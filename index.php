@@ -53,7 +53,7 @@
         i bezpiecznie, a to wszystko <br> w jednym miejscu.
     </div>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <div class="ikony_dwa">
         <div id="obrazek_jeden">

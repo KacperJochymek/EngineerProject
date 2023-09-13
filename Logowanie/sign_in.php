@@ -14,17 +14,19 @@
 
     <div class="container">
         <div class="forms">
+
+        <!-- Logowanie -->
             <div class="form login">
                 <span class="title">Zaloguj</span>
 
                 <form action="#">
                     <div class="input-field">
-                        <input type="text" placeholder="Wpisz swój adres e-mail" required>
-                        <i class="fa-regular fa-envelope icon"></i>
+                        <input type="text" placeholder="Nazwa użytkownika" required>
+                        <i class="fa-regular fa-user"></i>
                     </div>
 
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Wpisz swoje hasło" required>
+                        <input type="password" class="password" placeholder="Hasło" required>
                         <i class="fa-solid fa-lock icon"></i>
                         <i class="fa-solid fa-eye showHidePw"></i>
                     </div>
@@ -51,7 +53,7 @@
             </div>
 
 
-            <!--Register form!-->
+            <!--Rejestracja-->
             <div class="form signup">
                 <span class="title">Zarejestruj się</span>
 
@@ -86,7 +88,7 @@
                     </div>
 
                     <div class="input-field button">
-                        <input type="button" value="Zaloguj się!">
+                        <input type="button" value="Zarejestruj się!">
                     </div>
                 </form>
 
