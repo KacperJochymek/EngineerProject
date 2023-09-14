@@ -1,9 +1,10 @@
 <?php
 session_start();
-if(isset($_SESSION["user"])){
-    header("Location: UserLogin.php");
+if(!isset($_SESSION["user"])){
+    header("Location: index.php");
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,25 +83,15 @@ if(isset($_SESSION["user"])){
 
     </div>
 
-    <div class="cennik">
-        Elastyczny cennik
+   
+
+    <div class="container">
+        <h1>Witamy w panelu głównym użytkownika!</h1>
+        <a href="logout.php" class="btn btn-warning">Wyloguj</a>
     </div>
 
-    <div class="informacja">
-        Aktualizacje:
-    </div>
 
-    <div class="umow_sie">
-        Umów się na poradę już teraz! <br><br>
 
-        Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie.
-
-        <button>Znajdź lekarza</button>
-    </div>
-
-    <div class="patroni">
-        Jesteśmy wspierani przez:
-    </div>
 
     <footer>
         <div class="foo">

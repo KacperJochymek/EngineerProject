@@ -19,7 +19,30 @@
             <div class="form login">
                 <span class="title">Zaloguj</span>
 
-                <form action="#">
+                <?php
+                if (isset($_POST["login"])){
+                    $nick = $_POST["nick"];
+                    $password = $_POST["password"];
+                    require_once "database.php";
+                    $sql = "SELECT * FROM users WHERE nick = '$nick'";
+                    $result = mysqli_query($conn, $sql);
+                    $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    if($user){
+                        if(password_verify($password, $user["password"])){
+                            session_start();
+                            $_SESSION["user"] = "yes";
+                            header("Location: UserLogin.php");
+                            die();
+                        }else{
+                            echo "<div class='alert alert-danger'>Nieprawidłowe hasło.</div>";
+                        }
+
+                    }else{
+                        echo "<div class='alert alert-danger'>Nieprawidłowa nazwa użytkownika.</div>";
+                    }
+                }
+                ?>
+                <form action="sign_in.php" method="post">
                     <div class="input-field">
                         <input type="text" placeholder="Nazwa użytkownika" required>
                         <i class="fa-regular fa-user"></i>
@@ -41,7 +64,7 @@
                     </div>
 
                     <div class="input-field button">
-                        <input type="button" value="Zaloguj się!">
+                        <input type="submit" value="Zaloguj się!">
                     </div>
                 </form>
 
@@ -57,7 +80,61 @@
             <div class="form signup">
                 <span class="title">Zarejestruj się</span>
 
-                <form action="#">
+
+                <?php
+                if(isset($_POST["submit"])){
+                    $nick = $_POST["nick"];
+                    $email = $_POST["email"];
+                    $password = $_POST["password"];
+                    $passwordRepeat= $_POST["passwordRepeat"];
+
+                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+                    $errors = array();
+
+                    if(empty($nick) OR empty ($email) OR empty ($password) OR empty ($passwordRepeat)){
+                        array_push($errors, "Wszystkie pola wymagane!");
+                    }
+                    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        array_push($errors, "Email nieprawidłowy");
+                    }
+                    if(strlen($password)<8){
+                        array_push($errors,"Hasło musi mieć conajmniej 8 znaków.");
+                    }
+                    if($password!==$passwordRepeat){
+                        array_push($errors,"Hasła do siebie nie pasują.");
+                    }
+
+                    $sql = "SELECT * FROM users WHERE email = '$email'";
+                    require_once "database.php";
+                    $result = mysqli_query($conn, $sql);
+                    $rowCount = mysqli_num_rows($result);
+                    if ($rowCount>0){
+                        array_push($errors, "Email już istnieje");
+                    }
+
+                    if(count($errors)>0){
+                        foreach($errors as $error){
+                            echo "<div class ='alert alert-danger'>$error</div>";
+                        }
+                    }else{
+                     
+                        $sql = "INSERT INTO users (nick, email, password) VALUES (?, ?, ?)";
+                        $stmt = mysqli_stmt_init($conn);
+                        $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
+                        if($prepareStmt){
+                            mysqli_stmt_bind_param($stmt,"sss",$nick, $email, $passwordHash);
+                            mysqli_stmt_execute($stmt);
+                            echo "<div class='alert alert-succes'>Pomyślnie zarejestrowano!</div>";
+                        }else{
+                            die("Cos poszlo nie tak.");
+                        }
+
+                    }
+                }
+                ?>
+
+                <form action="sign_in.php" method="post">
                     <div class="input-field">
                         <input type="text" placeholder="Podaj nazwę użytkownika" required>
                         <i class="fa-regular fa-user"></i>
@@ -88,7 +165,7 @@
                     </div>
 
                     <div class="input-field button">
-                        <input type="button" value="Zarejestruj się!">
+                        <input type="submit" value="Zarejestruj się!">
                     </div>
                 </form>
 
