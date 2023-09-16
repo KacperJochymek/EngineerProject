@@ -183,6 +183,7 @@ nav ul li a.active {
 }
 
 .ikony_dwa {
+    margin-top: 648px;
     width: 100%;
     height: 200px;
     background: #fefefe;
@@ -214,26 +215,6 @@ nav ul li a.active {
     float: left;
     width: 100px;
     text-align: center;
-}
-
-.cennik {
-    font-weight: 400;
-    height: 200px;
-}
-
-.informacja {
-    background-color: #fefefe;
-    height: 400px;
-}
-
-.umow_sie {
-    background: linear-gradient(to right, #BEC8E9, #a380ee);
-    height: 200px;
-}
-
-.patroni {
-    background-color: #fefefe;
-    height: 800px;
 }
 
 footer {
@@ -326,4 +307,65 @@ hr {
 .footer-text{
     margin-top: 30px;
     text-align: justify;
+}
+
+.badania {
+    box-sizing: border-box;
+    width: 220px;
+    height: 75px;
+    font-size: 20px;
+    margin-right: 50px;
+    background: rgba(16, 15, 66, 0.53);
+    border-radius: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.cennik {
+    margin-top: 10px;
+    margin-left: 300px;
+    font-weight: 400;
+    height: 150px;
+    color: #fefefe;
+    font-weight: 300;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cennik .badania {
+    margin-left: 40px; 
+}
+
+
+.informacja {
+    background-color: #fefefe;
+    height: 400px;
+    text-align: center;
+    font-weight: 350;
+    font-size: 40px;
+}
+
+.tekst-aktualizacje{
+    font-size: 20px;
+    display: flex;
+}
+
+.umow_sie {
+    background: linear-gradient(to right, #BEC8E9, #a380ee);
+    height: 200px;
+    text-align: center;
+}
+
+.patroni {
+    background-color: #fefefe;
+    height: 800px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
 }

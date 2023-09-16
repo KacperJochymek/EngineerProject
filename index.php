@@ -60,8 +60,6 @@ if (isset($_SESSION["user"])) {
         i bezpiecznie, a to wszystko <br> w jednym miejscu.
     </div>
 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
     <div class="ikony_dwa">
         <div id="obrazek_jeden">
             <img src="./images/gwarancja_satysfakcji.png" alt="">
@@ -84,22 +82,40 @@ if (isset($_SESSION["user"])) {
 
     <div class="cennik">
         Elastyczny cennik
+        <div class="badania">199,99zł <br> Zestaw 2 badań</div>
+        <div class="badania">99,99 zł <br> Konsultacja</div>
+        <div class="badania">899,99 <br> Zestaw 10 badań</div>
     </div>
 
     <div class="informacja">
         Aktualizacje:
+
+        <div class="logo">
+        <img src="./images/Analiza-danych.jpg" alt="">
+        </div>
+        
+        <div class="tekst-aktualizacje">
+        Postępy w technologii telemedycyny: Telemedycyna staje się coraz popularniejsza, zwłaszcza w kontekście pandemii COVID-19.
+        Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym
+        bez konieczności wizyty w gabinecie lekarskim.
+        </div>
     </div>
 
     <div class="umow_sie">
         Umów się na poradę już teraz! <br><br>
 
-        Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie.
+        Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie. <br><br>
 
         <button>Znajdź lekarza</button>
     </div>
 
     <div class="patroni">
         Jesteśmy wspierani przez:
+        <div class="logo">
+            <img src="/images/logo.png" alt="">
+            <img src="/images/logo.png" alt="">
+            <img src="/images/logo.png" alt="">
+        </div>
     </div>
 
     <footer>
