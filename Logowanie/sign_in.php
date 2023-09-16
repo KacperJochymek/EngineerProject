@@ -31,7 +31,7 @@
                     $usernamemail = $_POST["usernamemail"];
                     $password = $_POST["password"];
 
-                    $result = mysqli_query($conn, "SELECT * FROM tb_user WHERE username='$usernamemail' OR email = '$usernamemail'");
+                    $result = mysqli_query($conn, "SELECT * FROM users WHERE username='$usernamemail' OR email = '$usernamemail'");
                     $row = mysqli_fetch_assoc($result);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -87,18 +87,18 @@
 
                 <?php
                 if (isset($_POST["signup_submit"])) {
-                    $name = $_POST["name"];
+                    
                     $username = $_POST["username"];
                     $email = $_POST["email"];
                     $password = $_POST["password"];
                     $confirmpassword = $_POST["confirmpassword"];
 
-                    $duplicate = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username' OR email = '$email'");
+                    $duplicate = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
                     if (mysqli_num_rows($duplicate) > 0) {
                         echo "<script> alert('Nick lub e-mail już zajęty');</script>";
                     } else {
                         if ($password == $confirmpassword) {
-                            $query = "INSERT INTO tb_user (name, username, email, password) VALUES ('$name', '$username', '$email', '$password')";
+                            $query = "INSERT INTO users ( username, email, password) VALUES ( '$username', '$email', '$password')";
                             mysqli_query($conn, $query);
                             echo "<script>alert('Pomyślnie zarejestrowano!');</script>";
                         } else {
@@ -108,10 +108,6 @@
                 }
                 ?>
                 <form action="sign_in.php" method="post" autocomplete="off">
-                    <div class="input-field">
-                        <input type="text" name="name" id="name" placeholder="Podaj imię" required>
-                        <i class="fa-regular fa-user"></i>
-                    </div>
 
                     <div class="input-field">
                         <input type="text" name="username" id="username" placeholder="Podaj nazwę użytkownika" required>
