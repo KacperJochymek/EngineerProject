@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     list-style: none;
     text-decoration: none;
 }
@@ -217,7 +217,7 @@ nav ul li a.active {
 }
 
 .cennik {
-    font-family: "Poppins";
+    font-weight: 400;
     height: 200px;
 }
 
@@ -259,7 +259,7 @@ footer {
 
 .col-1 {
     flex-basis: 25%;
-    padding: 10px;
+    padding: 30px;
 }
 
 .col-1 h3 {
@@ -274,27 +274,32 @@ footer {
     margin: 20px 0;
 }
 
-ul li {
+.col-1 ul li {
+    margin-top: 30px;
     list-style: none;
     margin-bottom: 10px;
 }
 
-ul li a {
+.col-1 ul li a {
     text-decoration: none;
     color: #fefefe;
 }
 
 .sociale {
-    font-size: 16px;
-    color: #fefefe;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.sociale .circle {
+    font-size: 20px;
+    color: #000;
+    background: #fefefe;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     text-align: center;
     line-height: 40px;
-    font-size: 20px;
-    color: #000;
-    background: #fefefe;
     margin-right: 15px;
     cursor: pointer;
 }
@@ -305,6 +310,7 @@ hr {
 
 .copyright {
     text-align: center;
+    font-weight: 700;
 }
 
 @media (max-width: 700px) {
@@ -315,4 +321,9 @@ hr {
     .col-1 {
         flex-basis: 100%;
     }
+}
+
+.footer-text{
+    margin-top: 30px;
+    text-align: justify;
 }

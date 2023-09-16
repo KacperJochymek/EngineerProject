@@ -105,22 +105,22 @@ if (isset($_SESSION["user"])) {
     <footer>
         <div class="foo">
             <div class="col-1">
-                <h3>O nas</h3>
-                <img src="./images/logo.png" class="logo">
-                <p>Jesteśmy firmą specjalizującą się w oprogramowaniu dla sieci szpitali i przychodni. <br>
-                    Dzięki nam pacjent ma wszystko pod ręką.</p>
+                <h1>O nas</h1>
+
+                <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
+                     swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
-                <h3>Biuro</h3>
-                <p>ul. Galla Anonima 7</p>
-                <p>Jaworzno, Polska</p>
-                <p class="email-id">k.joch19@wp.pl</p>
-                <p>576-157-274</p>
+                <h1>Biuro</h1>
+                <p class="footer-text">ul. Galla Anonima 7</p>
+                <p>43-608 Jaworzno, Polska</p>
+                <p class="email-id"><b>Nasz adres e-mail:</b> <br> k.joch19@wp.pl</p>
+                <p><b>Numer telefonu: </b> <br> 576-157-274</p>
             </div>
 
             <div class="col-1">
-                <h3>Przydatne linki</h3>
+                <h1>Przydatne linki</h1>
                 <ul>
                     <li><a href="#">Strona główna</a></li>
                     <li><a href="#">Umów wizytę</a></li>
@@ -128,17 +128,17 @@ if (isset($_SESSION["user"])) {
                 </ul>
             </div>
             <div class="col-1">
-                <h3>Kontakt</h3>
-                <form>
+                <h1>Skontaktuj się!</h1>
+                <!-- <form>
                     <input type="text" placeholder="Twój adres e-mail">
                     <input type="text" placeholder="Zadaj pytanie">
                     <button type="submit">Wyślij!</button>
-                </form>
+                </form> -->
                 <div class="sociale">
-                    <i class="fa-brands fa-facebook-f"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-tiktok"></i>
+                    <div class="circle"><i class="fa-brands fa-facebook-f"></i></div>
+                    <div class="circle"><i class="fa-brands fa-x-twitter"></i></div>
+                    <div class="circle"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="circle"><i class="fa-brands fa-tiktok"></i></div>
                 </div>
             </div>
         </div>
