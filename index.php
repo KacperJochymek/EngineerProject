@@ -88,17 +88,18 @@ if (isset($_SESSION["user"])) {
     </div>
 
     <div class="informacja">
-        Aktualizacje:
-
-        <div class="logo">
-        <img src="./images/Analiza-danych.jpg" alt="">
+        <p class="aktualizacje">Aktualizacje:</p>
+<div class="informacja-dwa">
+        <div class="logo-aktualizacje">
+            <img src="./images/Analiza-danych.jpg" alt="">
         </div>
         
         <div class="tekst-aktualizacje">
-        Postępy w technologii telemedycyny: Telemedycyna staje się coraz popularniejsza, zwłaszcza w kontekście pandemii COVID-19.
-        Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym
+        Postępy w technologii telemedycyny: Telemedycyna staje się coraz popularniejsza, zwłaszcza w kontekście pandemii COVID-19. <br>
+        Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym <br>
         bez konieczności wizyty w gabinecie lekarskim.
         </div>
+</div>
     </div>
 
     <div class="umow_sie">

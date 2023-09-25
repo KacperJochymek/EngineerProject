@@ -342,22 +342,6 @@ hr {
     margin-left: 40px; 
 }
 
-
-.informacja {
-    background-color: #fefefe;
-    height: 400px;
-    text-align: center;
-    font-weight: 350;
-    font-size: 40px;
-    padding-top: 10px;
-}
-
-.tekst-aktualizacje{
-    font-size: 20px;
-    display: flex;
-}
-
-
 .patroni {
     background-color: #fefefe;
     color: #351d69;
@@ -412,3 +396,31 @@ hr {
     color: #fefefe;
     font-size: 20px;
 }
+
+.informacja {
+    background-color: #fefefe;
+    height: 400px;
+}
+.informacja-dwa{
+    display: flex;
+    text-align: center;
+}
+
+.aktualizacje{
+    text-align: center;
+    font-weight: 350;
+    font-size: 40px;
+    padding-top: 10px;
+}
+
+.tekst-aktualizacje{
+    font-size: 25px;
+    margin-left: 50px;
+    margin-top: 70px;
+}
+
+.logo-aktualizacje {
+    width: 300px;
+    margin-left: 100px;
+}
+
