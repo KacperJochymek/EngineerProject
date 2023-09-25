@@ -349,6 +349,7 @@ hr {
     text-align: center;
     font-weight: 350;
     font-size: 40px;
+    padding-top: 10px;
 }
 
 .tekst-aktualizacje{
@@ -356,16 +357,58 @@ hr {
     display: flex;
 }
 
-.umow_sie {
-    background: linear-gradient(to right, #BEC8E9, #a380ee);
-    height: 200px;
-    text-align: center;
-}
 
 .patroni {
     background-color: #fefefe;
+    color: #351d69;
     height: 800px;
     text-align: center;
     font-size: 40px;
-    font-weight: 500;
+    font-weight: 700;
+    padding-top: 40px;
+}
+
+.patroni-logo{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.patroni-logo img{
+    width: 300px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.umow_sie {
+    background: linear-gradient(to right, #BEC8E9, #a380ee);
+    height: 250px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.umow_sie_tekst{
+    color:#351d69;
+    margin-top: 25px;
+    font-weight: 700;
+    font-size: 40px;
+}
+.umow_sie_tekst2{
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.btn_znajdz{
+    background: rgba(16, 15, 66, 0.53);
+    outline: none;
+    border-radius: 30px;
+    cursor: pointer;
+    height: 50px;
+    margin-top: 20px;
+    width: 200px;
+    color: #fefefe;
+    font-size: 20px;
 }

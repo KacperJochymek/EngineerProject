@@ -102,19 +102,26 @@ if (isset($_SESSION["user"])) {
     </div>
 
     <div class="umow_sie">
-        Umów się na poradę już teraz! <br><br>
 
-        Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie. <br><br>
+    <p class="umow_sie_tekst"> Umów się na poradę już teraz! <br></p>
+       
+    <p class="umow_sie_tekst2">Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie. <br></p>
+        
 
-        <button>Znajdź lekarza</button>
+        <button class="btn_znajdz">Znajdź lekarza</button>
     </div>
 
     <div class="patroni">
         Jesteśmy wspierani przez:
-        <div class="logo">
+        <div class="patroni-logo">
             <img src="/images/logo.png" alt="">
             <img src="/images/logo.png" alt="">
+            <img src="/images/logo.png" alt="">           
+        </div>
+        <div class="patroni-logo">
             <img src="/images/logo.png" alt="">
+            <img src="/images/logo.png" alt="">
+            <img src="/images/logo.png" alt="">           
         </div>
     </div>
 
