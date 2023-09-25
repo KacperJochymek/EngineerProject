@@ -453,3 +453,35 @@ hr {
     text-align: center;
     margin-top: 10px;
 }
+
+.lekarze-wybor{
+    height: 1000px;
+}
+
+.lekarz-wybierz{
+    text-align: center;
+    margin-top: 40px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #100F42;
+}
+
+
+.lekarz-logo{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.lekarz-logo img{
+    width: 300px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.lekarz-btn{
+    width: 100px;
+    height: 50px;
+}
