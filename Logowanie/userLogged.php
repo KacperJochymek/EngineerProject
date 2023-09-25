@@ -19,7 +19,7 @@ if (!empty($_SESSION["id"])) {
 <body>
 
     <h1>Witamy <?php echo $row["username"]; ?>
-    </h1>
+</h1>
     <a href="logout.php">Wyloguj</a>
 </body>
 

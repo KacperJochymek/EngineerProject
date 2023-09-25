@@ -225,7 +225,7 @@ footer {
     color: #fefefe;
     padding: 10px 0 0;
     border-top-left-radius: 125px;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 20px;
 }
 
@@ -372,6 +372,7 @@ hr {
     height: 250px;
     text-align: center;
     padding-top: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .umow_sie_tekst{
@@ -388,7 +389,7 @@ hr {
 .btn_znajdz{
     background: rgba(16, 15, 66, 0.53);
     outline: none;
-    border-radius: 30px;
+    border-radius: 20px;
     cursor: pointer;
     height: 50px;
     margin-top: 20px;
@@ -410,13 +411,14 @@ hr {
     text-align: center;
     font-weight: 350;
     font-size: 40px;
-    padding-top: 10px;
+    padding-top: 30px;
 }
 
 .tekst-aktualizacje{
     font-size: 25px;
     margin-left: 50px;
     margin-top: 70px;
+    text-align: justify;
 }
 
 .logo-aktualizacje {
@@ -424,3 +426,30 @@ hr {
     margin-left: 100px;
 }
 
+.aktualizacje-btn{
+    width: 200px;
+    height: 50px;
+    margin-top: 40px;
+    margin-left: 1000px;
+    border-radius: 20px;
+    cursor: pointer;
+    outline: none;
+    background-color: #100F42;
+    color: #fefefe;
+    font-size: 20px;
+}
+
+.analiza-danych{
+    height: 2000px;
+}
+.tekst-analiza{
+    font-size: 40px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tekst-analiza2{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
