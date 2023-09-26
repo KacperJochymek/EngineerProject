@@ -388,7 +388,7 @@ hr {
 
 .btn_znajdz{
     background: rgba(16, 15, 66, 0.53);
-    outline: none;
+    border: none;
     border-radius: 20px;
     cursor: pointer;
     height: 50px;
@@ -433,20 +433,13 @@ hr {
     margin-left: 1000px;
     border-radius: 20px;
     cursor: pointer;
+    border: none;
     outline: none;
     background-color: #100F42;
     color: #fefefe;
     font-size: 20px;
 }
 
-.analiza-danych{
-    height: 2000px;
-}
-.tekst-analiza{
-    font-size: 40px;
-    text-align: center;
-    margin-top: 20px;
-}
 
 .tekst-analiza2{
     font-size: 20px;
@@ -492,8 +485,10 @@ hr {
     margin-top: 20px;
     color: #fefefe;
     font-size: 20px;
+    border: none;
     border-radius: 20px;
     background-color: rgb(54, 183, 7);
+    cursor: pointer;
 }
 
 .lekarz-med{
@@ -507,5 +502,45 @@ hr {
 }
 
 .lekarzeDatabase{
-    height: 1200px;
+    height: 600px;
 }
+
+.doctor-form{
+    margin-top: 150px;
+    text-align: center;
+    align-items: center;
+}
+
+.doctor-form input[type="text"] {
+    padding: 10px; 
+    margin: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 20px; 
+  }
+  
+  
+  .doctor-form input[type="file"] {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .dataAnalize{
+    height: 1000px;
+  }
+
+  .dataAnalize img{
+    width: 250px;
+    margin: 70px;
+  }
+
+  .doc-chosen{
+    height: 1000px;
+  }
+
+  .btn-chosen{
+    text-align: center;
+  }

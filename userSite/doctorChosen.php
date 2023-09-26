@@ -59,39 +59,36 @@ if (!empty($_SESSION["id"])) {
     </header>
 
     
-    <div class="analiza-danych">
-        <p class="tekst-analiza">Analiza danych:</p> <br>
-        <p class="tekst-analiza2">Miary statystyczne:</p>
+    <p class="lekarz-wybierz">Podaj dane osobowe:</p>
 
-        
-        
-        
-            <div class="logo-aktualizacje">
-                <img src="/images/Analiza-danych.jpg" alt="">
-            </div>
-        
+    <div class="lekarz-logo">
+            <img src="/images/lekarz-w.png" alt="">
 
-            <div class="licz-miary">
+            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
+            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
+    </div>
 
-                <button class="aktualizacje-btn">Oblicz</button>
-            </div>
-    
-        
-        
-
-        <div class="wykresy">
-        <p class="tekst-analiza2">Wykresy: </p>
-            <div class="logo-aktualizacje">
-                <img src="/images/Analiza-danych.jpg" alt="">
-            </div>
-            <button class="aktualizacje-btn">Generuj</button>
+    <div class="doc-chosen">
+        <div class="doctor-form">
+            <p class="tekst-analiza2">Imię:</p>
+            <input type="text" name="name" id="name" placeholder="Podaj imię"> 
+            <p class="tekst-analiza2">Nazwisko:</p>
+            <input type="text" name="name" id="name" placeholder="Podaj nazwisko">
+            <p class="tekst-analiza2">Wiek:</p>
+            <input type="text" name="name" id="name" placeholder="Podaj swój wiek">
+            <p class="tekst-analiza2">Pesel:</p>
+            <input type="text" name="name" id="name" placeholder="Podaj swój pesel">
+            <p class="tekst-analiza2">Miasto:</p>
+            <input type="text" name="name" id="name" placeholder="Podaj miasto">
+            <p class="tekst-analiza2">Województwo</p>
+            <input type="text" name="name" id="name" placeholder="Podaj swoje województwo">
         </div>
 
-        <div class="ankieta-satysfakcja">
-        <p class="tekst-analiza2">Ankieta dot. satysfakcji pacjentów</p>
+        <div class="btn-chosen">
+            <button class="lekarz-btn">Powrót</button>
+            <button class="lekarz-btn">Dalej</button>
         </div>
     </div>
-    
 
     
     
@@ -116,7 +113,7 @@ if (!empty($_SESSION["id"])) {
             <div class="col-1">
                 <h1>Przydatne linki</h1>
                 <ul>
-                    <li><a href="index.php">Strona główna</a></li>
+                    <li><a href="/index.php">Strona główna</a></li>
                     <li><a href="#">Umów wizytę</a></li>
                     <li><a href="#">Cennik</a></li>
                 </ul>

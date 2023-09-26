@@ -61,12 +61,18 @@ if (!empty($_SESSION["id"])) {
     
     <p class="lekarz-wybierz">Formularz dodawania lekarza do systemu</p>
 
+
     <div class="lekarzeDatabase">
-        siema
-    </div>
+        <div class="doctor-form">
+            <input type="text" name="name" id="name" placeholder="Wprowadź imię"> 
+            <input type="text" name="name" id="name" placeholder="Wprowadź nazwisko"></br>
+            <input type="text" name="name" id="name" placeholder="Wprowadź specjalizację">
+            <input type="file" name="image" id="img"></br>
+            <input type="submit" class ="lekarz-btn" value="Wyślij">
+        </div>
 
     
-
+    </div>
     
     
 

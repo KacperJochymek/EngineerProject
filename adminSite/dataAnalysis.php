@@ -59,47 +59,23 @@ if (!empty($_SESSION["id"])) {
     </header>
 
     
-    <p class="lekarz-wybierz">Wybierz lekarza dla siebie:</p>
+    <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
+    <p class="tekst-analiza2">Miary statystyczne:</p>
 
-    <div class="lekarze-wybor">
-    
-    
-    
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-    
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
+    <div class="dataAnalize">
+        <img src="/images/Analiza-danych.jpg" alt="">
         
-
+    
+        
     </div>
     
-    
-    
+    <p class="tekst-analiza2">Wykresy</p>
+    <div class="wykresy">
+        
+    </div>
 
-    
-    
+
+
 
     <footer>
         <div class="foo">
