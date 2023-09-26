@@ -40,9 +40,7 @@ if (!empty($_SESSION["id"])) {
                 <li>
                     <a href="">Kontakt</a>
                 </li>
-                <li>
-                    <a href="">Analiza Danych</a>
-                </li>
+                
                 <li>
                     <a href="">Moje Konto</a>
                 </li>
@@ -78,7 +76,7 @@ if (!empty($_SESSION["id"])) {
             <img src="/images/lekarz-w.png" alt="">
 
             <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
+            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Psycholog</p>
             <button class ="lekarz-btn">Umów się</button>
 
         </div>
@@ -87,7 +85,7 @@ if (!empty($_SESSION["id"])) {
             <img src="/images/lekarz-w.png" alt="">
 
             <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
+            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Kardiolog</p>
             <button class ="lekarz-btn">Umów się</button>
 
         </div>

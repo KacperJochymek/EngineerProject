@@ -12,6 +12,8 @@
 
 <body>
 
+    <a href="/index.php"><i class="fa-solid fa-angle-left"></i></a>
+
     <div class="container">
         <div class="forms">
 

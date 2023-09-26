@@ -30,7 +30,7 @@ if (isset($_SESSION["user"])) {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="/Podstrony/lekarze.php">Lekarze</a>
+                    <a href="/userSite/lekarze.php">Lekarze</a>
                 </li>
                 <li>
                     <a href="">Cennik</a>

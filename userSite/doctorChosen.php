@@ -40,9 +40,7 @@ if (!empty($_SESSION["id"])) {
                 <li>
                     <a href="">Kontakt</a>
                 </li>
-                <li>
-                    <a href="">Analiza Danych</a>
-                </li>
+                
                 <li>
                     <a href="">Moje Konto</a>
                 </li>
