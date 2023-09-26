@@ -456,32 +456,56 @@ hr {
 
 .lekarze-wybor{
     height: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .lekarz-wybierz{
     text-align: center;
-    margin-top: 40px;
-    font-size: 30px;
+    margin-top: 50px;
+    font-size: 40px;
     font-weight: 600;
     color: #100F42;
+    
 }
 
 
 .lekarz-logo{
-    margin-top: 30px;
+    margin: 50px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
+    text-align: center;
 }
 
 .lekarz-logo img{
-    width: 300px;
-    margin-bottom: 20px;
-    margin-left: 20px;
+    width: 250px;
+    border-radius: 50%;
+    margin-right: 70px;
+    margin-left: 100px;
 }
 
 .lekarz-btn{
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    color: #fefefe;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: rgb(54, 183, 7);
+}
+
+.lekarz-med{
+    font-size: 20px;
+    color: #100F42;
+    margin-top: 10px;
+}
+
+.profesja{
+    margin-top: 10px;
+}
+
+.lekarzeDatabase{
+    height: 1200px;
 }

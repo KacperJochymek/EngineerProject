@@ -59,43 +59,12 @@ if (!empty($_SESSION["id"])) {
     </header>
 
     
-    <p class="lekarz-wybierz">Wybierz lekarza dla siebie:</p>
+    <p class="lekarz-wybierz">Formularz dodawania lekarza do systemu</p>
 
-    <div class="lekarze-wybor">
-    
-    
-    
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-    
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-        
-
+    <div class="lekarzeDatabase">
+        siema
     </div>
-    
-    
+
     
 
     
