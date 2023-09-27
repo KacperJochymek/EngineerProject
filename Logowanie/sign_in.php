@@ -40,7 +40,7 @@
                         if ($password == $row["password"]) {
                             $_SESSION["login"] = true;
                             $_SESSION["id"] = $row["id"];
-                            header("Location: userLogged.php");
+                            header("Location: /userSite/lekarze.php");
                             exit();
                         } else {
                             echo "<script>alert('Złe hasło');</script>";

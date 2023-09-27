@@ -45,7 +45,7 @@ if (!empty($_SESSION["id"])) {
                     <a href="">Moje Konto</a>
                 </li>
                 <li>
-                    <a href="./Logowanie/logout.php" class="active">Wyloguj się</a>
+                    <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
                 </li>
             </ul>
         </nav>
