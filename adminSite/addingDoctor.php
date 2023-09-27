@@ -63,13 +63,66 @@ if (!empty($_SESSION["id"])) {
 
 
     <div class="lekarzeDatabase">
-        <div class="doctor-form">
-            <input type="text" name="name" id="name" placeholder="Wprowadź imię"> 
-            <input type="text" name="name" id="name" placeholder="Wprowadź nazwisko"></br>
-            <input type="text" name="name" id="name" placeholder="Wprowadź specjalizację">
-            <input type="file" name="image" id="img"></br>
-            <input type="submit" class ="lekarz-btn" value="Wyślij">
-        </div>
+
+    <?php
+
+    // Zmień na swoje dane dostępowe do bazy danych
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "doctorsadding";
+
+    if (isset($_POST["signup_submit"])) {
+        $imie = $_POST["imie"];
+        $nazwisko = $_POST["nazwisko"];
+        $profesja = $_POST["profesja"];
+
+        // Obsługa przesyłania pliku
+        $obrazek_name = $_FILES["obrazek"]["name"];
+        $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
+        $obrazek_type = $_FILES["obrazek"]["type"];
+
+        // Sprawdź, czy przesłany plik to obrazek
+        if (substr($obrazek_type, 0, 5) === "image") {
+            // Przenieś przesłany plik do stałego miejsca
+            move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
+
+            // Utwórz połączenie z bazą danych
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            if ($conn->connect_error) {
+                die("Błąd połączenia: " . $conn->connect_error);
+            }
+
+            // Przygotuj i wykonaj zapytanie SQL do dodania danych
+            $sql = "INSERT INTO doctors (imie, nazwisko, profesja, obrazek) VALUES ('$imie', '$nazwisko', '$profesja', '$obrazek_name')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo '<script>alert("Dane dodane poprawnie");</script>';
+            } else {
+                echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+            }
+            
+            
+
+            $conn->close();
+        } else {
+            echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
+            
+        }
+    }
+
+
+    ?>
+
+
+    <form method="POST" enctype="multipart/form-data" class="doctor-form">
+        <input type="text" name="imie" id="imie" placeholder="Wprowadź imię">
+        <input type="text" name="nazwisko" id="nazwisko" placeholder="Wprowadź nazwisko"><br>
+        <input type="text" name="profesja" id="profesja" placeholder="Wprowadź specjalizację">
+        <input type="file" name="obrazek" id="obrazek"><br>
+        <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
+    </form>
 
     
     </div>
