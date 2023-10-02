@@ -63,10 +63,10 @@ if (!empty($_SESSION["id"])) {
     
     
 
-    <div class="lekarze-wybor">
+    <div class="account">
     
     
-    <h1>Witamy <?php echo $row["username"]; ?></h1>
+    <h1>Witamy <?php echo $row["username"]; ?> !</h1>
 
     </div>
     

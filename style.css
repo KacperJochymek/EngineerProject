@@ -554,3 +554,9 @@ hr {
   .btn-chosen{
     text-align: center;
   }
+
+  .account{
+    text-align: center;
+    height: 1000px;
+    margin-top: 50px;
+  }
