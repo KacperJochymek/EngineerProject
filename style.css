@@ -462,6 +462,7 @@ hr {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .lekarz-wybierz{
@@ -470,12 +471,11 @@ hr {
     font-size: 40px;
     font-weight: 600;
     color: #100F42;
-    
 }
 
 
 .lekarz-logo{
-    margin: 50px;
+    margin: 50px 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -484,9 +484,9 @@ hr {
 
 .lekarz-logo img{
     width: 250px;
+    height: 250px; 
+    object-fit: cover; 
     border-radius: 50%;
-    margin-right: 70px;
-    margin-left: 100px;
 }
 
 .lekarz-btn{
@@ -497,8 +497,12 @@ hr {
     font-size: 20px;
     border: none;
     border-radius: 20px;
-    background-color: rgb(54, 183, 7);
+    background-color: #36b707;
     cursor: pointer;
+}
+
+.lekarz-btn:hover {
+    background: linear-gradient(to right, #36b707, #ddf104);
 }
 
 .lekarz-med{
@@ -560,3 +564,35 @@ hr {
     height: 1000px;
     margin-top: 50px;
   }
+
+.contact-site{
+    text-align: center;
+    height: 900px;
+    margin-top: 50px;
+}
+
+.contact-form{
+    margin-top: 100px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.email-hldr{
+    padding: 10px; 
+    margin: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 20px; 
+}
+
+.message-inpt {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 250px;
+    width: 700px;
+    padding: 10px; 
+}

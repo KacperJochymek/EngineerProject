@@ -21,7 +21,7 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <img src="/images/logo.png">
+            <a href="/index.php"> <img src="/images/logo.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>

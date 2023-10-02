@@ -1,4 +1,5 @@
 <?php
+require '../Logowanie/config.php';
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
@@ -42,7 +43,7 @@ if (!empty($_SESSION["id"])) {
                 </li>
                 
                 <li>
-                    <a href="myAccount.php">Moje Konto</a>
+                    <a href="">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -60,75 +61,24 @@ if (!empty($_SESSION["id"])) {
     
 
     
-    <p class="lekarz-wybierz">Wybierz lekarza dla siebie:</p>
-
-    <div class="lekarze-wybor">
     
-    <?php
-// Zmień na swoje dane dostępowe do bazy danych
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "doctorsadding";
 
-// Utwórz połączenie z bazą danych
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Błąd połączenia: " . $conn->connect_error);
-}
-
-// Przygotuj zapytanie SQL do pobrania danych z tabeli 'doctors'
-$sql = "SELECT * FROM doctors";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Iteruj przez wyniki zapytania i generuj divy
-    while ($row = $result->fetch_assoc()) {
-        echo '<div class="lekarz-logo">';
-        echo '<img src="/adminSite/uploads/' . $row["obrazek"] . '" alt="">';
-        echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> ' . $row["imie"] . ' ' . $row["nazwisko"] . ' </p>';
-        echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $row["profesja"] . '</p>';
-        echo '<button class="lekarz-btn">Umów się</button>';
-        echo '</div>';
-    }
-} else {
-    echo "Brak danych do wyświetlenia.";
-}
-
-$conn->close();
-?>
-
+    <div class="contact-site">
     
-        <!-- <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Psycholog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
     
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
+        <h1>Hej <?php echo $row["username"]; ?>, jeśli masz jakieś pytania skontaktuj się z nami!</h1>
 
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Kardiolog</p>
-            <button class ="lekarz-btn">Umów się</button>
 
-        </div> -->
-        
+        <form class="contact-form">
+            <input type="text" class="email-hldr" placeholder="Wpisz swój mail">
+            <input type="text" class="message-inpt" placeholder="Treść wiadomości">
+            <input type="submit" class="lekarz-btn" name="" value="Wyślij">
+        </form>
+
+
 
     </div>
+    
     
     
     

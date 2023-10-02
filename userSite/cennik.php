@@ -1,4 +1,5 @@
 <?php
+require '../Logowanie/config.php';
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
@@ -20,7 +21,7 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <img src="/images/logo.png">
+            <a href="/index.php"> <img src="/images/logo.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -45,7 +46,8 @@ if (!empty($_SESSION["id"])) {
                     <a href="">Moje Konto</a>
                 </li>
                 <li>
-                    <a href="./Logowanie/logout.php" class="active">Wyloguj się</a>
+                    <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
+                    
                 </li>
             </ul>
         </nav>
@@ -57,39 +59,14 @@ if (!empty($_SESSION["id"])) {
     </header>
 
     
-    <p class="lekarz-wybierz">Wybierz lekarza dla siebie:</p>
 
-    <div class="lekarze-wybor">
     
     
+
+    <div class="account">
     
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
     
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-        
+    tu bedzie cennik
 
     </div>
     

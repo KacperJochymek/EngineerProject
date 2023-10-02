@@ -18,7 +18,7 @@ if (isset($_SESSION["user"])) {
 <body>
     <header>
         <div class="logo">
-            <img src="./images/logo.png">
+            <a href="/index.php"> <img src="/images/logo.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -33,13 +33,13 @@ if (isset($_SESSION["user"])) {
                     <a href="/userSite/lekarze.php">Lekarze</a>
                 </li>
                 <li>
-                    <a href="">Cennik</a>
+                    <a href="/userSite/cennik.php">Cennik</a>
                 </li>
                 <li>
-                    <a href="">Kontakt</a>
+                    <a href="/userSite/contact.php">Kontakt</a>
                 </li>
                 <li>
-                    <a href="">Moje Konto</a>
+                    <a href="/userSite/myAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="./Logowanie/sign_in.php" class="active">Zaloguj się</a>
@@ -153,7 +153,7 @@ if (isset($_SESSION["user"])) {
             <div class="col-1">
                 <h1>Przydatne linki</h1>
                 <ul>
-                    <li><a href="index.php">Strona główna</a></li>
+                    <li><a href="/index.php">Strona główna</a></li>
                     <li><a href="#">Umów wizytę</a></li>
                     <li><a href="#">Cennik</a></li>
                 </ul>
@@ -179,5 +179,5 @@ if (isset($_SESSION["user"])) {
     
 </body>
 
-<script src="script1.js"></script>
+<script src="/script1.js"></script>
 </html>
