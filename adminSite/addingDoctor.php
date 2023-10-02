@@ -1,8 +1,18 @@
 <?php
-if (!empty($_SESSION["id"])) {
-    $id = $_SESSION["id"];
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
-    $row = mysqli_fetch_assoc($result);
+session_start();
+
+// Sprawdź, czy użytkownik jest zalogowany
+if (!isset($_SESSION["id"])) {
+    header("Location: /index.php"); // Przekieruj na stronę logowania, jeśli użytkownik nie jest zalogowany
+    exit();
+}
+
+// Sprawdź, czy użytkownik ma rolę administratora
+if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") {
+    // Reszta kodu HTML i logiki strony dostępna tylko dla administratora
+} else {
+    echo '<script>alert("Brak uprawnień do tej strony.");</script>'; // Wyświetl alert o braku uprawnień
+    exit();
 }
 ?>
 
@@ -47,7 +57,7 @@ if (!empty($_SESSION["id"])) {
                     <a href="">Moje Konto</a>
                 </li>
                 <li>
-                    <a href="./Logowanie/logout.php" class="active">Wyloguj się</a>
+                    <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
                 </li>
             </ul>
         </nav>

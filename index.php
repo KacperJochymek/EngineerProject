@@ -179,5 +179,5 @@ if (isset($_SESSION["user"])) {
     
 </body>
 
-<script src="/script1.js"></script>
+<script src="script1.js"></script>
 </html>
