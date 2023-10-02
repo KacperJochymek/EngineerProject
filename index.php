@@ -55,7 +55,7 @@ if (isset($_SESSION["user"])) {
 
     <div class="wstep">
     <div class="lekarze">
-        <img src="./images/lekarze.png">
+        <!-- <img src="./images/lekarze.png"> -->
     </div>
     <div class="tekst">
         Umów się na poradę do Twojego lekarza. Od teraz łatwo, szybko <br>
@@ -84,7 +84,7 @@ if (isset($_SESSION["user"])) {
     </div>
 
     <div class="cennik">
-        Elastyczny cennik
+        Elastyczny cennik:
         <div class="badania">199,99zł <br> Zestaw 2 badań</div>
         <div class="badania">99,99 zł <br> Konsultacja</div>
         <div class="badania">899,99 <br> Zestaw 10 badań</div>
@@ -144,8 +144,8 @@ if (isset($_SESSION["user"])) {
 
             <div class="col-1">
                 <h1>Biuro</h1>
-                <p class="footer-text">ul. Galla Anonima 7</p>
-                <p>43-608 Jaworzno, Polska</p>
+                <p class="footer-text">ul. Sezamkowa 15</p>
+                <p>43-600 XYZ, Polska</p>
                 <p class="email-id"><b>Nasz adres e-mail:</b> <br> k.joch19@wp.pl</p>
                 <p><b>Numer telefonu: </b> <br> 576-157-274</p>
             </div>
