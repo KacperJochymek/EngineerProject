@@ -56,7 +56,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") {
                     <a href="">Analiza Danych</a>
                 </li>
                 <li>
-                    <a href="">Moje Konto</a>
+                    <a href="/adminSite/adminAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="./Logowanie/logout.php" class="active">Wyloguj się</a>

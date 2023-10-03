@@ -30,16 +30,16 @@ if (isset($_SESSION["user"])) {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="/userSite/lekarze.php">Lekarze</a>
+                    <a href="#">Lekarze</a>
                 </li>
                 <li>
-                    <a href="/userSite/cennik.php">Cennik</a>
+                    <a href="#">Cennik</a>
                 </li>
                 <li>
-                    <a href="/userSite/contact.php">Kontakt</a>
+                    <a href="#">Kontakt</a>
                 </li>
                 <li>
-                    <a href="/userSite/myAccount.php">Moje Konto</a>
+                    <a href="#">Moje Konto</a>
                 </li>
                 <li>
                     <a href="./Logowanie/sign_in.php" class="active">Zaloguj się</a>

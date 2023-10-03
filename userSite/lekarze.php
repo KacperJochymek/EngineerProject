@@ -42,7 +42,7 @@ if (!empty($_SESSION["id"])) {
                 </li>
                 
                 <li>
-                    <a href="myAccount.php">Moje Konto</a>
+                    <a href="/userSite/myAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -65,14 +65,8 @@ if (!empty($_SESSION["id"])) {
     <div class="lekarze-wybor">
     
     <?php
-// Zmień na swoje dane dostępowe do bazy danych
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "doctorsadding";
+    require '../Logowanie/config.php';
 
-// Utwórz połączenie z bazą danych
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Błąd połączenia: " . $conn->connect_error);

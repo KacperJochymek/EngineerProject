@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../Logowanie/config.php';
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
@@ -68,6 +69,8 @@ if (!empty($_SESSION["id"])) {
     
     <h1>Witamy <?php echo $row["username"]; ?> !</h1>
 
+
+    
     </div>
     
     

@@ -22,7 +22,8 @@
                 <span class="title">Zaloguj</span>
 
                 <?php
-                require 'config.php';
+                session_start();
+                require '../Logowanie/config.php';
 
                 if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
                     header("Location: sign_in.php"); // Przekieruj na stronę główną, jeśli jest już zalogowany
@@ -40,7 +41,15 @@
                         if ($password == $row["password"]) {
                             $_SESSION["login"] = true;
                             $_SESSION["id"] = $row["id"];
-                            header("Location: /userSite/myAccount.php");
+
+                            $_SESSION["role"]=$row["role"];
+
+
+                            if ($_SESSION["role"] === "admin") {
+                                header("Location: ../adminSite/adminAccount.php"); // Przekieruj na stronę administratora
+                            } else {
+                                header("Location: ../userSite/myAccount.php"); // Przekieruj na stronę użytkownika
+                            }
                             exit();
                         } else {
                             echo "<script>alert('Złe hasło');</script>";
