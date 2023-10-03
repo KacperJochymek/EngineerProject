@@ -69,65 +69,52 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") {
     </header>
 
     
-    <p class="lekarz-wybierz">Formularz dodawania lekarza do systemu</p>
+    <p class="lekarz-wybierz">Dodaj post na strone bloga</p>
 
 
-    <div class="lekarzeDatabase">
+    <div class="blog_adding">
+        <?php
+        require '../Logowanie/config.php';
 
-    <?php
+        if (isset($_POST["signup_submit"])) {
+            $tekst = $_POST["tekst"];
+            $data = date("Y-m-d"); // Aktualna data
 
-    require '../Logowanie/config.php';
+            // Obsługa przesyłania pliku
+            $obrazek_name = $_FILES["obrazek"]["name"];
+            $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
+            $obrazek_type = $_FILES["obrazek"]["type"];
 
-    if (isset($_POST["signup_submit"])) {
-        $imie = $_POST["imie"];
-        $nazwisko = $_POST["nazwisko"];
-        $profesja = $_POST["profesja"];
+            // Sprawdź, czy przesłany plik to obrazek
+            if (substr($obrazek_type, 0, 5) === "image") {
+                // Przenieś przesłany plik do stałego miejsca
+                move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
 
-        // Obsługa przesyłania pliku
-        $obrazek_name = $_FILES["obrazek"]["name"];
-        $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
-        $obrazek_type = $_FILES["obrazek"]["type"];
+                if ($conn->connect_error) {
+                    die("Błąd połączenia: " . $conn->connect_error);
+                }
 
-        // Sprawdź, czy przesłany plik to obrazek
-        if (substr($obrazek_type, 0, 5) === "image") {
-            // Przenieś przesłany plik do stałego miejsca
-            move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
+                // Przygotuj i wykonaj zapytanie SQL do dodania danych
+                $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES ('$tekst', '$obrazek_name', '$data')";
 
+                if ($conn->query($sql) === TRUE) {
+                    echo '<script>alert("Wpis dodany pomyślnie!");</script>';
+                } else {
+                    echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                }
 
-            if ($conn->connect_error) {
-                die("Błąd połączenia: " . $conn->connect_error);
-            }
-
-            // Przygotuj i wykonaj zapytanie SQL do dodania danych
-            $sql = "INSERT INTO doctors (imie, nazwisko, profesja, obrazek) VALUES ('$imie', '$nazwisko', '$profesja', '$obrazek_name')";
-
-            if ($conn->query($sql) === TRUE) {
-                echo '<script>alert("Dane dodane poprawnie");</script>';
+                $conn->close();
             } else {
-                echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
             }
-            
-            
-
-            $conn->close();
-        } else {
-            echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
-            
         }
-    }
+        ?>
 
-
-    ?>
-
-
-    <form method="POST" enctype="multipart/form-data" class="doctor-form">
-        <input type="text" name="imie" id="imie" placeholder="Wprowadź imię">
-        <input type="text" name="nazwisko" id="nazwisko" placeholder="Wprowadź nazwisko"><br>
-        <input type="text" name="profesja" id="profesja" placeholder="Wprowadź specjalizację">
-        <input type="file" name="obrazek" id="obrazek"><br>
-        <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
-    </form>
-
+        <form class="blog-form" method="POST" enctype="multipart/form-data"> <!-- Dodaj enctype="multipart/form-data" aby obsłużyć przesyłanie pliku -->
+            <input type="text" name="tekst" class="message-inpt" placeholder="Treść wpisu bloga">
+            <input type="file" name="obrazek" id="obrazek" class="file-input">
+            <input type="submit" name="signup_submit" class="lekarz-btn" value="Wyślij">
+        </form>
     
     </div>
     

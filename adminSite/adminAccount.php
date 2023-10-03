@@ -80,7 +80,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     <h1>Witamy w panelu administratora!</h1>
 
 
-    <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
+    <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a></br>
+    <a href="/adminSite/addingBlog.php">Dodaj wpis na bloga</a>
     
     </div>
     

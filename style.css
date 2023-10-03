@@ -596,3 +596,46 @@ hr {
     width: 700px;
     padding: 10px; 
 }
+
+.blog_adding{
+    height: 750px;
+}
+
+.blog-form{
+    margin-top: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.file-input {
+    width: 15%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.blog-obrazek img{
+    flex:1;
+    margin-left: 100px;
+    width: 250px;
+    height: 250px; 
+    object-fit: cover; 
+    border-radius: 50%;
+}
+
+.blog-tekst{
+    flex: 1;
+    text-align: justify;
+    margin-left: 50px;
+}
+.blog-strona{
+    height: 1000px;
+    display: flex;
+    text-align: center;
+    margin-top: 100px;
+}
