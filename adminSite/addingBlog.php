@@ -78,39 +78,47 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         if (isset($_POST["signup_submit"])) {
             $tekst = $_POST["tekst"];
             $data = date("Y-m-d"); // Aktualna data
-
+        
             // Obsługa przesyłania pliku
             $obrazek_name = $_FILES["obrazek"]["name"];
             $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
             $obrazek_type = $_FILES["obrazek"]["type"];
-
+        
             // Sprawdź, czy przesłany plik to obrazek
             if (substr($obrazek_type, 0, 5) === "image") {
                 // Przenieś przesłany plik do stałego miejsca
                 move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
-
-                if ($conn->connect_error) {
-                    die("Błąd połączenia: " . $conn->connect_error);
-                }
-
-                // Przygotuj i wykonaj zapytanie SQL do dodania danych
-                $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES ('$tekst', '$obrazek_name', '$data')";
-
-                if ($conn->query($sql) === TRUE) {
-                    echo '<script>alert("Wpis dodany pomyślnie!");</script>';
+        
+                // Przygotuj zapytanie SQL z placeholderami
+                $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES (?, ?, ?)";
+        
+                // Przygotuj zapytanie
+                $stmt = $conn->prepare($sql);
+        
+                if ($stmt) {
+                    // Zbinduj parametry
+                    $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
+        
+                    // Wykonaj zapytanie
+                    if ($stmt->execute()) {
+                        echo '<script>alert("Wpis dodany pomyślnie!");</script>';
+                    } else {
+                        echo '<script>alert("Błąd: ' . $stmt->error . '");</script>';
+                    }
+        
+                    // Zamknij zapytanie
+                    $stmt->close();
                 } else {
-                    echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                    echo '<script>alert("Błąd przy przygotowywaniu zapytania.");</script>';
                 }
-
-                $conn->close();
             } else {
                 echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
             }
         }
         ?>
 
-        <form class="blog-form" method="POST" enctype="multipart/form-data"> <!-- Dodaj enctype="multipart/form-data" aby obsłużyć przesyłanie pliku -->
-            <input type="text" name="tekst" class="message-inpt" placeholder="Treść wpisu bloga">
+        <form class="blog-form" method="POST" enctype="multipart/form-data"> 
+            <textarea name="tekst" class="message-inpt" placeholder="Treść wpisu bloga"></textarea>
             <input type="file" name="obrazek" id="obrazek" class="file-input">
             <input type="submit" name="signup_submit" class="lekarz-btn" value="Wyślij">
         </form>
@@ -163,7 +171,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
     
+
+
 </body>
 
-<script src="script1.js"></script>
+<script src="/adminSite/script2.js"></script>
 </html>

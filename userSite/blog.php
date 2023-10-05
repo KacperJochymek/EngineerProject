@@ -82,6 +82,7 @@ if (!empty($_SESSION["id"])) {
                 echo '</div>';
                 echo '<div class="blog-tekst">';
                 echo '<p>' . $row['tekst'] . '</p>';
+                echo '<p> </br> Data dodania: ' . $row['dat'] . '</p>';
                 echo '</div>';
             }
         } else {

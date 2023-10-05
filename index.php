@@ -153,7 +153,7 @@ if (isset($_SESSION["user"])) {
             <div class="col-1">
                 <h1>Przydatne linki</h1>
                 <ul>
-                    <li><a href="/index.php">Strona główna</a></li>
+                    <li><a href="index.php">Strona główna</a></li>
                     <li><a href="#">Umów wizytę</a></li>
                     <li><a href="#">Cennik</a></li>
                 </ul>
@@ -177,6 +177,7 @@ if (isset($_SESSION["user"])) {
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
     
+
 </body>
 
 <script src="script1.js"></script>

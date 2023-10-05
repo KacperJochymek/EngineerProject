@@ -559,12 +559,6 @@ hr {
     text-align: center;
   }
 
-  .account{
-    text-align: center;
-    height: 1000px;
-    margin-top: 50px;
-  }
-
 .contact-site{
     text-align: center;
     height: 900px;
@@ -588,13 +582,13 @@ hr {
 }
 
 .message-inpt {
-    margin-top: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 20px;
     height: 250px;
     width: 700px;
-    padding: 10px; 
+    padding-left: 15px;
+    padding-top: 15px;
 }
 
 .blog_adding{
@@ -620,24 +614,25 @@ hr {
 }
 
 .blog-obrazek img{
-    flex:1;
-    margin-left: 100px;
     width: 250px;
     height: 250px; 
-    object-fit: cover; 
     border-radius: 50%;
 }
 
 .blog-tekst{
-    flex: 1;
     text-align: justify;
-    margin-left: 50px;
+    max-width: 1400px; 
+    font-size: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
 }
+
 .blog-strona{
-    height: 1000px;
+    height: 2000px;
     display: flex;
+    flex-direction: column;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .blad {
@@ -660,3 +655,30 @@ hr {
     margin-top: 25px;
     font-size: 100px; 
 }
+
+.account{
+    text-align: center;
+    height: 750px;
+    margin-top: 100px;
+}
+
+.account h1{
+    margin-bottom: 100px;
+}
+
+.account a {
+    display: inline-block;
+    padding: 30px 60px;
+    margin: 20px;
+    background: linear-gradient(to right, #100f4287, black);
+    color: #ffffff; 
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s; 
+  }
+  
+  
+  .account a:hover {
+    background: linear-gradient(to right, #100f4287, rgb(222, 57, 57)); 
+  }

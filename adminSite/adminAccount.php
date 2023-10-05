@@ -39,22 +39,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="index.php">Strona główna</a>
                 </li>
                 <li>
-                    <a href="">Lekarze</a>
+                    <a href="/userSite/lekarze.php">Lekarze</a>
                 </li>
                 <li>
-                    <a href="">Cennik</a>
+                    <a href="/userSite/cennik.php">Cennik</a>
                 </li>
                 <li>
-                    <a href="">Kontakt</a>
+                    <a href="/userSite/contact.php">Kontakt</a>
                 </li>
                 <li>
-                    <a href="/adminSite/dataAnalysis.php">Analiza Danych</a>
-                </li>
-                <li>
-                    <a href="">Moje Konto</a>
+                    <a href="/adminSite/adminAccount.php">Panel administratora</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -77,12 +74,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     <div class="account">
     
     
-    <h1>Witamy w panelu administratora!</h1>
+        <h1>Witamy w panelu administratora!</h1>
 
 
-    <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a></br>
-    <a href="/adminSite/addingBlog.php">Dodaj wpis na bloga</a>
-    
+        <div class="admin-panel">
+            <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
+            <a href="/adminSite/addingBlog.php">Dodaj wpis na bloga</a>
+            <a href="/adminSite/dataAnalysis.php">Analiza Danych</a>
+            <a href="#">Rezerwacje</a>
+            <a href="#">Edytuj cennik</a>
+            
+        </div>
+
+
     </div>
     
     
