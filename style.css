@@ -639,3 +639,24 @@ hr {
     text-align: center;
     margin-top: 100px;
 }
+
+.blad {
+    font-size: 100px;
+    margin-top: 100px;
+
+}
+
+.blad_strona{
+    height: 750px;
+    text-align: center;
+}
+
+.brak_dostepu{
+    margin-top: 25px;
+    font-size: 40px;
+}
+
+.fa-solid.fa-ban {
+    margin-top: 25px;
+    font-size: 100px; 
+}

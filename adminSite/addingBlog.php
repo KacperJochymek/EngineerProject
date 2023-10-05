@@ -8,10 +8,9 @@ if (!isset($_SESSION["id"])) {
 }
 
 // Sprawdź, czy użytkownik ma rolę administratora
-if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") {
-    // Reszta kodu HTML i logiki strony dostępna tylko dla administratora
-} else {
-    echo '<script>alert("Brak uprawnień do tej strony.");</script>'; 
+if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
+    header('Location: ../userSite/noPermission.php');
+    session_destroy();
     exit();
 }
 ?>
