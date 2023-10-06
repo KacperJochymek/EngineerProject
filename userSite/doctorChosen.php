@@ -1,9 +1,32 @@
 <?php
+require '../Logowanie/config.php';
+session_start();
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
 }
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
+    $doctor_id = $_POST["doctor_id"];
+
+    
+    $sql = "SELECT * FROM doctors WHERE id = $doctor_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $selected_doctor = $result->fetch_assoc();
+        $imie = $selected_doctor["imie"];
+        $nazwisko = $selected_doctor["nazwisko"];
+        $profesja = $selected_doctor["profesja"];
+        $obrazek = $selected_doctor["obrazek"];
+    } else {
+        echo "Brak danych do wyświetlenia.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,35 +82,53 @@ if (!empty($_SESSION["id"])) {
     
     <p class="lekarz-wybierz">Podaj dane osobowe:</p>
 
-    <div class="lekarz-logo">
+
+    <div class="doctorContent">
+    <!-- <div class="lekarz-logo2">
             <img src="/images/lekarz-w.png" alt="">
 
             <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
             <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
+    </div> -->
+
+
+    <div class="lekarz-logo2">
+        <?php
+        if (isset($imie) && isset($nazwisko)) {
+            echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
+            echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
+            echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
+        } else {
+            echo "Nie wybrano lekarza.";
+        }
+        ?>
+    
+
+
     </div>
 
     <div class="doc-chosen">
         <div class="doctor-form">
-            <p class="tekst-analiza2">Imię:</p>
-            <input type="text" name="name" id="name" placeholder="Podaj imię"> 
-            <p class="tekst-analiza2">Nazwisko:</p>
-            <input type="text" name="name" id="name" placeholder="Podaj nazwisko">
-            <p class="tekst-analiza2">Wiek:</p>
-            <input type="text" name="name" id="name" placeholder="Podaj swój wiek">
-            <p class="tekst-analiza2">Pesel:</p>
-            <input type="text" name="name" id="name" placeholder="Podaj swój pesel">
-            <p class="tekst-analiza2">Miasto:</p>
-            <input type="text" name="name" id="name" placeholder="Podaj miasto">
-            <p class="tekst-analiza2">Województwo</p>
-            <input type="text" name="name" id="name" placeholder="Podaj swoje województwo">
+            <p class="tekst-doctor3">Imię:</p>
+            <input type="text" name="name" id="name" placeholder="Wpisz imię"> 
+            <p class="tekst-doctor3">Nazwisko:</p>
+            <input type="text" name="name" id="name" placeholder="Wpisz nazwisko">
+            <p class="tekst-doctor3">Wiek:</p>
+            <input type="text" name="name" id="name" placeholder="Wpisz swój wiek">
+            <p class="tekst-doctor3">Pesel:</p>
+            <input type="text" name="name" id="name" placeholder="Wpisz swój pesel">
+            <p class="tekst-doctor3">Miasto:</p>
+            <input type="text" name="name" id="name" placeholder="Wpisz miasto">
+            <p class="tekst-doctor3">Województwo:</p>
+            <input type="text" name="name" id="name" placeholder="Wpisz województwo">
         </div>
 
         <div class="btn-chosen">
-            <button class="lekarz-btn">Powrót</button>
-            <button class="lekarz-btn">Dalej</button>
+            <button class="lekarz-btn"><a href="/userSite/lekarze.php">Powrót</a></button>
+            <button class="lekarz-btn"><a href="#">Dalej</a></button>
         </div>
     </div>
-
+    </div>
     
     
 

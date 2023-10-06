@@ -457,6 +457,15 @@ hr {
     margin-top: 10px;
 }
 
+.tekst-doctor3{
+    font-size: 20px;
+    text-align: left;
+    margin-left: 95px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
 .lekarze-wybor{
     height: 1000px;
     display: flex;
@@ -487,6 +496,10 @@ hr {
     height: 250px; 
     object-fit: cover; 
     border-radius: 50%;
+}
+
+.lekarz-btn:first-child {
+    margin-right: 50px; 
 }
 
 .lekarz-btn{
@@ -520,7 +533,7 @@ hr {
 }
 
 .doctor-form{
-    margin-top: 150px;
+    margin-top: 40px;
     text-align: center;
     align-items: center;
 }
@@ -557,16 +570,17 @@ hr {
 
   .btn-chosen{
     text-align: center;
+    margin-top: 20px;
   }
 
 .contact-site{
     text-align: center;
-    height: 900px;
+    height: 800px;
     margin-top: 50px;
 }
 
 .contact-form{
-    margin-top: 100px;
+    margin-top: 50px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -576,9 +590,14 @@ hr {
 .email-hldr{
     padding: 10px; 
     margin: 5px; 
+    margin-bottom: 20px;
     border: 1px solid #ccc; 
     border-radius: 5px; 
     font-size: 20px; 
+}
+
+.contact-form i{
+    font-size: 20px;
 }
 
 .message-inpt {
@@ -679,6 +698,30 @@ hr {
   }
   
   
-  .account a:hover {
+.account a:hover {
     background: linear-gradient(to right, #100f4287, rgb(222, 57, 57)); 
-  }
+}
+
+.doctorContent{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 1100px;
+}
+
+
+.lekarz-logo2{
+    margin: 0px 450px 350px 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.lekarz-logo2 img{
+    width: 250px;
+    height: 250px; 
+    object-fit: cover; 
+    border-radius: 50%;
+}
+

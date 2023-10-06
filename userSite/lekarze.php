@@ -1,9 +1,13 @@
 <?php
+require '../Logowanie/config.php';
+session_start();
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +87,10 @@ if ($result->num_rows > 0) {
         echo '<img src="/adminSite/uploads/' . $row["obrazek"] . '" alt="">';
         echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> ' . $row["imie"] . ' ' . $row["nazwisko"] . ' </p>';
         echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $row["profesja"] . '</p>';
-        echo '<button class="lekarz-btn">Umów się</button>';
+        echo '<form method="POST" action="../userSite/doctorChosen.php">';
+        echo '<input type="hidden" name="doctor_id" value="' . $row["id"] . '">';
+        echo '<button class="lekarz-btn" type="submit">Umów się</button>';
+        echo '</form>';
         echo '</div>';
     }
 } else {

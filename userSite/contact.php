@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../Logowanie/config.php';
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
@@ -70,9 +71,9 @@ if (!empty($_SESSION["id"])) {
 
 
         <form class="contact-form">
-            <input type="text" class="email-hldr" placeholder="Wpisz swój mail">
-            <input type="text" class="message-inpt" placeholder="Treść wiadomości">
-            <input type="submit" class="lekarz-btn" name="" value="Wyślij">
+            <i class="fa-regular fa-envelope"><input type="text" class="email-hldr" placeholder="Wpisz swój e-mail"></i>
+            <textarea class="message-inpt" placeholder="Treść wiadomości"></textarea>
+            <input type="submit" class="lekarz-btn" name="#" value="Wyślij">
         </form>
 
 
@@ -132,5 +133,5 @@ if (!empty($_SESSION["id"])) {
     
 </body>
 
-<script src="script1.js"></script>
+
 </html>
