@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
     }
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -108,25 +109,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
     </div>
 
     <div class="doc-chosen">
+
+
+    <form method="post" action="">
         <div class="doctor-form">
             <p class="tekst-doctor3">Imię:</p>
-            <input type="text" name="name" id="name" placeholder="Wpisz imię"> 
+            <input type="text" name="imie" id="imie" placeholder="Wpisz imię"> 
             <p class="tekst-doctor3">Nazwisko:</p>
-            <input type="text" name="name" id="name" placeholder="Wpisz nazwisko">
+            <input type="text" name="nazwisko" id="nazwisko" placeholder="Wpisz nazwisko">
             <p class="tekst-doctor3">Wiek:</p>
-            <input type="text" name="name" id="name" placeholder="Wpisz swój wiek">
+            <input type="text" name="wiek" id="wiek" placeholder="Wpisz swój wiek">
             <p class="tekst-doctor3">Pesel:</p>
-            <input type="text" name="name" id="name" placeholder="Wpisz swój pesel">
+            <input type="text" name="pesel" id="pesel" placeholder="Wpisz swój pesel">
             <p class="tekst-doctor3">Miasto:</p>
-            <input type="text" name="name" id="name" placeholder="Wpisz miasto">
+            <input type="text" name="miasto" id="miasto" placeholder="Wpisz miasto">
             <p class="tekst-doctor3">Województwo:</p>
-            <input type="text" name="name" id="name" placeholder="Wpisz województwo">
+            <input type="text" name="wojewodztwo" id="wojewodztwo" placeholder="Wpisz województwo">
         </div>
 
         <div class="btn-chosen">
             <button class="lekarz-btn"><a href="/userSite/lekarze.php">Powrót</a></button>
-            <button class="lekarz-btn"><a href="#">Dalej</a></button>
+            <button class="lekarz-btn" type="submit"><a href="#">Zapisz CSV</a></button>
         </div>
+    </form>
+<?php
+$csvFile = '../adminSite/dane.csv';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["imie"]) && isset($_POST["nazwisko"]) && isset($_POST["wiek"]) && isset($_POST["pesel"]) && isset($_POST["miasto"]) && isset($_POST["wojewodztwo"])) {
+
+    $imie = $_POST["imie"];
+    $nazwisko = $_POST["nazwisko"];
+    $wiek = $_POST["wiek"];
+    $pesel = $_POST["pesel"];
+    $miasto = $_POST["miasto"];
+    $wojewodztwo = $_POST["wojewodztwo"];
+
+    $file = fopen($csvFile, 'a');
+
+    fputcsv($file, array($imie, $nazwisko, $wiek, $pesel, $miasto, $wojewodztwo), ";");
+
+    fclose($file);
+}
+?>
+
     </div>
     </div>
     
