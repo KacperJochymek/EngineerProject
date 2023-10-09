@@ -42,22 +42,23 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="">Lekarze</a>
+                    <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
                 </li>
                 <li>
-                    <a href="">Cennik</a>
+                    <a href="#">Zmień cene</a>
+                </li>
+                
+                <li>
+                    <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
                 </li>
                 <li>
-                    <a href="">Kontakt</a>
-                </li>
-                <li>
-                    <a href="">Analiza Danych</a>
+                    <a href="dataAnalysis.php">Analiza Danych</a>
                 </li>
                 <li>
                     <a href="/adminSite/adminAccount.php">Moje Konto</a>
                 </li>
                 <li>
-                    <a href="./Logowanie/logout.php" class="active">Wyloguj się</a>
+                    <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
                 </li>
             </ul>
         </nav>

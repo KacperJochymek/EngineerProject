@@ -36,17 +36,20 @@ if (!empty($_SESSION["id"])) {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="">Lekarze</a>
+                    <a href="lekarze.php">Lekarze</a>
                 </li>
                 <li>
-                    <a href="">Cennik</a>
+                    <a href="cennik.php">Cennik</a>
                 </li>
                 <li>
-                    <a href="">Kontakt</a>
+                    <a href="blog.php">Blog</a>
+                </li>
+                <li>
+                    <a href="contact.php">Kontakt</a>
                 </li>
                 
                 <li>
-                    <a href="">Moje Konto</a>
+                    <a href="myAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
