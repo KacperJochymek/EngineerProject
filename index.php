@@ -102,7 +102,7 @@ if (isset($_SESSION["user"])) {
         Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym <br>
         bez konieczności wizyty w gabinecie lekarskim. <br>
 
-        <button class="aktualizacje-btn">Czytaj dalej...</button>
+        <a href="/userSite/blog.php"><button class="aktualizacje-btn" id="myLink">Czytaj dalej...</button></a>
         </div>
 
         
@@ -116,7 +116,7 @@ if (isset($_SESSION["user"])) {
     <p class="umow_sie_tekst2">Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie. <br></p>
         
 
-        <button class="btn_znajdz">Znajdź lekarza</button>
+       <a href="/userSite/lekarze.php"><button class="btn_znajdz" id="myLink">Znajdź lekarza</button></a>
     </div>
 
     <div class="patroni">

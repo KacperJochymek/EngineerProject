@@ -1,3 +1,4 @@
+//Funkcja, która przewija stronę do samej góry
 function ScrollingTop() {
     const czas = 1000; 
     const start = window.scrollY;
@@ -25,3 +26,21 @@ stronaGlownaLink.addEventListener('click', function (event) {
     event.preventDefault(); 
     ScrollingTop(); 
 });
+
+
+//Jeśli użytkownik nie jest zalogowany - przekieruj go do strony z logowaniem
+document.addEventListener("DOMContentLoaded", function() {
+    const myLinks = document.querySelectorAll("#myLink");
+
+    myLinks.forEach(function(link) {
+        link.addEventListener("click", function(event) {
+            event.preventDefault(); 
+
+            alert("Aby korzystać z serwisu, najpierw musisz się zalogować.");
+
+            window.location.href = "/Logowanie/sign_in.php";
+        });
+    });
+});
+
+

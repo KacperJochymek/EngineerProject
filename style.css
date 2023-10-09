@@ -725,3 +725,8 @@ hr {
     border-radius: 50%;
 }
 
+.analizeForm{
+    margin-top: 50px;
+    height: 1100px;
+    text-align: center;
+}
