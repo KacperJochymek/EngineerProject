@@ -3,38 +3,37 @@ const daysTag = document.querySelector(".days");
 const prevIcon = document.querySelector("#prev");
 const nextIcon = document.querySelector("#next");
 
-let date = new Date(),
-currYear = date.getFullYear(),
-currMonth = date.getMonth();
+let date = new Date();
+let currYear = date.getFullYear();
+let currMonth = date.getMonth();
 
 const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
     "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
-const renderujKalendarz = () => {
-    let firstDayOfMonth = new Date(currYear, currMonth, 0).getDay();
-    let lastDateOfMonth = new Date(currYear, currMonth + 1, 0).getDate();
-    let lastDayOfMonth = new Date(currYear, currMonth, lastDateOfMonth).getDay() - 1;
-    let lastDateOfLastMonth = new Date(currYear, currMonth, 0).getDate();
-    let liTag = "";
+const renderujKalendarz = (year, month) => {
+    const firstDayOfMonth = new Date(year, month, 0).getDay();
+    const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
+    const lastDayOfMonth = new Date(year, month, lastDateOfMonth).getDay() - 2;
+    const liTag = [];
 
-    for (let i = firstDayOfMonth; i > 0; i--) {
-        liTag += `<li class="inactive">${lastDateOfLastMonth - i + 1}</li>`;
+    for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+        liTag.push(`<li class="inactive">${new Date(year, month, -i).getDate()}</li>`);
     }
 
     for (let i = 1; i <= lastDateOfMonth; i++) {
-        let isToday = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear ? "active" : "";
-        liTag += `<li class="${isToday}">${i}</li>`;
+        let isToday = i === date.getDate() && month === date.getMonth() && year === date.getFullYear() ? "active" : "";
+        liTag.push(`<li class="${isToday}">${i}</li>`);
     }
 
-    for (let i = lastDayOfMonth; i < 6; i++) {
-        liTag += `<li class="inactive">${i - lastDayOfMonth + 1}</li>`;
-    
+    for (let i = 1; i < 6 - lastDayOfMonth; i++) {
+        liTag.push(`<li class="inactive">${i}</li>`);
     }
-    currentDate.innerText = `${months[currMonth]} ${currYear}`;
-    daysTag.innerHTML = liTag;
-}
 
-renderujKalendarz();
+    currentDate.innerText = `${months[month]} ${year}`;
+    daysTag.innerHTML = liTag.join("");
+};
+
+renderujKalendarz(currYear, currMonth);
 
 prevIcon.addEventListener("click", () => {
     currMonth--;
@@ -42,7 +41,7 @@ prevIcon.addEventListener("click", () => {
         currYear--;
         currMonth = 11;
     }
-    renderujKalendarz();
+    renderujKalendarz(currYear, currMonth);
 });
 
 nextIcon.addEventListener("click", () => {
@@ -51,6 +50,16 @@ nextIcon.addEventListener("click", () => {
         currYear++;
         currMonth = 0;
     }
-    renderujKalendarz();
+    renderujKalendarz(currYear, currMonth);
 });
 
+daysTag.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target.tagName === 'LI' && !target.classList.contains("inactive")) {
+        const day = parseInt(target.textContent, 10);
+        if (!isNaN(day) && isFinite(day)) {
+            const selectedDateElement = document.getElementById("selectedDate");
+            selectedDateElement.textContent = `${day} ${months[currMonth]} ${currYear}`;
+        }
+    }
+});

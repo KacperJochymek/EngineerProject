@@ -806,3 +806,39 @@ hr {
 .days li.inactive{
     color: #aaa;
 }
+
+.godzinaWizyty {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.tekst-wizyta{
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.przykladowa {
+    background: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.przykladowa:hover {
+    background: #0056b3;
+}
+
+.selected-date{
+    margin-top: 10px;
+}
+
+.selected-date .fa-solid{
+    font-size: 20px;
+}

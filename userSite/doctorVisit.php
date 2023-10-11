@@ -108,6 +108,7 @@ $_SESSION["doctor_data"] = array(
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
                 echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
+                echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
             } else {
                 echo "Nie wybrano lekarza.";
             }
@@ -163,30 +164,17 @@ $_SESSION["doctor_data"] = array(
                             <li>Nd</li>
                         </ul>
                         <ul class="days">
-                            
+
                         </ul>
                     </div>
                 </div>
 
-                <div class="doctor-form">
-
-                    <p class="tekst-doctor3">Data:</p>
-                    <select type="date" name="data" required>
-                        <option value="Poniedziałek">Poniedziałek 10.10</option>
-                        <option value="Wtorek">Wtorek 11.10</option>
-                        <option value="Środa">Środa 12.10</option>
-
-                    </select>
-
-                    <p class="tekst-doctor3">Wybierz godzinę wizyty:</p>
-                    <select type="time" name="godzina" required>
-                        <option value="08:00">08:00</option>
-                        <option value="09:00">09:00</option>
-                        <option value="10:00">10:00</option>
-
-                    </select>
-
-
+                <div class="godzinaWizyty">
+                    <p class="tekst-wizyta">Godzina wizyty:</p>
+                    <button class="przykladowa">8:00</button>
+                    <button class="przykladowa">15:30</button>
+                    <button class="przykladowa">16:00</button>
+                    <button class="przykladowa">17:00</button>
                 </div>
 
 
