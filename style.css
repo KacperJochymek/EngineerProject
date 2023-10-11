@@ -709,6 +709,13 @@ hr {
     height: 1100px;
 }
 
+.doctorContent2{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 1200px;
+}
+
 
 .lekarz-logo2{
     margin: 0px 450px 350px 150px;
@@ -729,4 +736,73 @@ hr {
     margin-top: 50px;
     height: 1100px;
     text-align: center;
+}
+
+.wstep_calendar{
+    width: 450px;
+    background: #fefefe;
+    border-radius: 10px;
+}
+
+.calendar_icons{
+    display: flex;
+    align-items: center;
+    padding: 25px 30px 10px;
+    justify-content: space-between;
+    height: 35px;
+    cursor: pointer;
+}
+
+.calendar{
+    padding: 20px;
+}
+
+.calendar ul{
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.current_date{
+    text-align: center;
+    font-size: 25px;
+    padding-top: 15px;
+    font-weight: 500;
+}
+
+.calendar ul li{
+    position: relative;
+    width: calc(100% / 7);
+}
+
+.calendar .weeks li{
+    font-weight: 600;
+}
+
+.calendar .days{
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calendar .days li{
+    cursor: pointer;
+    text-align: center;
+    width: calc(100% / 7);
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.calendar .days li:hover{
+    background: linear-gradient(to right, #BEC8E9, #265df2);
+    color: #fefefe;
+    border-radius: 50%;
+}
+
+.days li.inactive{
+    color: #aaa;
 }

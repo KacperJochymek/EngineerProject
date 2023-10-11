@@ -94,7 +94,7 @@ $_SESSION["doctor_data"] = array(
     <p class="lekarz-wybierz">Wybierz date i godzine wizyty:</p>
 
 
-    <div class="doctorContent">
+    <div class="doctorContent2">
         <!-- <div class="lekarz-logo2">
             <img src="/images/lekarz-w.png" alt="">
 
@@ -145,6 +145,28 @@ $_SESSION["doctor_data"] = array(
                     }
                 }
                 ?>
+
+                <div class="wstep_calendar">
+                    <p class="current_date"></p>
+                    <div class="calendar_icons">
+                        <i id="prev" class="fa-solid fa-arrow-left"></i>
+                        <i id="next" class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    <div class="calendar">
+                        <ul class="weeks">
+                            <li>Pon</li>
+                            <li>Wt</li>
+                            <li>Śr</li>
+                            <li>Czw</li>
+                            <li>Pt</li>
+                            <li>Sb</li>
+                            <li>Nd</li>
+                        </ul>
+                        <ul class="days">
+                            
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="doctor-form">
 
@@ -237,5 +259,6 @@ $_SESSION["doctor_data"] = array(
 </body>
 
 <script src="script1.js"></script>
+<script src="/userSite/calendar.js"></script>
 
 </html>
