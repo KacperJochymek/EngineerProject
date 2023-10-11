@@ -1,13 +1,10 @@
 <?php
 require '../Logowanie/config.php';
-session_start();
-
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -67,70 +64,14 @@ if (!empty($_SESSION["id"])) {
 
 
 
-    <p class="lekarz-wybierz">Wybierz lekarza dla siebie:</p>
-
-    <div class="lekarze-wybor">
-
-        <?php
-        require '../Logowanie/config.php';
 
 
-        if ($conn->connect_error) {
-            die("Błąd połączenia: " . $conn->connect_error);
-        }
+    <div class="blad_strona">
 
-        // Przygotuj zapytanie SQL do pobrania danych z tabeli 'doctors'
-        $sql = "SELECT * FROM doctors";
-        $result = $conn->query($sql);
+        <p class="blad">Dziękujemy za rejestrację!</p>
 
-        if ($result->num_rows > 0) {
-            // Iteruj przez wyniki zapytania i generuj divy
-            while ($row = $result->fetch_assoc()) {
-                echo '<div class="lekarz-logo">';
-                echo '<img src="/adminSite/uploads/' . $row["obrazek"] . '" alt="">';
-                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> ' . $row["imie"] . ' ' . $row["nazwisko"] . ' </p>';
-                echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $row["profesja"] . '</p>';
-                echo '<form method="POST" action="../userSite/doctorVisit.php">';
-                echo '<input type="hidden" name="doctor_id" value="' . $row["id"] . '">';
-                echo '<button class="lekarz-btn" type="submit">Umów się</button>';
-                echo '</form>';
-                echo '</div>';
-            }
-        } else {
-            echo "Brak danych do wyświetlenia.";
-        }
-
-        $conn->close();
-        ?>
-
-
-        <!-- <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Psycholog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-    
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Kardiolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div> -->
-
+        <i class="fa-regular fa-circle-check"></i>
+        <p class="brak_dostepu">W celu anulowania wizyty przejdź do zakładki "Moje konto" lub skontaktuj sie z nami telefonicznie.</p>
 
     </div>
 

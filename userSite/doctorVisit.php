@@ -27,14 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
     }
 }
 
-if (isset($_SESSION["doctor_data"])) {
-    $doctor_data = $_SESSION["doctor_data"];
-    $doctor_id = $doctor_data["doctor_id"];
-    $imie = $doctor_data["imie"];
-    $nazwisko = $doctor_data["nazwisko"];
-    $profesja = $doctor_data["profesja"];
-    $obrazek = $doctor_data["obrazek"];
-}
+
+$_SESSION["doctor_data"] = array(
+    "doctor_id" => $doctor_id,
+    "imie" => $imie,
+    "nazwisko" => $nazwisko,
+    "profesja" => $profesja,
+    "obrazek" => $obrazek
+);
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +91,7 @@ if (isset($_SESSION["doctor_data"])) {
     </header>
 
 
-    <p class="lekarz-wybierz">Podaj dane osobowe:</p>
+    <p class="lekarz-wybierz">Wybierz date i godzine wizyty:</p>
 
 
     <div class="doctorContent">
@@ -101,7 +101,6 @@ if (isset($_SESSION["doctor_data"])) {
             <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
             <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
     </div> -->
-
 
         <div class="lekarz-logo2">
             <?php
@@ -118,24 +117,59 @@ if (isset($_SESSION["doctor_data"])) {
         <div class="doc-chosen">
 
 
-            <form method="post" action="">
-                <div class="doctor-form">
-                    <p class="tekst-doctor3">Imię:</p>
-                    <input type="text" name="imie" id="imie" placeholder="Wpisz imię">
-                    <p class="tekst-doctor3">Nazwisko:</p>
-                    <input type="text" name="nazwisko" id="nazwisko" placeholder="Wpisz nazwisko">
-                    <p class="tekst-doctor3">Wiek:</p>
-                    <input type="text" name="wiek" id="wiek" placeholder="Wpisz swój wiek">
-                    <p class="tekst-doctor3">Pesel:</p>
-                    <input type="text" name="pesel" id="pesel" placeholder="Wpisz swój pesel">
-                    <p class="tekst-doctor3">Miasto:</p>
-                    <input type="text" name="miasto" id="miasto" placeholder="Wpisz miasto">
-                    <p class="tekst-doctor3">Województwo:</p>
-                    <input type="text" name="wojewodztwo" id="wojewodztwo" placeholder="Wpisz województwo">
-                </div>
-                <button class="lekarz-btn" type="submit" name="save_csv">Zapisz CSV</button>
-            </form>
 
+            <form method="POST" action="../userSite/doctorChosen.php">
+                <?php
+                require '../Logowanie/config.php';
+
+
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data']) && isset($_POST['godzina']) && isset($_POST['lekarz']) && isset($_POST['pacjent'])) {
+                    $data = $_POST['data'];
+                    $godzina = $_POST['godzina'];
+                    $lekarz = $_POST['lekarz'];
+                    $pacjent = $_POST['pacjent'];
+
+                    // Sprawdzenie istnienia połączenia z bazą danych i dodanie logiki
+                    if ($conn) {
+                        try {
+                            $stmt = $conn->prepare("INSERT INTO wizyty (data, godzina, lekarz, pacjent, status) VALUES (?, ?, ?, ?, 'Potwierdzona')");
+                            $stmt->bind_param("ssss", $data, $godzina, $lekarz, $pacjent); // Użyj bind_param do przypisania parametrów
+                            $stmt->execute();
+
+                            echo "Wizyta została zarezerwowana pomyślnie!";
+                        } catch (mysqli_sql_exception $e) {
+                            echo "Błąd przy rezerwacji wizyty: " . $e->getMessage();
+                        }
+                    } else {
+                        echo "Brak połączenia z bazą danych.";
+                    }
+                }
+                ?>
+
+                <div class="doctor-form">
+
+                    <p class="tekst-doctor3">Data:</p>
+                    <select type="date" name="data" required>
+                        <option value="Poniedziałek">Poniedziałek 10.10</option>
+                        <option value="Wtorek">Wtorek 11.10</option>
+                        <option value="Środa">Środa 12.10</option>
+
+                    </select>
+
+                    <p class="tekst-doctor3">Wybierz godzinę wizyty:</p>
+                    <select type="time" name="godzina" required>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+
+                    </select>
+
+
+                </div>
+
+
+
+            </form>
 
             <div class="btn-chosen">
                 <a href="/userSite/lekarze.php">
@@ -148,26 +182,8 @@ if (isset($_SESSION["doctor_data"])) {
                     ?>
                     <button class="lekarz-btn">Powrót</button>
                 </a>
-                <a href="/userSite/successfullVisit.php">
-                    <button class="lekarz-btn">Dalej</button>
-                </a>
+                <a href="/userSite/doctorChosen.php"><button class="lekarz-btn" type="submit" name="submit">Dalej</button></a>
             </div>
-            <?php
-            $csvFile = '../adminSite/dane.csv';
-
-            if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["imie"]) && isset($_POST["nazwisko"]) && isset($_POST["wiek"]) && isset($_POST["pesel"]) && isset($_POST["miasto"]) && isset($_POST["wojewodztwo"]) && isset($_POST["save_csv"])) {
-                $imie = $_POST["imie"];
-                $nazwisko = $_POST["nazwisko"];
-                $wiek = $_POST["wiek"];
-                $pesel = $_POST["pesel"];
-                $miasto = $_POST["miasto"];
-                $wojewodztwo = $_POST["wojewodztwo"];
-
-                $file = fopen($csvFile, 'a');
-                fputcsv($file, array($imie, $nazwisko, $wiek, $pesel, $miasto, $wojewodztwo), ";");
-                fclose($file);
-            }
-            ?>
 
         </div>
     </div>
