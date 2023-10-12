@@ -109,6 +109,7 @@ $_SESSION["doctor_data"] = array(
                 echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
                 echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
+                echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
             } else {
                 echo "Nie wybrano lekarza.";
             }
@@ -117,69 +118,35 @@ $_SESSION["doctor_data"] = array(
 
         <div class="doc-chosen">
 
-
-
-            <form method="POST" action="../userSite/doctorChosen.php">
-                <?php
-                require '../Logowanie/config.php';
-
-
-                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data']) && isset($_POST['godzina']) && isset($_POST['lekarz']) && isset($_POST['pacjent'])) {
-                    $data = $_POST['data'];
-                    $godzina = $_POST['godzina'];
-                    $lekarz = $_POST['lekarz'];
-                    $pacjent = $_POST['pacjent'];
-
-                    // Sprawdzenie istnienia połączenia z bazą danych i dodanie logiki
-                    if ($conn) {
-                        try {
-                            $stmt = $conn->prepare("INSERT INTO wizyty (data, godzina, lekarz, pacjent, status) VALUES (?, ?, ?, ?, 'Potwierdzona')");
-                            $stmt->bind_param("ssss", $data, $godzina, $lekarz, $pacjent); // Użyj bind_param do przypisania parametrów
-                            $stmt->execute();
-
-                            echo "Wizyta została zarezerwowana pomyślnie!";
-                        } catch (mysqli_sql_exception $e) {
-                            echo "Błąd przy rezerwacji wizyty: " . $e->getMessage();
-                        }
-                    } else {
-                        echo "Brak połączenia z bazą danych.";
-                    }
-                }
-                ?>
-
-                <div class="wstep_calendar">
-                    <p class="current_date"></p>
-                    <div class="calendar_icons">
-                        <i id="prev" class="fa-solid fa-arrow-left"></i>
-                        <i id="next" class="fa-solid fa-arrow-right"></i>
-                    </div>
-                    <div class="calendar">
-                        <ul class="weeks">
-                            <li>Pon</li>
-                            <li>Wt</li>
-                            <li>Śr</li>
-                            <li>Czw</li>
-                            <li>Pt</li>
-                            <li>Sb</li>
-                            <li>Nd</li>
-                        </ul>
-                        <ul class="days">
-
-                        </ul>
-                    </div>
+            <div class="wstep_calendar">
+                <p class="current_date"></p>
+                <div class="calendar_icons">
+                    <i id="prev" class="fa-solid fa-arrow-left"></i>
+                    <i id="next" class="fa-solid fa-arrow-right"></i>
                 </div>
+                <div class="calendar">
+                    <ul class="weeks">
+                        <li>Pon</li>
+                        <li>Wt</li>
+                        <li>Śr</li>
+                        <li>Czw</li>
+                        <li>Pt</li>
+                        <li>Sb</li>
+                        <li>Nd</li>
+                    </ul>
+                    <ul class="days">
 
-                <div class="godzinaWizyty">
-                    <p class="tekst-wizyta">Godzina wizyty:</p>
-                    <button class="przykladowa">8:00</button>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="godzinaWizyty" id="availableHours">
+                <p class="tekst-wizyta"><i class="fa-regular fa-clock"></i>Godziny wizyt</p>
+                <!-- <button class="przykladowa">8:00</button>
                     <button class="przykladowa">15:30</button>
                     <button class="przykladowa">16:00</button>
-                    <button class="przykladowa">17:00</button>
-                </div>
-
-
-
-            </form>
+                    <button class="przykladowa">17:00</button> -->
+            </div>
 
             <div class="btn-chosen">
                 <a href="/userSite/lekarze.php">

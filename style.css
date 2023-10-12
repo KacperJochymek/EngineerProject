@@ -565,7 +565,7 @@ hr {
   }
 
   .doc-chosen{
-    height: 1050px;
+    height: 1000px;
   }
 
   .btn-chosen{
@@ -814,9 +814,13 @@ hr {
 
 .tekst-wizyta{
     text-align: center;
-    font-size: 20px;
+    font-size: 28px;
     margin-bottom: 20px;
     font-weight: 500;
+}
+
+.tekst-wizyta .fa-regular{
+    margin-right: 10px;
 }
 
 .przykladowa {
@@ -841,4 +845,8 @@ hr {
 
 .selected-date .fa-solid{
     font-size: 20px;
+}
+
+.selected-hour{
+    margin-top: 10px;
 }

@@ -69,7 +69,7 @@ if (isset($_SESSION["doctor_data"])) {
                     <a href="cennik.php">Cennik</a>
                 </li>
                 <li>
-                    <a href="blog.php">Blog</a>
+                    <a href="blog.php">Aktualności</a>
                 </li>
                 <li>
                     <a href="contact.php">Kontakt</a>
