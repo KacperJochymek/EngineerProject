@@ -1,20 +1,17 @@
 <?php
 session_start();
 
-// Sprawdź, czy użytkownik jest zalogowany
 if (!isset($_SESSION["id"])) {
-    header("Location: /index.php"); // Przekieruj na stronę główną, jeśli nie jesteś zalogowany
+    header("Location: /index.php");
     exit();
 }
 
-// Sprawdź, czy użytkownik ma rolę administratora
 if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     header('Location: ../userSite/noPermission.php');
     session_destroy();
     exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +44,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <li>
                     <a href="#">Zmień cene</a>
                 </li>
-                
+
                 <li>
                     <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
                 </li>
@@ -69,16 +66,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    
-
-    
-    
-
     <div class="account">
-    
-    
-        <h1>Witamy w panelu administratora!</h1>
 
+        <h1>Witamy w panelu administratora!</h1>
 
         <div class="admin-panel">
             <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
@@ -86,17 +76,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <a href="/adminSite/dataAnalysis.php">Analiza Danych</a>
             <a href="#">Rezerwacje</a>
             <a href="#">Edytuj cennik</a>
-            
         </div>
-
-
     </div>
-    
-    
-    
-
-    
-    
 
     <footer>
         <div class="foo">
@@ -104,7 +85,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <h1>O nas</h1>
 
                 <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                     swój stan zdrowia i ma to wszystko pod ręką.</p>
+                    swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
@@ -141,8 +122,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <hr>
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
-    
+
 </body>
 
 <script src="script1.js"></script>
+
 </html>

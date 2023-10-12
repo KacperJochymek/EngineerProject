@@ -45,13 +45,13 @@ if (!empty($_SESSION["id"])) {
                 <li>
                     <a href="contact.php">Kontakt</a>
                 </li>
-                
+
                 <li>
                     <a href="myAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
-                    
+
                 </li>
             </ul>
         </nav>
@@ -62,33 +62,16 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-    
-
-    
-    
-
     <div class="contact-site">
-    
-    
-        <h1>Hej <?php echo $row["username"]; ?>, jeśli masz jakieś pytania skontaktuj się z nami!</h1>
 
+        <h1>Hej <?php echo $row["username"]; ?>, jeśli masz jakieś pytania skontaktuj się z nami!</h1>
 
         <form class="contact-form">
             <i class="fa-regular fa-envelope"><input type="text" class="email-hldr" placeholder="Wpisz swój e-mail"></i>
             <textarea class="message-inpt" placeholder="Treść wiadomości"></textarea>
             <input type="submit" class="lekarz-btn" name="#" value="Wyślij">
         </form>
-
-
-
     </div>
-    
-    
-    
-    
-
-    
-    
 
     <footer>
         <div class="foo">
@@ -96,7 +79,7 @@ if (!empty($_SESSION["id"])) {
                 <h1>O nas</h1>
 
                 <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                     swój stan zdrowia i ma to wszystko pod ręką.</p>
+                    swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
@@ -133,7 +116,7 @@ if (!empty($_SESSION["id"])) {
         <hr>
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
-    
+
 </body>
 
 

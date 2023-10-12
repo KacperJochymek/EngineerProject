@@ -42,7 +42,7 @@
                             $_SESSION["login"] = true;
                             $_SESSION["id"] = $row["id"];
 
-                            $_SESSION["role"]=$row["role"];
+                            $_SESSION["role"] = $row["role"];
 
 
                             if ($_SESSION["role"] === "admin") {
@@ -98,7 +98,7 @@
 
                 <?php
                 if (isset($_POST["signup_submit"])) {
-                    
+
                     $username = $_POST["username"];
                     $email = $_POST["email"];
                     $password = $_POST["password"];

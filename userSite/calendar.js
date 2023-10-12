@@ -1,3 +1,5 @@
+//Kod odpowiedzialny za tworzenie kalendarza i generowanie w nim dni.
+
 const currentDate = document.querySelector(".current_date");
 const daysTag = document.querySelector(".days");
 const prevIcon = document.querySelector("#prev");
@@ -61,25 +63,21 @@ daysTag.addEventListener("click", (event) => {
             const selectedDateElement = document.getElementById("selectedDate");
             selectedDateElement.textContent = `${day} ${months[currMonth]} ${currYear}`;
 
-            // Pobierz div godzinaWizyty
             const availableHours = document.getElementById("availableHours");
-
-            // Wyczyść go, aby usunąć poprzednie godziny
             availableHours.innerHTML = '';
 
-            // Tutaj możesz dodać kod, który pobierze dostępne godziny dla wybranego dnia i wstawi je do diva godzinaWizyty
-            // Przykładowo, zakładamy, że dostępne godziny są w formie tablicy:
+            // Tutaj bedzie kod, który wzcytuje godziny do tabeli z pliku php
+
             const dostepneGodziny = ["8:00", "15:30", "16:00", "17:00"];
 
-            // Iterujemy przez godziny i tworzymy przyciski
+            // Tworzenie nowych przycisków po przez iterację
+
             dostepneGodziny.forEach(godzina => {
                 const button = document.createElement("button");
                 button.classList.add("przykladowa");
                 button.textContent = godzina;
 
-                // Nasłuchujemy kliknięcia na przycisku godziny
                 button.addEventListener("click", () => {
-                    // Tutaj możesz dodać kod obsługujący wybór godziny, np. zapisujący ją w zmiennej
                     const wybranaGodzina = godzina;
                     console.log("Wybrano godzinę:", wybranaGodzina);
                 });

@@ -114,8 +114,6 @@ if (isset($_SESSION["doctor_data"])) {
         </div>
     </div>
 
-
-
     <footer>
         <div class="foo">
             <div class="col-1">

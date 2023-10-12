@@ -4,6 +4,7 @@ if (isset($_SESSION["user"])) {
     header("Location: sign_in.php");
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,13 +55,13 @@ if (isset($_SESSION["user"])) {
     </header>
 
     <div class="wstep">
-    <div class="lekarze">
-        <!-- <img src="./images/lekarze.png"> -->
-    </div>
-    <div class="tekst">
-        Umów się na poradę do Twojego lekarza. Od teraz łatwo, szybko <br>
-        i bezpiecznie, a to wszystko <br> w jednym miejscu.
-    </div>
+        <div class="lekarze">
+            <!-- <img src="./images/lekarze.png"> -->
+        </div>
+        <div class="tekst">
+            Umów się na poradę do Twojego lekarza. Od teraz łatwo, szybko <br>
+            i bezpiecznie, a to wszystko <br> w jednym miejscu.
+        </div>
     </div>
 
     <div class="ikony_dwa">
@@ -92,31 +93,26 @@ if (isset($_SESSION["user"])) {
 
     <div class="informacja">
         <p class="aktualizacje">Aktualizacje:</p>
-<div class="informacja-dwa">
-        <div class="logo-aktualizacje">
-            <img src="./images/Analiza-danych.jpg" alt="">
-        </div>
-        
-        <div class="tekst-aktualizacje">
-        Postępy w technologii telemedycyny: Telemedycyna staje się coraz popularniejsza, zwłaszcza w kontekście pandemii COVID-19. <br>
-        Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym <br>
-        bez konieczności wizyty w gabinecie lekarskim. <br>
+        <div class="informacja-dwa">
+            <div class="logo-aktualizacje">
+                <img src="./images/Analiza-danych.jpg" alt="">
+            </div>
 
-        <a href="/userSite/blog.php"><button class="aktualizacje-btn" id="myLink">Czytaj dalej...</button></a>
-        </div>
+            <div class="tekst-aktualizacje">
+                Postępy w technologii telemedycyny: Telemedycyna staje się coraz popularniejsza, zwłaszcza w kontekście pandemii COVID-19. <br>
+                Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym <br>
+                bez konieczności wizyty w gabinecie lekarskim. <br>
 
-        
-</div>
+                <a href="/userSite/blog.php"><button class="aktualizacje-btn" id="myLink">Czytaj dalej...</button></a>
+            </div>
+
+        </div>
     </div>
 
     <div class="umow_sie">
-
-    <p class="umow_sie_tekst"> Umów się na poradę już teraz! <br></p>
-       
-    <p class="umow_sie_tekst2">Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie. <br></p>
-        
-
-       <a href="/userSite/lekarze.php"><button class="btn_znajdz" id="myLink">Znajdź lekarza</button></a>
+        <p class="umow_sie_tekst"> Umów się na poradę już teraz! <br></p>
+        <p class="umow_sie_tekst2">Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie. <br></p>
+        <a href="/userSite/lekarze.php"><button class="btn_znajdz" id="myLink">Znajdź lekarza</button></a>
     </div>
 
     <div class="patroni">
@@ -124,12 +120,12 @@ if (isset($_SESSION["user"])) {
         <div class="patroni-logo">
             <img src="/images/logo.png" alt="">
             <img src="/images/logo.png" alt="">
-            <img src="/images/logo.png" alt="">           
+            <img src="/images/logo.png" alt="">
         </div>
         <div class="patroni-logo">
             <img src="/images/logo.png" alt="">
             <img src="/images/logo.png" alt="">
-            <img src="/images/logo.png" alt="">           
+            <img src="/images/logo.png" alt="">
         </div>
     </div>
 
@@ -139,7 +135,7 @@ if (isset($_SESSION["user"])) {
                 <h1>O nas</h1>
 
                 <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                     swój stan zdrowia i ma to wszystko pod ręką.</p>
+                    swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
@@ -176,9 +172,10 @@ if (isset($_SESSION["user"])) {
         <hr>
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
-    
+
 
 </body>
 
 <script src="script1.js"></script>
+
 </html>

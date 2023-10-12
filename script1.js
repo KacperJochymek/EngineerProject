@@ -1,4 +1,5 @@
-//Funkcja, która przewija stronę do samej góry
+//Funkcja, która przewija stronę do samej góry, nie odświeżając strony.
+
 function ScrollingTop() {
     const czas = 1000; 
     const start = window.scrollY;
@@ -16,7 +17,6 @@ function ScrollingTop() {
             requestAnimationFrame(scroll);
         }
     }
-
     requestAnimationFrame(scroll);
 }
 
@@ -27,8 +27,8 @@ stronaGlownaLink.addEventListener('click', function (event) {
     ScrollingTop(); 
 });
 
+//Funkcja, która sprawdza, czy użytkownik jest zalogowany. Jeśli nie - przekierowuje go do strony głównej.
 
-//Jeśli użytkownik nie jest zalogowany - przekieruj go do strony z logowaniem
 document.addEventListener("DOMContentLoaded", function() {
     const myLinks = document.querySelectorAll("#myLink");
 

@@ -1,3 +1,5 @@
+//Funkcja, która służy do przewijania pomiędzy formularzem logowania, a formularzem rejestracji.
+
 const container = document.querySelector(".container");
 const pwShowHideIcons = document.querySelectorAll(".showHidePw");
 const pwFields = document.querySelectorAll(".password");

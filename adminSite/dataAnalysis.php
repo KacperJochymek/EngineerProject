@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Sprawdź, czy użytkownik jest zalogowany
 if (!isset($_SESSION["id"])) {
-    header("Location: /index.php"); // Przekieruj na stronę logowania, jeśli użytkownik nie jest zalogowany
+    header("Location: /index.php");
     exit();
 }
 
-// Sprawdź, czy użytkownik ma rolę administratora
 if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     header('Location: ../userSite/noPermission.php');
     session_destroy();
@@ -47,7 +45,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <li>
                     <a href="#">Zmień cene</a>
                 </li>
-                
+
                 <li>
                     <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
                 </li>
@@ -69,24 +67,18 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    
     <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
     <p class="tekst-analiza2">Miary statystyczne:</p>
 
     <div class="dataAnalize">
         <img src="/images/Analiza-danych.jpg" alt="">
-        
-    
-        
+
     </div>
-    
+
     <p class="tekst-analiza2">Wykresy</p>
     <div class="wykresy">
-        
+
     </div>
-
-
-
 
     <footer>
         <div class="foo">
@@ -94,7 +86,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <h1>O nas</h1>
 
                 <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                     swój stan zdrowia i ma to wszystko pod ręką.</p>
+                    swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
@@ -131,8 +123,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <hr>
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
-    
+
 </body>
 
 <script src="script1.js"></script>
+
 </html>

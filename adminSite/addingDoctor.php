@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Sprawdź, czy użytkownik jest zalogowany
 if (!isset($_SESSION["id"])) {
-    header("Location: /index.php"); // Przekieruj na stronę logowania, jeśli użytkownik nie jest zalogowany
+    header("Location: /index.php");
     exit();
 }
 
-// Sprawdź, czy użytkownik ma rolę administratora
 if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     header('Location: ../userSite/noPermission.php');
     session_destroy();
@@ -46,7 +44,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <li>
                     <a href="#">Zmień cene</a>
                 </li>
-                
+
                 <li>
                     <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
                 </li>
@@ -68,70 +66,54 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    
     <p class="lekarz-wybierz">Formularz dodawania lekarza do systemu</p>
 
-
     <div class="lekarzeDatabase">
+        <?php
 
-    <?php
+        require '../Logowanie/config.php';
 
-    require '../Logowanie/config.php';
+        if (isset($_POST["signup_submit"])) {
+            $imie = $_POST["imie"];
+            $nazwisko = $_POST["nazwisko"];
+            $profesja = $_POST["profesja"];
 
-    if (isset($_POST["signup_submit"])) {
-        $imie = $_POST["imie"];
-        $nazwisko = $_POST["nazwisko"];
-        $profesja = $_POST["profesja"];
+            // Obsługa przesyłania pliku
+            $obrazek_name = $_FILES["obrazek"]["name"];
+            $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
+            $obrazek_type = $_FILES["obrazek"]["type"];
 
-        // Obsługa przesyłania pliku
-        $obrazek_name = $_FILES["obrazek"]["name"];
-        $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
-        $obrazek_type = $_FILES["obrazek"]["type"];
+            // Sprawdź, czy przesłany plik to obrazek
+            if (substr($obrazek_type, 0, 5) === "image") {
+                
+                move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
 
-        // Sprawdź, czy przesłany plik to obrazek
-        if (substr($obrazek_type, 0, 5) === "image") {
-            // Przenieś przesłany plik do stałego miejsca
-            move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
+                if ($conn->connect_error) {
+                    die("Błąd połączenia: " . $conn->connect_error);
+                }
 
+                $sql = "INSERT INTO doctors (imie, nazwisko, profesja, obrazek) VALUES ('$imie', '$nazwisko', '$profesja', '$obrazek_name')";
 
-            if ($conn->connect_error) {
-                die("Błąd połączenia: " . $conn->connect_error);
-            }
-
-            // Przygotuj i wykonaj zapytanie SQL do dodania danych
-            $sql = "INSERT INTO doctors (imie, nazwisko, profesja, obrazek) VALUES ('$imie', '$nazwisko', '$profesja', '$obrazek_name')";
-
-            if ($conn->query($sql) === TRUE) {
-                echo '<script>alert("Dane dodane poprawnie");</script>';
+                if ($conn->query($sql) === TRUE) {
+                    echo '<script>alert("Dane dodane poprawnie");</script>';
+                } else {
+                    echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                }
+                $conn->close();
             } else {
-                echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
             }
-            
-            
-
-            $conn->close();
-        } else {
-            echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
-            
         }
-    }
+        ?>
 
-
-    ?>
-
-
-    <form method="POST" enctype="multipart/form-data" class="doctor-form">
-        <input type="text" name="imie" id="imie" placeholder="Wprowadź imię">
-        <input type="text" name="nazwisko" id="nazwisko" placeholder="Wprowadź nazwisko"><br>
-        <input type="text" name="profesja" id="profesja" placeholder="Wprowadź specjalizację">
-        <input type="file" name="obrazek" id="obrazek"><br>
-        <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
-    </form>
-
-    
+        <form method="POST" enctype="multipart/form-data" class="doctor-form">
+            <input type="text" name="imie" id="imie" placeholder="Wprowadź imię">
+            <input type="text" name="nazwisko" id="nazwisko" placeholder="Wprowadź nazwisko"><br>
+            <input type="text" name="profesja" id="profesja" placeholder="Wprowadź specjalizację">
+            <input type="file" name="obrazek" id="obrazek"><br>
+            <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
+        </form>
     </div>
-    
-    
 
     <footer>
         <div class="foo">
@@ -139,7 +121,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <h1>O nas</h1>
 
                 <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                     swój stan zdrowia i ma to wszystko pod ręką.</p>
+                    swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
@@ -176,8 +158,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <hr>
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
-    
+
 </body>
 
 <script src="script1.js"></script>
+
 </html>

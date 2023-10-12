@@ -61,9 +61,6 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-
-
-
     <div class="priceSite">
         <div class="pricing">
             <h2>Cennik naszych usług</h2>
@@ -80,10 +77,6 @@ if (!empty($_SESSION["id"])) {
             <p>Płatności za wykonane usługi realizowane są tylko za pomocą karty lub gotówki w placówce.</p>
         </div>
     </div>
-
-
-
-
 
     <footer>
         <div class="foo">

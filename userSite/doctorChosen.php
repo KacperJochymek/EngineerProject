@@ -90,19 +90,9 @@ if (isset($_SESSION["doctor_data"])) {
         </label>
     </header>
 
-
     <p class="lekarz-wybierz">Podaj dane osobowe:</p>
 
-
     <div class="doctorContent">
-        <!-- <div class="lekarz-logo2">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-    </div> -->
-
-
         <div class="lekarz-logo2">
             <?php
             if (isset($imie) && isset($nazwisko)) {
@@ -118,7 +108,6 @@ if (isset($_SESSION["doctor_data"])) {
         </div>
 
         <div class="doc-chosen">
-
 
             <form method="post" action="">
                 <div class="doctor-form">
@@ -137,7 +126,6 @@ if (isset($_SESSION["doctor_data"])) {
                 </div>
                 <button class="lekarz-btn" type="submit" name="save_csv">Zapisz CSV</button>
             </form>
-
 
             <div class="btn-chosen">
                 <a href="/userSite/lekarze.php">
@@ -170,11 +158,8 @@ if (isset($_SESSION["doctor_data"])) {
                 fclose($file);
             }
             ?>
-
         </div>
     </div>
-
-
 
     <footer>
         <div class="foo">

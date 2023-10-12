@@ -8,7 +8,6 @@ if (!empty($_SESSION["id"])) {
     $row = mysqli_fetch_assoc($result);
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
     $doctor_id = $_POST["doctor_id"];
 
@@ -26,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
         echo "Brak danych do wyświetlenia.";
     }
 }
-
 
 $_SESSION["doctor_data"] = array(
     "doctor_id" => $doctor_id,
@@ -90,18 +88,9 @@ $_SESSION["doctor_data"] = array(
         </label>
     </header>
 
-
     <p class="lekarz-wybierz">Wybierz date i godzine wizyty:</p>
 
-
     <div class="doctorContent2">
-        <!-- <div class="lekarz-logo2">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-    </div> -->
-
         <div class="lekarz-logo2">
             <?php
             if (isset($imie) && isset($nazwisko)) {
@@ -139,26 +128,22 @@ $_SESSION["doctor_data"] = array(
                         <li>Nd</li>
                     </ul>
                     <ul class="days">
-
+                        <!-- Generowanie dni -->
                     </ul>
                 </div>
             </div>
 
             <div class="godzinaWizyty" id="availableHours">
                 <p class="tekst-wizyta"><i class="fa-regular fa-clock"></i>Godziny wizyt</p>
-                <!-- <button class="przykladowa">8:00</button>
-                    <button class="przykladowa">15:30</button>
-                    <button class="przykladowa">16:00</button>
-                    <button class="przykladowa">17:00</button> -->
+                <!-- Generowanie godzin wizyt -->
             </div>
 
             <div class="btn-chosen">
                 <a href="/userSite/lekarze.php">
                     <?php
-                    // Dodaj ten blok PHP, który zakończy sesję po kliknięciu "Powrót"
                     if (isset($_SESSION["id"])) {
-                        session_unset();  // Usuń wszystkie zmienne sesji
-                        session_destroy(); // Zakończ sesję
+                        session_unset();
+                        session_destroy();
                     }
                     ?>
                     <button class="lekarz-btn">Powrót</button>
@@ -168,8 +153,6 @@ $_SESSION["doctor_data"] = array(
 
         </div>
     </div>
-
-
 
     <footer>
         <div class="foo">

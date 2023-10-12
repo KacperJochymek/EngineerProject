@@ -44,13 +44,13 @@ if (!empty($_SESSION["id"])) {
                 <li>
                     <a href="contact.php">Kontakt</a>
                 </li>
-                
+
                 <li>
                     <a href="myAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
-                    
+
                 </li>
             </ul>
         </nav>
@@ -61,27 +61,20 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-    
-
-    
-    
-
     <div class="blog-strona">
-    
-    <?php
+
+        <?php
         if ($conn->connect_error) {
             die("Błąd połączenia: " . $conn->connect_error);
         }
 
-        // Przygotuj zapytanie SQL do pobrania danych z tabeli 'blog'
         $sql = "SELECT * FROM blog";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            // Iteruj przez wyniki zapytania i generuj divy
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="blog-obrazek">';
-                echo '<img src="/adminSite/uploads/' . $row['obrazek'] . '" alt="">'; // Poprawna ścieżka do obrazka
+                echo '<img src="/adminSite/uploads/' . $row['obrazek'] . '" alt="">';
                 echo '</div>';
                 echo '<div class="blog-tekst">';
                 echo '<p>' . $row['tekst'] . '</p>';
@@ -93,21 +86,7 @@ if (!empty($_SESSION["id"])) {
         }
         $conn->close();
         ?>
-    <!-- <div class="blog-obrazek">
-        <img src="/images/logo.png" alt="">
     </div>
-
-    <div class="blog-tekst">
-        <p>rem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-    </div> -->
-
-    </div>
-    
-    
-    
-
-    
-    
 
     <footer>
         <div class="foo">
@@ -115,7 +94,7 @@ if (!empty($_SESSION["id"])) {
                 <h1>O nas</h1>
 
                 <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                     swój stan zdrowia i ma to wszystko pod ręką.</p>
+                    swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
@@ -152,8 +131,9 @@ if (!empty($_SESSION["id"])) {
         <hr>
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
-    
+
 </body>
 
 <script src="script1.js"></script>
+
 </html>

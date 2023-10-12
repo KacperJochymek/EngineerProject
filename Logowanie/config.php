@@ -1,2 +1,2 @@
 <?php
-$conn = mysqli_connect("localhost","root","", "registerlog");
+$conn = mysqli_connect("localhost", "root", "", "registerlog");

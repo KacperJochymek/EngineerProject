@@ -64,16 +64,11 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-
-
-
     <p class="lekarz-wybierz">Wybierz lekarza dla siebie:</p>
 
     <div class="lekarze-wybor">
-
         <?php
         require '../Logowanie/config.php';
-
 
         if ($conn->connect_error) {
             die("Błąd połączenia: " . $conn->connect_error);
@@ -99,46 +94,9 @@ if (!empty($_SESSION["id"])) {
         } else {
             echo "Brak danych do wyświetlenia.";
         }
-
         $conn->close();
         ?>
-
-
-        <!-- <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Laryngolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Psycholog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div>
-    
-        <div class="lekarz-logo">
-            <img src="/images/lekarz-w.png" alt="">
-
-            <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> lek. med. Anita Wrona </p> 
-            <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Kardiolog</p>
-            <button class ="lekarz-btn">Umów się</button>
-
-        </div> -->
-
-
     </div>
-
-
-
-
-
-
 
     <footer>
         <div class="foo">

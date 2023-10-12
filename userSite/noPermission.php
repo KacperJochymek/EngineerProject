@@ -44,13 +44,13 @@ if (!empty($_SESSION["id"])) {
                 <li>
                     <a href="#">Kontakt</a>
                 </li>
-                
+
                 <li>
                     <a href="#">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/sign_in.php" class="active">Zaloguj się</a>
-                    
+
                 </li>
             </ul>
         </nav>
@@ -61,25 +61,14 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-    
-
-    
-    
-
     <div class="blad_strona">
-   
-    <p class="blad">Błąd 403 </p> 
 
-    <i class="fa-solid fa-ban"></i>
-    <p class="brak_dostepu">Nie masz dostępu do tej strony!</p>
+        <p class="blad">Błąd 403 </p>
+
+        <i class="fa-solid fa-ban"></i>
+        <p class="brak_dostepu">Nie masz dostępu do tej strony!</p>
 
     </div>
-    
-    
-    
-
-    
-    
 
     <footer>
         <div class="foo">
@@ -87,7 +76,7 @@ if (!empty($_SESSION["id"])) {
                 <h1>O nas</h1>
 
                 <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                     swój stan zdrowia i ma to wszystko pod ręką.</p>
+                    swój stan zdrowia i ma to wszystko pod ręką.</p>
             </div>
 
             <div class="col-1">
@@ -124,8 +113,9 @@ if (!empty($_SESSION["id"])) {
         <hr>
         <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
     </footer>
-    
+
 </body>
 
 <script src="script1.js"></script>
+
 </html>
