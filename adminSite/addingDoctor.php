@@ -85,7 +85,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
             // Sprawdź, czy przesłany plik to obrazek
             if (substr($obrazek_type, 0, 5) === "image") {
-                
+
                 move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
 
                 if ($conn->connect_error) {
@@ -107,11 +107,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         ?>
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
-            <input type="text" name="imie" id="imie" placeholder="Wprowadź imię">
-            <input type="text" name="nazwisko" id="nazwisko" placeholder="Wprowadź nazwisko"><br>
-            <input type="text" name="profesja" id="profesja" placeholder="Wprowadź specjalizację">
-            <input type="file" name="obrazek" id="obrazek"><br>
+            <div class="add-inpt">
+                <input type="text" name="imie" id="imie" placeholder="Tytuł naukowy">
+                <input type="text" name="nazwisko" id="nazwisko" placeholder="Imię i nazwisko"><br>
+                <input type="text" name="profesja" id="profesja" placeholder="Specjalizacja">
+                <input type="file" name="obrazek" id="obrazek"><br>
             <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
+            </div>
         </form>
     </div>
 

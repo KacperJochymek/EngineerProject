@@ -533,8 +533,12 @@ hr {
 }
 
 .doctor-form{
+    background: #fefefe;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 0px 425px 0 425px;
     margin-top: 40px;
-    text-align: center;
+    text-align: justify;
     align-items: center;
 }
 
@@ -543,16 +547,21 @@ hr {
     margin: 5px; 
     border: 1px solid #ccc; 
     border-radius: 5px; 
-    font-size: 20px; 
+    font-size: 19px; 
   }
   
   
   .doctor-form input[type="file"] {
     padding: 10px;
+    width: 250px;
     margin: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
+  }
+
+  .add-inpt{
+    text-align: center;
   }
 
   .dataAnalize{
@@ -620,6 +629,10 @@ hr {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.blog-form input[type="file"]{
+    width: 250px;
 }
 
 
