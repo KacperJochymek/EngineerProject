@@ -62,9 +62,36 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-    <div class="account">
+    <div class="myAccountSite">
         <h1>Witamy <?php echo $row["username"]; ?> !</h1>
+
+        <div class="mojeWizyty">
+            <p class="tekst-wizytyMyAcc">Moje wizyty:</p>
+
+            <div class="wyswietlanieMyAcc">
+                <img src="../adminSite/uploads/kobieta.png" alt="">
+                <div class="resztaMyAcc">
+                    <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
+                    <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
+                    <p id="selectedDate" class="selected-date">Data</p>
+                    <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
+                </div>
+                <button class="myAccBtn">Anuluj</button>
+            </div>
+
+            <div class="wyswietlanieMyAcc">
+                <img src="../adminSite/uploads/kobieta.png" alt="">
+                <div class="resztaMyAcc">
+                    <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
+                    <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
+                    <p id="selectedDate" class="selected-date">Data</p>
+                    <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
+                </div>
+                <button class="myAccBtn">Anuluj</button>
+            </div>
+        </div>
     </div>
+
 
     <footer>
         <div class="foo">
