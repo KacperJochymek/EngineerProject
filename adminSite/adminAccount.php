@@ -74,7 +74,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
             <a href="/adminSite/addingBlog.php">Dodaj wpis na bloga</a>
             <a href="/adminSite/dataAnalysis.php">Analiza Danych</a>
-            <a href="#">Rezerwacje</a>
+            <a href="/adminSite/adminLookVisit.php">Wizyty</a>
             <a href="#">Edytuj cennik</a>
         </div>
     </div>

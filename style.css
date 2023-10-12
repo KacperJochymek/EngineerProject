@@ -450,6 +450,11 @@ hr {
     z-index: 2;
 }
 
+.tekst-dataWykresy{
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-align: center;
+}
 
 .tekst-analiza2{
     font-size: 20px;
@@ -565,8 +570,27 @@ hr {
   }
 
   .dataAnalize{
-    height: 1000px;
+    height: 1500px;
   }
+
+  .dataAnalizeSquare{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .wykresy {
+    background: #fefefe;
+    border-radius: 20px;
+    height: 300px;
+    width: 500px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; 
+  }  
 
   .dataAnalize img{
     width: 250px;

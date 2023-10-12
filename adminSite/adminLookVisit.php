@@ -11,7 +11,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     session_destroy();
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +27,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 <body>
     <header>
         <div class="logo">
-            <img src="/images/logo.png">
+            <a href="/index.php"> <img src="/images/logo.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -67,30 +66,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
-    <p class="tekst-analiza2">Miary statystyczne:</p>
+    <div class="account">
 
-    <div class="dataAnalize">
-        <div class="dataAnalizeSquare">
-            <img src="/images/Analiza-danych.jpg" alt="">
-            <input type="text" placeholder="Wybierz miare">
-            <button>Oblicz!</button>
+    <div class="lookUsers">
+        <p>Wyświetl wizyty</p>
+        <input type="text" placeholder="Wpisz date">
+    </div>
 
-            <div class="wykresy">
-                <p>Tutaj beda sie generowac wykresy</p>
-            </div>
-        </div>
-
-        <p class="tekst-dataWykresy">Wykresy</p>
-
-        <div class="allWykres">
-        <input type="text" placeholder="Wybierz miare">
-        <input type="text" placeholder="Wybierz miare">
-        <button>Oblicz!</button>
-            <div class="wykresy">
-                <p>Tutaj beda sie generowac wykresy</p>
-            </div>
-        </div>
     </div>
 
     <footer>
