@@ -109,6 +109,8 @@ if (isset($_SESSION["doctor_data"])) {
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
                 echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
+                echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
+                echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
             } else {
                 echo "Nie wybrano lekarza.";
             }
@@ -149,7 +151,7 @@ if (isset($_SESSION["doctor_data"])) {
                     <button class="lekarz-btn">Powrót</button>
                 </a>
                 <a href="/userSite/successfullVisit.php">
-                    <button class="lekarz-btn">Dalej</button>
+                    <button class="lekarz-btn">Umów się!</button>
                 </a>
             </div>
             <?php

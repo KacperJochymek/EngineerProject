@@ -850,3 +850,76 @@ hr {
 .selected-hour{
     margin-top: 10px;
 }
+
+.messageSuccess {
+    margin: 0px 0px 350px 0px;
+    background-color: #fefefe;
+    color: green; 
+    border-radius: 10px; 
+    padding: 20px;
+    width: 400px; 
+    height: 400px;
+    text-align: center; 
+}
+  
+.succesThanks {
+    font-size: 30px; 
+    margin-bottom: 50px; 
+    margin-top: 30px;
+}
+  
+.messageSuccess .fa-regular{
+    font-size: 80px; 
+    margin-bottom: 50px; 
+}
+  
+.messageCancel {
+    font-size: 22px; 
+}
+
+.succesfullContent{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    height: 1000px;
+}
+
+.priceSite{
+    text-align: center;
+    height: 750px;
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pricing {
+    background-color: #fff; 
+    width: 500px; 
+    border-radius: 10px;
+    padding: 20px; 
+}
+  
+.pricing h2 {
+    text-align: center;
+    font-size: 24px;
+}
+  
+.pricing li {
+    font-size: 18px; 
+    text-align: left; 
+    margin: 10px 0;
+}
+
+.warningInfo .fa-solid{
+    font-size: 60px;
+    color: red;
+    margin-top: 20px;
+}
+
+.warningInfo p{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 600;
+}

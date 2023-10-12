@@ -1,9 +1,39 @@
 <?php
 require '../Logowanie/config.php';
+session_start();
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
+    $doctor_id = $_POST["doctor_id"];
+
+
+    $sql = "SELECT * FROM doctors WHERE id = $doctor_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $selected_doctor = $result->fetch_assoc();
+        $imie = $selected_doctor["imie"];
+        $nazwisko = $selected_doctor["nazwisko"];
+        $profesja = $selected_doctor["profesja"];
+        $obrazek = $selected_doctor["obrazek"];
+    } else {
+        echo "Brak danych do wyświetlenia.";
+    }
+}
+
+if (isset($_SESSION["doctor_data"])) {
+    $doctor_data = $_SESSION["doctor_data"];
+    $doctor_id = $doctor_data["doctor_id"];
+    $imie = $doctor_data["imie"];
+    $nazwisko = $doctor_data["nazwisko"];
+    $profesja = $doctor_data["profesja"];
+    $obrazek = $doctor_data["obrazek"];
 }
 ?>
 
@@ -50,7 +80,6 @@ if (!empty($_SESSION["id"])) {
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
-
                 </li>
             </ul>
         </nav>
@@ -61,23 +90,29 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
+    <p class="lekarz-wybierz">Podsumowanie:</p>
 
+    <div class="succesfullContent">
+        <div class="lekarz-logo2">
+            <?php
+            if (isset($imie) && isset($nazwisko)) {
+                echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
+                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
+                echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
+                echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
+                echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
+            } else {
+                echo "Nie wybrano lekarza.";
+            }
+            ?>
+        </div>
 
-
-
-
-    <div class="blad_strona">
-
-        <p class="blad">Dziękujemy za rejestrację!</p>
-
-        <i class="fa-regular fa-circle-check"></i>
-        <p class="brak_dostepu">W celu anulowania wizyty przejdź do zakładki "Moje konto" lub skontaktuj sie z nami telefonicznie.</p>
-
+        <div class="messageSuccess">
+            <p class="succesThanks">Dziękujemy za rejestrację!</p>
+            <i class="fa-regular fa-circle-check"></i>
+            <p class="messageCancel">W celu anulowania wizyty przejdź do zakładki <a href="/userSite/myAccount.php">"Moje konto"</a> lub skontaktuj sie z nami telefonicznie.</p>
+        </div>
     </div>
-
-
-
-
 
 
 

@@ -108,8 +108,12 @@ $_SESSION["doctor_data"] = array(
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
                 echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
+                echo '<form method="POST" action="../userSite/doctorChosen.php">';
                 echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
                 echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
+                echo '<input type="hidden" name="selectedDate" id="selectedDateInput" value="">';
+                echo '<input type="hidden" name="selectedDate" id="selectedDateInput" value="">';
+                echo '</form>';
             } else {
                 echo "Nie wybrano lekarza.";
             }
