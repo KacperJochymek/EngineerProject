@@ -66,12 +66,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <div class="account">
+    <div class="accountAdminLook">
 
-    <div class="lookUsers">
-        <p>Wyświetl wizyty</p>
-        <input type="text" placeholder="Wpisz date">
-    </div>
+    <p class="lekarz-wybierz">Podgląd wizyt</p>
+
+        <div class="lookUsers">
+            <div class="lookVis">
+                <p>Wybierz datę:</p>
+                <input type="date" placeholder="Wpisz date">
+            </div>
+            <div class="vtableUsers">
+                <p>Tabela która będzie wyświetlać użytkowników z danego dnia</p>
+            </div>
+        </div>
 
     </div>
 

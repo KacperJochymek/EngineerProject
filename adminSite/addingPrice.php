@@ -1,9 +1,15 @@
 <?php
-require '../Logowanie/config.php';
-if (!empty($_SESSION["id"])) {
-    $id = $_SESSION["id"];
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
-    $row = mysqli_fetch_assoc($result);
+session_start();
+
+if (!isset($_SESSION["id"])) {
+    header("Location: /index.php");
+    exit();
+}
+
+if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
+    header('Location: ../userSite/noPermission.php');
+    session_destroy();
+    exit();
 }
 ?>
 
@@ -21,7 +27,7 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/logo.png"></a>
+            <img src="/images/logo.png">
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -33,24 +39,23 @@ if (!empty($_SESSION["id"])) {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="lekarze.php">Lekarze</a>
+                    <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
                 </li>
                 <li>
-                    <a href="cennik.php">Cennik</a>
-                </li>
-                <li>
-                    <a href="blog.php">Aktualności</a>
-                </li>
-                <li>
-                    <a href="contact.php">Kontakt</a>
+                    <a href="#">Zmień cene</a>
                 </li>
 
                 <li>
-                    <a href="myAccount.php">Moje Konto</a>
+                    <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
+                </li>
+                <li>
+                    <a href="dataAnalysis.php">Analiza Danych</a>
+                </li>
+                <li>
+                    <a href="/adminSite/adminAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
-
                 </li>
             </ul>
         </nav>
@@ -61,30 +66,65 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-    <div class="priceSite">
+    <p class="lekarz-wybierz">Formularz dodawania/zmian cen w systemie</p>
+
+    <div class="lekarzeDatabase">
+
+        <form method="POST" enctype="multipart/form-data" class="doctor-form">
+            <div class="add-inpt">
+                <input type="text" name="nazwa" id="nazwa" placeholder="Nazwa zabiegu">
+                <input type="text" name="cena" id="cena" placeholder="Cena"><br>
+                <input type="submit" class="lekarz-btn" name="add_submit" value="Dodaj">
+            </div>
+        </form>
+
+
+        <p class="lekarz-wybierz">Podgląd:</p>
+
         <?php
 
-        $sql = "SELECT nazwa, cena FROM cennik";
+        require '../Logowanie/config.php';
+        require '../adminSite/cennik-config.php';
+
+        $sql = "SELECT * FROM cennik";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            echo '<div class="pricing">';
-            echo '<h2>Cennik naszych usług</h2>';
-            echo '<ul>';
+            echo '<div class="tble-cennik">';
+            echo '<table>';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Id</th>';
+            echo '<th>Nazwa zabiegu</th>';
+            echo '<th>Cena</th>';
+            echo '<th>Akcje</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
             while ($row = $result->fetch_assoc()) {
-                echo '<li>' . htmlspecialchars($row["nazwa"]) . ': ' . number_format($row["cena"], 2) . ' zł</li>';
+                echo '<tr>';
+                echo '<td>' . $row["id"] . '</td>';
+                echo '<td>' . $row["nazwa"] . '</td>';
+                echo '<td>' . $row["cena"] . '</td>';
+                echo '<td>';
+                echo '<form method="post" action="">';
+                echo '<input type="hidden" name="id" value="' . $row["id"] . '">';
+                echo '<input type="text" class="new-price-form" name="cena" placeholder="Nowa cena">';
+                echo '<button type="submit" class="edit-btn" name="edit-btn">Aktualizuj cenę</button>';
+                echo '<button type="submit" class="delete-btn" name="delete-btn">Usuń</button>';
+                echo '</form>';
+                echo '</td>';
+                echo '</tr>';
             }
-            echo '</ul>';
+            echo '</tbody>';
+            echo '</table>';
             echo '</div>';
         } else {
-            echo "Brak danych w cenniku.";
+            echo "Brak danych do wyświetlenia.";
         }
+        $conn->close();
         ?>
-
-        <div class="warningInfo">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <p>Płatności za wykonane usługi realizowane są tylko za pomocą karty lub gotówki w placówce.</p>
-        </div>
     </div>
 
     <footer>

@@ -534,7 +534,7 @@ hr {
 }
 
 .lekarzeDatabase{
-    height: 710px;
+    height: 100vh;
 }
 
 .doctor-form{
@@ -1052,3 +1052,78 @@ hr {
     background: #fefefe;
     color: red;
 }
+
+.accountAdminLook{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    justify-content: flex-start; 
+    height: 100vh;
+}
+
+.vtableUsers{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    background: #fefefe;
+    height: 400px;
+    width: 900px;
+}
+
+.lookVis{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.lookVis p{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.lookVis input{
+    font-size: 20px;
+    height: 50px;
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    border: none;
+}
+
+.tble-cennik{
+    background: #fefefe;
+    border-radius: 20px;
+    margin: 0px 425px 0 425px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.tble-cennik table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tble-cennik table th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.tble-cennik .edit-btn, .delete-btn {
+    background-color: #007BFF;
+    border-radius: 20px;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.new-price-form{
+    padding: 5px;
+    height: 20px;
+    width: 80px;
+    text-align: center;
+}
+
