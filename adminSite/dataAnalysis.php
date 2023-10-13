@@ -68,27 +68,92 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     </header>
 
     <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
-    <p class="tekst-analiza2">Miary statystyczne:</p>
 
     <div class="dataAnalize">
+        
+        <p class="tekst-dataWykresy">Miary statystyczne:</p>
         <div class="dataAnalizeSquare">
             <img src="/images/Analiza-danych.jpg" alt="">
-            <input type="text" placeholder="Wybierz miare">
-            <button>Oblicz!</button>
+            <!-- Miary statystyczne -->
+            <div class="miaryStat">
+                <div class="slct-wrapper">
+                    <p>Wybierz:</p>
+                    <select class="slct-miara">
+                        <option value="miara1">Miara 1</option>
+                        <option value="miara2">Miara 2</option>
+                        <option value="miara3">Miara 3</option>
+                    </select>
+                </div>
+                <div class="slct-wrapper">
+                    <p>Wybierz:</p>
+                    <select class="slct-miara">
+                        <option value="miara1">Miara 1</option>
+                        <option value="miara2">Wiek</option>
+                        <option value="miara3">Miara 3</option>
+                    </select>
+                </div>
+                <button class="lekarz-btn">Oblicz</button>
+            </div>
+            <div class="wykresy">
+                <p>Tutaj beda sie generowac obliczenia</p>
+            </div>
+        </div>
 
+        <p class="tekst-dataWykresy">Wykresy:</p>
+
+        <div class="dataAnalizeSquare">
+            <img src="/images/wykresy.png" alt="">
+            <!-- Wykresy -->
+            <div class="miaryStat">
+                <div class="slct-wrapper">
+                    <p>Wybierz:</p>
+                    <select class="slct-miara">
+                        <option value="miara1">Miara 1</option>
+                        <option value="miara2">Miara 2</option>
+                        <option value="miara3">Miara 3</option>
+                    </select>
+                </div>
+                <div class="slct-wrapper">
+                    <p>Wybierz:</p>
+                    <select class="slct-miara">
+                        <option value="miara1">Miara 1</option>
+                        <option value="miara2">Wiek</option>
+                        <option value="miara3">Miara 3</option>
+                    </select>
+                </div>
+                <button class="lekarz-btn">Generuj wykres</button>
+            </div>
             <div class="wykresy">
                 <p>Tutaj beda sie generowac wykresy</p>
             </div>
         </div>
 
-        <p class="tekst-dataWykresy">Wykresy</p>
+        <p class="tekst-dataWykresy">Date z ankiety:</p>
 
-        <div class="allWykres">
-        <input type="text" placeholder="Wybierz miare">
-        <input type="text" placeholder="Wybierz miare">
-        <button>Oblicz!</button>
+        <div class="dataAnalizeSquare">
+            <img src="/images/ankieta.jpg" alt="">
+            <!-- Ankieta -->
+            <div class="miaryStat">
+                <div class="slct-wrapper">
+                    <p>Wybierz:</p>
+                    <select class="slct-miara">
+                        <option value="miara1">Miara 1</option>
+                        <option value="miara2">Miara 2</option>
+                        <option value="miara3">Miara 3</option>
+                    </select>
+                </div>
+                <div class="slct-wrapper">
+                    <p>Wybierz:</p>
+                    <select class="slct-miara">
+                        <option value="miara1">Miara 1</option>
+                        <option value="miara2">Wiek</option>
+                        <option value="miara3">Miara 3</option>
+                    </select>
+                </div>
+                <button class="lekarz-btn">Oblicz</button>
+            </div>
             <div class="wykresy">
-                <p>Tutaj beda sie generowac wykresy</p>
+                <p>Tutaj beda sie wyświetlać obliczenia z ankiety</p>
             </div>
         </div>
     </div>
