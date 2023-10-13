@@ -115,6 +115,59 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
             </div>
         </form>
+
+
+        <p class="lekarz-wybierz">Podgląd:</p>
+
+        <?php
+
+        require '../Logowanie/config.php';
+        require '../adminSite/cennik-config.php';
+
+        $sql = "SELECT * FROM doctors";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            echo '<div class="tble-cennik">';
+            echo '<table>';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Id</th>';
+            echo '<th>Imie i Nazwisko</th>';
+            echo '<th>Profesja</th>';
+            echo '<th>Akcje</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+
+            // zmienić "name" tak zeby bylo dobrze pod tą podstrone, i dodać zmiany w pliku cennik-config.php, tak
+            //  zeby mozna bylo wyswietlac dane
+
+            while ($row = $result->fetch_assoc()) {
+                echo '<tr>';
+                echo '<td>' . $row["id"] . '</td>';
+                echo '<td>' . htmlspecialchars($row["imie"]) . ' ' . htmlspecialchars($row["nazwisko"]) . '</td>';
+                echo '<td>' . $row["profesja"] . '</td>';
+                echo '<td>';
+                echo '<form method="post" action="">';
+                echo '<input type="hidden" name="id" value="' . $row["id"] . '">';
+                echo '<input type="text" class="new-price-form" name="nowe_dane" placeholder="Nowe dane">';
+                echo '<input type="text" class="new-price-form" name="nowa_profesja" placeholder="Nowa profesja">';
+                echo '<button type="submit" class="edit-btn" name="edit-btn">Aktualizuj</button>';
+                echo '<button type="submit" class="delete-btn" name="delete-btn">Usuń</button>';
+                echo '</form>';
+                echo '</td>';
+                echo '</tr>';
+            }
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+        } else {
+            echo "Brak danych do wyświetlenia.";
+        }
+        $conn->close();
+        ?>
     </div>
 
     <footer>
