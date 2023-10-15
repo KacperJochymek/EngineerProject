@@ -74,8 +74,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         require '../Logowanie/config.php';
 
         if (isset($_POST["signup_submit"])) {
-            $imie = $_POST["imie"];
-            $nazwisko = $_POST["nazwisko"];
+            $tytul = $_POST["tytul"];
+            $imienazwisko = $_POST["imienazwisko"];
             $profesja = $_POST["profesja"];
 
             // Obsługa przesyłania pliku
@@ -92,7 +92,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     die("Błąd połączenia: " . $conn->connect_error);
                 }
 
-                $sql = "INSERT INTO doctors (imie, nazwisko, profesja, obrazek) VALUES ('$imie', '$nazwisko', '$profesja', '$obrazek_name')";
+                $sql = "INSERT INTO doctors (tytul, imienazwisko, profesja, obrazek) VALUES ('$tytul', '$imienazwisko', '$profesja', '$obrazek_name')";
 
                 if ($conn->query($sql) === TRUE) {
                     echo '<script>alert("Dane dodane poprawnie");</script>';
@@ -108,11 +108,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
             <div class="add-inpt">
-                <input type="text" name="imie" id="imie" placeholder="Tytuł naukowy">
-                <input type="text" name="nazwisko" id="nazwisko" placeholder="Imię i nazwisko"><br>
+                <input type="text" name="tytul" id="tytul" placeholder="Tytuł naukowy">
+                <input type="text" name="imienazwisko" id="imienazwisko" placeholder="Imię i nazwisko"><br>
                 <input type="text" name="profesja" id="profesja" placeholder="Specjalizacja">
                 <input type="file" name="obrazek" id="obrazek"><br>
-            <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
+                <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
             </div>
         </form>
 
@@ -122,7 +122,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <?php
 
         require '../Logowanie/config.php';
-        require '../adminSite/cennik-config.php';
+        require '../adminSite/configs/addDoctor-config.php';
 
         $sql = "SELECT * FROM doctors";
         $result = $conn->query($sql);
@@ -140,19 +140,14 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</thead>';
             echo '<tbody>';
 
-
-            // zmienić "name" tak zeby bylo dobrze pod tą podstrone, i dodać zmiany w pliku cennik-config.php, tak
-            //  zeby mozna bylo wyswietlac dane
-
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
                 echo '<td>' . $row["id"] . '</td>';
-                echo '<td>' . htmlspecialchars($row["imie"]) . ' ' . htmlspecialchars($row["nazwisko"]) . '</td>';
+                echo '<td>' . htmlspecialchars($row["tytul"]) . ' ' . htmlspecialchars($row["imienazwisko"]) . '</td>';
                 echo '<td>' . $row["profesja"] . '</td>';
                 echo '<td>';
                 echo '<form method="post" action="">';
                 echo '<input type="hidden" name="id" value="' . $row["id"] . '">';
-                echo '<input type="text" class="new-price-form" name="nowe_dane" placeholder="Nowe dane">';
                 echo '<input type="text" class="new-price-form" name="nowa_profesja" placeholder="Nowa profesja">';
                 echo '<button type="submit" class="edit-btn" name="edit-btn">Aktualizuj</button>';
                 echo '<button type="submit" class="delete-btn" name="delete-btn">Usuń</button>';

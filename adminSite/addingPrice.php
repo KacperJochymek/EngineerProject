@@ -84,7 +84,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <?php
 
         require '../Logowanie/config.php';
-        require '../adminSite/cennik-config.php';
+        require '../adminSite/configs/cennik-config.php';
 
         $sql = "SELECT * FROM cennik";
         $result = $conn->query($sql);
