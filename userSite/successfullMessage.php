@@ -1,15 +1,39 @@
 <?php
+require '../Logowanie/config.php';
 session_start();
 
-if (!isset($_SESSION["id"])) {
-    header("Location: /index.php");
-    exit();
+if (!empty($_SESSION["id"])) {
+    $id = $_SESSION["id"];
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
+    $row = mysqli_fetch_assoc($result);
 }
 
-if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
-    header('Location: ../userSite/noPermission.php');
-    session_destroy();
-    exit();
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
+    $doctor_id = $_POST["doctor_id"];
+
+
+    $sql = "SELECT * FROM doctors WHERE id = $doctor_id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $selected_doctor = $result->fetch_assoc();
+        $imie = $selected_doctor["imie"];
+        $nazwisko = $selected_doctor["nazwisko"];
+        $profesja = $selected_doctor["profesja"];
+        $obrazek = $selected_doctor["obrazek"];
+    } else {
+        echo "Brak danych do wyświetlenia.";
+    }
+}
+
+if (isset($_SESSION["doctor_data"])) {
+    $doctor_data = $_SESSION["doctor_data"];
+    $doctor_id = $doctor_data["doctor_id"];
+    $imie = $doctor_data["imie"];
+    $nazwisko = $doctor_data["nazwisko"];
+    $profesja = $doctor_data["profesja"];
+    $obrazek = $doctor_data["obrazek"];
 }
 ?>
 
@@ -39,20 +63,20 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
+                    <a href="lekarze.php">Lekarze</a>
                 </li>
                 <li>
-                    <a href="#">Zmień cene</a>
+                    <a href="cennik.php">Cennik</a>
+                </li>
+                <li>
+                    <a href="blog.php">Aktualności</a>
+                </li>
+                <li>
+                    <a href="contact.php">Kontakt</a>
                 </li>
 
                 <li>
-                    <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
-                </li>
-                <li>
-                    <a href="dataAnalysis.php">Analiza Danych</a>
-                </li>
-                <li>
-                    <a href="/adminSite/adminAccount.php">Moje Konto</a>
+                    <a href="myAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -66,16 +90,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <div class="account">
+    <div class="succesfullContent">
 
-        <h1>Witamy w panelu administratora!</h1>
-
-        <div class="admin-panel">
-            <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
-            <a href="/adminSite/addingBlog.php">Dodaj wpis na bloga</a>
-            <a href="/adminSite/dataAnalysis.php">Analiza Danych</a>
-            <a href="/adminSite/adminLookVisit.php">Wizyty</a>
-            <a href="/adminSite/addingPrice.php">Edytuj cennik</a>
+        <div class="messageSuccess">
+            <p class="succesThanks">Dziękujemy za wiadomość!</p>
+            <i class="fa-regular fa-circle-check"></i>
+            <p class="messageCancel">Odpowiemy na Twoje pytanie, tak szybko jak tylko będziemy mogli. Aby powrócić do strony głównej <a href="/userSite/myAccount.php">kliknij tutaj.</a> </p>
         </div>
     </div>
 

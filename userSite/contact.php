@@ -66,10 +66,11 @@ if (!empty($_SESSION["id"])) {
 
         <h1>Hej <?php echo $row["username"]; ?>, jeśli masz jakieś pytania skontaktuj się z nami!</h1>
 
-        <form class="contact-form">
-            <i class="fa-regular fa-envelope"><input type="text" class="email-hldr" placeholder="Wpisz swój e-mail"></i>
-            <textarea class="message-inpt" placeholder="Treść wiadomości"></textarea>
-            <input type="submit" class="lekarz-btn" name="#" value="Wyślij">
+        <form class="contact-form" action="https://formsubmit.co/karton2137j@gmail.com" method="POST">
+            <i class="fa-regular fa-envelope"><input type="email" name="email" class="email-hldr" placeholder="Wpisz swój e-mail" required></i>
+            <textarea class="message-inpt" name="message" placeholder="Treść wiadomości" required></textarea>
+            <input type="hidden" name="_next" value="http://localhost:3000/userSite/successfullMessage.php">
+            <input type="submit" class="lekarz-btn" value="Wyślij">
         </form>
     </div>
 

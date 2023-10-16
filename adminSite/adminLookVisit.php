@@ -68,15 +68,73 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
     <div class="accountAdminLook">
 
-    <p class="lekarz-wybierz">Podgląd wizyt</p>
+        <p class="lekarz-wybierz">Podgląd wizyt</p>
 
         <div class="lookUsers">
             <div class="lookVis">
-                <p>Wybierz datę:</p>
+                <p>Wybierz przedział dat:</p>
+                <input type="date" placeholder="Wpisz date">
                 <input type="date" placeholder="Wpisz date">
             </div>
             <div class="vtableUsers">
-                <p>Tabela która będzie wyświetlać użytkowników z danego dnia</p>
+                <?php
+
+                require '../Logowanie/config.php';
+                require '../adminSite/configs/blog-config.php';
+
+                $sql = "SELECT * FROM wizyty";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    echo '<div class="tble-cennik">';
+                    echo '<table>';
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Id</th>';
+                    echo '<th>Data</th>';
+                    echo '<th>Godzina</th>';
+                    echo '<th>Lekarz</th>';
+                    echo '<th>Pacjent</th>';
+                    echo '<th>Status</th>';
+                    echo '<th>Akcje</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+                    echo '<tbody>';
+
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<form method="post" action="">';
+                        echo '<td>' . $row["id"] . '</td>';
+                        echo '<td>' . $row["data"] . '</td>';
+                        echo '<td>' . $row["godzina"] . '</td>';
+                        echo '<td>' . $row["lekarz"] . '</td>';
+                        echo '<td>' . $row["pacjent"] . '</td>';
+                        echo '<td> <select id="status">
+                            <option value="oczekujaca">Oczekująca</option>
+                            <option value="potwierdzona">Potwierdzona</option>
+                            <option value="anulowana">Anulowana</option>'
+                        
+
+
+                            . $row["status"] .
+                            '</select>
+                            </td>';
+                        echo '<td>';
+                        echo '<input type="hidden" name="id[]" value="' . $row["id"] . '">';
+                        echo '<button type="submit" class="edit-btn" name="save-btn[]">Zapisz</button>';
+                        echo '<button type="submit" class="delete-btn" name="delete-btn[]">Usuń</button>';
+                        echo '</form>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                    echo '</tbody>';
+                    echo '</table>';
+                    echo '</div>';
+                } else {
+                    echo "Brak danych do wyświetlenia.";
+                }
+                $conn->close();
+                ?>
             </div>
         </div>
 

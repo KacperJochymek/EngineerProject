@@ -1067,8 +1067,9 @@ hr {
     align-items: center; 
     justify-content: center;
     background: #fefefe;
-    height: 400px;
-    width: 900px;
+    padding: 20px;
+    width: 700px;
+    border-radius: 20px;
 }
 
 .lookVis{
