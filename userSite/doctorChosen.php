@@ -108,8 +108,37 @@ if (isset($_SESSION["doctor_data"])) {
         </div>
 
         <div class="doc-chosen">
+            <?php
+            require '../Logowanie/config.php';
 
-            <form method="post" action="">
+            if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["umow_btn"])) {
+                $imie = $_POST["imie"];
+                $nazwisko = $_POST["nazwisko"];
+                $wiek = $_POST["wiek"];
+                $pesel = $_POST["pesel"];
+                $miasto = $_POST["miasto"];
+                $wojewodztwo = $_POST["wojewodztwo"];
+
+                $id_pacjenta = $imie . " " . $nazwisko;
+
+                if ($conn->connect_error) {
+                    die("Błąd połączenia: " . $conn->connect_error);
+                }
+
+                $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo')";
+
+                if ($conn->query($sql) === TRUE) {
+                    echo '<script>alert("Dane dodane poprawnie");</script>';
+                    echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
+                    exit;
+                } else {
+                    echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                }
+                $conn->close();
+            }
+            ?>
+
+            <form method="POST">
                 <div class="doctoruser-form">
                     <div class="teksikv">
                         <p class="tekst-doctor3">Imię:</p>
@@ -130,40 +159,21 @@ if (isset($_SESSION["doctor_data"])) {
                         <input type="text" name="wojewodztwo" id="wojewodztwo" placeholder="Wpisz województwo">
                     </div>
                 </div>
-                <button class="lekarz-btn" type="submit" name="save_csv">Zapisz CSV</button>
-            </form>
-
-            <div class="btn-chosen">
-                <a href="/userSite/lekarze.php">
+                <div class="btn-chosen">
                     <?php
-                    // Dodaj ten blok PHP, który zakończy sesję po kliknięciu "Powrót"
-                    if (isset($_SESSION["id"])) {
-                        session_unset();  // Usuń wszystkie zmienne sesji
-                        session_destroy(); // Zakończ sesję
+
+                    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["powrot_btn"])) {
+                        session_unset();
+                        session_destroy();
+                        echo '<script>window.location.href = "/userSite/lekarze.php";</script>';
+                        exit;
                     }
                     ?>
-                    <button class="lekarz-btn">Powrót</button>
-                </a>
-                <a href="/userSite/successfullVisit.php">
-                    <button class="lekarz-btn">Umów się!</button>
-                </a>
-            </div>
-            <?php
-            $csvFile = '../adminSite/dane.csv';
+                    <button type="submit" class="lekarz-btn" name="powrot_btn">Powrót</button>
+                    <button type="submit" class="lekarz-btn" name="umow_btn">Umów się!</button>
+                </div>
+            </form>
 
-            if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["imie"]) && isset($_POST["nazwisko"]) && isset($_POST["wiek"]) && isset($_POST["pesel"]) && isset($_POST["miasto"]) && isset($_POST["wojewodztwo"]) && isset($_POST["save_csv"])) {
-                $imie = $_POST["imie"];
-                $nazwisko = $_POST["nazwisko"];
-                $wiek = $_POST["wiek"];
-                $pesel = $_POST["pesel"];
-                $miasto = $_POST["miasto"];
-                $wojewodztwo = $_POST["wojewodztwo"];
-
-                $file = fopen($csvFile, 'a');
-                fputcsv($file, array($imie, $nazwisko, $wiek, $pesel, $miasto, $wojewodztwo), ";");
-                fclose($file);
-            }
-            ?>
         </div>
     </div>
 

@@ -82,7 +82,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 require '../Logowanie/config.php';
                 require '../adminSite/configs/blog-config.php';
 
-                $sql = "SELECT * FROM wizyty";
+                $sql = "SELECT * FROM pacjenci";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -104,20 +104,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<form method="post" action="">';
-                        echo '<td>' . $row["id"] . '</td>';
-                        echo '<td>' . $row["data"] . '</td>';
-                        echo '<td>' . $row["godzina"] . '</td>';
-                        echo '<td>' . $row["lekarz"] . '</td>';
-                        echo '<td>' . $row["pacjent"] . '</td>';
+                        echo '<td>' . $row["id_pacjenta"] . '</td>';
+                        echo '<td>' . $row["wiek"] . '</td>';
+                        echo '<td>' . $row["pesel"] . '</td>';
+                        echo '<td>' . $row["miasto"] . '</td>';
+                        echo '<td>' . $row["województwo"] . '</td>';
                         echo '<td> <select id="status">
-                            <option value="oczekujaca">Oczekująca</option>
-                            <option value="potwierdzona">Potwierdzona</option>
-                            <option value="anulowana">Anulowana</option>'
-                        
-
-
-                            . $row["status"] .
-                            '</select>
+                            
                             </td>';
                         echo '<td>';
                         echo '<input type="hidden" name="id[]" value="' . $row["id"] . '">';

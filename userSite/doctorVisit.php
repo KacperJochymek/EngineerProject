@@ -139,15 +139,15 @@ $_SESSION["doctor_data"] = array(
             </div>
 
             <div class="btn-chosen">
-                <a href="/userSite/lekarze.php">
-                    <?php
-                    if (isset($_SESSION["id"])) {
-                        session_unset();
-                        session_destroy();
-                    }
-                    ?>
-                    <button class="lekarz-btn">Powrót</button>
-                </a>
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["powrot_btn"])) {
+                    session_unset();
+                    session_destroy();
+                    echo '<script>window.location.href = "/userSite/lekarze.php";</script>';
+                    exit;
+                }
+                ?>
+                <button type="submit" class="lekarz-btn" name="powrot_btn">Powrót</button>
                 <a href="/userSite/doctorChosen.php"><button class="lekarz-btn" type="submit" name="submit">Dalej</button></a>
             </div>
 

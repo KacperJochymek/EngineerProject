@@ -30,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
 if (isset($_SESSION["doctor_data"])) {
     $doctor_data = $_SESSION["doctor_data"];
     $doctor_id = $doctor_data["doctor_id"];
-    $imie = $doctor_data["imie"];
-    $nazwisko = $doctor_data["nazwisko"];
+    $tytul = $doctor_data["tytul"];
+    $imienazwisko = $doctor_data["imienazwisko"];
     $profesja = $doctor_data["profesja"];
     $obrazek = $doctor_data["obrazek"];
 }
@@ -95,9 +95,9 @@ if (isset($_SESSION["doctor_data"])) {
     <div class="succesfullContent">
         <div class="lekarz-logo2">
             <?php
-            if (isset($imie) && isset($nazwisko)) {
+            if (isset($tytul) && isset($imienazwisko)) {
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
-                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
+                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $tytul . ' ' . $imienazwisko . '</p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
                 echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
                 echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
