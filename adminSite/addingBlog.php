@@ -22,6 +22,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <script src="https://kit.fontawesome.com/0e252f77f3.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -76,34 +77,36 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             $tekst = $_POST["tekst"];
             $data = date("Y-m-d");
 
-            // Obsługa przesyłania pliku
-            $obrazek_name = $_FILES["obrazek"]["name"];
-            $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
-            $obrazek_type = $_FILES["obrazek"]["type"];
+            // Inicjalizuj zmienne obrazka na null, które zostaną wstawione do bazy danych
+            $obrazek_name = null;
 
-            // Sprawdź, czy przesłany plik to obrazek
-            if (substr($obrazek_type, 0, 5) === "image") {
+            if (!empty($_FILES["obrazek"]["name"])) {
+                $obrazek_name = $_FILES["obrazek"]["name"];
+                $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
+                $obrazek_type = $_FILES["obrazek"]["type"];
 
-                move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
-
-                $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES (?, ?, ?)";
-
-                $stmt = $conn->prepare($sql);
-
-                if ($stmt) {
-                    $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
-
-                    if ($stmt->execute()) {
-                        echo '<script>alert("Wpis dodany pomyślnie!");</script>';
-                    } else {
-                        echo '<script>alert("Błąd: ' . $stmt->error . '");</script>';
-                    }
-                    $stmt->close();
+                // Sprawdź, czy przesłany plik to obrazek
+                if (substr($obrazek_type, 0, 5) === "image") {
+                    move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
                 } else {
-                    echo '<script>alert("Błąd przy przygotowywaniu zapytania.");</script>';
+                    echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
                 }
+            }
+
+            $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+
+            if ($stmt) {
+                $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
+
+                if ($stmt->execute()) {
+                    echo '<script>alert("Wpis dodany pomyślnie!");</script>';
+                } else {
+                    echo '<script>alert("Błąd: ' . $stmt->error . '");</script>';
+                }
+                $stmt->close();
             } else {
-                echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
+                echo '<script>alert("Błąd przy przygotowywaniu zapytania.");</script>';
             }
         }
         ?>
@@ -113,6 +116,52 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <input type="file" name="obrazek" id="obrazek" class="file-input">
             <input type="submit" name="signup_submit" class="lekarz-btn" value="Wyślij">
         </form>
+
+        <p class="lekarz-wybierz">Podgląd:</p>
+
+        <?php
+
+        require '../Logowanie/config.php';
+        require '../adminSite/configs/blog-config.php';
+
+        $sql = "SELECT * FROM blog";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            echo '<div class="tble-cennik">';
+            echo '<table>';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Id</th>';
+            echo '<th>Tekst</th>';
+            echo '<th>Data</th>';
+            echo '<th>Akcje</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+            while ($row = $result->fetch_assoc()) {
+                echo '<tr>';
+                echo '<form method="post" action="">';
+                echo '<td>' . $row["id"] . '</td>';
+                echo '<td><textarea name="tekst[]" class="edit-text" placeholder="Twój tekst">' . $row["tekst"] . '</textarea></td>';
+                echo '<td>' . $row["dat"] . '</td>';
+                echo '<td>';
+                echo '<input type="hidden" name="id[]" value="' . $row["id"] . '">';
+                echo '<button type="submit" class="edit-btn" name="save-btn[]">Zapisz</button>';
+                echo '<button type="submit" class="delete-btn" name="delete-btn[]">Usuń</button>';
+                echo '</form>';
+                echo '</td>';
+                echo '</tr>';
+            }
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+        } else {
+            echo "Brak danych do wyświetlenia.";
+        }
+        $conn->close();
+        ?>
 
     </div>
 

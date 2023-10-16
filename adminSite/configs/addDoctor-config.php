@@ -1,4 +1,4 @@
-<!-- Zrobic update tego \/ -->
+<!-- Aktualizacja profesji -->
 
 <?php
 require '../Logowanie/config.php';
