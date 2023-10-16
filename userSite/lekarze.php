@@ -83,7 +83,7 @@ if (!empty($_SESSION["id"])) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="lekarz-logo">';
                 echo '<img src="/adminSite/uploads/' . $row["obrazek"] . '" alt="">';
-                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> ' . $row["imie"] . ' ' . $row["nazwisko"] . ' </p>';
+                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> ' . $row["tytul"] . ' ' . $row["imienazwisko"] . ' </p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $row["profesja"] . '</p>';
                 echo '<form method="POST" action="../userSite/doctorVisit.php">';
                 echo '<input type="hidden" name="doctor_id" value="' . $row["id"] . '">';

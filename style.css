@@ -565,6 +565,21 @@ hr {
     border-radius: 5px;
 }
 
+.doctoruser-form {
+    background: #fefefe;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.doctoruser-form input[type="text"] {
+    padding: 10px; 
+    margin: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 19px; 
+}
+
 .add-inpt{
     text-align: center;
 }
@@ -772,7 +787,7 @@ hr {
     display: flex;
     align-items: center; 
     justify-content: center;
-    height: 1100px;
+    height: 1300px;
 }
 
 .doctorContent2{

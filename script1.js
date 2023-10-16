@@ -37,8 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault(); 
 
             alert("Aby korzystać z serwisu, najpierw musisz się zalogować.");
-
-            window.location.href = "/Logowanie/sign_in.php";
         });
     });
 });

@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
 
     if ($result->num_rows > 0) {
         $selected_doctor = $result->fetch_assoc();
-        $imie = $selected_doctor["imie"];
-        $nazwisko = $selected_doctor["nazwisko"];
+        $tytul = $selected_doctor["tytul"];
+        $imienazwisko = $selected_doctor["imienazwisko"];
         $profesja = $selected_doctor["profesja"];
         $obrazek = $selected_doctor["obrazek"];
     } else {
@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
 
 $_SESSION["doctor_data"] = array(
     "doctor_id" => $doctor_id,
-    "imie" => $imie,
-    "nazwisko" => $nazwisko,
+    "tytul" => $tytul,
+    "imienazwisko" => $imienazwisko,
     "profesja" => $profesja,
     "obrazek" => $obrazek
 );
@@ -93,9 +93,9 @@ $_SESSION["doctor_data"] = array(
     <div class="doctorContent2">
         <div class="lekarz-logo2">
             <?php
-            if (isset($imie) && isset($nazwisko)) {
+            if (isset($tytul) && isset($imienazwisko)) {
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
-                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $imie . ' ' . $nazwisko . '</p>';
+                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $tytul . ' ' . $imienazwisko . '</p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
                 echo '<form method="POST" action="../userSite/doctorChosen.php">';
                 echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
