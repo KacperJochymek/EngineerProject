@@ -66,23 +66,36 @@ daysTag.addEventListener("click", (event) => {
             const availableHours = document.getElementById("availableHours");
             availableHours.innerHTML = '';
 
-            // Tutaj bedzie kod, który wzcytuje godziny do tabeli z pliku php
+            const selectedDate = `${currYear}-${currMonth + 1}-${day}`; // Tworzenie daty w formacie "Y-m-d"
 
-            const dostepneGodziny = ["8:00", "15:30", "16:00", "17:00"];
+            fetch('http://localhost:3000/userSite/calendarConnect.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `selectedDate=${selectedDate}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                const dostepneGodziny = data;
+                const availableHours = document.getElementById("availableHours");
+                availableHours.innerHTML = '';
 
-            // Tworzenie nowych przycisków po przez iterację
+                dostepneGodziny.forEach(godzina => {
+                    const button = document.createElement("button");
+                    button.classList.add("przykladowa");
+                    button.textContent = godzina; // Wyświetlenie godziny w przycisku
 
-            dostepneGodziny.forEach(godzina => {
-                const button = document.createElement("button");
-                button.classList.add("przykladowa");
-                button.textContent = godzina;
+                    button.addEventListener("click", () => {
+                        const wybranaGodzina = godzina;
+                        console.log("Wybrano godzinę:", wybranaGodzina);
+                    });
 
-                button.addEventListener("click", () => {
-                    const wybranaGodzina = godzina;
-                    console.log("Wybrano godzinę:", wybranaGodzina);
+                    availableHours.appendChild(button);
                 });
-
-                availableHours.appendChild(button);
+            })
+            .catch(error => {
+                console.error("Błąd podczas pobierania danych:", error);
             });
         }
     }
