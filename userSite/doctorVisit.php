@@ -8,8 +8,8 @@ if (!empty($_SESSION["id"])) {
     $row = mysqli_fetch_assoc($result);
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
-    $doctor_id = $_POST["doctor_id"];
+if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["doctor_id"])) {
+    $doctor_id = $_GET["doctor_id"];
 
 
     $sql = "SELECT * FROM doctors WHERE id = $doctor_id";
@@ -26,13 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["doctor_id"])) {
     }
 }
 
-$_SESSION["doctor_data"] = array(
-    "doctor_id" => $doctor_id,
-    "tytul" => $tytul,
-    "imienazwisko" => $imienazwisko,
-    "profesja" => $profesja,
-    "obrazek" => $obrazek
-);
 ?>
 
 <!DOCTYPE html>
