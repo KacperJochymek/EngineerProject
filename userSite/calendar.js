@@ -68,12 +68,11 @@ daysTag.addEventListener("click", (event) => {
 
             const selectedDate = `${currYear}-${currMonth + 1}-${day}`; // Tworzenie daty w formacie "Y-m-d"
 
-            fetch('http://localhost:3000/userSite/calendarConnect.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `selectedDate=${selectedDate}`,
+            const queryParams = new URLSearchParams(window.location.search);
+            const doctorId = queryParams.get('doctor_id'); // Pobieranie doctor_id z adresu URL
+
+            fetch(`http://localhost:3000/userSite/calendarConnect.php?selectedDate=${selectedDate}&doctor_id=${doctorId}`, {
+            method: 'GET',
             })
             .then(response => response.json())
             .then(data => {
@@ -97,6 +96,7 @@ daysTag.addEventListener("click", (event) => {
             .catch(error => {
                 console.error("Błąd podczas pobierania danych:", error);
             });
+
         }
     }
 });

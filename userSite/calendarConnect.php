@@ -5,17 +5,16 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["selectedDate"])) {
-    $selectedDate = $_POST["selectedDate"];
+if (isset($_GET["selectedDate"]) && isset($_GET["doctor_id"])) { 
+    $selectedDate = $_GET["selectedDate"]; 
+    $doctorId = $_GET["doctor_id"]; 
 
-    // Przyjmujemy, że $selectedDate to data w formacie "Y-m-d", na przykład "2023-10-20".
-    // Możesz dostosować ten format do swojej aplikacji.
-
-    // Zabezpiecz zmienną przed atakami SQL Injection
+    // Zabezpieczenie przed atakami SQL Injection
     $selectedDate = mysqli_real_escape_string($conn, $selectedDate);
+    $doctorId = mysqli_real_escape_string($conn, $doctorId);
 
-    // Pobieranie dostępnych godzin tylko dla wybranego dnia
-    $query = "SELECT available_hour FROM wizyty WHERE data_wizyty = '$selectedDate'";
+    // Pobieranie dostępnych godzin tylko dla wybranego dnia i lekarza
+    $query = "SELECT available_hour FROM wizyty WHERE data_wizyty = '$selectedDate' AND doctor_id = '$doctorId'";
     $result = mysqli_query($conn, $query);
 
     if (!$result) {
@@ -27,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["selectedDate"])) {
         $godziny[] = $row['available_hour'];
     }
 
-    // Zamknij połączenie z bazą danych
     mysqli_close($conn);
 
     // Zwróć dane jako JSON
@@ -36,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["selectedDate"])) {
 } else {
     die("Nieprawidłowe żądanie.");
 }
-?>
+
+
 
 
