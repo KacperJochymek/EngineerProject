@@ -93,19 +93,6 @@ if (isset($_SESSION["doctor_data"])) {
     <p class="lekarz-wybierz">Podsumowanie:</p>
 
     <div class="succesfullContent">
-        <div class="lekarz-logo2">
-            <?php
-            if (isset($tytul) && isset($imienazwisko)) {
-                echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
-                echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $tytul . ' ' . $imienazwisko . '</p>';
-                echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
-                echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
-                echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
-            } else {
-                echo "Nie wybrano lekarza.";
-            }
-            ?>
-        </div>
 
         <div class="messageSuccess">
             <p class="succesThanks">Dziękujemy za rejestrację!</p>

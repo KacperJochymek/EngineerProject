@@ -85,6 +85,8 @@ if (isset($_GET["doctor_id"])) {
     <div class="doctorContent2">
 
         <div class="lekarz-logo2">
+
+        <p class="pdsm">Podsumowanie:</p>
             <?php
             if (isset($tytul) && isset($imienazwisko)) {
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
@@ -120,6 +122,10 @@ if (isset($_GET["doctor_id"])) {
                     }
 
                     $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo')";
+                    
+                    $sql = "INSERT INTO wizyty (id_pacjenta) VALUES ('$id_pacjenta')";
+
+                    
 
                     if ($conn->query($sql) === TRUE) {
                         echo '<script>alert("Dane dodane poprawnie");</script>';
