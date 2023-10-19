@@ -80,9 +80,10 @@ if (isset($_GET["doctor_id"])) {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Wybierz date i godzine wizyty:</p>
+    <p class="lekarz-wybierz" id="lekarz-wybierz-text">Wybierz date i godzine wizyty:</p>
 
     <div class="doctorContent2">
+
         <div class="lekarz-logo2">
             <?php
             if (isset($tytul) && isset($imienazwisko)) {
@@ -92,8 +93,6 @@ if (isset($_GET["doctor_id"])) {
                 echo '<form method="GET" action="../userSite/doctorChosen.php">';
                 echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
                 echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
-                echo '<input type="hidden" name="selectedDate" id="selectedDateInput" value="">';
-                echo '<input type="hidden" name="selectedDate" id="selectedDateInput" value="">';
                 echo '</form>';
             } else {
                 echo "Nie wybrano lekarza.";
@@ -102,8 +101,68 @@ if (isset($_GET["doctor_id"])) {
         </div>
 
         <div class="doc-chosen">
+            <div class="test" id="formContainer">
+                <?php
+                require '../Logowanie/config.php';
 
-            <div class="wstep_calendar">
+                if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["umow_btn"])) {
+                    $imie = $_POST["imie"];
+                    $nazwisko = $_POST["nazwisko"];
+                    $wiek = $_POST["wiek"];
+                    $pesel = $_POST["pesel"];
+                    $miasto = $_POST["miasto"];
+                    $wojewodztwo = $_POST["wojewodztwo"];
+
+                    $id_pacjenta = $imie . " " . $nazwisko;
+
+                    if ($conn->connect_error) {
+                        die("Błąd połączenia: " . $conn->connect_error);
+                    }
+
+                    $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo')";
+
+                    if ($conn->query($sql) === TRUE) {
+                        echo '<script>alert("Dane dodane poprawnie");</script>';
+                        echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
+                        exit;
+                    } else {
+                        echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                    }
+                    $conn->close();
+                }
+                ?>
+
+                <form method="POST">
+                    <div class="doctoruser-form">
+                        <div class="teksikv">
+                            <p class="tekst-doctor3">Imię:</p>
+                            <input type="text" name="imie" id="imie" placeholder="Wpisz imię">
+                            <p class="tekst-doctor3">Nazwisko:</p>
+                            <input type="text" name="nazwisko" id="nazwisko" placeholder="Wpisz nazwisko">
+                        </div>
+                        <div class="teksikv">
+                            <p class="tekst-doctor3">Wiek:</p>
+                            <input type="text" name="wiek" id="wiek" placeholder="Wpisz swój wiek">
+                            <p class="tekst-doctor3">Pesel:</p>
+                            <input type="text" name="pesel" id="pesel" placeholder="Wpisz swój pesel">
+                        </div>
+                        <div class="teksikv">
+                            <p class="tekst-doctor3">Miasto:</p>
+                            <input type="text" name="miasto" id="miasto" placeholder="Wpisz miasto">
+                            <p class="tekst-doctor3">Województwo:</p>
+                            <input type="text" name="wojewodztwo" id="wojewodztwo" placeholder="Wpisz województwo">
+                        </div>
+                    </div>
+                    <div class="btn-chosen">
+                        
+                        <button type="submit" class="lekarz-btn" id="powrotButton" name="powrot_btn">Powrót</button>
+                        <button type="submit" class="lekarz-btn" name="umow_btn">Umów się!</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="wstep_calendar" id="calendarContainer">
                 <p class="current_date"></p>
                 <div class="calendar_icons">
                     <i id="prev" class="fa-solid fa-arrow-left"></i>
@@ -130,18 +189,13 @@ if (isset($_GET["doctor_id"])) {
                 <!-- Generowanie godzin wizyt -->
             </div>
 
-            <div class="btn-chosen">
+            <div class="btn-chosen" id="guziczki">
 
                 <?php
                 echo '<a href="/userSite/lekarze.php"><button type="submit" class="lekarz-btn" name="powrot_btn">Powrót</button></a>';
 
-                // Tworzenie linku z danymi
-                if (isset($tytul) && isset($imienazwisko)) {
-                    $link = "/userSite/doctorChosen.php?obrazek=$obrazek&tytul=$tytul&imienazwisko=$imienazwisko&profesja=$profesja";
-                    echo '<a href="' . $link . '"><button class="lekarz-btn" type="submit" name="submit">Dalej</button></a>';
-                } else {
-                    echo "Nie wybrano lekarza.";
-                }
+                echo '<button class="lekarz-btn" type="submit" name="submit">Dalej</button>';
+                
                 ?>
             </div>
 
@@ -194,7 +248,8 @@ if (isset($_GET["doctor_id"])) {
 
 </body>
 
-<script src="script1.js"></script>
+<script src="/userSite/test.js"></script>
+<script src="/script1.js"></script>
 <script src="/userSite/calendar.js"></script>
 
 </html>
