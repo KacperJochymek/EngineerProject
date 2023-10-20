@@ -26,7 +26,7 @@
                 require '../Logowanie/config.php';
 
                 if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
-                    header("Location: sign_in.php"); // Przekieruj na stronę główną, jeśli jest już zalogowany
+                    header("Location: sign_in.php");
                     exit();
                 }
 
@@ -38,17 +38,18 @@
                     $row = mysqli_fetch_assoc($result);
 
                     if (mysqli_num_rows($result) > 0) {
-                        if ($password == $row["password"]) {
+
+                        $hashedPasswordFromDatabase = $row["password"];
+
+                        if (password_verify($password, $hashedPasswordFromDatabase)) {
                             $_SESSION["login"] = true;
                             $_SESSION["id"] = $row["id"];
-
                             $_SESSION["role"] = $row["role"];
 
-
                             if ($_SESSION["role"] === "admin") {
-                                header("Location: ../adminSite/adminAccount.php"); // Przekieruj na stronę administratora
+                                header("Location: ../adminSite/adminAccount.php");
                             } else {
-                                header("Location: ../userSite/myAccount.php"); // Przekieruj na stronę użytkownika
+                                header("Location: ../userSite/myAccount.php");
                             }
                             exit();
                         } else {
@@ -98,26 +99,47 @@
 
                 <?php
                 if (isset($_POST["signup_submit"])) {
-
                     $username = $_POST["username"];
                     $email = $_POST["email"];
                     $password = $_POST["password"];
                     $confirmpassword = $_POST["confirmpassword"];
 
-                    $duplicate = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
-                    if (mysqli_num_rows($duplicate) > 0) {
-                        echo "<script> alert('Nick lub e-mail już zajęty');</script>";
+
+                    if (empty($username) || empty($email) || empty($password) || empty($confirmpassword)) {
+                        echo "<script>alert('Wszystkie pola są wymagane.');</script>";
                     } else {
-                        if ($password == $confirmpassword) {
-                            $query = "INSERT INTO users ( username, email, password) VALUES ( '$username', '$email', '$password')";
-                            mysqli_query($conn, $query);
-                            echo "<script>alert('Pomyślnie zarejestrowano!');</script>";
+
+                        if (strlen($password) < 6) {
+                            echo "<script>alert('Hasło musi mieć co najmniej 6 znaków.');</script>";
                         } else {
-                            echo "<script>alert('Hasło nie pasuje');</script>";
+                            if (!preg_match('/[A-Z]/', $password) || !preg_match('/[!@#$%^&*()_+]/', $password)) {
+                                echo "<script>alert('Hasło musi zawierać co najmniej jedną dużą literę i jeden znak specjalny.');</script>";
+                            } else {
+
+                                if ($password == $confirmpassword) {
+
+                                    $duplicate = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
+                                    if (mysqli_num_rows($duplicate) > 0) {
+                                        echo "<script>alert('Nazwa użytkownika lub e-mail już istnieje.');</script>";
+                                    } else {
+
+                                        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                                        $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
+                                        if (mysqli_query($conn, $query)) {
+                                            echo "<script>alert('Pomyślnie zarejestrowano!');</script>";
+                                        } else {
+                                            echo "<script>alert('Wystąpił błąd podczas rejestracji.');</script>";
+                                        }
+                                    }
+                                } else {
+                                    echo "<script>alert('Hasła nie pasują do siebie.');</script>";
+                                }
+                            }
                         }
                     }
                 }
                 ?>
+
                 <form action="sign_in.php" method="post" autocomplete="off">
 
                     <div class="input-field">

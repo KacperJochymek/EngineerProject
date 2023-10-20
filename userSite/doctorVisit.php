@@ -122,10 +122,6 @@ if (isset($_GET["doctor_id"])) {
                     }
 
                     $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo')";
-                    
-                    $sql = "INSERT INTO wizyty (id_pacjenta) VALUES ('$id_pacjenta')";
-
-                    
 
                     if ($conn->query($sql) === TRUE) {
                         echo '<script>alert("Dane dodane poprawnie");</script>';
@@ -138,7 +134,7 @@ if (isset($_GET["doctor_id"])) {
                 }
                 ?>
 
-                <form method="POST">
+                <form method="POST" onsubmit="return validateForm()">
                     <div class="doctoruser-form">
                         <div class="teksikv">
                             <p class="tekst-doctor3">Imię:</p>
