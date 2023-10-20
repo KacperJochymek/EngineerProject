@@ -101,3 +101,50 @@ function validateForm() {
 
     return true; 
 }
+
+//Skrypt do myAccount.php -- skryt do naprawienia, div mojeWizyty sie źle wyświetla + trzeba zrobić css'a dla tego drugiego
+document.addEventListener("DOMContentLoaded", function () {
+
+    var settingi = document.querySelector(".settingi");
+    var mojeWizyty = document.querySelector(".mojeWizyty");
+    var settingsInpt = document.querySelector(".settings-inpt");
+
+    // Początkowo ukryj settings-inpt
+    settingsInpt.style.display = "none";
+
+    // Utwórz zmienną do śledzenia widoczności mojeWizyty
+    var mojeWizytyVisible = true;
+
+    settingi.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        if (mojeWizytyVisible) {
+            // Ukryj mojeWizyty
+            mojeWizyty.style.display = "none";
+            // Wyświetl settings-inpt
+            settingsInpt.style.display = "block";
+            mojeWizytyVisible = false;
+        } else {
+            // Jeśli mojeWizyty jest już ukryte, przywróć je
+            mojeWizyty.style.display = "block";
+            settingsInpt.style.display = "none";
+            mojeWizytyVisible = true;
+        }
+    });
+
+    // Pobierz przycisk "Powrót"
+    var zwrotButton = document.getElementById("zwrot");
+
+    zwrotButton.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        // Wyświetl mojeWizyty
+        mojeWizyty.style.display = "block";
+
+        // Ukryj settings-inpt
+        settingsInpt.style.display = "none";
+        mojeWizytyVisible = true;
+    });
+
+});
+

@@ -48,10 +48,14 @@
 
                             if ($_SESSION["role"] === "admin") {
                                 header("Location: ../adminSite/adminAccount.php");
+                                exit();
+                            } elseif ($_SESSION["role"] === "doctor") {
+                                header("Location: ../doctorSite/doctorFirstSite.php");
+                                exit();
                             } else {
                                 header("Location: ../userSite/myAccount.php");
+                                exit();
                             }
-                            exit();
                         } else {
                             echo "<script>alert('Złe hasło');</script>";
                         }

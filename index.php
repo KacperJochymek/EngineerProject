@@ -37,6 +37,9 @@ if (isset($_SESSION["user"])) {
                     <a href="#">Cennik</a>
                 </li>
                 <li>
+                    <a href="#">Aktualności</a>
+                </li>
+                <li>
                     <a href="#">Kontakt</a>
                 </li>
                 <li>

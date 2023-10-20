@@ -1153,3 +1153,20 @@ hr {
     font-size: 20px;
     font-weight: 600;
 }
+
+.settingi {
+    background: #fefefe;
+    border-radius: 10px;
+    height: 30px;
+    width: 110px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center; 
+    padding: 0 10px; 
+    text-align: center;
+    cursor: pointer;
+}
+
+.settings-inpt{
+    display: none;
+}

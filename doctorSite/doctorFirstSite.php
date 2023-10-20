@@ -1,10 +1,15 @@
 <?php
 session_start();
-require '../Logowanie/config.php';
-if (!empty($_SESSION["id"])) {
-    $id = $_SESSION["id"];
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
-    $row = mysqli_fetch_assoc($result);
+
+if (!isset($_SESSION["id"])) {
+    header("Location: /index.php");
+    exit();
+}
+
+if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
+    header('Location: ../userSite/noPermission.php');
+    session_destroy();
+    exit();
 }
 ?>
 
@@ -22,7 +27,7 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/logo.png"></a>
+            <img src="/images/logo.png">
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -34,20 +39,19 @@ if (!empty($_SESSION["id"])) {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="lekarze.php">Lekarze</a>
+                    <a href="/userSite/lekarze.php">Lekarze</a>
                 </li>
                 <li>
-                    <a href="cennik.php">Cennik</a>
+                    <a href="/userSite/cennik.php">Cennik</a>
                 </li>
                 <li>
-                    <a href="blog.php">Aktualności</a>
+                    <a href="/userSite/blog.php">Aktualności</a>
                 </li>
                 <li>
-                    <a href="contact.php">Kontakt</a>
+                    <a href="/userSite/contact.php">Kontakt</a>
                 </li>
-
                 <li>
-                    <a href="myAccount.php">Moje Konto</a>
+                    <a href="/doctorSite/doctorAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -62,46 +66,14 @@ if (!empty($_SESSION["id"])) {
         </label>
     </header>
 
-    <div class="myAccountSite">
-        <h1>Witamy <?php echo $row["username"]; ?> !</h1>
+    <div class="account">
 
-        <p class="settingi" id="toggleSettings"><i class="fa-solid fa-gears"></i>Ustawienia</p>
-        <div class="mojeWizyty">
-            <p class="tekst-wizytyMyAcc">Moje wizyty:</p>
+        <h1>Witamy w panelu lekarza!</h1>
 
-            <div class="wyswietlanieMyAcc">
-                <img src="../adminSite/uploads/kobieta.png" alt="">
-                <div class="resztaMyAcc">
-                    <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
-                    <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
-                    <p id="selectedDate" class="selected-date">Data</p>
-                    <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
-                </div>
-                <button class="myAccBtn">Anuluj</button>
-            </div>
-
-            <div class="wyswietlanieMyAcc">
-                <img src="../adminSite/uploads/kobieta.png" alt="">
-                <div class="resztaMyAcc">
-                    <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
-                    <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
-                    <p id="selectedDate" class="selected-date">Data</p>
-                    <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
-                </div>
-                <button class="myAccBtn">Anuluj</button>
-            </div>
-        </div>
-
-        <div class="settings-inpt">
-            <div class="changePass">
-                <input type="text" placeholder="Stare hasło">
-                <input type="text" placeholder="Nowe hasło">
-                <button class="myAccBtn">Zmień hasło</button>
-            </div>
-            <button class="myAccBtn">Usuń konto</button>
+        <div class="admin-panel">
+            <a href="/doctorSite/doctorAccount.php">Godziny pracy / wizyty</a>
         </div>
     </div>
-
 
     <footer>
         <div class="foo">
@@ -149,7 +121,6 @@ if (!empty($_SESSION["id"])) {
 
 </body>
 
-<script src="/script1.js"></script>
-<script src="/userSite/test.js"></script>
+<script src="script1.js"></script>
 
 </html>

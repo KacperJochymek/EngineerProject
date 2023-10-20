@@ -6,7 +6,7 @@ if (!isset($_SESSION["id"])) {
     exit();
 }
 
-if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
+if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
     header('Location: ../userSite/noPermission.php');
     session_destroy();
     exit();
@@ -35,27 +35,27 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <img src="./images/logo.png" width="100px" height="100px" />
             </div>
             <ul>
-                <li>
+            <li>
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
+                    <a href="/userSite/lekarze.php">Lekarze</a>
                 </li>
                 <li>
-                    <a href="#">Zmień cene</a>
-                </li>
-
-                <li>
-                    <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
+                    <a href="/userSite/cennik.php">Cennik</a>
                 </li>
                 <li>
-                    <a href="dataAnalysis.php">Analiza Danych</a>
+                    <a href="/userSite/blog.php">Aktualności</a>
                 </li>
                 <li>
-                    <a href="/adminSite/adminAccount.php">Moje Konto</a>
+                    <a href="/userSite/contact.php">Kontakt</a>
+                </li>
+                <li>
+                    <a href="/doctorSite/doctorAccount.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
+
                 </li>
             </ul>
         </nav>
@@ -66,7 +66,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Formularz dodawania/edycji godzin pracy dla lekarza</p>
+    <p class="lekarz-wybierz">Dodaj godziny pracy:</p>
 
     <div class="lekarzeDatabase">
 
@@ -125,7 +125,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </form>
 
 
-        <p class="lekarz-wybierz">Podgląd:</p>
+        <p class="lekarz-wybierz">Podgląd wizyt:</p>
 
         <?php
 
@@ -155,7 +155,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo '<td>' . $row["id"] . '</td>';
                 echo '<td>' . $row["data_wizyty"] . '</td>';
                 echo '<td>' . $row["available_hour"] . '</td>';
-                echo '<td>' . $row["id_lekarza"] . '</td>';
+                echo '<td>' . $row["doctor_id"] . '</td>';
                 echo '<td>' . $row["id_pacjenta"] . '</td>';
                 echo '<td>' . $row["status"] . '</td>';
                 echo '<td>';
