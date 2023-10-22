@@ -102,7 +102,7 @@ function validateForm() {
     return true; 
 }
 
-//Skrypt do myAccount.php -- skryt do naprawienia, div mojeWizyty sie źle wyświetla + trzeba zrobić css'a dla tego drugiego
+// Skrypt do ukrywania i pokazywania diva w myAccount
 document.addEventListener("DOMContentLoaded", function () {
 
     var settingi = document.querySelector(".settingi");

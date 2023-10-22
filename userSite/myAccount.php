@@ -66,39 +66,44 @@ if (!empty($_SESSION["id"])) {
         <h1>Witamy <?php echo $row["username"]; ?> !</h1>
 
         <p class="settingi" id="toggleSettings"><i class="fa-solid fa-gears"></i>Ustawienia</p>
-        <div class="mojeWizyty">
-            <p class="tekst-wizytyMyAcc">Moje wizyty:</p>
 
-            <div class="wyswietlanieMyAcc">
-                <img src="../adminSite/uploads/kobieta.png" alt="">
-                <div class="resztaMyAcc">
-                    <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
-                    <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
-                    <p id="selectedDate" class="selected-date">Data</p>
-                    <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
+        <div class="mojeWizyty-container">
+            <div class="mojeWizyty">
+                <p class="tekst-wizytyMyAcc">Moje wizyty:</p>
+
+                <div class="wyswietlanieMyAcc">
+                    <img src="../adminSite/uploads/kobieta.png" alt="">
+                    <div class="resztaMyAcc">
+                        <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
+                        <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
+                        <p id="selectedDate" class="selected-date">Data</p>
+                        <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
+                    </div>
+                    <button class="myAccBtn">Anuluj</button>
                 </div>
-                <button class="myAccBtn">Anuluj</button>
-            </div>
 
-            <div class="wyswietlanieMyAcc">
-                <img src="../adminSite/uploads/kobieta.png" alt="">
-                <div class="resztaMyAcc">
-                    <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
-                    <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
-                    <p id="selectedDate" class="selected-date">Data</p>
-                    <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
+                <div class="wyswietlanieMyAcc">
+                    <img src="../adminSite/uploads/kobieta.png" alt="">
+                    <div class="resztaMyAcc">
+                        <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
+                        <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
+                        <p id="selectedDate" class="selected-date">Data</p>
+                        <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
+                    </div>
+                    <button class="myAccBtn">Anuluj</button>
                 </div>
-                <button class="myAccBtn">Anuluj</button>
             </div>
-        </div>
 
-        <div class="settings-inpt">
-            <div class="changePass">
-                <input type="text" placeholder="Stare hasło">
-                <input type="text" placeholder="Nowe hasło">
-                <button class="myAccBtn">Zmień hasło</button>
+            <div class="settings-inpt">
+                <div class="changePass">
+                    <div class="input-cntiner">
+                    <input class="haslo" type="password" placeholder="Stare hasło">
+                    <input class="haslo" type="password" placeholder="Nowe hasło">
+                    </div>
+                    <button class="myAccBtn">Zmień hasło</button>
+                    <button class="myAccBtn">Usuń konto</button>
+                </div>
             </div>
-            <button class="myAccBtn">Usuń konto</button>
         </div>
     </div>
 
