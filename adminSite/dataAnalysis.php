@@ -33,7 +33,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <input type="checkbox" id="nav_check" hidden>
         <nav>
             <div class="logo">
-                <img src="./images/logo.png" width="100px" height="100px" />
+                <img src="/images/logo.png" width="100px" height="100px" />
             </div>
             <ul>
                 <li>
@@ -77,19 +77,17 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <!-- Miary statystyczne -->
             <div class="miaryStat">
                 <div class="slct-wrapper">
-                    <p>Wybierz:</p>
+                    <p>Wybierz wartość:</p>
                     <select class="slct-miara">
-                        <option value="miara1">Miara 1</option>
-                        <option value="miara2">Miara 2</option>
-                        <option value="miara3">Miara 3</option>
+                        <option value="wiek">Wiek</option>
                     </select>
                 </div>
                 <div class="slct-wrapper">
-                    <p>Wybierz:</p>
+                    <p>Wybierz miarę:</p>
                     <select class="slct-miara">
-                        <option value="miara1">Miara 1</option>
-                        <option value="miara2">Wiek</option>
-                        <option value="miara3">Miara 3</option>
+                        <option value="srednia">Średnia</option>
+                        <option value="mediana">Mediana</option>
+                        <option value="odchylenie-std">Odchylenie std</option>
                     </select>
                 </div>
                 <button class="lekarz-btn">Oblicz</button>
@@ -106,19 +104,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <!-- Wykresy -->
             <div class="miaryStat">
                 <div class="slct-wrapper">
-                    <p>Wybierz:</p>
+                    <p>Wybierz wartość:</p>
                     <select class="slct-miara">
-                        <option value="miara1">Miara 1</option>
-                        <option value="miara2">Miara 2</option>
-                        <option value="miara3">Miara 3</option>
+                        <option value="wiek">Wiek</option>
+                        <option value="miasto">Miasto</option>
+                        <option value="wojewodztwo">Wojewodztwo</option>
                     </select>
                 </div>
                 <div class="slct-wrapper">
-                    <p>Wybierz:</p>
+                    <p>Wybierz wykres:</p>
                     <select class="slct-miara">
-                        <option value="miara1">Miara 1</option>
-                        <option value="miara2">Wiek</option>
-                        <option value="miara3">Miara 3</option>
+                        <option value="miara1">Kołowy</option>
+                        <option value="miara2">Liniowy</option>
+                        <option value="miara3">Słupkowy</option>
                     </select>
                 </div>
                 <button class="lekarz-btn">Generuj wykres</button>

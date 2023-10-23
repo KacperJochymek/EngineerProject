@@ -108,7 +108,6 @@ nav ul li a.active {
 
     #nav_check:checked~nav {
         left: 0;
-
     }
 
     nav .logo {
@@ -133,8 +132,8 @@ nav ul li a.active {
 
     .hamburger {
         display: block;
-
     }
+
 }
 
 .lekarze {
@@ -144,7 +143,7 @@ nav ul li a.active {
     align-items: center;
     margin: 0 auto;
     position: absolute;
-    right: 120px;
+    right: 50px;
     background: url(./images/lekarze.png);
     background-size: cover; 
     animation: slide 20s infinite;
@@ -162,7 +161,7 @@ nav ul li a.active {
     position: absolute;
     width: 700px;
     height: 300px;
-    left: 250px;
+    left: 200px;
     top: 350px;
     font-family: "Poppins";
     font-style: normal;
@@ -185,29 +184,16 @@ nav ul li a.active {
     padding: 0 40px;
 }
 
-#obrazek_jeden {
-    float: left;
-    width: 100px;
-    text-align: center;
-}
-
-#obrazek_dwa {
-    float: left;
-    width: 100px;
-    text-align: center;
-}
-
-#obrazek_trzy {
-    float: left;
-    width: 100px;
-    text-align: center;
-}
-
+#obrazek_jeden,
+#obrazek_dwa,
+#obrazek_trzy,
 #obrazek_cztery {
     float: left;
     width: 100px;
     text-align: center;
 }
+
+
 
 footer {
     width: 100%;
@@ -215,7 +201,7 @@ footer {
     bottom: 0;
     background: linear-gradient(to right, #BEC8E9, #a380ee);
     color: #fefefe;
-    padding: 10px 0 0;
+    padding: 10px 0;
     border-top-left-radius: 125px;
     font-size: 15px;
     line-height: 20px;
@@ -286,7 +272,7 @@ hr {
     font-weight: 700;
 }
 
-@media (max-width: 700px) {
+@media only screen and (max-width: 1500px) {
     footer {
         bottom: unset;
     }
@@ -636,6 +622,37 @@ hr {
     margin: 0 auto; 
 }  
 
+@media screen and (max-width: 1100px) {
+    .dataAnalize {
+        height: auto; 
+    }
+
+    .dataAnalizeSquare {
+        flex-direction: column; 
+    }
+
+    .miaryStat {
+        flex-direction: column; 
+    }
+
+    .slct-miara {
+        width: 100%; 
+        margin-right: 0; 
+    }
+
+    .miaryStat .lekarz-btn {
+        margin-top: 10px; 
+        margin-left: 0; 
+    }
+
+    .wykresy {
+        width: 50%; 
+        height: 200px; 
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+}
+
 .dataAnalize img{
     width: 250px;
     margin: 70px;
@@ -942,6 +959,12 @@ hr {
     height: 400px;
     text-align: center; 
 }
+
+@media only screen and (max-width: 1500px) {
+    .messageSuccess {
+        margin: 0px 0px 50px 0px;
+    }
+}
   
 .succesThanks {
     font-size: 30px; 
@@ -962,7 +985,8 @@ hr {
     display: flex;
     align-items: center; 
     justify-content: center;
-    height: 1000px;
+    height: auto;
+    margin-top: 20px;
 }
 
 .priceSite{
