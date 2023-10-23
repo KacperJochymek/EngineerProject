@@ -520,7 +520,7 @@ hr {
 }
 
 .lekarzeDatabase{
-    height: 100vh;
+    height: 1200px;
 }
 
 .doctor-form{
@@ -668,6 +668,7 @@ hr {
 }
 
 .contact-site{
+    font-size: 20px;
     text-align: center;
     height: 800px;
     margin-top: 50px;
@@ -703,6 +704,36 @@ hr {
     padding-left: 15px;
     padding-top: 15px;
 }
+
+@media only screen and (max-width: 1500px) {
+    .contact-site{
+        text-align: center;
+        height: 500px;
+        margin-top: 50px;
+        font-size: 17px;
+    }
+    
+    @media only screen and (max-width: 1100px) {
+        .contact-site{
+            text-align: center;
+            font-size: 10px;
+        }
+        
+        .message-inpt {
+            height: 200px;
+            width: 500px;
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        .message-inpt {
+            height: 200px;
+            width: 350px;
+        }
+    }
+}
+
+
 
 .blog_adding{
     height: 1200px;
@@ -755,12 +786,24 @@ hr {
 .blad {
     font-size: 100px;
     margin-top: 100px;
-
 }
 
 .blad_strona{
     height: 750px;
     text-align: center;
+}
+
+@media only screen and (max-width: 1500px) {
+    .blad_strona{
+        height: auto;
+        text-align: center;
+        margin-bottom: 100px;
+    }
+
+    .blad {
+        font-size: 80px;
+        margin-top: 100px;
+    }
 }
 
 .brak_dostepu{
@@ -777,6 +820,24 @@ hr {
     text-align: center;
     height: 750px;
     margin-top: 100px;
+}
+
+.account{
+    text-align: center;
+    height: 750px;
+    margin-top: 100px;
+}
+
+@media only screen and (max-width: 1500px) {
+    .account{
+        height: 440px;
+    }
+}
+
+@media only screen and (max-width: 784px) {
+    .account{
+        height: 800px;
+    }
 }
 
 .account h1{
@@ -814,6 +875,37 @@ hr {
     height: 1200px;
 }
 
+@media only screen and (max-width: 1400px) {
+    .doctorContent2{
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+        height: 1200px;
+    }
+
+    .lekarz-logo2{
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .lekarz-logo2 img{
+        width: 250px;
+        height: 250px; 
+        object-fit: cover; 
+        border-radius: 50%;
+    }
+
+    .wstep_calendar{
+        width: 450px;
+        background: #fefefe;
+        border-radius: 10px;
+    }
+
+}
+
 
 .lekarz-logo2{
     margin: 0px 450px 350px 150px;
@@ -834,6 +926,13 @@ hr {
     margin-top: 50px;
     height: 1100px;
     text-align: center;
+}
+
+@media only screen and (max-width: 1500px) {
+    .analizeForm{
+        margin-top: 50px;
+        height: 780px;
+    }
 }
 
 .wstep_calendar{
@@ -986,7 +1085,7 @@ hr {
     align-items: center; 
     justify-content: center;
     height: auto;
-    margin-top: 20px;
+    margin-top: 100px;
 }
 
 .priceSite{
@@ -996,6 +1095,36 @@ hr {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+@media only screen and (max-width: 1500px) {
+    .priceSite{
+        height: 430px;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .pricing {
+            background-color: #fff; 
+            width: 300px; 
+            border-radius: 10px;
+            padding: 10px; 
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 20px;
+        }
+          
+        .pricing li {
+            font-size: 16px; 
+            text-align: left; 
+            margin: 10px 0;
+        }
+    
+        .priceSite{
+            height: 450px;
+        }
+    }
 }
 
 .pricing {
@@ -1034,6 +1163,13 @@ hr {
     height: 1000px;
 }
 
+@media only screen and (max-width: 1500px) {
+    .myAccountSite{
+        text-align: center;
+        height: 700px;
+    }
+}
+
 .myAccountSite h1{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -1053,7 +1189,7 @@ hr {
 }
 
 .wyswietlanieMyAcc{
-    margin: 0px 150px 0px 150px;
+    margin: auto;
     display: flex;
     align-items: center;
     text-align: center;
@@ -1070,6 +1206,29 @@ hr {
     margin-left: 30px;
     object-fit: cover; 
     border-radius: 50%;
+}
+
+@media only screen and (max-width: 1100px) {
+
+    .wyswietlanieMyAcc{
+        margin: auto;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        background: #fefefe;
+        border-radius: 20px;
+        padding: 10px;
+        width: 700px;
+        margin-bottom: 30px;
+    }
+    
+    .wyswietlanieMyAcc img{
+        width: 150px;
+        height: 150px; 
+        margin-left: 30px;
+        object-fit: cover; 
+        border-radius: 50%;
+    }
 }
 
 .resztaMyAcc{
@@ -1133,7 +1292,7 @@ hr {
 .tble-cennik{
     background: #fefefe;
     border-radius: 20px;
-    margin: 0px 425px 0 425px;
+    margin: 0px 425px 0px 425px;
     padding: 20px;
     margin-top: 20px;
 }

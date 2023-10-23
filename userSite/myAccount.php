@@ -107,7 +107,6 @@ if (!empty($_SESSION["id"])) {
         </div>
     </div>
 
-
     <footer>
         <div class="foo">
             <div class="col-1">
