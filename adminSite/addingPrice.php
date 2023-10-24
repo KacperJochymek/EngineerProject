@@ -32,7 +32,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <input type="checkbox" id="nav_check" hidden>
         <nav>
             <div class="logo">
-                <img src="./images/logo.png" width="100px" height="100px" />
+                <img src="/images/logo.png" width="100px" height="100px" />
             </div>
             <ul>
                 <li>
@@ -138,8 +138,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
             <div class="col-1">
                 <h1>Biuro</h1>
-                <p class="footer-text">ul. Galla Anonima 7</p>
-                <p>43-608 Jaworzno, Polska</p>
+                <p class="footer-text">ul. Sezamkowa 15</p>
+                <p>43-600 XYZ, Polska</p>
                 <p class="email-id"><b>Nasz adres e-mail:</b> <br> k.joch19@wp.pl</p>
                 <p><b>Numer telefonu: </b> <br> 576-157-274</p>
             </div>

@@ -88,10 +88,12 @@ if (isset($_SESSION["user"])) {
     </div>
 
     <div class="cennik">
-        Elastyczny cennik:
-        <div class="badania">199,99zł <br> Zestaw 2 badań</div>
-        <div class="badania">99,99 zł <br> Konsultacja</div>
-        <div class="badania">899,99 <br> Zestaw 10 badań</div>
+        <div class="badanie-cennik">
+            <p class="elastyczny-cennik"></p>Elastyczny cennik:
+            <div class="badania">199,99zł <br> Zestaw 2 badań</div>
+            <div class="badania">99,99 zł <br> Konsultacja</div>
+            <div class="badania">899,99 <br> Zestaw 10 badań</div>
+        </div>
     </div>
 
     <div class="informacja">
