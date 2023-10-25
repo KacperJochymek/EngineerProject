@@ -1361,12 +1361,6 @@ hr {
         margin-top: 15px;
     }
 
-    .badanie-cennik{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
     .umow_sie{
         display: flex;
         flex-direction: column;
@@ -1571,6 +1565,12 @@ hr {
         align-items: center;
         text-align: center;
     }
+
+    .badanie-cennik{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 @media (max-width: 600px) {
@@ -1582,5 +1582,9 @@ hr {
         position: fixed;
         top: 488px;
         right: auto;
+    }
+
+    .logo-aktualizacje{
+        display: none;
     }
 }
