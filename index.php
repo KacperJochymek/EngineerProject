@@ -62,9 +62,10 @@ if (isset($_SESSION["user"])) {
             <!-- <img src="./images/lekarze.png"> -->
         </div>
         <div class="tekst">
-            Umów się na poradę do Twojego lekarza. Od teraz łatwo, szybko <br>
-            i bezpiecznie, a to wszystko <br> w jednym miejscu.
+            Umów się na poradę do Twojego lekarza. Od teraz łatwo, szybko 
+            i bezpiecznie, a to wszystko  w jednym miejscu.
         </div>
+        
     </div>
 
     <div class="ikony_dwa">

@@ -93,7 +93,7 @@ nav ul li a.active {
     display: flex;
     align-items: center;
     margin: 0 auto;
-    position: absolute;
+    position: fixed;
     right: 50px;
     background: url(./images/lekarze.png);
     background-size: cover; 
@@ -109,7 +109,7 @@ nav ul li a.active {
 }
 
 .tekst {
-    position: absolute;
+    position: fixed;
     width: 700px;
     height: 300px;
     left: 200px;
@@ -783,6 +783,9 @@ hr {
     height: 1300px;
 }
 
+.wstep{
+    height: 0px;
+}
 .doctorContent2{
     display: flex;
     align-items: center; 
@@ -1258,9 +1261,33 @@ hr {
 /* ================================ Responsywność ============================================= */
 
 @media (max-width: 1500px) {
-    .tekst {
-        width: 50%; 
-        font-size: 20px; 
+
+    .tekst{
+        position:fixed;
+        font-size: 40px;
+        line-height: 54px;
+        width: auto;
+        height: auto;
+        left: auto;
+        top: auto;
+        margin-top: 20px;
+    }
+
+    .lekarze{
+        width: 800px;
+        height: 600px;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 168px;
+        right: auto;
+    }
+
+    .wstep{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .myAccountSite{
@@ -1327,12 +1354,6 @@ hr {
         height: 440px;
     }
 
-    .cennik {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
     .badania {
         width: auto;
         height: auto;
@@ -1364,7 +1385,9 @@ hr {
     .informacja {
         height: auto; 
         display: flex;
+        flex-direction: column;
         align-items: center;
+        text-align: center;
     }
 
     .informacja-dwa {
@@ -1517,4 +1540,47 @@ hr {
         margin-top: 20px;
     }
 
+}
+
+@media (max-width: 800px) {
+
+    .tekst{
+        position:fixed;
+        font-size: 30px;
+        line-height: 44px;
+        width: auto;
+        height: auto;
+        left: auto;
+        top: auto;
+        margin-top: 60px;
+    }
+
+    .lekarze{
+        width: 600px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 368px;
+        right: auto;
+    }
+
+    .wstep{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .lekarze{
+        width: 375px;
+        height: 280px;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 488px;
+        right: auto;
+    }
 }
