@@ -87,55 +87,6 @@ nav ul li a.active {
     background: black;
 }
 
-@media only screen and (max-width: 1100px) {
-    header {
-        font-family: "Poppins";
-        width: 90%;
-        padding: 0 20px;
-    }
-
-    nav {
-        position: absolute;
-        left: -300px;
-        top: 0;
-        z-index: 999;
-        width: 280px;
-        height: 100vh;
-        background-color: #fefefe;
-        transition: 0.2s;
-        box-shadow: 2px 0 20px 0 rgba(0, 0, 0, 0.05);
-    }
-
-    #nav_check:checked~nav {
-        left: 0;
-    }
-
-    nav .logo {
-        display: block;
-        height: 70px;
-        display: flex;
-        align-items: center;
-        margin-left: 30px;
-    }
-
-    nav ul li a {
-        margin-bottom: 5px;
-        padding: 10px 15px;
-        margin-top: 5px;
-    }
-
-    nav ul {
-        display: block;
-        padding: 0 20px;
-        margin-top: 30px;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-}
-
 .lekarze {
     width: 1000px;
     height: 648px;
@@ -171,14 +122,6 @@ nav ul li a.active {
     color: #fefefe;
     text-shadow: 2px 0 20px 0 rgba(0, 0, 0, 0.05);
 }
-
-@media (max-width: 1500px) {
-    .tekst {
-        width: 50%; 
-        font-size: 20px; 
-    }
-}
-
 
 .ikony_dwa {
     margin-top: 648px;
@@ -280,16 +223,6 @@ hr {
     font-weight: 700;
 }
 
-@media only screen and (max-width: 1500px) {
-    footer {
-        bottom: unset;
-    }
-
-    .col-1 {
-        flex-basis: 100%;
-    }
-}
-
 .footer-text{
     margin-top: 30px;
     text-align: justify;
@@ -340,17 +273,6 @@ hr {
     margin-left: 40px; 
 }
 
-@media (max-width: 1400px) {
-    .cennik {
-        font-size: 32px;
-    }
-    .badania {
-        width: 180px;
-        height: 60px;
-        font-size: 16px;
-    }
-}
-
 @media (max-width: 1000px) {
     .cennik {
         font-size: auto;
@@ -389,7 +311,7 @@ hr {
 
 .umow_sie {
     background: linear-gradient(to right, #BEC8E9, #a380ee);
-    height: 250px;
+    height: auto;
     text-align: center;
     padding-top: 10px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -413,6 +335,7 @@ hr {
     cursor: pointer;
     height: 50px;
     margin-top: 20px;
+    margin-bottom: 50px;
     width: 200px;
     color: #fefefe;
     font-size: 20px;
@@ -472,37 +395,6 @@ hr {
     z-index: 2;
 }
 
-@media (max-width: 1500px) {
-    .informacja {
-        height: auto; /* Dostosowanie wysokości do zawartości */
-        display: flex;
-        align-items: center;
-    }
-
-    .informacja-dwa {
-        flex: 1;
-        justify-content: center;
-    }
-
-    .logo-aktualizacje {
-        width: 100%; /* Wykorzystanie pełnej szerokości dostępnej przestrzeni */
-        max-width: 300px; /* Ograniczenie szerokości obrazka */
-        margin: 0; /* Zerowanie marginesu */
-    }
-
-    .tekst-aktualizacje {
-        flex: 1; /* Wypełnij dostępną przestrzeń */
-        max-width: 700px; /* Ograniczenie szerokości tekstu */
-        margin: 0 50px 0 20px; /* Lekki margines po lewej i prawej stronie tekstu */
-        margin-top: 0; /* Usunięcie marginesu na górze */
-    }
-
-    .aktualizacje-btn {
-        margin: 20px 0; /* Margines na górze i na dole przycisku */
-        margin-left: 0; /* Usunięcie marginesu z lewej strony */
-    }
-}
-
 .tekst-dataWykresy{
     margin-bottom: 20px;
     font-size: 24px;
@@ -530,12 +422,6 @@ hr {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-}
-
-@media screen and (max-width: 1500px) {
-    .lekarze-wybor{
-        height: auto;
-    }
 }
 
 .lekarz-wybierz{
@@ -604,12 +490,6 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-@media screen and (max-width: 1500px) {
-    .lekarzeDatabase{
-        height: 700px;
-    }
 }
 
 .doctor-form{
@@ -735,37 +615,6 @@ hr {
     margin: 0 auto; 
 }  
 
-@media screen and (max-width: 1100px) {
-    .dataAnalize {
-        height: auto; 
-    }
-
-    .dataAnalizeSquare {
-        flex-direction: column; 
-    }
-
-    .miaryStat {
-        flex-direction: column; 
-    }
-
-    .slct-miara {
-        width: 100%; 
-        margin-right: 0; 
-    }
-
-    .miaryStat .lekarz-btn {
-        margin-top: 10px; 
-        margin-left: 0; 
-    }
-
-    .wykresy {
-        width: 50%; 
-        height: 200px; 
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-}
-
 .dataAnalize img{
     width: 250px;
     margin: 70px;
@@ -818,35 +667,12 @@ hr {
     padding-top: 15px;
 }
 
-@media only screen and (max-width: 1500px) {
-    .contact-site{
-        text-align: center;
-        height: 500px;
-        margin-top: 50px;
-        font-size: 17px;
-    }
-    
-    @media only screen and (max-width: 1100px) {
-        .contact-site{
-            text-align: center;
-            font-size: 10px;
-        }
-        
-        .message-inpt {
-            height: 200px;
-            width: 500px;
-        }
-    }
-
     @media only screen and (max-width: 500px) {
         .message-inpt {
             height: 200px;
             width: 350px;
         }
     }
-}
-
-
 
 .blog_adding{
     height: 1200px;
@@ -896,12 +722,6 @@ hr {
     margin-top: 50px;
 }
 
-@media only screen and (max-width: 1500px){
-    .blog-strona{
-        height: auto;
-    }
-}
-
 .blad {
     font-size: 100px;
     margin-top: 100px;
@@ -910,19 +730,6 @@ hr {
 .blad_strona{
     height: 750px;
     text-align: center;
-}
-
-@media only screen and (max-width: 1500px) {
-    .blad_strona{
-        height: auto;
-        text-align: center;
-        margin-bottom: 100px;
-    }
-
-    .blad {
-        font-size: 80px;
-        margin-top: 100px;
-    }
 }
 
 .brak_dostepu{
@@ -945,12 +752,6 @@ hr {
     text-align: center;
     height: 750px;
     margin-top: 100px;
-}
-
-@media only screen and (max-width: 1500px) {
-    .account{
-        height: 440px;
-    }
 }
 
 @media only screen and (max-width: 784px) {
@@ -994,33 +795,6 @@ hr {
     height: 1200px;
 }
 
-@media only screen and (max-width: 1500px) {
-    .doctorContent2{
-        height: 1200px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .doctorContent2 .lekarz-logo2{
-        margin: auto;
-        margin-top: 20px;
-    }
-
-    .wstep_calendar{
-        width: auto;
-        background: #fefefe;
-        border-radius: 10px;
-        margin-top: 30px;
-    }
-
-    .btn-chosen .lekarz-btn{
-        width: 150px;
-        height: 40px;
-    }
-}
-
 @media only screen and (max-width: 600px) {
     .wstep_calendar {
         width: 100%; 
@@ -1062,13 +836,6 @@ hr {
     margin-top: 50px;
     height: 1100px;
     text-align: center;
-}
-
-@media only screen and (max-width: 1500px) {
-    .analizeForm{
-        margin-top: 50px;
-        height: 780px;
-    }
 }
 
 .wstep_calendar{
@@ -1194,13 +961,6 @@ hr {
     height: 400px;
     text-align: center; 
 }
-
-@media only screen and (max-width: 1500px) {
-    .messageSuccess {
-        margin: auto;
-        margin-bottom: 40px;
-    }
-}
   
 .succesThanks {
     font-size: 30px; 
@@ -1232,13 +992,6 @@ hr {
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-
-@media only screen and (max-width: 1500px) {
-    .priceSite{
-        height: auto;
-        margin-bottom: 50px;
-    }
 }
 
 @media only screen and (max-width: 560px) {
@@ -1284,13 +1037,6 @@ hr {
     height: 1000px;
 }
 
-@media only screen and (max-width: 1500px) {
-    .myAccountSite{
-        text-align: center;
-        height: 700px;
-    }
-}
-
 .myAccountSite h1{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -1329,37 +1075,17 @@ hr {
     border-radius: 50%;
 }
 
-@media only screen and (max-width: 1100px) {
-
-    .wyswietlanieMyAcc{
-        margin: auto;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        background: #fefefe;
-        border-radius: 20px;
-        padding: 10px;
-        width: auto;
-        margin-bottom: 30px;
-    }
-    
-    .wyswietlanieMyAcc img{
-        width: 150px;
-        height: 150px; 
-    }
-}
-
 @media only screen and (max-width: 700px) {
     .wyswietlanieMyAcc {
         margin: auto;
         display: flex;
-        flex-direction: column; /* Elementy będą układać się jeden pod drugim */
+        flex-direction: column; 
         align-items: center;
         text-align: center;
         background: #fefefe;
         border-radius: 20px;
         padding: 10px;
-        width: 100%; /* Możesz dostosować tę wartość do swoich potrzeb */
+        width: 100%; 
         margin-bottom: 30px;
     }
 
@@ -1497,11 +1223,6 @@ hr {
     width: 800px;
 }
 
-@media only screen and (max-width: 1100px) {
-    .changePass{
-        width: 700px;
-    }
-}
 
 @media only screen and (max-width: 710px) {
     .changePass{
@@ -1537,4 +1258,267 @@ hr {
 .input-cntiner{
     display: flex;
     flex-direction: column;
+}
+
+/* ================================ Responsywność ============================================= */
+
+@media (max-width: 1500px) {
+    .tekst {
+        width: 50%; 
+        font-size: 20px; 
+    }
+
+    .myAccountSite{
+        text-align: center;
+        height: 700px;
+    }
+
+    .priceSite{
+        height: auto;
+        margin-bottom: 50px;
+    }
+
+    .messageSuccess {
+        margin: auto;
+        margin-bottom: 40px;
+    }
+
+    .analizeForm{
+        margin-top: 50px;
+        height: 780px;
+    }
+
+    .doctorContent2{
+        height: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .doctorContent2 .lekarz-logo2{
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .wstep_calendar{
+        width: auto;
+        background: #fefefe;
+        border-radius: 10px;
+        margin-top: 30px;
+    }
+
+    .btn-chosen .lekarz-btn{
+        width: 150px;
+        height: 40px;
+    }
+
+    .blad_strona{
+        height: auto;
+        text-align: center;
+        margin-bottom: 100px;
+    }
+
+    .blad {
+        font-size: 80px;
+        margin-top: 100px;
+    }
+
+    .blog-strona{
+        height: auto;
+    }
+
+    .account{
+        height: 440px;
+    }
+
+    .cennik {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .badania {
+        width: auto;
+        height: auto;
+        padding: 20px;
+    }
+
+    .badanie-cennik{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .umow_sie{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer {
+        bottom: unset;
+    }
+
+    .col-1 {
+        flex-basis: 100%;
+    }
+
+    .informacja {
+        height: auto; 
+        display: flex;
+        align-items: center;
+    }
+
+    .informacja-dwa {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .logo-aktualizacje {
+        width: 100%; 
+        max-width: 300px; 
+        margin: 0; 
+    }
+
+    .tekst-aktualizacje {
+        flex: 1; 
+        max-width: 700px; 
+        margin: 0 50px 0 20px; 
+        margin-top: 0; 
+    }
+
+    .aktualizacje-btn {
+        margin: 20px 0; 
+        margin-left: 0; 
+    }
+
+    .patroni{
+        height: auto;
+    }
+
+    .lekarze-wybor{
+        height: auto;
+    }
+
+    .lekarzeDatabase{
+        height: 700px;
+    }
+
+    .contact-site{
+        text-align: center;
+        height: 500px;
+        margin-top: 50px;
+        font-size: 17px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .contact-site{
+        text-align: center;
+        font-size: 10px;
+    }
+
+    .changePass{
+        width: 700px;
+    }
+    
+    .message-inpt {
+        height: 200px;
+        width: 500px;
+    }
+
+    header {
+        font-family: "Poppins";
+        width: 90%;
+        padding: 0 20px;
+    }
+
+    nav {
+        position: absolute;
+        left: -300px;
+        top: 0;
+        z-index: 999;
+        width: 280px;
+        height: 100vh;
+        background-color: #fefefe;
+        transition: 0.2s;
+        box-shadow: 2px 0 20px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    #nav_check:checked~nav {
+        left: 0;
+    }
+
+    nav .logo {
+        display: block;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+    }
+
+    nav ul li a {
+        margin-bottom: 5px;
+        padding: 10px 15px;
+        margin-top: 5px;
+    }
+
+    nav ul {
+        display: block;
+        padding: 0 20px;
+        margin-top: 30px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .wyswietlanieMyAcc{
+        margin: auto;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        background: #fefefe;
+        border-radius: 20px;
+        padding: 10px;
+        width: auto;
+        margin-bottom: 30px;
+    }
+    
+    .wyswietlanieMyAcc img{
+        width: 150px;
+        height: 150px; 
+    }
+
+    .dataAnalize {
+        height: auto; 
+    }
+
+    .dataAnalizeSquare {
+        flex-direction: column; 
+    }
+
+    .miaryStat {
+        flex-direction: column; 
+    }
+
+    .slct-miara {
+        width: 100%; 
+        margin-right: 0; 
+    }
+
+    .miaryStat .lekarz-btn {
+        margin-top: 10px; 
+        margin-left: 0; 
+    }
+
+    .wykresy {
+        width: 50%; 
+        height: 200px; 
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
 }
