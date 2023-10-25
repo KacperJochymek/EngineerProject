@@ -135,16 +135,11 @@ nav ul li a.active {
     padding: 0 40px;
 }
 
-#obrazek_jeden,
-#obrazek_dwa,
-#obrazek_trzy,
-#obrazek_cztery {
+.obrazek_jeden{
     float: left;
     width: 100px;
     text-align: center;
 }
-
-
 
 footer {
     width: 100%;
@@ -1342,11 +1337,12 @@ hr {
         width: auto;
         height: auto;
         padding: 20px;
+        margin-top: 15px;
     }
 
     .badanie-cennik{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
     }
 

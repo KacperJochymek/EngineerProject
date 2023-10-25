@@ -68,19 +68,19 @@ if (isset($_SESSION["user"])) {
     </div>
 
     <div class="ikony_dwa">
-        <div id="obrazek_jeden">
+        <div class="obrazek_jeden">
             <img src="./images/gwarancja_satysfakcji.png" alt="">
             Gwarancja satysfakcji
         </div>
-        <div id="obrazek_dwa">
+        <div class="obrazek_jeden">
             <img src="./images/cena.png" alt="">
             Konkurencyjna cena
         </div>
-        <div id="obrazek_trzy">
+        <div class="obrazek_jeden">
             <img src="./images/doctor.png" alt="">
             Znani specjaliści
         </div>
-        <div id="obrazek_cztery">
+        <div class="obrazek_jeden">
             <img src="./images/rocker.png" alt="">
             Szybkie terminy
         </div>
