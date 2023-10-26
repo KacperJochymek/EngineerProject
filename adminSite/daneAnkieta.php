@@ -171,10 +171,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <img src="/images/wykresy.png" alt="">
             <!-- Wykresy -->
             <form method="post" action="" class="miaryStat">
+
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
-                    <select name="selectedColumn" class="slct-miara">
-                    <?php
+                    <select name="wybranaColumna" class="slct-miara">
+                        <?php
                         if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
                             $header = fgetcsv($handle, 1000, ",");
                             fclose($handle);
@@ -189,7 +190,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz wykres:</p>
-                    <select class="slct-miara">
+                    <select name="wybranyWykres" class="slct-miara">
                         <option value="kolowy">Kołowy</option>
                         <option value="liniowy">Liniowy</option>
                         <option value="slupkowy">Słupkowy</option>
@@ -198,7 +199,36 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <button class="lekarz-btn">Generuj wykres</button>
             </form>
             <div class="wykresy">
-                <canvas id="myChart"></canvas>
+            <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $selectedColumn = $_POST["wybranaColumna"];
+                    $selectedChartType = $_POST["wybranyWykres"];
+
+                    if ($selectedColumn && $selectedChartType) {
+                        // Tutaj możesz użyć Chart.js do generowania wykresu
+                        // Przykład generowania wykresu kołowego
+                        if ($selectedChartType === "kolowy") {
+                            echo '<canvas id="myChart"></canvas>';
+                            echo '<script>
+                    var ctx = document.getElementById("myChart").getContext("2d");
+                    var data = {
+                        labels: ["Wartość 1", "Wartość 2", "Wartość 3"], // Dodaj odpowiednie etykiety
+                        datasets: [{
+                            data: [30, 40, 30], // Dodaj odpowiednie dane
+                            backgroundColor: ["#FF5733", "#33FF57", "#3333FF"] // Dodaj odpowiednie kolory
+                        }]
+                    };
+                    var myPieChart = new Chart(ctx, {
+                        type: "pie",
+                        data: data
+                    });
+                </script>';
+                        }
+                        // Dodaj obsługę innych typów wykresów
+                        // Liniowy, słupkowy, etc.
+                    }
+                }
+                ?>
             </div>
         </div>
 

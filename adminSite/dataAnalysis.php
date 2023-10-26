@@ -70,7 +70,42 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
 
     <div class="dataAnalize">
-        
+
+        <?php
+
+        require '../Logowanie/config.php';
+
+        if ($conn->connect_error) {
+            die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+        }
+
+        $query = "SELECT wiek FROM pacjenci";
+        $result = $conn->query($query);
+
+        $ages = array();
+
+        if ($result->num_rows > 0) {
+            $totalAge = 0;
+            $totalPatients = 0;
+
+            while ($row = $result->fetch_assoc()) {
+                $age = $row["wiek"];
+                $ages[] = $age; 
+
+                $totalAge += $age;
+                $totalPatients++;
+
+                // Tutaj możesz wykonywać operacje na województwach i miastach, np. tworzyć wykresy
+            }
+
+            $averageAge = $totalAge / $totalPatients;
+        } else {
+            echo "Brak danych pacjentów w bazie.";
+        }
+
+        $conn->close();
+        ?>
+
         <p class="tekst-dataWykresy">Miary statystyczne:</p>
         <div class="dataAnalizeSquare">
             <img src="/images/Analiza-danych.jpg" alt="">
@@ -78,22 +113,22 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <div class="miaryStat">
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
-                    <select class="slct-miara">
+                    <select class="slct-miara" id="selectValue">
                         <option value="wiek">Wiek</option>
                     </select>
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
-                    <select class="slct-miara">
+                    <select class="slct-miara" id="selectMeasure">
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
                         <option value="odchylenie-std">Odchylenie std</option>
                     </select>
                 </div>
-                <button class="lekarz-btn">Oblicz</button>
+                <button id="calculateButton" class="lekarz-btn">Oblicz</button>
             </div>
             <div class="wykresy">
-                <p>Tutaj beda sie generowac obliczenia</p>
+                <p id="result">Wynik będzie wyświetlony tutaj</p>
             </div>
         </div>
 
@@ -175,5 +210,58 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="script1.js"></script>
+<script>
+    document.getElementById("calculateButton").addEventListener("click", function() {
+        var selectedValue = document.getElementById("selectValue").value;
+        var selectedMeasure = document.getElementById("selectMeasure").value;
+
+        var resultText = "";
+
+        if (selectedValue === "wiek" && selectedMeasure === "srednia") {
+            var averageAge = <?php echo $averageAge; ?>;
+            resultText += "Średni wiek pacjentów: " + averageAge.toFixed(2) + " lat";
+        } else if (selectedValue === "wiek" && selectedMeasure === "mediana") {
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number); 
+
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia mediany.";
+            } else {
+                var median;
+                ages.sort(function(a, b) {
+                    return a - b;
+                });
+                if (ages.length % 2 === 0) {
+                    median = (ages[ages.length / 2 - 1] + ages[ages.length / 2]) / 2;
+                } else {
+                    median = ages[Math.floor(ages.length / 2)];
+                }
+                resultText += "Mediana wieku pacjentów: " + median.toFixed(2) + " lat";
+            }
+        } else if (selectedValue === "wiek" && selectedMeasure === "odchylenie-std") {
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number); 
+
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia odchylenia standardowego.";
+            } else {
+                var mean = ages.reduce(function(sum, value) {
+                    return sum + value;
+                }, 0) / ages.length;
+
+                var variance = ages.reduce(function(sum, value) {
+                    return sum + Math.pow(value - mean, 2);
+                }, 0) / ages.length;
+
+                var stdDev = Math.sqrt(variance);
+                resultText += "Odchylenie standardowe wieku pacjentów: " + stdDev.toFixed(2) + " lat";
+            }
+        } else {
+            resultText += "Brak dostępnych danych lub błędne opcje.";
+        }
+
+        document.getElementById("result").textContent = resultText;
+    });
+</script>
 
 </html>
