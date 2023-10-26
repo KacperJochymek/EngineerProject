@@ -23,6 +23,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <script src="https://kit.fontawesome.com/0e252f77f3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -70,30 +71,97 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
 
     <div class="dataAnalize">
-        
-        <p class="tekst-dataWykresy">Miary statystyczne:</p>
+
+        <p class="tekst-dataWykresy">Dane z ankiety:</p>
+
+        <div class="ankietaDaneWyniki">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR-TRX2QUSvbUxH3qDZsFl_G3IrnE89WzXp9s-9pqdNp93FaQFTZQ-Ia3e41e5lJmta9fkIao7TPIUy/pubhtml?widget=true&amp;headers=false"></iframe>
+        </div>
+
+        <p class="tekst-dataWykresy">Obliczenia:</p>
+
         <div class="dataAnalizeSquare">
-            <img src="/images/Analiza-danych.jpg" alt="">
-            <!-- Miary statystyczne -->
-            <div class="miaryStat">
+            <img src="/images/ankieta.jpg" alt="">
+            <!-- Ankieta -->
+            <form method="post" action="" class="miaryStat">
+
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $selectedColumn = $_POST["selectedColumn"];
+                    $selectedMethod = $_POST["selectedMethod"];
+
+                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                        $data = [];
+                        while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                            $data[] = $row;
+                        }
+                        fclose($handle);
+
+                        // Przetwarzanie danych i obliczenia
+                        $selectedColumnIndex = array_search($selectedColumn, $data[0]);
+                        $values = array_column(array_slice($data, 1), $selectedColumnIndex);
+
+                        $result = null;
+
+                        if ($selectedMethod === "srednia") {
+                            $result = array_sum($values) / count($values);
+                        } elseif ($selectedMethod === "odchylenie-std") {
+                            $result = sqrt(array_sum(array_map(function ($x) use ($values) {
+                                return pow($x - (array_sum($values) / count($values)), 2);
+                            }, $values)) / count($values));
+                        } elseif ($selectedMethod === "mediana") {
+                            sort($values);
+                            $count = count($values);
+                            $middle = floor($count / 2);
+                            if ($count % 2 == 0) {
+                                $result = ($values[$middle - 1] + $values[$middle]) / 2;
+                            } else {
+                                $result = $values[$middle];
+                            }
+                        } elseif ($selectedMethod === "moda") {
+                            $countValues = array_count_values($values);
+                            arsort($countValues);
+                            $modes = array_keys($countValues, max($countValues));
+                            $result = implode(", ", $modes);
+                        }
+                    }
+                }
+
+                ?>
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
-                    <select class="slct-miara">
-                        <option value="wiek">Wiek</option>
+                    <select name="selectedColumn" class="slct-miara">
+                        <?php
+                        if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                            $header = fgetcsv($handle, 1000, ",");
+                            fclose($handle);
+
+                            for ($i = 5; $i < 10 && $i < count($header); $i++) {
+                                $column = $header[$i];
+                                echo "<option value='$column'>$column</option>";
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
-                    <select class="slct-miara">
+                    <select name="selectedMethod" class="slct-miara">
                         <option value="srednia">Średnia</option>
-                        <option value="mediana">Mediana</option>
                         <option value="odchylenie-std">Odchylenie std</option>
+                        <option value="mediana">Mediana</option>
+                        <option value="moda">Moda</option>
                     </select>
                 </div>
                 <button class="lekarz-btn">Oblicz</button>
-            </div>
+            </form>
+
             <div class="wykresy">
-                <p>Tutaj beda sie generowac obliczenia</p>
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result)) {
+                    echo "Wynik obliczenia: $result";
+                }
+                ?>
             </div>
         </div>
 
@@ -102,27 +170,35 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <div class="dataAnalizeSquare">
             <img src="/images/wykresy.png" alt="">
             <!-- Wykresy -->
-            <div class="miaryStat">
+            <form method="post" action="" class="miaryStat">
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
-                    <select class="slct-miara">
-                        <option value="wiek">Wiek</option>
-                        <option value="miasto">Miasto</option>
-                        <option value="wojewodztwo">Wojewodztwo</option>
+                    <select name="selectedColumn" class="slct-miara">
+                    <?php
+                        if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                            $header = fgetcsv($handle, 1000, ",");
+                            fclose($handle);
+
+                            for ($i = 2; $i < count($header); $i++) {
+                                $column = $header[$i];
+                                echo "<option value='$column'>$column</option>";
+                            }
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz wykres:</p>
                     <select class="slct-miara">
-                        <option value="miara1">Kołowy</option>
-                        <option value="miara2">Liniowy</option>
-                        <option value="miara3">Słupkowy</option>
+                        <option value="kolowy">Kołowy</option>
+                        <option value="liniowy">Liniowy</option>
+                        <option value="slupkowy">Słupkowy</option>
                     </select>
                 </div>
                 <button class="lekarz-btn">Generuj wykres</button>
-            </div>
+            </form>
             <div class="wykresy">
-                <p>Tutaj beda sie generowac wykresy</p>
+                <canvas id="myChart"></canvas>
             </div>
         </div>
 
