@@ -23,6 +23,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <script src="https://kit.fontawesome.com/0e252f77f3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -90,7 +91,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
             while ($row = $result->fetch_assoc()) {
                 $age = $row["wiek"];
-                $ages[] = $age; 
+                $ages[] = $age;
 
                 $totalAge += $age;
                 $totalPatients++;
@@ -135,29 +136,86 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <p class="tekst-dataWykresy">Wykresy:</p>
 
         <div class="dataAnalizeSquare">
+
+            <?php
+
+            require '../Logowanie/config.php';
+
+            if ($conn->connect_error) {
+                die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+            }
+
+            $query = "SELECT województwo FROM pacjenci";
+            $result = $conn->query($query);
+
+            $wojewodztwoCount = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $wojewodztwo = $row["województwo"];
+                    if (isset($wojewodztwoCount[$wojewodztwo])) {
+                        $wojewodztwoCount[$wojewodztwo]++;
+                    } else {
+                        $wojewodztwoCount[$wojewodztwo] = 1;
+                    }
+                }
+            } else {
+                echo "Brak danych pacjentów w bazie.";
+            }
+
+            $conn->close();
+            ?>
+
+            <?php
+            require '../Logowanie/config.php';
+
+            if ($conn->connect_error) {
+                die("Błąd połączenia z bazą danych: " . $conn->connect_error);
+            }
+
+            $query = "SELECT miasto FROM pacjenci";
+            $result = $conn->query($query);
+
+            $miastoCount = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $miasto = $row["miasto"];
+                    if (isset($miastoCount[$miasto])) {
+                        $miastoCount[$miasto]++;
+                    } else {
+                        $miastoCount[$miasto] = 1;
+                    }
+                }
+            } else {
+                echo "Brak danych pacjentów w bazie.";
+            }
+
+            $conn->close();
+            ?>
+
             <img src="/images/wykresy.png" alt="">
             <!-- Wykresy -->
             <div class="miaryStat">
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
-                    <select class="slct-miara">
-                        <option value="wiek">Wiek</option>
+                    <select class="slct-miara" id="selectLocation">
                         <option value="miasto">Miasto</option>
                         <option value="wojewodztwo">Wojewodztwo</option>
                     </select>
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz wykres:</p>
-                    <select class="slct-miara">
-                        <option value="miara1">Kołowy</option>
-                        <option value="miara2">Liniowy</option>
-                        <option value="miara3">Słupkowy</option>
+                    <select class="slct-miara" id="selectChartType">
+                        <option value="kolowy">Kołowy</option>
+                        <option value="liniowy">Liniowy</option>
+                        <option value="slupkowy">Słupkowy</option>
                     </select>
                 </div>
-                <button class="lekarz-btn">Generuj wykres</button>
+                <button class="lekarz-btn" id="generateChart">Generuj wykres</button>
             </div>
             <div class="wykresy">
-                <p>Tutaj beda sie generowac wykresy</p>
+                <canvas id="locationChart"></canvas>
             </div>
         </div>
 
@@ -222,7 +280,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             resultText += "Średni wiek pacjentów: " + averageAge.toFixed(2) + " lat";
         } else if (selectedValue === "wiek" && selectedMeasure === "mediana") {
             var ages = <?php echo json_encode($ages); ?>;
-            ages = ages.map(Number); 
+            ages = ages.map(Number);
 
             if (ages.length === 0) {
                 resultText += "Brak dostępnych danych do obliczenia mediany.";
@@ -240,7 +298,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             }
         } else if (selectedValue === "wiek" && selectedMeasure === "odchylenie-std") {
             var ages = <?php echo json_encode($ages); ?>;
-            ages = ages.map(Number); 
+            ages = ages.map(Number);
 
             if (ages.length === 0) {
                 resultText += "Brak dostępnych danych do obliczenia odchylenia standardowego.";
@@ -262,6 +320,42 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         document.getElementById("result").textContent = resultText;
     });
+</script>
+<script>
+  document.getElementById('generateChart').addEventListener('click', function() {
+    var selectedValue = document.getElementById('selectLocation').value;
+    var selectedChartType = document.getElementById('selectChartType').value;
+
+    var locationCountsMiasto = <?php echo json_encode($miastoCount); ?>;
+    var locationCountsWojewodztwo = <?php echo json_encode($wojewodztwoCount); ?>;
+    var parsedLocationCounts = selectedValue === 'miasto' ? locationCountsMiasto : locationCountsWojewodztwo;
+
+    var labels = Object.keys(parsedLocationCounts);
+    var data = Object.values(parsedLocationCounts);
+
+    var ctx = document.getElementById('locationChart').getContext('2d');
+
+    if (window.locationChart instanceof Chart) {
+        window.locationChart.destroy();
+    }
+
+    if (selectedChartType === "kolowy") {
+        // Wygeneruj wykres kołowy
+        window.locationChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                }],
+            },
+            options: {
+                responsive: true,
+            },
+        });
+    }
+});
+
 </script>
 
 </html>
