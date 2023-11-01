@@ -170,65 +170,26 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <div class="dataAnalizeSquare">
             <img src="/images/wykresy.png" alt="">
             <!-- Wykresy -->
-            <form method="post" action="" class="miaryStat">
+            <div class="miaryStat">
 
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
-                    <select name="wybranaColumna" class="slct-miara">
-                        <?php
-                        if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
-                            $header = fgetcsv($handle, 1000, ",");
-                            fclose($handle);
+                    <select name="wybranaColumna" class="slct-miara" id="selectColumn">
 
-                            for ($i = 2; $i < count($header); $i++) {
-                                $column = $header[$i];
-                                echo "<option value='$column'>$column</option>";
-                            }
-                        }
-                        ?>
                     </select>
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz wykres:</p>
-                    <select name="wybranyWykres" class="slct-miara">
-                        <option value="kolowy">Kołowy</option>
-                        <option value="liniowy">Liniowy</option>
-                        <option value="slupkowy">Słupkowy</option>
+                    <select name="wybranyWykres" class="slct-miara" id="chartTypeSelect">
+                        <option value="pie">Kołowy</option>
+                        <option value="line">Liniowy</option>
+                        <option value="bar">Słupkowy</option>
                     </select>
                 </div>
-                <button class="lekarz-btn">Generuj wykres</button>
-            </form>
+                <button class="lekarz-btn" id="generateChart">Generuj wykres</button>
+            </div>
             <div class="wykresy">
-            <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $selectedColumn = $_POST["wybranaColumna"];
-                    $selectedChartType = $_POST["wybranyWykres"];
-
-                    if ($selectedColumn && $selectedChartType) {
-                        // Tutaj możesz użyć Chart.js do generowania wykresu
-                        // Przykład generowania wykresu kołowego
-                        if ($selectedChartType === "kolowy") {
-                            echo '<canvas id="myChart"></canvas>';
-                            echo '<script>
-                    var ctx = document.getElementById("myChart").getContext("2d");
-                    var data = {
-                        labels: ["Wartość 1", "Wartość 2", "Wartość 3"], // Dodaj odpowiednie etykiety
-                        datasets: [{
-                            data: [30, 40, 30], // Dodaj odpowiednie dane
-                            backgroundColor: ["#FF5733", "#33FF57", "#3333FF"] // Dodaj odpowiednie kolory
-                        }]
-                    };
-                    var myPieChart = new Chart(ctx, {
-                        type: "pie",
-                        data: data
-                    });
-                </script>';
-                        }
-                        // Dodaj obsługę innych typów wykresów
-                        // Liniowy, słupkowy, etc.
-                    }
-                }
-                ?>
+                <canvas id="myCharts"></canvas>
             </div>
         </div>
 
@@ -281,5 +242,127 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="script1.js"></script>
+<script>
+    const columnSelect = document.getElementById("selectColumn");
+    const chartTypeSelect = document.getElementById("chartTypeSelect");
+    const generateChartButton = document.getElementById("generateChart");
+    const ctx = document.getElementById("myCharts").getContext("2d");
+
+    let ageChartCanvas = document.getElementById("myCharts").getContext("2d");
+
+    let ageChart;
+
+    fetch("../analiza_danych2.csv")
+        .then(response => response.text())
+        .then(data => {
+            const lines = data.split("\n");
+            const header = lines[0].split(",");
+
+            columnSelect.innerHTML = '';
+
+            for (let i = 2; i < header.length; i++) {
+                const column = header[i];
+                const option = document.createElement("option");
+                option.value = column;
+                option.text = column;
+                columnSelect.appendChild(option);
+            }
+        });
+
+    generateChartButton.addEventListener("click", () => {
+        const selectColumn = columnSelect.value;
+        const selectedChartType = chartTypeSelect.value;
+
+        if (ageChart) {
+            ageChart.destroy();
+        }
+
+        if (selectedChartType === "pie") {
+            const selectedColumn = columnSelect.value;
+
+            fetch("../analiza_danych2.csv")
+                .then(response => response.text())
+                .then(data => {
+                    const lines = data.split("\n");
+                    const header = lines[0].split(",");
+                    const ageCategories = ["0-18", "19-35", "36-55", "55+"];
+                    const ageData = Array(ageCategories.length).fill(0);
+
+                    for (let i = 1; i < lines.length; i++) {
+                        const row = lines[i].split(",");
+                        const age = parseInt(row[2]);
+                        if (!isNaN(age)) {
+                            if (age <= 18) {
+                                ageData[0]++;
+                            } else if (age <= 35) {
+                                ageData[1]++;
+                            } else {
+                                ageData[2]++;
+                            }
+                        }
+                    }
+
+                    const ageChartData = {
+                        labels: ageCategories,
+                        datasets: [{
+                            data: ageData,
+                            backgroundColor: [
+                                "rgb(255, 99, 132)",
+                                "rgb(54, 162, 235)",
+                                "rgb(255, 205, 86)",
+                                "rgb(55, 203, 20)"
+                            ],
+                        }],
+                    };
+
+                    ageChart = new Chart(ageChartCanvas, {
+                        type: "pie",
+                        data: ageChartData,
+                    });
+                });
+        } else if (selectedChartType === "bar") {
+            // Tworzenie wykresu słupkowego
+            const selectedColumn = columnSelect.value;
+
+            fetch("../analiza_danych2.csv")
+                .then(response => response.text())
+                .then(data => {
+                    const lines = data.split("\n");
+                    const header = lines[0].split(",");
+                    const ageCategories = ["0-18", "19-35", "36-55", "55+"];
+                    const ageData = Array(ageCategories.length).fill(0);
+
+                    for (let i = 1; i < lines.length; i++) {
+                        const row = lines[i].split(",");
+                        const age = parseInt(row[2]);
+                        if (!isNaN(age)) {
+                            if (age <= 18) {
+                                ageData[0]++;
+                            } else if (age <= 35) {
+                                ageData[1]++;
+                            } else {
+                                ageData[2]++;
+                            }
+                        }
+                    }
+
+                    const ageChartData = {
+                        labels: ageCategories,
+                        datasets: [{
+                            data: ageData,
+                            backgroundColor: [
+                                "rgb(255, 99, 132)",
+                            ],
+                        }],
+                    };
+
+                    ageChart = new Chart(ageChartCanvas, {
+                        type: "bar",
+                        data: ageChartData,
+                    });
+                });
+            }
+        });
+</script>
 
 </html>
