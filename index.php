@@ -9,7 +9,8 @@ if (isset($_SESSION["user"])) {
 <html lang="en">
 
 <head>
-    <title>EngineerProject</title>
+    <title>Strona Główna</title>
+    <link rel="icon" href="/images/leaf.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -19,12 +20,12 @@ if (isset($_SESSION["user"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/logo.png"></a>
+            <a href="/index.php"> <img src="/images/medease.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
             <div class="logo">
-                <img src="./images/logo.png" width="100px" height="100px" />
+                <img src="/images/medease.png" width="100px" height="100px" />
             </div>
             <ul>
                 <li>
@@ -46,7 +47,7 @@ if (isset($_SESSION["user"])) {
                     <a href="#">Moje Konto</a>
                 </li>
                 <li>
-                    <a href="./Logowanie/sign_in.php" class="active">Zaloguj się</a>
+                    <a href="/Logowanie/sign_in.php" class="active">Zaloguj się</a>
                 </li>
             </ul>
         </nav>
@@ -62,10 +63,10 @@ if (isset($_SESSION["user"])) {
             <!-- <img src="./images/lekarze.png"> -->
         </div>
         <div class="tekst">
-            Umów się na poradę do Twojego lekarza. Od teraz łatwo, szybko 
-            i bezpiecznie, a to wszystko  w jednym miejscu.
+            Umów się na poradę do Twojego lekarza. Od teraz łatwo, szybko
+            i bezpiecznie, a to wszystko w jednym miejscu.
         </div>
-        
+
     </div>
 
     <div class="ikony_dwa">
@@ -105,7 +106,7 @@ if (isset($_SESSION["user"])) {
             </div>
 
             <div class="tekst-aktualizacje">
-                Postępy w technologii telemedycyny: Telemedycyna staje się coraz popularniejsza, zwłaszcza w kontekście pandemii COVID-19. <br>
+                <b>Postępy w technologii telemedycyny: </b> Telemedycyna staje się coraz popularniejsza, zwłaszcza w kontekście pandemii COVID-19. <br>
                 Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym <br>
                 bez konieczności wizyty w gabinecie lekarskim. <br>
 
@@ -125,12 +126,12 @@ if (isset($_SESSION["user"])) {
         Jesteśmy wspierani przez:
         <div class="patroni-logo">
             <img src="/images/logo.png" alt="">
-            <img src="/images/logo.png" alt="">
-            <img src="/images/logo.png" alt="">
+            <img src="/images/medease.png" alt="">
+            <img src="/images/hotel.png" alt="">
         </div>
         <div class="patroni-logo">
-            <img src="/images/logo.png" alt="">
-            <img src="/images/logo.png" alt="">
+            <img src="/images/drop.png" alt="">
+            <img src="/images/sklep-kj.png" alt="">
             <img src="/images/logo.png" alt="">
         </div>
     </div>
@@ -140,43 +141,46 @@ if (isset($_SESSION["user"])) {
             <div class="col-1">
                 <h1>O nas</h1>
 
-                <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                    swój stan zdrowia i ma to wszystko pod ręką.</p>
+                <p class="footer-text">Witamy w Medease! Nasza firma zajmuje się tworzeniem oprogramowania dla przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
+                    swój stan zdrowia i wiele więcej. Ponadto może ocenić swoją wizytę, a to wszystko w jednym miejscu.</p>
             </div>
 
             <div class="col-1">
                 <h1>Biuro</h1>
                 <p class="footer-text">ul. Sezamkowa 15</p>
                 <p>43-600 XYZ, Polska</p>
-                <p class="email-id"><b>Nasz adres e-mail:</b> <br> k.joch19@wp.pl</p>
-                <p><b>Numer telefonu: </b> <br> 576-157-274</p>
+                <p class="email-id"><b>E-mail:</b> <br> kontakt@medease.pl</p>
+                <p><b>Numer telefonu: </b> <br> 123-456-789</p>
             </div>
 
             <div class="col-1">
                 <h1>Przydatne linki</h1>
                 <ul>
                     <li><a href="index.php">Strona główna</a></li>
-                    <li><a href="#">Umów wizytę</a></li>
-                    <li><a href="#">Cennik</a></li>
+                    <li><a href="#" id="myLink">Umów wizytę</a></li>
+                    <li><a href="#" id="myLink">Czytaj bloga</a></li>
                 </ul>
             </div>
             <div class="col-1">
                 <h1>Skontaktuj się!</h1>
-                <!-- <form>
-                    <input type="text" placeholder="Twój adres e-mail">
-                    <input type="text" placeholder="Zadaj pytanie">
-                    <button type="submit">Wyślij!</button>
-                </form> -->
                 <div class="sociale">
-                    <div class="circle"><i class="fa-brands fa-facebook-f"></i></div>
-                    <div class="circle"><i class="fa-brands fa-x-twitter"></i></div>
-                    <div class="circle"><i class="fa-brands fa-instagram"></i></div>
-                    <div class="circle"><i class="fa-brands fa-tiktok"></i></div>
+                    <a href="https://www.facebook.com/">
+                        <div class="circle"><i class="fa-brands fa-facebook-f"></i></div>
+                    </a>
+                    <a href="https://twitter.com/">
+                        <div class="circle"><i class="fa-brands fa-x-twitter"></i></div>
+                    </a>
+                    <a href="https://instagram.com/">
+                        <div class="circle"><i class="fa-brands fa-instagram"></i></div>
+                    </a>
+                    <a href="https://tiktok.com/">
+                        <div class="circle"><i class="fa-brands fa-tiktok"></i></div>
+                    </a>
                 </div>
             </div>
         </div>
         <hr>
-        <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
+        <p class="copyright"> Wszelkie prawa zastrzeżone. Medease 2023 ©</p>
     </footer>
 
 

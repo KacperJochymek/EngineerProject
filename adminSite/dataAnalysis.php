@@ -18,7 +18,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 <html lang="en">
 
 <head>
-    <title>EngineerProject</title>
+    <title>Analiza danych</title>
+    <link rel="icon" href="/images/leaf.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
@@ -29,12 +30,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 <body>
     <header>
         <div class="logo">
-            <img src="/images/logo.png">
+            <img src="/images/medease.png">
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
             <div class="logo">
-                <img src="/images/logo.png" width="100px" height="100px" />
+                <img src="/images/medease.png" width="100px" height="100px" />
             </div>
             <ul>
                 <li>
@@ -44,7 +45,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
                 </li>
                 <li>
-                    <a href="#">Zmień cene</a>
+                    <a href="/adminSite/addingPrice.php">Zmień cene</a>
                 </li>
 
                 <li>
@@ -226,43 +227,46 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <div class="col-1">
                 <h1>O nas</h1>
 
-                <p class="footer-text">Witamy w Kacper Jochymek. Jesteśmy firmą, która zajmuje się tworzeniem oprogramowania dla sieci przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                    swój stan zdrowia i ma to wszystko pod ręką.</p>
+                <p class="footer-text">Witamy w Medease! Nasza firma zajmuje się tworzeniem oprogramowania dla przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
+                    swój stan zdrowia i wiele więcej. Ponadto może ocenić swoją wizytę, a to wszystko w jednym miejscu.</p>
             </div>
 
             <div class="col-1">
                 <h1>Biuro</h1>
                 <p class="footer-text">ul. Sezamkowa 15</p>
                 <p>43-600 XYZ, Polska</p>
-                <p class="email-id"><b>Nasz adres e-mail:</b> <br> k.joch19@wp.pl</p>
-                <p><b>Numer telefonu: </b> <br> 576-157-274</p>
+                <p class="email-id"><b>E-mail:</b> <br> kontakt@medease.pl</p>
+                <p><b>Numer telefonu: </b> <br> 123-456-789</p>
             </div>
 
             <div class="col-1">
                 <h1>Przydatne linki</h1>
                 <ul>
-                    <li><a href="/index.php">Strona główna</a></li>
-                    <li><a href="#">Umów wizytę</a></li>
-                    <li><a href="#">Cennik</a></li>
+                    <li><a href="/adminSite/adminAccount.php">Moje konto</a></li>
+                    <li><a href="/adminSite/dataAnalysis.php">Analiza danych</a></li>
+                    <li><a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a></li>
                 </ul>
             </div>
             <div class="col-1">
                 <h1>Skontaktuj się!</h1>
-                <!-- <form>
-                    <input type="text" placeholder="Twój adres e-mail">
-                    <input type="text" placeholder="Zadaj pytanie">
-                    <button type="submit">Wyślij!</button>
-                </form> -->
                 <div class="sociale">
-                    <div class="circle"><i class="fa-brands fa-facebook-f"></i></div>
-                    <div class="circle"><i class="fa-brands fa-x-twitter"></i></div>
-                    <div class="circle"><i class="fa-brands fa-instagram"></i></div>
-                    <div class="circle"><i class="fa-brands fa-tiktok"></i></div>
+                    <a href="https://www.facebook.com/">
+                        <div class="circle"><i class="fa-brands fa-facebook-f"></i></div>
+                    </a>
+                    <a href="https://twitter.com/">
+                        <div class="circle"><i class="fa-brands fa-x-twitter"></i></div>
+                    </a>
+                    <a href="https://instagram.com/">
+                        <div class="circle"><i class="fa-brands fa-instagram"></i></div>
+                    </a>
+                    <a href="https://tiktok.com/">
+                        <div class="circle"><i class="fa-brands fa-tiktok"></i></div>
+                    </a>
                 </div>
             </div>
         </div>
         <hr>
-        <p class="copyright"> Copyright © YOHM 2023 Wszelkie prawa zastrzeżone.</p>
+        <p class="copyright"> Wszelkie prawa zastrzeżone. Medease 2023 ©</p>
     </footer>
 
 </body>
