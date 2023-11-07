@@ -11,6 +11,29 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     session_destroy();
     exit();
 }
+
+require '../Logowanie/config.php';
+
+if (isset($_POST['filter-btn'])) {
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+
+    $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, 
+            pacjenci.id_pacjenta, wizyty.status_wizyty 
+            FROM wizyty
+            LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
+            LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
+            WHERE wizyty.data_wizyty BETWEEN '$start_date' AND '$end_date'";
+} else {
+    $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, 
+            pacjenci.id_pacjenta, wizyty.status_wizyty 
+            FROM wizyty
+            LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
+            LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id";
+}
+
+$result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -69,22 +92,17 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
     <div class="accountAdminLook">
 
-        <p class="lekarz-wybierz">Podgląd wizyt</p>
+        <p class="lekarz-wybierz">Podgląd wizyt pacjentów</p>
 
         <div class="lookUsers">
-            <div class="lookVis">
-                <p>Wybierz przedział dat:</p>
-                <input type="date" placeholder="Wpisz date">
-                <input type="date" placeholder="Wpisz date">
-            </div>
+            <form method="post" class="lookVis">
+                <p>Wybierz przedziały dat:</p>
+                <input type="date" name="start_date" placeholder="Data początkowa">
+                <input type="date" name="end_date" placeholder="Data końcowa">
+                <button type="submit" class="filtruj" name="filter-btn" >Filtruj</button>
+            </form>
             <div class="vtableUsers">
                 <?php
-
-                require '../Logowanie/config.php';
-                require '../adminSite/configs/blog-config.php';
-
-                $sql = "SELECT * FROM pacjenci";
-                $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                     echo '<div class="tble-cennik">';
@@ -105,18 +123,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<form method="post" action="">';
+                        echo '<td>' . $row["id"] . '</td>';
+                        echo '<td>' . $row["data_wizyty"] . '</td>';
+                        echo '<td>' . $row["available_hour"] . '</td>';
+                        echo '<td>' . $row["doctor_id"] . '</td>';
                         echo '<td>' . $row["id_pacjenta"] . '</td>';
-                        echo '<td>' . $row["wiek"] . '</td>';
-                        echo '<td>' . $row["pesel"] . '</td>';
-                        echo '<td>' . $row["miasto"] . '</td>';
-                        echo '<td>' . $row["województwo"] . '</td>';
-                        echo '<td> <select id="status">
-                            
-                            </td>';
                         echo '<td>';
-                        echo '<input type="hidden" name="id[]" value="' . $row["id"] . '">';
+                        echo '<select name="status_wizyty[]">';
+                        echo '<option value="dostępna" ' . ($row["status_wizyty"] == 'dostępna' ? 'selected' : '') . '>Dostępna</option>';
+                        echo '<option value="zarezerwowana" ' . ($row["status_wizyty"] == 'zarezerwowana' ? 'selected' : '') . '>Zarezerwowana</option>';
+                        echo '</select>';
+                        echo '</td>';
+                        echo '<td>';
                         echo '<button type="submit" class="edit-btn" name="save-btn[]">Zapisz</button>';
-                        echo '<button type="submit" class="delete-btn" name="delete-btn[]">Usuń</button>';
                         echo '</form>';
                         echo '</td>';
                         echo '</tr>';

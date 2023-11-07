@@ -1129,9 +1129,26 @@ hr {
     border-radius: 20px;
 }
 
+.filtruj{
+    width: 150px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #fefefe;
+    font-size: 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #36b707;
+    cursor: pointer;
+}
+
+.filtruj:hover {
+    background: linear-gradient(to right, #36b707, #ddf104);
+}
+
 .lookVis{
     margin-top: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .lookVis p{
