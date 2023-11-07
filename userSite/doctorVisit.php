@@ -125,14 +125,33 @@ if (isset($_GET["doctor_id"])) {
                     $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo')";
 
                     if ($conn->query($sql) === TRUE) {
-                        echo '<script>alert("Dane dodane poprawnie");</script>';
-                        echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
-                        exit;
+                        // Dane pacjenta zostały dodane, teraz znajdź odpowiednią wizytę w tabeli "wizyty"
+                        // i dodaj rekord do tabeli "dostepnosc"
+                        $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status = 'Dostepna'";
+                        $result_wizyta = $conn->query($sql_wizyta);
+                
+                        if ($result_wizyta->num_rows > 0) {
+                            $row_wizyta = $result_wizyta->fetch_assoc();
+                            $id_wizyty = $row_wizyta["id"];
+                
+                            // Teraz możemy dodać rekord do tabeli "dostepnosc" z odpowiednimi danymi
+                            $sql_dostepnosc = "INSERT INTO dostepnosc (id_wizyty, id_pacjenta) VALUES ('$id_wizyty', (SELECT id FROM pacjenci WHERE id_pacjenta = '$id_pacjenta'))";
+                            if ($conn->query($sql_dostepnosc) === TRUE) {
+                                echo '<script>alert("Umówiono wizytę pomyślnie!");</script>';
+                                echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
+                                exit;
+                            } else {
+                                echo '<script>alert("Błąd: ' . $sql_dostepnosc . '\\n' . $conn->error . '");</script>';
+                            }
+                        } else {
+                            echo "Brak dostępnych wizyt dla wybranego lekarza.";
+                        }
                     } else {
                         echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
                     }
                     $conn->close();
                 }
+                
                 ?>
 
                 <form method="POST" onsubmit="return validateForm()">
