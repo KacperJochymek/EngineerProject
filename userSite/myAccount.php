@@ -15,7 +15,7 @@ if (isset($_POST['zmien_haslo_btn'])) {
 
     if (empty($stare_haslo) || empty($nowe_haslo) || empty($potwierdz_nowe_haslo)) {
         echo "<script>alert('Proszę wypełnić wszystkie pola formularza.');</script>";
-     } elseif ($nowe_haslo !== $potwierdz_nowe_haslo) {
+    } elseif ($nowe_haslo !== $potwierdz_nowe_haslo) {
         echo "<script>alert('Nowe hasło i potwierdzenie nowego hasła nie pasują do siebie.');</script>";
     } else {
         $query = "SELECT password FROM users WHERE id = $id";
@@ -23,7 +23,7 @@ if (isset($_POST['zmien_haslo_btn'])) {
 
         if ($result) {
             $row = mysqli_fetch_assoc($result);
-            $haslo_bazy = $row['password']; 
+            $haslo_bazy = $row['password'];
 
             if (password_verify($stare_haslo, $haslo_bazy)) {
                 $haslo_hash = password_hash($nowe_haslo, PASSWORD_BCRYPT);
@@ -45,7 +45,7 @@ if (isset($_POST['zmien_haslo_btn'])) {
     }
 }
 
-if (isset($_POST['usun_konto_btn'])) {
+if (isset($_POST['usun_tak'])) {
 
     $delete_query = "DELETE FROM users WHERE id = $id";
     $delete_result = mysqli_query($conn, $delete_query);
@@ -54,7 +54,7 @@ if (isset($_POST['usun_konto_btn'])) {
         session_destroy();
 
         header("Location: /index.php");
-        exit; 
+        exit;
     } else {
         echo "<script>alert('Błąd podczas usuwania konta: " . mysqli_error($conn) . "');</script>";
     }
@@ -158,8 +158,25 @@ if (isset($_POST['usun_konto_btn'])) {
                             <input class="haslo" type="password" name="potwierdz_nowe_haslo" placeholder="Potwierdź nowe hasło">
                         </div>
                         <button class="filtruj" type="submit" name="zmien_haslo_btn">Zmień hasło</button>
-                        <button class="filtruj" type="submit" name="usun_konto_btn">Usuń konto</button>
                     </form>
+                    <button class="filtruj" type="submit" id="pokazDiv">Usuń konto</button>
+                    <form method="post">
+                        <div class="czy-napewno" style="display: none;">
+                            <p>Czy napewno chcesz usunąć konto?</p>
+                            <button type="submit" name="usun_tak" id="usun_tak">Tak</button>
+                            <button type="submit" name="usun_nie" id="usun_nie">Nie</button>
+                        </div>
+                    </form>
+                    <script>
+                        document.getElementById('pokazDiv').addEventListener('click', function() {
+                            document.querySelector('.czy-napewno').style.display = 'block';
+                        });
+
+                        document.getElementById('usunNie').addEventListener('click', function() {
+                            document.querySelector('.czy-napewno').style.display = 'none';
+                        });
+                    </script>
+
                 </div>
             </div>
         </div>

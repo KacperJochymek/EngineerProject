@@ -1246,6 +1246,17 @@ hr {
     max-width: 800px;
 }
 
+.czy-napewno button{
+    margin-top: 10px;
+    padding: 5px;
+    margin-left: 20px;
+    width: 50px;
+}
+
+.czy-napewno p{
+    margin-top: 10px;
+}
+
 
 @media only screen and (max-width: 710px) {
     .changePass{
