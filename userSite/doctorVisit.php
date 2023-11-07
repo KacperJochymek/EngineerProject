@@ -87,7 +87,7 @@ if (isset($_GET["doctor_id"])) {
 
         <div class="lekarz-logo2">
 
-        <p class="pdsm">Podsumowanie:</p>
+            <p class="pdsm">Podsumowanie:</p>
             <?php
             if (isset($tytul) && isset($imienazwisko)) {
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
@@ -125,33 +125,34 @@ if (isset($_GET["doctor_id"])) {
                     $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo')";
 
                     if ($conn->query($sql) === TRUE) {
-                        // Dane pacjenta zostały dodane, teraz znajdź odpowiednią wizytę w tabeli "wizyty"
-                        // i dodaj rekord do tabeli "dostepnosc"
-                        $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status = 'Dostepna'";
+                        $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status_wizyty = 'dostepna'";
                         $result_wizyta = $conn->query($sql_wizyta);
-                
+
                         if ($result_wizyta->num_rows > 0) {
                             $row_wizyta = $result_wizyta->fetch_assoc();
                             $id_wizyty = $row_wizyta["id"];
-                
-                            // Teraz możemy dodać rekord do tabeli "dostepnosc" z odpowiednimi danymi
+
                             $sql_dostepnosc = "INSERT INTO dostepnosc (id_wizyty, id_pacjenta) VALUES ('$id_wizyty', (SELECT id FROM pacjenci WHERE id_pacjenta = '$id_pacjenta'))";
+
                             if ($conn->query($sql_dostepnosc) === TRUE) {
-                                echo '<script>alert("Umówiono wizytę pomyślnie!");</script>';
-                                echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
-                                exit;
+                                $sql_update_status = "UPDATE wizyty SET status_wizyty = 'zarezerwowana' WHERE id = $id_wizyty";
+
+                                if ($conn->query($sql_update_status) === TRUE) {
+                                    echo '<script>alert("Umówiono wizytę pomyślnie!");</script>';
+                                    echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
+                                    exit;
+                                }
                             } else {
-                                echo '<script>alert("Błąd: ' . $sql_dostepnosc . '\\n' . $conn->error . '");</script>';
+                                echo '<script>alert("Błąd: ' . $sql_update_status . '\\n' . $conn->error . '");</script>';
                             }
                         } else {
-                            echo "Brak dostępnych wizyt dla wybranego lekarza.";
+                            echo '<script>alert("Błąd: ' . $sql_dostepnosc . '\\n' . $conn->error . '");</script>';
                         }
                     } else {
-                        echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                        echo "Brak dostępnych wizyt dla wybranego lekarza.";
                     }
-                    $conn->close();
-                }
-                
+                } 
+
                 ?>
 
                 <form method="POST" onsubmit="return validateForm()">
@@ -176,7 +177,7 @@ if (isset($_GET["doctor_id"])) {
                         </div>
                     </div>
                     <div class="btn-chosen">
-                        
+
                         <button type="submit" class="lekarz-btn" id="powrotButton" name="powrot_btn">Powrót</button>
                         <button type="submit" class="lekarz-btn" name="umow_btn">Umów się!</button>
                     </div>
@@ -217,7 +218,7 @@ if (isset($_GET["doctor_id"])) {
                 echo '<a href="/userSite/lekarze.php"><button type="submit" class="lekarz-btn" name="powrot_btn">Powrót</button></a>';
 
                 echo '<button class="lekarz-btn" type="submit" name="submit">Dalej</button>';
-                
+
                 ?>
             </div>
 
