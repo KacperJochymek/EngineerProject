@@ -1,5 +1,4 @@
 //Kod odpowiedzialny za tworzenie kalendarza i generowanie w nim dni.
-
 const currentDate = document.querySelector(".current_date");
 const daysTag = document.querySelector(".days");
 const prevIcon = document.querySelector("#prev");
@@ -79,24 +78,28 @@ daysTag.addEventListener("click", (event) => {
                 const dostepneGodziny = data;
                 const availableHours = document.getElementById("availableHours");
                 availableHours.innerHTML = '';
-
-                dostepneGodziny.forEach(godzina => {
-                    const button = document.createElement("button");
-                    button.classList.add("przykladowa");
-                    button.textContent = godzina; // Wyświetlenie godziny w przycisku
-
-                    button.addEventListener("click", () => {
-                        const wybranaGodzina = godzina;
-                        console.log("Wybrano godzinę:", wybranaGodzina);
-                    });
-
-                    availableHours.appendChild(button);
+            
+                dostepneGodziny.forEach(entry => {
+                    const godzina = entry.hour;
+                    const status = entry.status_wizyty; 
+            
+                    if (status !== 'zarezerwowana') { 
+                        const button = document.createElement("button");
+                        button.classList.add("przykladowa");
+                        button.textContent = godzina; 
+            
+                        button.addEventListener("click", () => {
+                            const wybranaGodzina = godzina;
+                            console.log("Wybrano godzinę:", wybranaGodzina);
+                        });
+            
+                        availableHours.appendChild(button);
+                    }
                 });
             })
             .catch(error => {
                 console.error("Błąd podczas pobierania danych:", error);
             });
-
         }
     }
 });
