@@ -138,7 +138,6 @@ if (isset($_GET["doctor_id"])) {
                                 $sql_update_status = "UPDATE wizyty SET status_wizyty = 'zarezerwowana' WHERE id = $id_wizyty";
 
                                 if ($conn->query($sql_update_status) === TRUE) {
-                                    echo '<script>alert("Umówiono wizytę pomyślnie!");</script>';
                                     echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
                                     exit;
                                 }
