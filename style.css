@@ -1098,6 +1098,10 @@ hr {
     margin-left: 50px;
 }
 
+.resztaMyAcc i{
+    margin-right: 5px;
+}
+
 .myAccBtn{
     cursor: pointer;
     margin-left: 100px;
@@ -1227,16 +1231,19 @@ hr {
     margin-bottom: 20px;
 }
 
+.settingi i{
+    margin-right: 5px;
+}
+
 
 .changePass{
     display: flex;
-    flex-direction: row; 
+    flex-direction: column;
     align-items: center;
-    text-align: center;
     background: #fefefe;
     border-radius: 20px;
-    padding: 20px;
-    width: 800px;
+    padding: 30px;
+    max-width: 800px;
 }
 
 
@@ -1255,6 +1262,7 @@ hr {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    text-align: center;
 }
 
 .mojeWizyty-container{

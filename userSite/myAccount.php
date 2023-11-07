@@ -1,11 +1,65 @@
 <?php
 session_start();
 require '../Logowanie/config.php';
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
 }
+
+if (isset($_POST['zmien_haslo_btn'])) {
+    $stare_haslo = $_POST['stare_haslo'];
+    $nowe_haslo = $_POST['nowe_haslo'];
+    $potwierdz_nowe_haslo = $_POST['potwierdz_nowe_haslo'];
+
+    if (empty($stare_haslo) || empty($nowe_haslo) || empty($potwierdz_nowe_haslo)) {
+        echo "<script>alert('Proszę wypełnić wszystkie pola formularza.');</script>";
+     } elseif ($nowe_haslo !== $potwierdz_nowe_haslo) {
+        echo "<script>alert('Nowe hasło i potwierdzenie nowego hasła nie pasują do siebie.');</script>";
+    } else {
+        $query = "SELECT password FROM users WHERE id = $id";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $haslo_bazy = $row['password']; 
+
+            if (password_verify($stare_haslo, $haslo_bazy)) {
+                $haslo_hash = password_hash($nowe_haslo, PASSWORD_BCRYPT);
+
+                $update_query = "UPDATE users SET password = '$haslo_hash' WHERE id = $id";
+                $update_result = mysqli_query($conn, $update_query);
+
+                if ($update_result) {
+                    echo "<script>alert('Hasło zostało pomyślnie zmienione.');</script>";
+                } else {
+                    echo "<script>alert('Błąd podczas aktualizacji hasła: " . mysqli_error($conn) . "');</script>";
+                }
+            } else {
+                echo "<script>alert('Stare hasło jest niepoprawne.');</script>";
+            }
+        } else {
+            echo "<script>alert('Błąd zapytania do bazy danych: " . mysqli_error($conn) . "');</script>";
+        }
+    }
+}
+
+if (isset($_POST['usun_konto_btn'])) {
+
+    $delete_query = "DELETE FROM users WHERE id = $id";
+    $delete_result = mysqli_query($conn, $delete_query);
+
+    if ($delete_result) {
+        session_destroy();
+
+        header("Location: /index.php");
+        exit; 
+    } else {
+        echo "<script>alert('Błąd podczas usuwania konta: " . mysqli_error($conn) . "');</script>";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -97,12 +151,15 @@ if (!empty($_SESSION["id"])) {
 
             <div class="settings-inpt">
                 <div class="changePass">
-                    <div class="input-cntiner">
-                        <input class="haslo" type="password" placeholder="Stare hasło">
-                        <input class="haslo" type="password" placeholder="Nowe hasło">
-                    </div>
-                    <button class="myAccBtn">Zmień hasło</button>
-                    <button class="myAccBtn">Usuń konto</button>
+                    <form method="post">
+                        <div class="input-cntiner">
+                            <input class="haslo" type="password" name="stare_haslo" placeholder="Stare hasło">
+                            <input class="haslo" type="password" name="nowe_haslo" placeholder="Nowe hasło">
+                            <input class="haslo" type="password" name="potwierdz_nowe_haslo" placeholder="Potwierdź nowe hasło">
+                        </div>
+                        <button class="filtruj" type="submit" name="zmien_haslo_btn">Zmień hasło</button>
+                        <button class="filtruj" type="submit" name="usun_konto_btn">Usuń konto</button>
+                    </form>
                 </div>
             </div>
         </div>
