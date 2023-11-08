@@ -559,6 +559,28 @@ hr {
     text-align: center;
 }
 
+.id_leka{
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.id_leka2{
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.id_leka3{
+    padding: 10px;
+    border-radius: 10px;
+    width: 100px;
+    font-size: 15px;
+    margin-left: 20px;
+}
+
 .dataAnalize{
     height: 1700px;
 }
@@ -757,7 +779,7 @@ hr {
 }
 
 .account h1{
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .account a {
@@ -1112,6 +1134,21 @@ hr {
     border: 2px solid red;
     background: #fefefe;
     color: red;
+}
+
+.count{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.count p{
+    background-color: #fefefe;
+    width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 .accountAdminLook{

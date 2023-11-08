@@ -118,64 +118,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
             <div class="add-inpt">
-                <input type="number" name="id_lekarza" id="id_lekarza" placeholder="Podaj id lekarza"><br>
-                <input type="date" name="data_wizyty" id="data_wizyty">
-                <input type="time" name="available_hour" id="available_hour" placeholder="Wybierz godzinę"><br>
+                <input type="number" name="id_lekarza" id="id_lekarza" class="id_leka" placeholder="Podaj id lekarza"><br>
+                <input type="date" name="data_wizyty" class="id_leka2" id="data_wizyty">
+                <input type="time" name="available_hour" id="available_hour" class="id_leka3" placeholder="Wybierz godzinę"><br>
                 <input type="submit" class="lekarz-btn" name="add_hour" value="Dodaj">
             </div>
         </form>
 
-
-        <p class="lekarz-wybierz">Podgląd wizyt:</p>
-
-        <?php
-
-        require '../Logowanie/config.php';
-
-        $sql = "SELECT * FROM wizyty";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            echo '<div class="tble-cennik">';
-            echo '<table>';
-            echo '<thead>';
-            echo '<tr>';
-            echo '<th>id</th>';
-            echo '<th>Data</th>';
-            echo '<th>Dostępne godziny</th>';
-            echo '<th>id_lekarza</th>';
-            echo '<th>id_pacjenta</th>';
-            echo '<th>status</th>';
-            echo '<th>Akcje</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
-
-            while ($row = $result->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td>' . $row["id"] . '</td>';
-                echo '<td>' . $row["data_wizyty"] . '</td>';
-                echo '<td>' . $row["available_hour"] . '</td>';
-                echo '<td>' . $row["doctor_id"] . '</td>';
-                echo '<td>' . $row["id_pacjenta"] . '</td>';
-                echo '<td>' . $row["status"] . '</td>';
-                echo '<td>';
-                echo '<form method="post" action="">';
-                echo '<input type="hidden" name="id" value="' . $row["id"] . '">';
-                echo '<button type="submit" class="edit-btn" name="edit-btn">Aktualizuj</button>';
-                echo '<button type="submit" class="delete-btn" name="delete-btn">Usuń</button>';
-                echo '</form>';
-                echo '</td>';
-                echo '</tr>';
-            }
-            echo '</tbody>';
-            echo '</table>';
-            echo '</div>';
-        } else {
-            echo "Brak danych do wyświetlenia.";
-        }
-        $conn->close();
-        ?>
     </div>
 
     <footer>

@@ -71,8 +71,36 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
         <h1>Witamy w panelu lekarza!</h1>
 
+        <div class="count">
+            <p>Liczba wizyt dzisiaj: </br>
+                <?php
+
+                require '../Logowanie/config.php';
+
+                $today = date("Y-m-d");
+
+                $query = "SELECT * FROM wizyty WHERE data_wizyty = '$today'";
+                $result = $conn->query($query);
+
+                if (!$result) {
+                    die("Błąd zapytania: " . $conn->error);
+                }
+
+                $today_visits = 0;
+
+                while ($row = $result->fetch_assoc()) {
+                    if ($row["data_wizyty"] == $today) {
+                        $today_visits++;
+                    }
+                }
+
+                echo $today_visits;
+                ?>
+            </p>
+        </div>
         <div class="admin-panel">
-            <a href="/doctorSite/doctorAccount.php">Godziny pracy / wizyty</a>
+            <a href="/doctorSite/doctorAccount.php">Dodaj godziny pracy</a>
+            <a href="/doctorSite/doctorVisitCount.php">Podgląd wizyt</a>
         </div>
     </div>
 
