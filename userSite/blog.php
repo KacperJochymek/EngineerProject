@@ -69,7 +69,11 @@ if (!empty($_SESSION["id"])) {
             die("Błąd połączenia: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM blog";
+        $posts_per_page = 2;
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $offset = ($page - 1) * $posts_per_page;
+
+        $sql = "SELECT * FROM blog LIMIT $posts_per_page OFFSET $offset";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -85,6 +89,21 @@ if (!empty($_SESSION["id"])) {
         } else {
             echo "Brak danych do wyświetlenia.";
         }
+
+        $total_posts_sql = "SELECT COUNT(*) as total FROM blog";
+        $total_posts_result = $conn->query($total_posts_sql);
+        $total_posts = $total_posts_result->fetch_assoc()['total'];
+        $total_pages = ceil($total_posts / $posts_per_page);
+
+        if ($total_pages > 1) {
+            echo '<div class="pagination">';
+            for ($i = 1; $i <= $total_pages; $i++) {
+                $active_class = ($i == $page) ? 'active' : '';
+                echo '<a class="' . $active_class . '" href="blog.php?page=' . $i . '">' . $i . '</a>';
+            }
+            echo '</div>';
+        }
+
         $conn->close();
         ?>
     </div>

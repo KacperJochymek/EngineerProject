@@ -145,7 +145,7 @@ footer {
     width: 100%;
     position: absolute;
     bottom: 0;
-    background: linear-gradient(to right, #BEC8E9, #a380ee);
+    background: linear-gradient(to right, #bfccf8, #9574dd);
     color: #fefefe;
     padding: 10px 0;
     border-top-left-radius: 125px;
@@ -395,6 +395,29 @@ hr {
     margin-bottom: 20px;
     font-size: 24px;
     text-align: center;
+}
+
+.ankieta-cd{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ankieta-cd p{
+    font-weight: 600;
+    font-size: 30px;
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+.ankieta-cd i{
+    color: #fefefe;
+}
+
+.linia{
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
 }
 
 .tekst-analiza2{
@@ -708,6 +731,29 @@ hr {
     width: 250px;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.pagination a {
+    display: block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #007BFF;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
 
 .file-input {
     width: 15%;
@@ -733,7 +779,7 @@ hr {
 }
 
 .blog-strona{
-    height: 2100px;
+    height: 1650px;
     display: flex;
     flex-direction: column;
     text-align: center;

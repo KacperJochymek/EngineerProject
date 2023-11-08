@@ -108,6 +108,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         $conn->close();
         ?>
 
+        <div class="ankieta-cd">
+            <p>Dane ankieta <a href="/adminSite/daneAnkieta.php"><i class="fa-solid fa-circle-arrow-right"></i> </p></a>
+            <p class="linia"></p>
+        </div>
         <p class="tekst-dataWykresy">Miary statystyczne:</p>
         <div class="dataAnalizeSquare">
             <img src="/images/Analiza-danych.jpg" alt="">
