@@ -6,6 +6,8 @@ if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
+
+    $email = $row["email"];
 }
 
 if (isset($_GET["doctor_id"])) {
@@ -115,6 +117,7 @@ if (isset($_GET["doctor_id"])) {
                     $pesel = $_POST["pesel"];
                     $miasto = $_POST["miasto"];
                     $wojewodztwo = $_POST["wojewodztwo"];
+                    $adres_email = $_POST["adres_email"];
 
                     $id_pacjenta = $imie . " " . $nazwisko;
 
@@ -122,7 +125,7 @@ if (isset($_GET["doctor_id"])) {
                         die("Błąd połączenia: " . $conn->connect_error);
                     }
 
-                    $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo')";
+                    $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo, adres_email) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo', '$adres_email')";
 
                     if ($conn->query($sql) === TRUE) {
                         $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status_wizyty = 'dostepna'";
@@ -173,6 +176,8 @@ if (isset($_GET["doctor_id"])) {
                             <input type="text" name="miasto" id="miasto" placeholder="Wpisz miasto">
                             <p class="tekst-doctor3">Województwo:</p>
                             <input type="text" name="wojewodztwo" id="wojewodztwo" placeholder="Wpisz województwo">
+                            <p class="tekst-doctor3">E-mail</p>
+                            <input type="text" name="adres_email" id="adres_email" placeholder="Wpisz E-mail" value="<?php echo $email; ?>">
                         </div>
                     </div>
                     <div class="btn-chosen">

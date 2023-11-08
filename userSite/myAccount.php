@@ -6,6 +6,8 @@ if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
+
+    $email = $row["email"];
 }
 
 if (isset($_POST['zmien_haslo_btn'])) {
@@ -126,27 +128,41 @@ if (isset($_POST['usun_tak'])) {
             <div class="mojeWizyty">
                 <p class="tekst-wizytyMyAcc">Moje wizyty:</p>
 
-                <div class="wyswietlanieMyAcc">
-                    <img src="../adminSite/uploads/kobieta.png" alt="">
-                    <div class="resztaMyAcc">
-                        <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
-                        <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
-                        <p id="selectedDate" class="selected-date">Data</p>
-                        <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
-                    </div>
-                    <button class="myAccBtn">Anuluj</button>
-                </div>
 
-                <div class="wyswietlanieMyAcc">
-                    <img src="../adminSite/uploads/kobieta.png" alt="">
-                    <div class="resztaMyAcc">
-                        <p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>Imie i Nazwisko lekarza</p>
-                        <p class="profesja"> <i class="fa-solid fa-stethoscope"></i>Profesja</p>
-                        <p id="selectedDate" class="selected-date">Data</p>
-                        <p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>
-                    </div>
-                    <button class="myAccBtn">Anuluj</button>
-                </div>
+                <?php
+                $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, wizyty.status_wizyty,
+                doctors.imienazwisko, doctors.profesja, doctors.obrazek
+                FROM wizyty
+                LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
+                LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
+                LEFT JOIN doctors ON wizyty.doctor_id = doctors.id_lekarza
+                WHERE pacjenci.adres_email = '$email' AND wizyty.status_wizyty = 'zarezerwowana'";
+
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+
+                        $obrazekPath = '/adminSite/uploads/' . $row['obrazek'];
+
+                        echo '<div class="wyswietlanieMyAcc">';
+                        echo '<img src="' . $obrazekPath . '" alt="">';
+                        echo '<div class="resztaMyAcc">';
+                        echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $row['imienazwisko'] . '</p>';
+                        echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $row['profesja'] . '</p>';
+                        echo '<p id="selectedDate" class="selected-date">' . $row['data_wizyty'] . '</p>';
+                        echo '<p id="selectedHour" class="selected-hour">' . $row['available_hour'] . '</p>';
+                        echo '</div>';
+                        echo '<button class="myAccBtn">Anuluj</button>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo "Brak dostępnych rekordów w bazie danych.";
+                }
+
+                $conn->close();
+                ?>
+                
             </div>
 
             <div class="settings-inpt">
