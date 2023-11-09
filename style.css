@@ -605,7 +605,16 @@ hr {
 }
 
 .dataAnalize{
-    height: 1700px;
+    height: 1400px;
+}
+
+.dataAnalize2{
+    height: 1500px;
+}
+
+.dataAnalize2 img{
+    width: 250px;
+    margin: 70px;
 }
 
 .dataAnalizeSquare{
@@ -659,6 +668,29 @@ hr {
 .dataAnalize img{
     width: 250px;
     margin: 70px;
+}
+
+.messageSent{
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blog_brakdan{
+    margin-top: 10px;
+    font-size: 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blog_brakdan i{
+    margin-top: 10px;
+    text-decoration: none;
+    color: #fefefe;
 }
 
 .doc-chosen{
@@ -716,7 +748,7 @@ hr {
     }
 
 .blog_adding{
-    height: 1200px;
+    height: 1250px;
 }
 
 .blog-form{
@@ -1207,7 +1239,7 @@ hr {
     align-items: center; 
     text-align: center;
     justify-content: flex-start; 
-    height: 1700px;
+    height: 1100px;
 }
 
 .vtableUsers{

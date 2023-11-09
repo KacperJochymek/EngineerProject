@@ -90,7 +90,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 if (substr($obrazek_type, 0, 5) === "image") {
                     move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
                 } else {
-                    echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
+                    echo '<div class="messageSent">Błąd: Plik nie jest obrazkiem.</div>';
                 }
             }
 
@@ -101,13 +101,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
 
                 if ($stmt->execute()) {
-                    echo '<script>alert("Wpis dodany pomyślnie!");</script>';
+                    echo '<div class="messageSent">Wpis dodany pomyślnie!</div>';
                 } else {
-                    echo '<script>alert("Błąd: ' . $stmt->error . '");</script>';
+                    echo '<div class="messageSent">Błąd: ' . $stmt->error . '</div>';
                 }
                 $stmt->close();
             } else {
-                echo '<script>alert("Błąd przy przygotowywaniu zapytania.");</script>';
+                echo '<div class="messageSent">Błąd przy przygotowywaniu zapytania.<br></div>';
             }
         }
         ?>
@@ -116,6 +116,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <textarea name="tekst" class="message-inpt" placeholder="Treść wpisu bloga"></textarea>
             <input type="file" name="obrazek" id="obrazek" class="file-input">
             <input type="submit" name="signup_submit" class="lekarz-btn" value="Wyślij">
+            <div class="messageSent"></div>
         </form>
 
         <p class="lekarz-wybierz">Podgląd:</p>
@@ -125,7 +126,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         require '../Logowanie/config.php';
         require '../adminSite/configs/blog-config.php';
 
-        $sql = "SELECT * FROM blog";
+        $itemsPerPage = 3;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($page - 1) * $itemsPerPage;
+
+        $sql = "SELECT * FROM blog LIMIT $itemsPerPage OFFSET $offset";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -158,8 +163,23 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</tbody>';
             echo '</table>';
             echo '</div>';
+
+            $sqlCount = "SELECT COUNT(*) AS total FROM blog";
+            $resultCount = $conn->query($sqlCount);
+            $rowCount = $resultCount->fetch_assoc()['total'];
+            $totalPages = ceil($rowCount / $itemsPerPage);
+
+            echo '<div class="pagination">';
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $active_class = ($i == $page) ? 'active' : '';
+                echo '<a class="' . $active_class . '" href="addingBlog.php?page=' . $i . '">' . $i . '</a>';
+            }
+            echo '</div>';
         } else {
+            echo '<div class="blog_brakdan">';
             echo "Brak danych do wyświetlenia.";
+            echo '<a href="addingBlog.php?page=1"><i class="fa-solid fa-circle-arrow-left"></i></a>';
+            echo '</div>';
         }
         $conn->close();
         ?>

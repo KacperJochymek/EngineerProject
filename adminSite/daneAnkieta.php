@@ -71,7 +71,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
     <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
 
-    <div class="dataAnalize">
+    <div class="dataAnalize2">
 
         <p class="tekst-dataWykresy">Dane z ankiety:</p>
 

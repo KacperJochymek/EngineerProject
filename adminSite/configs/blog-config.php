@@ -12,9 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $sql = "DELETE FROM blog WHERE id = $id";
         if ($conn->query($sql) === TRUE) {
-            echo '<script>alert("Dane usunięte poprawnie");</script>';
+            echo '<div class="messageSent">Dane usunięte poprawnie.</div>';
         } else {
-            echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+            echo '<div class="messageSent">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
         }
     }
 
@@ -31,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 $sql = "UPDATE blog SET tekst = '$currentTekst' WHERE id = $currentId";
                 if ($conn->query($sql) === TRUE) {
-                    echo '<script>alert("Tekst pomyślnie zapisany");</script>';
-                } else {
-                    echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
-                }
+                    echo '<div class="messageSent">Tekst pomyślnie zapisany!</div>';
+               } else {
+                    echo '<div class="messageSent">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
+            }
             }
         }
     }
