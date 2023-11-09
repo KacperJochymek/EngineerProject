@@ -79,12 +79,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             $imienazwisko = $_POST["imienazwisko"];
             $profesja = $_POST["profesja"];
 
-            // Obsługa przesyłania pliku
             $obrazek_name = $_FILES["obrazek"]["name"];
             $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
             $obrazek_type = $_FILES["obrazek"]["type"];
 
-            // Sprawdź, czy przesłany plik to obrazek
             if (substr($obrazek_type, 0, 5) === "image") {
 
                 move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
@@ -96,13 +94,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 $sql = "INSERT INTO doctors (tytul, imienazwisko, profesja, obrazek) VALUES ('$tytul', '$imienazwisko', '$profesja', '$obrazek_name')";
 
                 if ($conn->query($sql) === TRUE) {
-                    echo '<script>alert("Dane dodane poprawnie");</script>';
+                    echo '<div class="messageSent">Dane dodane poprawnie!</div>';
                 } else {
-                    echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+                    echo '<div class="messageSent">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
                 }
                 $conn->close();
             } else {
-                echo '<script>alert("Błąd: Plik nie jest obrazkiem.");</script>';
+                echo '<div class="messageSent">Błąd: Plik nie jest obrazkiem.</div>';
             }
         }
         ?>
@@ -114,9 +112,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <input type="text" name="profesja" id="profesja" placeholder="Specjalizacja">
                 <input type="file" name="obrazek" id="obrazek"><br>
                 <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
+                <div class="messageSent"></div>
             </div>
         </form>
-
 
         <p class="lekarz-wybierz">Podgląd:</p>
 
@@ -125,7 +123,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         require '../Logowanie/config.php';
         require '../adminSite/configs/addDoctor-config.php';
 
-        $sql = "SELECT * FROM doctors";
+        $itemsPerPage = 4;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($page - 1) * $itemsPerPage;
+
+        $sql = "SELECT * FROM doctors LIMIT $itemsPerPage OFFSET $offset";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -156,11 +158,26 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo '</td>';
                 echo '</tr>';
             }
+
             echo '</tbody>';
             echo '</table>';
             echo '</div>';
+            $sqlCount = "SELECT COUNT(*) AS total FROM doctors";
+            $resultCount = $conn->query($sqlCount);
+            $rowCount = $resultCount->fetch_assoc()['total'];
+            $totalPages = ceil($rowCount / $itemsPerPage);
+
+            echo '<div class="pagination">';
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $active_class = ($i == $page) ? 'active' : '';
+                echo '<a class="' . $active_class . '" href="addingDoctor.php?page=' . $i . '">' . $i . '</a>';
+            }
+            echo '</div>';
         } else {
+            echo '<div class="blog_brakdan">';
             echo "Brak danych do wyświetlenia.";
+            echo '<a href="addingDoctor.php?page=1"><i class="fa-solid fa-circle-arrow-left"></i></a>';
+            echo '</div>';
         }
         $conn->close();
         ?>
@@ -216,5 +233,23 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="script1.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector('.doctor-form').addEventListener('submit', function (e) {
+            var tytul = document.getElementById('tytul').value;
+            var imienazwisko = document.getElementById('imienazwisko').value;
+            var profesja = document.getElementById('profesja').value;
+            var messageSentDiv = document.querySelector('.messageSent');
+
+            if (!validateString(tytul) || !validateString(imienazwisko) || !validateString(profesja)) {
+                messageSentDiv.innerText = 'Pola "Tytuł naukowy", "Imię i nazwisko" oraz "Specjalizacja" mogą zawierać tylko litery.';
+                e.preventDefault();
+            } else {
+                messageSentDiv.innerText = ''; 
+            }
+        });
+
+    });
+</script>
 
 </html>

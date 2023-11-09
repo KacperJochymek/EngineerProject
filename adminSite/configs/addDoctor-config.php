@@ -10,9 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
     $sql = "UPDATE doctors SET profesja = '$nowa_profesja' WHERE id = $id"; 
     
     if ($conn->query($sql) === TRUE) {
-        echo '<script>alert("Profesja zaktualizowana poprawnie");</script>';
+        echo '<div class="messageSent">Profesja zaktualizowana pomyślnie!</div>';
     } else {
-        echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+        echo '<div class="messageSent">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
     }
 }
 ?>
@@ -39,10 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete-btn'])) {
 
         $sql = "DELETE FROM doctors WHERE id = $id";
         if ($conn->query($sql) === TRUE) {
-            echo '<script>alert("Dane usunięte poprawnie");</script>';
+            echo '<div class="messageSent">Dane usunięte poprawnie.</div>';
         } else {
-            echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+            echo '<div class="messageSent">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
         }
     }
 }
+
 ?>
