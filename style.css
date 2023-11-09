@@ -505,7 +505,7 @@ hr {
 }
 
 .lekarzeDatabase{
-    height: 1000px;
+    height: 1100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -784,6 +784,10 @@ hr {
     flex-direction: column;
     text-align: center;
     margin-top: 50px;
+}
+
+.validationMessage{
+    margin-top: 5px;
 }
 
 .blad {

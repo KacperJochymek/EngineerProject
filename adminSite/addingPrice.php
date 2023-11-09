@@ -76,18 +76,24 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <input type="text" name="nazwa" id="nazwa" placeholder="Nazwa zabiegu">
                 <input type="text" name="cena" id="cena" placeholder="Cena"><br>
                 <input type="submit" class="lekarz-btn" name="add_submit" value="Dodaj">
+                <div class="validationMessage" style="display:none;">
+                    <p class="nazwaError">Podana cena musi zawierać tylko litery.</p>
+                    <p class="cenaError">Podana cena jest ujemna.</p>
+                </div>
             </div>
         </form>
-
 
         <p class="lekarz-wybierz">Podgląd:</p>
 
         <?php
-
         require '../Logowanie/config.php';
         require '../adminSite/configs/cennik-config.php';
 
-        $sql = "SELECT * FROM cennik";
+        $itemsPerPage = 5;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($page - 1) * $itemsPerPage;
+
+        $sql = "SELECT * FROM cennik LIMIT $itemsPerPage OFFSET $offset";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -121,9 +127,22 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</tbody>';
             echo '</table>';
             echo '</div>';
+
+            $sqlCount = "SELECT COUNT(*) AS total FROM cennik";
+            $resultCount = $conn->query($sqlCount);
+            $rowCount = $resultCount->fetch_assoc()['total'];
+            $totalPages = ceil($rowCount / $itemsPerPage);
+
+            echo '<div class="pagination">';
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $active_class = ($i == $page) ? 'active' : '';
+                echo '<a class="' . $active_class . '" href="addingPrice.php?page=' . $i . '">' . $i . '</a>';
+            }
+            echo '</div>';
         } else {
             echo "Brak danych do wyświetlenia.";
         }
+
         $conn->close();
         ?>
     </div>
@@ -178,5 +197,44 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="script1.js"></script>
+<script>
+    //Walidacja formularza dodawania zabiegów i cen
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.doctor-form');
+        var validationMessage = document.querySelector('.validationMessage');
+        var nazwaError = document.querySelector('.nazwaError');
+        var cenaError = document.querySelector('.cenaError');
+
+        form.addEventListener('submit', function(event) {
+            var nazwaInput = document.getElementById('nazwa');
+            var cenaInput = document.getElementById('cena');
+
+            var nazwaRegex = /^[a-zA-Z]+$/;
+            var cenaRegex = /^\d+(\.\d{1,2})?$/;
+
+            var nazwaValid = nazwaRegex.test(nazwaInput.value);
+            var cenaValid = cenaRegex.test(cenaInput.value);
+
+            if (!nazwaValid && !cenaValid) {
+                nazwaError.style.display = 'block';
+                cenaError.style.display = 'block';
+                validationMessage.style.display = 'block';
+                event.preventDefault();
+            } else if (!nazwaValid) {
+                nazwaError.style.display = 'block';
+                cenaError.style.display = 'none';
+                validationMessage.style.display = 'block';
+                event.preventDefault();
+            } else if (!cenaValid) {
+                cenaError.style.display = 'block';
+                nazwaError.style.display = 'none';
+                validationMessage.style.display = 'block';
+                event.preventDefault();
+            } else {
+                validationMessage.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 </html>

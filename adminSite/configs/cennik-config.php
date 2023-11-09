@@ -10,6 +10,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     session_destroy();
     exit();
 }
+
 ?>
 
 <?php
@@ -22,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['add_submit'])) {
     $sql = "INSERT INTO cennik (nazwa, cena) VALUES ('$nazwa', '$cena')";
 
     if ($conn->query($sql) === TRUE) {
-        echo '<script>alert("Dane dodane poprawnie");</script>';
+        echo '<div class="validationMessage">Dane dodane poprawnie</div>';
     } else {
-        echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+        echo '<div class="validationMessage">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
     }
 }
 
@@ -39,13 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
 
     $sql = "UPDATE cennik SET cena = $cena WHERE id = $id";
     if ($conn->query($sql) === TRUE) {
-        echo '<script>alert("Dane zaktualizowane poprawnie");</script>';
+        echo '<div class="validationMessage">Dane zaktualizowane poprawnie</div>';
     } else {
-        echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+        echo '<div class="validationMessage">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
     }
 }
 
 ?>
+
 <?php
 require '../Logowanie/config.php';
 
@@ -53,9 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete-btn'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM cennik WHERE id = $id";
     if ($conn->query($sql) === TRUE) {
-        echo '<script>alert("Dane usunięte poprawnie");</script>';
+        echo '<div class="validationMessage">Dane usunięte poprawnie</div>';
     } else {
-        echo '<script>alert("Błąd: ' . $sql . '\\n' . $conn->error . '");</script>';
+        echo '<div class="validationMessage">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
     }
 }
 
