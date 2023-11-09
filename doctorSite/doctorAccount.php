@@ -69,6 +69,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
     <p class="lekarz-wybierz">Dodaj godziny pracy:</p>
 
+    <p class="zapytanie_admin">O "id lekarza" zapytaj administratora.</p>
+
     <div class="doctorAccDiv">
 
         <?php

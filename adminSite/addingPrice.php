@@ -140,7 +140,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             }
             echo '</div>';
         } else {
+            echo '<div class="blog_brakdan">';
             echo "Brak danych do wyświetlenia.";
+            echo '<a href="addingPrice.php?page=1"><i class="fa-solid fa-circle-arrow-left"></i></a>';
+            echo '</div>';
         }
 
         $conn->close();
