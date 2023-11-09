@@ -114,6 +114,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         <form class="blog-form" method="POST" enctype="multipart/form-data">
             <textarea name="tekst" class="message-inpt" placeholder="Treść wpisu bloga"></textarea>
+            <div class="file-container">
+                <i class="fa-solid fa-circle-arrow-down" id="fileIcon"></i>
+                <div class="file-name" id="fileName"></div>
+            </div>
             <input type="file" name="obrazek" id="obrazek" class="file-input">
             <input type="submit" name="signup_submit" class="lekarz-btn" value="Wyślij">
             <div class="messageSent"></div>
@@ -236,5 +240,18 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="/adminSite/script2.js"></script>
+<script>
+    const fileIcon = document.getElementById('fileIcon');
+    const fileInput = document.getElementById('obrazek');
+    const fileNameDisplay = document.getElementById('fileName');
+
+    fileIcon.addEventListener('click', function() {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function() {
+        fileNameDisplay.textContent = fileInput.files[0].name;
+    });
+</script>
 
 </html>

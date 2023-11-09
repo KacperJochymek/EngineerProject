@@ -528,14 +528,15 @@ hr {
     font-size: 19px; 
 }
   
-  
-.doctor-form input[type="file"] {
-    padding: 10px;
-    width: 250px;
-    margin: 5px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.file-container i{
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    color: black;
+}
+
+.file-container i:hover{
+    color: #0056b3;
 }
 
 @media screen and (max-width: 800px){
@@ -797,12 +798,22 @@ hr {
 }
 
 .file-input {
-    width: 15%;
-    padding: 10px;
+    display: none;
+}
+
+.blog-form i{
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 30px;
+    color: #fefefe;
+}
+
+.blog-form i:hover{
+    color: #0056b3;
+}
+
+.file-name{
     margin-top: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
 .blog-obrazek img{

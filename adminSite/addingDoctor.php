@@ -43,7 +43,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
                 </li>
                 <li>
-                    <a href="#">Zmień cene</a>
+                    <a href="/adminSite/addingPrice.php">Zmień cene</a>
                 </li>
 
                 <li>
@@ -110,7 +110,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <input type="text" name="tytul" id="tytul" placeholder="Tytuł naukowy">
                 <input type="text" name="imienazwisko" id="imienazwisko" placeholder="Imię i nazwisko"><br>
                 <input type="text" name="profesja" id="profesja" placeholder="Specjalizacja">
-                <input type="file" name="obrazek" id="obrazek"><br>
+                <div class="file-container">
+                <i class="fa-solid fa-circle-arrow-down" id="fileIcon"></i>
+                    <div class="file-name" id="fileName"></div>
+                </div>
+                <input type="file" name="obrazek" id="obrazek" class="file-input">
                 <input type="submit" class="lekarz-btn" name="signup_submit" value="Wyślij">
                 <div class="messageSent"></div>
             </div>
@@ -249,6 +253,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             }
         });
 
+    });
+</script>
+<script>
+    const fileIcon = document.getElementById('fileIcon');
+    const fileInput = document.getElementById('obrazek');
+    const fileNameDisplay = document.getElementById('fileName');
+
+    fileIcon.addEventListener('click', function() {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', function() {
+        fileNameDisplay.textContent = fileInput.files[0].name;
     });
 </script>
 
