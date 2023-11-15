@@ -93,7 +93,6 @@ if (isset($_POST['tak_oo'])) {
     }
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -162,13 +161,20 @@ if (isset($_POST['tak_oo'])) {
 
 
                 <?php
+
+                $recordsPerPage = 2;
+                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                $offset = ($currentPage - 1) * $recordsPerPage;
+
+
                 $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, wizyty.status_wizyty,
-                doctors.imienazwisko, doctors.profesja, doctors.obrazek
-                FROM wizyty
-                LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
-                LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
-                LEFT JOIN doctors ON wizyty.doctor_id = doctors.id_lekarza
-                WHERE pacjenci.adres_email = '$email' AND wizyty.status_wizyty = 'zarezerwowana'";
+        doctors.imienazwisko, doctors.profesja, doctors.obrazek
+        FROM wizyty
+        LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
+        LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
+        LEFT JOIN doctors ON wizyty.doctor_id = doctors.id_lekarza
+        WHERE pacjenci.adres_email = '$email' AND wizyty.status_wizyty = 'zarezerwowana'
+        LIMIT $recordsPerPage OFFSET $offset";
 
                 $result = $conn->query($sql);
 
@@ -189,16 +195,31 @@ if (isset($_POST['tak_oo'])) {
                         echo '<button class="myAccBtn" onclick="pokazDiv(' . $counter . ')">Anuluj</button>';
                         echo '<form method="post">';
                         echo '<input type="hidden" name="wizyta_id" value="' . $row['id'] . '">';
-                        echo '<div id="ukrytyDiv' . $counter . '" style="display:none;">';
+                        echo '<div class="ukrytyDiv" id="ukrytyDiv' . $counter . '" style="display:none;">';
                         echo '<p>Czy na pewno? </p>';
-                        echo '<button name="tak_oo" id="tak_oo">TAK</button>';
-                        echo '<button onclick="schowajDiv(' . $counter . ')">NIE</button>';
+                        echo '<button name="tak_oo" id="tak_oo">Tak</button>';
+                        echo '<button onclick="schowajDiv(' . $counter . ')">Nie</button>';
                         echo '</div>';
                         echo '</form>';
                         echo '</div>';
 
                         $counter++;
                     }
+
+                    $totalRecordsQuery = "SELECT COUNT(*) as total FROM wizyty
+                         LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
+                         LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
+                         WHERE pacjenci.adres_email = '$email' AND wizyty.status_wizyty = 'zarezerwowana'";
+                    $totalRecordsResult = $conn->query($totalRecordsQuery);
+                    $totalRecords = $totalRecordsResult->fetch_assoc()['total'];
+                    $totalPages = ceil($totalRecords / $recordsPerPage);
+
+                    echo '<div class="pagination">';
+                    for ($i = 1; $i <= $totalPages; $i++) {
+                        $activeClass = ($i == $currentPage) ? 'active' : '';
+                        echo '<a class="' . $activeClass . '" href="?page=' . $i . '">' . $i . '</a>';
+                    }
+                    echo '</div>';
                 } else {
                     echo "Brak dostępnych rekordów w bazie danych.";
                 }
