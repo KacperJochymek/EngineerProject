@@ -238,22 +238,55 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
 <script src="script1.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector('.doctor-form').addEventListener('submit', function (e) {
-            var tytul = document.getElementById('tytul').value;
-            var imienazwisko = document.getElementById('imienazwisko').value;
-            var profesja = document.getElementById('profesja').value;
-            var messageSentDiv = document.querySelector('.messageSent');
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('.doctor-form');
+    var messageSent = document.querySelector('.messageSent');
 
-            if (!validateString(tytul) || !validateString(imienazwisko) || !validateString(profesja)) {
-                messageSentDiv.innerText = 'Pola "Tytuł naukowy", "Imię i nazwisko" oraz "Specjalizacja" mogą zawierać tylko litery.';
-                e.preventDefault();
-            } else {
-                messageSentDiv.innerText = ''; 
-            }
-        });
+    form.addEventListener('submit', function (event) {
+        var tytulInput = document.getElementById('tytul');
+        if (!validateTextWithDot(tytulInput.value)) {
+            displayErrorMessage('Pole "Tytuł naukowy" musi zawierać tylko litery i kropki.');
+            event.preventDefault();
+            return false;
+        }
 
+        var imienazwiskoInput = document.getElementById('imienazwisko');
+        if (!validateText(imienazwiskoInput.value)) {
+            displayErrorMessage('Pole "Imię i nazwisko" musi zawierać tylko litery.');
+            event.preventDefault();
+            return false;
+        }
+
+        var profesjaInput = document.getElementById('profesja');
+        if (!validateText(profesjaInput.value)) {
+            displayErrorMessage('Pole "Specjalizacja" musi zawierać tylko litery.');
+            event.preventDefault();
+            return false;
+        }
+
+        clearErrorMessage();
+        return true;
     });
+
+    function displayErrorMessage(message) {
+        messageSent.innerHTML = message;
+        messageSent.style.color = 'red';
+    }
+
+    function clearErrorMessage() {
+        messageSent.innerHTML = '';
+    }
+
+    function validateTextWithDot(text) {
+        var regex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s.]+$/;
+        return regex.test(text);
+    }
+
+    function validateText(text) {
+        var regex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s]+$/;
+        return regex.test(text);
+    }
+});
 </script>
 <script>
     const fileIcon = document.getElementById('fileIcon');
