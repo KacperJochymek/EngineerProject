@@ -32,6 +32,18 @@ if (isset($_POST['filter-btn'])) {
             LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id";
 }
 
+$countQuery = "SELECT COUNT(*) as total FROM ($sql) as countTable";
+$countResult = $conn->query($countQuery);
+$countRow = $countResult->fetch_assoc();
+$totalRecords = $countRow['total'];
+
+$records_per_page = 4;
+
+
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $records_per_page;
+$sql .= " LIMIT $offset, $records_per_page";
+
 $result = $conn->query($sql);
 
 ?>
@@ -149,6 +161,16 @@ $result = $conn->query($sql);
                 $conn->close();
                 ?>
             </div>
+
+            <?php
+            echo '<div class="pagination">';
+            for ($i = 1; $i <= ceil($totalRecords / $records_per_page); $i++) {
+                $active_class = ($i == $page) ? 'active' : '';
+                echo '<a class="' . $active_class . '" href="?page=' . $i . '">' . $i . '</a>';
+            }
+            echo '</div>';
+            ?>
+
         </div>
 
     </div>
