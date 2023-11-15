@@ -62,6 +62,38 @@ if (isset($_POST['usun_tak'])) {
     }
 }
 
+if (isset($_POST['tak_oo'])) {
+    $wizytaId = $_POST['wizyta_id'];
+
+    $getPacjentIdQuery = "SELECT pacjenci.id FROM pacjenci 
+                         JOIN dostepnosc ON pacjenci.id = dostepnosc.id_pacjenta
+                         WHERE dostepnosc.id_wizyty = $wizytaId";
+    $getPacjentIdResult = mysqli_query($conn, $getPacjentIdQuery);
+
+    if ($getPacjentIdResult) {
+        $pacjentRow = mysqli_fetch_assoc($getPacjentIdResult);
+        $pacjentId = $pacjentRow['id'];
+
+        $updateWizytaQuery = "UPDATE wizyty SET status_wizyty = 'dostepna' WHERE id = $wizytaId";
+        $updateWizytaResult = mysqli_query($conn, $updateWizytaQuery);
+
+        $deleteDostepnoscQuery = "DELETE FROM dostepnosc WHERE id_wizyty = $wizytaId";
+        $deleteDostepnoscResult = mysqli_query($conn, $deleteDostepnoscQuery);
+
+        $deletePacjentQuery = "DELETE FROM pacjenci WHERE id = $pacjentId";
+        $deletePacjentResult = mysqli_query($conn, $deletePacjentQuery);
+
+        if ($updateWizytaResult && $deleteDostepnoscResult && $deletePacjentResult) {
+            echo "<script>alert('Anulowanie zakończone sukcesem.');</script>";
+        } else {
+            echo "<script>alert('Błąd podczas anulowania: " . mysqli_error($conn) . "');</script>";
+        }
+    } else {
+        echo "<script>alert('Błąd podczas pobierania danych pacjenta: " . mysqli_error($conn) . "');</script>";
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -141,8 +173,9 @@ if (isset($_POST['usun_tak'])) {
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
+                    $counter = 1;
 
+                    while ($row = $result->fetch_assoc()) {
                         $obrazekPath = '/adminSite/uploads/' . $row['obrazek'];
 
                         echo '<div class="wyswietlanieMyAcc">';
@@ -153,8 +186,18 @@ if (isset($_POST['usun_tak'])) {
                         echo '<p id="selectedDate" class="selected-date">' . $row['data_wizyty'] . '</p>';
                         echo '<p id="selectedHour" class="selected-hour">' . $row['available_hour'] . '</p>';
                         echo '</div>';
-                        echo '<button class="myAccBtn">Anuluj</button>';
+                        echo '<button class="myAccBtn" onclick="pokazDiv(' . $counter . ')">Anuluj</button>';
+                        echo '<form method="post">';
+                        echo '<input type="hidden" name="wizyta_id" value="' . $row['id'] . '">';
+                        echo '<div id="ukrytyDiv' . $counter . '" style="display:none;">';
+                        echo '<p>Czy na pewno? </p>';
+                        echo '<button name="tak_oo" id="tak_oo">TAK</button>';
+                        echo '<button onclick="schowajDiv(' . $counter . ')">NIE</button>';
                         echo '</div>';
+                        echo '</form>';
+                        echo '</div>';
+
+                        $counter++;
                     }
                 } else {
                     echo "Brak dostępnych rekordów w bazie danych.";
@@ -162,7 +205,19 @@ if (isset($_POST['usun_tak'])) {
 
                 $conn->close();
                 ?>
-                
+
+                <script>
+                    function pokazDiv(nr) {
+                        var div = document.getElementById('ukrytyDiv' + nr);
+                        div.style.display = 'block';
+                    }
+
+                    function schowajDiv(nr) {
+                        var div = document.getElementById('ukrytyDiv' + nr);
+                        div.style.display = 'none';
+                    }
+                </script>
+
             </div>
 
             <div class="settings-inpt">
