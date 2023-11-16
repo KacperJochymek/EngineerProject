@@ -69,11 +69,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
+    <p class="lekarz-wybierz">Analiza danych ankietowanych</p>
 
     <div class="dataAnalize2">
 
-        <p class="tekst-dataWykresy">Dane z ankiety:</p>
+        <div class="ankieta-cd">
+            <p>Dane z ankiety:</p>
+        </div>
 
         <div class="ankietaDaneWyniki">
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR-TRX2QUSvbUxH3qDZsFl_G3IrnE89WzXp9s-9pqdNp93FaQFTZQ-Ia3e41e5lJmta9fkIao7TPIUy/pubhtml?widget=true&amp;headers=false"></iframe>
@@ -365,8 +367,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         data: ageChartData,
                     });
                 });
-            }
-        });
+        }
+    });
 </script>
 
 </html>

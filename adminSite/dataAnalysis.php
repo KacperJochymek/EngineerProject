@@ -69,7 +69,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Sekcja analizy danych dla administratora</p>
+    <p class="lekarz-wybierz">Analiza danych systemowych</p>
 
     <div class="dataAnalize">
 
@@ -97,7 +97,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 $totalAge += $age;
                 $totalPatients++;
 
-                // Tutaj możesz wykonywać operacje na województwach i miastach, np. tworzyć wykresy
             }
 
             $averageAge = $totalAge / $totalPatients;
@@ -134,7 +133,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <button id="calculateButton" class="lekarz-btn">Oblicz</button>
             </div>
             <div class="wykresy">
-                <p id="result">Wynik będzie wyświetlony tutaj</p>
+                <p id="result"> </p>
             </div>
         </div>
 

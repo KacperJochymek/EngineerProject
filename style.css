@@ -405,17 +405,23 @@ hr {
 
 .ankieta-cd p{
     font-weight: 600;
-    font-size: 30px;
-    margin-top: 15px;
-    margin-bottom: 50px;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .ankieta-cd i{
+    margin-left: 5px;
     color: #fefefe;
 }
 
+.ankieta-cd i:hover{
+    transform: scale(1.3);
+}
+
 .linia{
-    width: 100%;
+    margin-left: 20%;
+    width: 60%;
     height: 1px;
     background-color: #ccc;
 }
