@@ -680,6 +680,11 @@ hr {
     flex-direction: column;
 }
 
+.messageSent2{
+    color: red;
+    margin-bottom: 20px;
+}
+
 .blog_brakdan{
     margin-top: 10px;
     font-size: 25px;

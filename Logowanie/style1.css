@@ -123,14 +123,9 @@ body {
     margin-top: 20px;
 }
 
-.checkbox-text .checkbox-content {
+.checkbox-text {
     display: flex;
     align-items: center;
-}
-
-.checkbox-content input {
-    margin-right: 10px;
-    accent-color: #a380ee;
 }
 
 .form .text {
@@ -170,4 +165,26 @@ body {
 .form .login-signup {
     margin-top: 30px;
     text-align: center;
+}
+
+.messageSent{
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
+
+.messageSent2{
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
+
+.prevPage i{
+    color: #999;
+    font-size: 20px;
+}
+
+.prevPage i:hover{
+    transform: scale(1.2);
+    color: #a380ee;
 }

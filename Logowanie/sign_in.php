@@ -2,17 +2,19 @@
 <html lang="en">
 
 <head>
+    <title>Logowanie i Rejestracja</title>
+    <link rel="icon" href="/images/leaf.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style1.css">
     <script src="https://kit.fontawesome.com/0e252f77f3.js"></script>
-
-    <title>EngineerProject</title>
 </head>
 
 <body>
 
-    <a href="/index.php"><i class="fa-solid fa-angle-left"></i></a>
+    <div class="prevPage">
+        <a href="/index.php"><i class="fa-solid fa-circle-chevron-left"></i></a>
+    </div>
 
     <div class="container">
         <div class="forms">
@@ -24,6 +26,8 @@
                 <?php
                 session_start();
                 require '../Logowanie/config.php';
+
+                $message = "";
 
                 if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
                     header("Location: sign_in.php");
@@ -57,10 +61,10 @@
                                 exit();
                             }
                         } else {
-                            echo "<script>alert('Złe hasło');</script>";
+                            $message = "Podałeś złe hasło.";
                         }
                     } else {
-                        echo "<script>alert('Nie jesteś zarejestrowany!');</script>";
+                        $message = "Nie jesteś zarejestrowany!";
                     }
                 }
                 ?>
@@ -77,11 +81,6 @@
                     </div>
 
                     <div class="checkbox-text">
-                        <div class="checkbox-content">
-                            <input type="checkbox" id="logcheck" name="remember_me">
-                            <label for="logcheck" class="text">Zapamiętaj mnie</label>
-                        </div>
-
                         <a href="#" class="text">Zapomniałeś hasła?</a>
                     </div>
 
@@ -94,6 +93,7 @@
                     <span class="text">Nie masz jeszcze konta?
                         <a href="#" class="text signup-link">Zarejestruj się!</a>
                     </span>
+                    <div class="messageSent"></div>
                 </div>
             </div>
 
@@ -102,6 +102,9 @@
                 <span class="title">Zarejestruj się</span>
 
                 <?php
+
+                $message2 = "";
+
                 if (isset($_POST["signup_submit"])) {
                     $username = $_POST["username"];
                     $email = $_POST["email"];
@@ -110,33 +113,33 @@
 
 
                     if (empty($username) || empty($email) || empty($password) || empty($confirmpassword)) {
-                        echo "<script>alert('Wszystkie pola są wymagane.');</script>";
+                        $message2 = "Wszystkie pola są wymagane.";
                     } else {
 
                         if (strlen($password) < 6) {
-                            echo "<script>alert('Hasło musi mieć co najmniej 6 znaków.');</script>";
+                            $message2 = "Hasło musi mieć co najmniej 6 znaków.";
                         } else {
                             if (!preg_match('/[A-Z]/', $password) || !preg_match('/[!@#$%^&*()_+]/', $password)) {
-                                echo "<script>alert('Hasło musi zawierać co najmniej jedną dużą literę i jeden znak specjalny.');</script>";
+                                $message2 = "Hasło musi zawierać co najmniej jedną dużą literę i jeden znak specjalny.";
                             } else {
 
                                 if ($password == $confirmpassword) {
 
                                     $duplicate = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
                                     if (mysqli_num_rows($duplicate) > 0) {
-                                        echo "<script>alert('Nazwa użytkownika lub e-mail już istnieje.');</script>";
+                                        $message2 = "Nazwa użytkownika lub e-mail już istnieje.";
                                     } else {
 
                                         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                                         $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
                                         if (mysqli_query($conn, $query)) {
-                                            echo "<script>alert('Pomyślnie zarejestrowano!');</script>";
+                                            $message2 = "Pomyślnie zarejestrowano!";
                                         } else {
-                                            echo "<script>alert('Wystąpił błąd podczas rejestracji.');</script>";
+                                            $message2 = "Wystąpił błąd podczas rejestracji.";
                                         }
                                     }
                                 } else {
-                                    echo "<script>alert('Hasła nie pasują do siebie.');</script>";
+                                    $message2 = "Hasła nie pasują do siebie.";
                                 }
                             }
                         }
@@ -168,11 +171,6 @@
                     </div>
 
                     <div class="checkbox-text">
-                        <div class="checkbox-content">
-                            <input type="checkbox" id="regcheck" name="remember_me">
-                            <label for="regcheck" class="text">Zapamiętaj mnie</label>
-                        </div>
-
                         <a href="#" class="text">Zapomniałeś hasła?</a>
                     </div>
 
@@ -185,12 +183,25 @@
                     <span class="text">Masz już konto?
                         <a href="#" class="text login-link">Zaloguj się!</a>
                     </span>
+                    <div class="messageSent2"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="/Logowanie/script.js"></script>
 </body>
+
+<script src="/Logowanie/script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var messageDiv = document.querySelector('.messageSent');
+        messageDiv.innerHTML = "<?php echo $message; ?>";
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var messageDiv = document.querySelector('.messageSent2');
+        messageDiv.innerHTML = "<?php echo $message2; ?>";
+    });
+</script>
 
 </html>

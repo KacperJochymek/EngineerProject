@@ -2,6 +2,8 @@
 session_start();
 require '../Logowanie/config.php';
 
+$message = "";
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
@@ -16,9 +18,9 @@ if (isset($_POST['zmien_haslo_btn'])) {
     $potwierdz_nowe_haslo = $_POST['potwierdz_nowe_haslo'];
 
     if (empty($stare_haslo) || empty($nowe_haslo) || empty($potwierdz_nowe_haslo)) {
-        echo "<script>alert('Proszę wypełnić wszystkie pola formularza.');</script>";
+        $message = "Proszę wypełnić wszystkie pola formularza.";
     } elseif ($nowe_haslo !== $potwierdz_nowe_haslo) {
-        echo "<script>alert('Nowe hasło i potwierdzenie nowego hasła nie pasują do siebie.');</script>";
+        $message = "Nowe hasło i potwierdzenie nowego hasła nie pasują do siebie.";
     } else {
         $query = "SELECT password FROM users WHERE id = $id";
         $result = mysqli_query($conn, $query);
@@ -34,15 +36,15 @@ if (isset($_POST['zmien_haslo_btn'])) {
                 $update_result = mysqli_query($conn, $update_query);
 
                 if ($update_result) {
-                    echo "<script>alert('Hasło zostało pomyślnie zmienione.');</script>";
+                    $message = "Hasło zostało pomyślnie zmienione.";
                 } else {
-                    echo "<script>alert('Błąd podczas aktualizacji hasła: " . mysqli_error($conn) . "');</script>";
+                    $message = "Błąd podczas aktualizacji hasła: " . mysqli_error($conn) . "";
                 }
             } else {
-                echo "<script>alert('Stare hasło jest niepoprawne.');</script>";
+                $message = "Stare hasło jest niepoprawne.";
             }
         } else {
-            echo "<script>alert('Błąd zapytania do bazy danych: " . mysqli_error($conn) . "');</script>";
+            $message = "Błąd zapytania do bazy danych: " . mysqli_error($conn) . "";
         }
     }
 }
@@ -58,7 +60,7 @@ if (isset($_POST['usun_tak'])) {
         header("Location: /index.php");
         exit;
     } else {
-        echo "<script>alert('Błąd podczas usuwania konta: " . mysqli_error($conn) . "');</script>";
+        $message = "Błąd podczas usuwania konta: " . mysqli_error($conn) . "";
     }
 }
 
@@ -84,12 +86,12 @@ if (isset($_POST['tak_oo'])) {
         $deletePacjentResult = mysqli_query($conn, $deletePacjentQuery);
 
         if ($updateWizytaResult && $deleteDostepnoscResult && $deletePacjentResult) {
-            echo "<script>alert('Anulowanie zakończone sukcesem.');</script>";
+            $message = "Anulowanie wizyty powiodło się.";
         } else {
-            echo "<script>alert('Błąd podczas anulowania: " . mysqli_error($conn) . "');</script>";
+            $message = "Błąd podczas anulowania: " . mysqli_error($conn) . "";
         }
     } else {
-        echo "<script>alert('Błąd podczas pobierania danych pacjenta: " . mysqli_error($conn) . "');</script>";
+        $message = "Błąd podczas pobierania danych pacjenta: " . mysqli_error($conn) . "";
     }
 }
 
@@ -152,6 +154,8 @@ if (isset($_POST['tak_oo'])) {
 
     <div class="myAccountSite">
         <h1>Witamy <?php echo $row["username"]; ?> !</h1>
+
+        <div class="messageSent2"></div>
 
         <p class="settingi" id="toggleSettings"><i class="fa-solid fa-gears"></i>Ustawienia</p>
 
@@ -325,5 +329,11 @@ if (isset($_POST['tak_oo'])) {
 
 <script src="/script1.js"></script>
 <script src="/userSite/test.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var messageDiv = document.querySelector('.messageSent2');
+        messageDiv.innerHTML = "<?php echo $message; ?>";
+    });
+</script>
 
 </html>
