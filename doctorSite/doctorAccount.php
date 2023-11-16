@@ -36,7 +36,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
                 <img src="/images/medease.png" width="100px" height="100px" />
             </div>
             <ul>
-            <li>
+                <li>
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
@@ -52,7 +52,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
                     <a href="/userSite/contact.php">Kontakt</a>
                 </li>
                 <li>
-                    <a href="/doctorSite/doctorAccount.php">Moje Konto</a>
+                    <a href="/doctorSite/doctorFirstSite.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -71,45 +71,47 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
     <p class="zapytanie_admin">O "id lekarza" zapytaj administratora.</p>
 
+    <div class="messageSent"></div>
+
     <div class="doctorAccDiv">
 
         <?php
         require '../Logowanie/config.php';
 
         if (isset($_POST["add_hour"])) {
-            $id_lekarza = $_POST["id_lekarza"];
+            $doctor_id = $_POST["doctor_id"];
             $data_wizyty = $_POST["data_wizyty"];
             $available_hour = $_POST["available_hour"];
-            $id_pacjenta = null; 
-            $status = 'Oczekujący'; 
+            $status_wizyty = 'dostepna';
 
-            // Sprawdzenie, czy wizyta już istnieje
-            $check_sql = "SELECT id FROM wizyty WHERE id_lekarza = ? AND data_wizyty = ? AND available_hour = ?";
+            // Czy wizyta już istnieje w bazie
+            $check_sql = "SELECT id FROM wizyty WHERE doctor_id = ? AND data_wizyty = ? AND available_hour = ?";
             $check_stmt = $conn->prepare($check_sql);
 
             if ($check_stmt) {
-                $check_stmt->bind_param("sss", $id_lekarza, $data_wizyty, $available_hour);
+                $check_stmt->bind_param("sss", $doctor_id, $data_wizyty, $available_hour);
                 $check_stmt->execute();
                 $check_stmt->store_result();
 
                 if ($check_stmt->num_rows > 0) {
-                    echo '<script>alert("Wizyta o tej godzinie już istnieje.");</script>';
+                    echo '<div class="messageSent">Wizyta o tej godzinie już istnieje.</div>';
                 } else {
-                    // Dodawanie nowej wizyty
-                    $sql = "INSERT INTO wizyty (id_lekarza, data_wizyty, available_hour, id_pacjenta, status) VALUES (?, ?, ?, ?, ?)";
+
+                    // Dodawanie nowej wizyty do bazy
+                    $sql = "INSERT INTO wizyty (doctor_id, data_wizyty, available_hour, status_wizyty) VALUES (?, ?, ?, ?)";
                     $stmt = $conn->prepare($sql);
 
                     if ($stmt) {
-                        $stmt->bind_param("sssss", $id_lekarza, $data_wizyty, $available_hour, $id_pacjenta, $status);
+                        $stmt->bind_param("ssss", $doctor_id, $data_wizyty, $available_hour, $status_wizyty);
 
                         if ($stmt->execute()) {
-                            echo '<script>alert("Wizyta dodana pomyślnie");</script>';
+                            echo '<div class="messageSent">Wizyta dodana pomyślnie.</div>';
                         } else {
-                            echo '<script>alert("Błąd: ' . $stmt->error . '");</script>';
+                            echo '<div class="messageSent">Błąd: ' . $stmt->error . '</div>';
                         }
                         $stmt->close();
                     } else {
-                        echo '<script>alert("Błąd przy przygotowywaniu zapytania.");</script>';
+                        echo '<div class="messageSent">Błąd przy przygotowywaniu zapytania.</div>';
                     }
                 }
 
@@ -120,7 +122,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
             <div class="add-inpt">
-                <input type="number" name="id_lekarza" id="id_lekarza" class="id_leka" placeholder="Podaj id lekarza"><br>
+                <input type="number" name="doctor_id" id="doctor_id" class="id_leka" placeholder="Podaj id lekarza"><br>
                 <input type="date" name="data_wizyty" class="id_leka2" id="data_wizyty">
                 <input type="time" name="available_hour" id="available_hour" class="id_leka3" placeholder="Wybierz godzinę"><br>
                 <input type="submit" class="lekarz-btn" name="add_hour" value="Dodaj">
@@ -179,5 +181,62 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 </body>
 
 <script src="script1.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('.doctor-form');
+
+    form.addEventListener('submit', function (event) {
+        var doctorIdInput = document.getElementById('doctor_id');
+        if (!validateNumber(doctorIdInput.value)) {
+            displayErrorMessage('Pole "id lekarza" musi zawierać liczby całkowite dodatnie.');
+            event.preventDefault();
+            return false;
+        }
+
+        var dataWizytyInput = document.getElementById('data_wizyty');
+        if (!validateDate(dataWizytyInput.value)) {
+            displayErrorMessage('Musisz wybrać datę.');
+            event.preventDefault();
+            return false;
+        }
+
+        var availableHourInput = document.getElementById('available_hour');
+        if (!validateTime(availableHourInput.value)) {
+            displayErrorMessage('Musisz wybrać godzinę.');
+            event.preventDefault();
+            return false;
+        }
+
+        clearErrorMessage();
+        return true;
+    });
+
+    function displayErrorMessage(message) {
+        var messageSent = document.querySelector('.messageSent');
+        messageSent.innerHTML = message;
+    }
+
+    function clearErrorMessage() {
+        var messageSent = document.querySelector('.messageSent');
+        messageSent.innerHTML = '';
+    }
+
+    function validateNumber(number) {
+        var regex = /^[0-9]+$/;
+        return regex.test(number);
+    }
+
+    function validateDate(date) {
+        var regex = /^\d{4}-\d{2}-\d{2}$/;
+        return regex.test(date);
+    }
+
+    function validateTime(time) {
+        var regex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+        return regex.test(time);
+    }
+});
+</script>
+
 
 </html>

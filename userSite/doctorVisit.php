@@ -85,6 +85,8 @@ if (isset($_GET["doctor_id"])) {
 
     <p class="lekarz-wybierz" id="lekarz-wybierz-text">Wybierz date i godzine wizyty:</p>
 
+    <div class="messageSent"></div>
+
     <div class="doctorContent2">
 
         <div class="lekarz-logo2">
@@ -145,13 +147,13 @@ if (isset($_GET["doctor_id"])) {
                                     exit;
                                 }
                             } else {
-                                echo '<script>alert("Błąd: ' . $sql_update_status . '\\n' . $conn->error . '");</script>';
+                                echo '<div class="messageSent">Błąd: ' . $sql_update_status . '\\n' . $conn->error . '</div>';
                             }
                         } else {
-                            echo '<script>alert("Błąd: ' . $sql_dostepnosc . '\\n' . $conn->error . '");</script>';
+                            echo '<div class="messageSent">Błąd: ' . $sql_dostepnosc . '\\n' . $conn->error . '</div>';
                         }
                     } else {
-                        echo "Brak dostępnych wizyt dla wybranego lekarza.";
+                        echo '<div class="messageSent">Brak dostępnych wizyt dla wybranego lekarza"</div>';
                     }
                 } 
 

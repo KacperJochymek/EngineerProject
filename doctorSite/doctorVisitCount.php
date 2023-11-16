@@ -87,7 +87,7 @@ $result = $conn->query($sql);
                     <a href="/userSite/contact.php">Kontakt</a>
                 </li>
                 <li>
-                    <a href="/doctorSite/doctorAccount.php">Moje Konto</a>
+                    <a href="/doctorSite/doctorFirstSite.php">Moje Konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>

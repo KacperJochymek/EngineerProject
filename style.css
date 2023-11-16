@@ -672,6 +672,7 @@ hr {
 }
 
 .messageSent{
+    color: red;
     margin-top: 10px;
     text-align: center;
     display: flex;
