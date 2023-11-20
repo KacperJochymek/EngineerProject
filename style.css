@@ -209,6 +209,10 @@ footer {
     cursor: pointer;
 }
 
+.circle:hover{
+    transform: scale(1.2);
+}
+
 hr {
     border: 0;
 }
