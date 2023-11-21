@@ -69,7 +69,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Analiza danych ankietowanych</p>
+    <p class="lekarz-wybierz">Analiza danych szczegółowych ankietowanych</p>
 
     <div class="dataAnalize2">
 
@@ -81,72 +81,113 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR-TRX2QUSvbUxH3qDZsFl_G3IrnE89WzXp9s-9pqdNp93FaQFTZQ-Ia3e41e5lJmta9fkIao7TPIUy/pubhtml?widget=true&amp;headers=false"></iframe>
         </div>
 
-        <p class="tekst-dataWykresy">Obliczenia dla całej przychodni:</p>
+        <p class="tekst-dataWykresy">Obliczenia szczegółowe:</p>
 
         <div class="dataAnalizeSquare">
             <img src="/images/ankieta.jpg" alt="">
             <!-- Ankieta -->
             <form method="post" action="" class="miaryStat">
 
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $selectedColumn = $_POST["selectedColumn"];
-                    $selectedMethod = $_POST["selectedMethod"];
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $selectedColumn = $_POST["selectedColumn"];
+                $selectedMethod = $_POST["selectedMethod"];
 
-                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
-                        $data = [];
-                        while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                            $data[] = $row;
+                $selectedAgeGroup = isset($_POST["selectedAgeGroup"]) ? $_POST["selectedAgeGroup"] : null;
+
+                if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                    $data = [];
+                    while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                        $data[] = $row;
+                    }
+                    fclose($handle);
+
+                    // Filtrowanie danych na podstawie wybranego przedziału wiekowego
+                    $ageGroupIndex = array_search("Ile masz lat?", $data[0]);
+                    $filteredData = array_filter($data, function ($row) use ($ageGroupIndex, $selectedAgeGroup) {
+                        return $row[$ageGroupIndex] === $selectedAgeGroup;
+                    });
+
+                    // Obliczenia na przefiltrowanych danych
+                    $selectedColumnIndex = array_search($selectedColumn, $data[0]);
+                    $values = array_column(array_slice($filteredData, 1), $selectedColumnIndex);
+
+                    $result = null;
+
+                    if ($selectedMethod === "odchylenie-std") {
+                        $result = sqrt(array_sum(array_map(function ($x) use ($values) {
+                            return pow($x - (array_sum($values) / count($values)), 2);
+                        }, $values)) / count($values));
+                    } elseif ($selectedMethod === "mediana") {
+                        sort($values);
+                        $count = count($values);
+                        $middle = floor($count / 2);
+                        if ($count % 2 == 0) {
+                            $result = ($values[$middle - 1] + $values[$middle]) / 2;
+                        } else {
+                            $result = $values[$middle];
                         }
-                        fclose($handle);
-
-                        // Przetwarzanie danych i obliczenia
-                        $selectedColumnIndex = array_search($selectedColumn, $data[0]);
-                        $values = array_column(array_slice($data, 1), $selectedColumnIndex);
-
-                        $result = null;
-
-                        if ($selectedMethod === "srednia") {
-                            $result = array_sum($values) / count($values);
-                        } elseif ($selectedMethod === "odchylenie-std") {
-                            $result = sqrt(array_sum(array_map(function ($x) use ($values) {
-                                return pow($x - (array_sum($values) / count($values)), 2);
-                            }, $values)) / count($values));
-                        } elseif ($selectedMethod === "mediana") {
-                            sort($values);
-                            $count = count($values);
-                            $middle = floor($count / 2);
-                            if ($count % 2 == 0) {
-                                $result = ($values[$middle - 1] + $values[$middle]) / 2;
-                            } else {
-                                $result = $values[$middle];
-                            }
-                        } elseif ($selectedMethod === "moda") {
-                            $countValues = array_count_values($values);
-                            arsort($countValues);
-                            $modes = array_keys($countValues, max($countValues));
-                            $result = implode(", ", $modes);
-                        } elseif ($selectedMethod === "minimum") {
-                            $result = min($values);
-                        } elseif ($selectedMethod === "maksimum") {
-                            $result = max($values);
-                        } elseif ($selectedMethod === "kwartyl1") {
-                            sort($values);
-                            $result = $values[floor(count($values) / 4)];
-                        } elseif ($selectedMethod === "kwartyl3") {
-                            sort($values);
-                            $result = $values[floor(3 * count($values) / 4)];
-                        } elseif ($selectedMethod === "iqr") {
-                            sort($values);
-                            $count = count($values);
-                            $q1 = $values[floor($count / 4)];
-                            $q3 = $values[floor(3 * $count / 4)];
-                            $result = $q3 - $q1;
-                        }
+                    } elseif ($selectedMethod === "moda") {
+                        $countValues = array_count_values($values);
+                        arsort($countValues);
+                        $modes = array_keys($countValues, max($countValues));
+                        $result = implode(", ", $modes);
+                    } elseif ($selectedMethod === "minimum") {
+                        $result = min($values);
+                    } elseif ($selectedMethod === "maksimum") {
+                        $result = max($values);
+                    } elseif ($selectedMethod === "kwartyl1") {
+                        sort($values);
+                        $result = $values[floor(count($values) / 4)];
+                    } elseif ($selectedMethod === "kwartyl3") {
+                        sort($values);
+                        $result = $values[floor(3 * count($values) / 4)];
+                    } elseif ($selectedMethod === "iqr") {
+                        sort($values);
+                        $count = count($values);
+                        $q1 = $values[floor($count / 4)];
+                        $q3 = $values[floor(3 * $count / 4)];
+                        $result = $q3 - $q1;
                     }
                 }
+            }
+            ?>
 
-                ?>
+                <div class="slct-wrapper">
+                    <p>Wybierz przedział wiekowy:</p>
+                    <select name="selectedAgeGroup" class="slct-miara">
+                        <option value="0-18">0-18</option>
+                        <option value="19-35">19-35</option>
+                        <option value="36-55">36-55</option>
+                        <option value="55+">55+</option>
+                    </select>
+                </div>
+                <!-- <div class="slct-wrapper">
+                    <p>Wybierz wartość:</p>
+                    <div class="slct-miara">
+                        <button id="wiekBtn" value="wiek" type="button">Względem wieku</button>
+                        <select name="selectedAgeGroup" id="wiekSelect" style="display:none;">
+                            <option value="0-18">0-18</option>
+                            <option value="19-35">19-35</option>
+                            <option value="36-55">36-55</option>
+                            <option value="55+">55+</option>
+                        </select>
+                    </div>
+
+                        <button id="plecBtn" value="plec" type="button">Względem płci</button>
+                        <select id="plecSelect" style="display:none;">
+                            <option value="kobieta">Kobieta</option>
+                            <option value="mezczyzna">Mężczyzna</option>
+                        </select>
+
+                        <button id="specjalistaBtn" value="specialist" type="button">Względem specjalisty</button>
+                        <select id="specjalistaSelect" style="display:none;">
+                            <option value="podolog">Podolog</option>
+                            <option value="onkolog">Onkolog</option>
+                        </select>
+                    </div>
+                </div> -->
+
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select name="selectedColumn" class="slct-miara">
@@ -174,7 +215,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         <option value="kwartyl1">Kwartyl1</option>
                         <option value="kwartyl3">Kwartyl3</option>
                         <!-- zakres miedzykwartylowy -->
-                        <option value="iqr">IQR</option> 
+                        <option value="iqr">IQR</option>
                         <option value="odchylenie-std">Odchylenie sd</option>
                     </select>
                 </div>
@@ -190,7 +231,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </div>
         </div>
 
-        <p class="tekst-dataWykresy">Wykresy dla całej przychodni:</p>
+        <p class="tekst-dataWykresy">Wykresy szczegółowe:</p>
 
         <div class="dataAnalizeSquare">
             <img src="/images/wykresy.png" alt="">
@@ -218,11 +259,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </div>
         </div>
 
-        <div class="ankieta-cd">
-            
-            <p class="linia"></p>
-            <p>Dane szczegółowe <a href="/adminSite/daneSzczegolowe.php"><i class="fa-solid fa-circle-arrow-right"></i> </p></a>
-        </div>
     </div>
 
     <footer>
@@ -275,7 +311,28 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="script1.js"></script>
-<script src="/adminSite/daneAnaliza.js"></script>
+<script>
+    function toggleVisibility(selectId) {
+        var select = document.getElementById(selectId);
+        var isVisible = select.style.display === 'block';
+        select.style.display = isVisible ? 'none' : 'block';
+    }
+
+    document.getElementById('wiekBtn').addEventListener('click', function() {
+        toggleVisibility('wiekSelect');
+        // Dodaj dodatkową logikę lub opcje, jeśli to konieczne
+    });
+
+    document.getElementById('plecBtn').addEventListener('click', function() {
+        toggleVisibility('plecSelect');
+        // Dodaj dodatkową logikę lub opcje, jeśli to konieczne
+    });
+
+    document.getElementById('specjalistaBtn').addEventListener('click', function() {
+        toggleVisibility('specjalistaSelect');
+        // Dodaj dodatkową logikę lub opcje, jeśli to konieczne
+    });
+</script>
 
 
 </html>

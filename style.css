@@ -430,6 +430,10 @@ hr {
     background-color: #ccc;
 }
 
+.dataAnalize2 .linia{
+    margin-top: 50px;
+}
+
 .tekst-analiza2{
     font-size: 20px;
     text-align: center;
@@ -620,7 +624,7 @@ hr {
 }
 
 .dataAnalize2{
-    height: 1500px;
+    height: 1600px;
 }
 
 .dataAnalize2 img{
