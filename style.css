@@ -624,6 +624,15 @@ hr {
     font-size: 19px; 
 }
 
+.doctoruser-form select{
+    padding: 10px; 
+    width: 260px;
+    margin: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 19px; 
+}
+
 .add-inpt{
     text-align: center;
 }

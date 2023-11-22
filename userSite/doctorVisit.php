@@ -33,7 +33,7 @@ if (isset($_GET["doctor_id"])) {
 <html lang="en">
 
 <head>
-    <title>Lekarz 2</title>
+    <title>Umawianie wizyty</title>
     <link rel="icon" href="/images/leaf.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -155,7 +155,7 @@ if (isset($_GET["doctor_id"])) {
                     } else {
                         echo '<div class="messageSent">Brak dostępnych wizyt dla wybranego lekarza"</div>';
                     }
-                } 
+                }
 
                 ?>
 
@@ -175,9 +175,23 @@ if (isset($_GET["doctor_id"])) {
                         </div>
                         <div class="teksikv">
                             <p class="tekst-doctor3">Miasto:</p>
-                            <input type="text" name="miasto" id="miasto" placeholder="Wpisz miasto">
+                            <select name="miasto" id="miasto" >
+                                <option value="Katowice">Katowice</option>
+                                <option value="Kraków">Kraków</option>
+                                <option value="Warszawa">Warszawa</option>
+                                <option value="Rzeszów">Rzeszów</option>
+                                <option value="Wrocław">Wrocław</option>
+                                <option value="Poznań">Poznań</option>
+                            </select>
                             <p class="tekst-doctor3">Województwo:</p>
-                            <input type="text" name="wojewodztwo" id="wojewodztwo" placeholder="Wpisz województwo">
+                            <select name="wojewodztwo" id="wojewodztwo">
+                                <option value="Śląskie">Śląskie</option>
+                                <option value="Małopolskie">Małopolskie</option>
+                                <option value="Mazowieckie">Mazowieckie</option>
+                                <option value="Podkarpackie">Podkarpackie</option>
+                                <option value="Dolnośląskie">Dolnośląskie</option>
+                                <option value="Wielkopolskie">Wielkopolskie</option>
+                            </select>
                             <p class="tekst-doctor3">E-mail</p>
                             <input type="text" name="adres_email" id="adres_email" placeholder="Wpisz E-mail" value="<?php echo $email; ?>">
                         </div>
