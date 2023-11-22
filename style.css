@@ -501,6 +501,37 @@ hr {
     background: linear-gradient(to right, #36b707, #ddf104);
 }
 
+.daneSzczegoloweContainer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+}
+
+.wykresy-szczegolowe{
+    background: #fefefe;
+    border-radius: 20px;
+    height: 300px;
+    width: 600px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 50px; 
+}
+
+.daneSzczegolowe{
+    height: 2150px;
+}
+
+.wykresyContent{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .lekarz-med{
     font-size: 20px;
     color: #100F42;

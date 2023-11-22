@@ -18,7 +18,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 <html lang="en">
 
 <head>
-    <title>Admin Site</title>
+    <title>Dane Szczegółowe</title>
     <link rel="icon" href="/images/leaf.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +71,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
     <p class="lekarz-wybierz">Analiza danych szczegółowych ankietowanych</p>
 
-    <div class="dataAnalize2">
+    <div class="daneSzczegolowe">
 
         <div class="ankieta-cd">
             <p>Dane z ankiety:</p>
@@ -83,49 +83,49 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         <p class="tekst-dataWykresy">Obliczenia szczegółowe:</p>
 
-        <div class="dataAnalizeSquare">
-            <img src="/images/ankieta.jpg" alt="">
-            <!-- Ankieta -->
-            <form method="post" action="" class="miaryStat">
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["formType"]) && $_POST["formType"] === "age") {
+            $selectedAgeGroup = $_POST["selectedAgeGroup"];
+            $selectedColumn = $_POST["selectedColumn"];
+            $selectedMethod = $_POST["selectedMethod"];
 
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $selectedColumn = $_POST["selectedColumn"];
-                $selectedMethod = $_POST["selectedMethod"];
 
-                $selectedAgeGroup = isset($_POST["selectedAgeGroup"]) ? $_POST["selectedAgeGroup"] : null;
+            if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                $data = [];
+                while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $data[] = $row;
+                }
+                fclose($handle);
 
-                if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
-                    $data = [];
-                    while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                        $data[] = $row;
+                $filteredData = [];
+                $selectedColumnIndex = array_search($selectedColumn, $data[0]);
+
+                foreach ($data as $row) {
+                    if (isset($row[2]) && trim($row[2]) == $selectedAgeGroup) {
+                        $filteredData[] = $row;
                     }
-                    fclose($handle);
+                }
 
-                    // Filtrowanie danych na podstawie wybranego przedziału wiekowego
-                    $ageGroupIndex = array_search("Ile masz lat?", $data[0]);
-                    $filteredData = array_filter($data, function ($row) use ($ageGroupIndex, $selectedAgeGroup) {
-                        return $row[$ageGroupIndex] === $selectedAgeGroup;
-                    });
-
-                    // Obliczenia na przefiltrowanych danych
-                    $selectedColumnIndex = array_search($selectedColumn, $data[0]);
+                if (!empty($filteredData)) {
                     $values = array_column(array_slice($filteredData, 1), $selectedColumnIndex);
+
 
                     $result = null;
 
-                    if ($selectedMethod === "odchylenie-std") {
-                        $result = sqrt(array_sum(array_map(function ($x) use ($values) {
+                    if ($selectedMethod === "srednia") {
+                        $result = number_format(array_sum($values) / count($values), 2);
+                    } elseif ($selectedMethod === "odchylenie-std") {
+                        $result = number_format(sqrt(array_sum(array_map(function ($x) use ($values) {
                             return pow($x - (array_sum($values) / count($values)), 2);
-                        }, $values)) / count($values));
+                        }, $values)) / count($values)), 2);
                     } elseif ($selectedMethod === "mediana") {
                         sort($values);
                         $count = count($values);
                         $middle = floor($count / 2);
                         if ($count % 2 == 0) {
-                            $result = ($values[$middle - 1] + $values[$middle]) / 2;
+                            $result = number_format(($values[$middle - 1] + $values[$middle]) / 2, 2);
                         } else {
-                            $result = $values[$middle];
+                            $result = number_format($values[$middle], 2);
                         }
                     } elseif ($selectedMethod === "moda") {
                         $countValues = array_count_values($values);
@@ -133,129 +133,320 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         $modes = array_keys($countValues, max($countValues));
                         $result = implode(", ", $modes);
                     } elseif ($selectedMethod === "minimum") {
-                        $result = min($values);
+                        $result = number_format(min($values), 2);
                     } elseif ($selectedMethod === "maksimum") {
-                        $result = max($values);
+                        $result = number_format(max($values), 2);
                     } elseif ($selectedMethod === "kwartyl1") {
                         sort($values);
-                        $result = $values[floor(count($values) / 4)];
+                        $result = number_format($values[floor(count($values) / 4)], 2);
                     } elseif ($selectedMethod === "kwartyl3") {
                         sort($values);
-                        $result = $values[floor(3 * count($values) / 4)];
+                        $result = number_format($values[floor(3 * count($values) / 4)], 2);
                     } elseif ($selectedMethod === "iqr") {
                         sort($values);
                         $count = count($values);
                         $q1 = $values[floor($count / 4)];
                         $q3 = $values[floor(3 * $count / 4)];
-                        $result = $q3 - $q1;
+                        $result = number_format($q3 - $q1, 2);
                     }
+                } else {
+                    echo "Brak danych dla wybranego przedziału wiekowego.";
                 }
+            } else {
+                echo "Błąd podczas otwierania pliku.";
             }
-            ?>
+        }
 
-                <div class="slct-wrapper">
-                    <p>Wybierz przedział wiekowy:</p>
-                    <select name="selectedAgeGroup" class="slct-miara">
-                        <option value="0-18">0-18</option>
-                        <option value="19-35">19-35</option>
-                        <option value="36-55">36-55</option>
-                        <option value="55+">55+</option>
-                    </select>
-                </div>
-                <!-- <div class="slct-wrapper">
-                    <p>Wybierz wartość:</p>
-                    <div class="slct-miara">
-                        <button id="wiekBtn" value="wiek" type="button">Względem wieku</button>
-                        <select name="selectedAgeGroup" id="wiekSelect" style="display:none;">
-                            <option value="0-18">0-18</option>
-                            <option value="19-35">19-35</option>
-                            <option value="36-55">36-55</option>
-                            <option value="55+">55+</option>
-                        </select>
-                    </div>
+        ?>
 
-                        <button id="plecBtn" value="plec" type="button">Względem płci</button>
-                        <select id="plecSelect" style="display:none;">
-                            <option value="kobieta">Kobieta</option>
-                            <option value="mezczyzna">Mężczyzna</option>
-                        </select>
+        <form method="post" action="" class="daneSzczegoloweContainer">
+            <input type="hidden" name="formType" value="age">
+            <div class="slct-wrapper">
+                <p>Wybierz przedział:</p>
+                <select name="selectedAgeGroup" class="slct-miara">
+                    <option value="0-18">0-18</option>
+                    <option value="19-35">19-35</option>
+                    <option value="36-55">36-55</option>
+                    <option value="55+">55+</option>
+                </select>
+            </div>
 
-                        <button id="specjalistaBtn" value="specialist" type="button">Względem specjalisty</button>
-                        <select id="specjalistaSelect" style="display:none;">
-                            <option value="podolog">Podolog</option>
-                            <option value="onkolog">Onkolog</option>
-                        </select>
-                    </div>
-                </div> -->
+            <div class="slct-wrapper">
+                <p>Wybierz wartość:</p>
+                <select name="selectedColumn" class="slct-miara">
+                    <?php
+                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                        $header = fgetcsv($handle, 1000, ",");
+                        fclose($handle);
 
-                <div class="slct-wrapper">
-                    <p>Wybierz wartość:</p>
-                    <select name="selectedColumn" class="slct-miara">
-                        <?php
-                        if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
-                            $header = fgetcsv($handle, 1000, ",");
-                            fclose($handle);
-
-                            for ($i = 5; $i < 10 && $i < count($header); $i++) {
-                                $column = $header[$i];
-                                echo "<option value='$column'>$column</option>";
-                            }
+                        for ($i = 5; $i < 10 && $i < count($header); $i++) {
+                            $column = $header[$i];
+                            echo "<option value='$column'>$column</option>";
                         }
-                        ?>
-                    </select>
-                </div>
-                <div class="slct-wrapper">
-                    <p>Wybierz miarę:</p>
-                    <select name="selectedMethod" class="slct-miara">
-                        <option value="srednia">Średnia</option>
-                        <option value="mediana">Mediana</option>
-                        <option value="moda">Moda</option>
-                        <option value="minimum">Minimum</option>
-                        <option value="maksimum">Maksimum</option>
-                        <option value="kwartyl1">Kwartyl1</option>
-                        <option value="kwartyl3">Kwartyl3</option>
-                        <!-- zakres miedzykwartylowy -->
-                        <option value="iqr">IQR</option>
-                        <option value="odchylenie-std">Odchylenie sd</option>
-                    </select>
-                </div>
-                <button class="lekarz-btn">Oblicz</button>
-            </form>
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="slct-wrapper">
+                <p>Wybierz miarę:</p>
+                <select name="selectedMethod" class="slct-miara">
+                    <option value="srednia">Średnia</option>
+                    <option value="mediana">Mediana</option>
+                    <option value="moda">Moda</option>
+                    <option value="minimum">Minimum</option>
+                    <option value="maksimum">Maksimum</option>
+                    <option value="kwartyl1">Kwartyl1</option>
+                    <option value="kwartyl3">Kwartyl3</option>
+                    <!-- zakres miedzykwartylowy -->
+                    <option value="iqr">IQR</option>
+                    <option value="odchylenie-std">Odchylenie sd</option>
+                </select>
+            </div>
+            <button type="submit" name="submit" class="lekarz-btn">Oblicz</button>
+        </form>
 
-            <div class="wykresy">
+        <div class="wykresyContent">
+            <div class="wykresy-szczegolowe">
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result)) {
-                    echo "Wynik obliczenia: $result";
+                    echo "Wynik: $result";
                 }
                 ?>
             </div>
+            <div class="wykresy-szczegolowe">
+                <?php
+                $values = [];
+
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+                    $selectedAgeGroup = $_POST["selectedAgeGroup"];
+                    $selectedColumn = $_POST["selectedColumn"];
+                    $selectedMethod = $_POST["selectedMethod"];
+
+                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                        $data = [];
+                        while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                            $data[] = $row;
+                        }
+                        fclose($handle);
+
+                        $filteredData = [];
+                        $selectedColumnIndex = array_search($selectedColumn, $data[0]);
+
+                        foreach ($data as $row) {
+
+                            if (isset($row[2]) && trim($row[2]) == $selectedAgeGroup) {
+                                $filteredData[] = array_slice($row, 2);
+                            }
+                        }
+
+                        if (!empty($filteredData)) {
+                            $values = array_column($filteredData, $selectedColumnIndex);
+                        } else {
+                            echo "Brak danych dla wybranego przedziału wiekowego.";
+                        }
+                    } else {
+                        echo "Błąd podczas otwierania pliku.";
+                    }
+                }
+                ?>
+
+                <?php
+                if (!empty($values)) {
+
+                    echo ' <table>';
+                    foreach ($filteredData as $row) {
+                        echo "<tr>";
+                        foreach ($row as $value) {
+                            echo "<td>$value</td>";
+                        }
+                        echo "</tr>";
+                    }
+                    echo '</table>';
+                }
+                ?>
+            </div>
+
         </div>
 
-        <p class="tekst-dataWykresy">Wykresy szczegółowe:</p>
+        <!-- Obliczenia dla płci -->
 
-        <div class="dataAnalizeSquare">
-            <img src="/images/wykresy.png" alt="">
-            <!-- Wykresy -->
-            <div class="miaryStat">
+        <?php
+        $result2 = null;
 
-                <div class="slct-wrapper">
-                    <p>Wybierz wartość:</p>
-                    <select name="wybranaColumna" class="slct-miara" id="selectColumn">
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["formType"]) && $_POST["formType"] === "sex") {
+            $selectedSex = $_POST["selectedSex"];
+            $selectedColumn = $_POST["selectedColumn"];
+            $selectedMethod = $_POST["selectedMethod"];
 
-                    </select>
-                </div>
-                <div class="slct-wrapper">
-                    <p>Wybierz wykres:</p>
-                    <select name="wybranyWykres" class="slct-miara" id="chartTypeSelect">
-                        <option value="pie">Kołowy</option>
-                        <option value="line">Liniowy</option>
-                        <option value="bar">Słupkowy</option>
-                    </select>
-                </div>
-                <button class="lekarz-btn" id="generateChart">Generuj wykres</button>
+            if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                $data = [];
+                while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $data[] = $row;
+                }
+                fclose($handle);
+
+                $filteredData2 = [];
+                $selectedColumnIndex2 = array_search($selectedColumn, $data[0]);
+
+                foreach ($data as $row) {
+                    if (isset($row[3]) && trim($row[3]) == $selectedSex) {
+                        $filteredData2[] = $row;
+                    }
+                }
+
+                if (!empty($filteredData2)) {
+                    $values = array_column(array_slice($filteredData2, 1), $selectedColumnIndex2);
+
+                    $result2 = null;
+
+                    if ($selectedMethod === "srednia") {
+                        $result2 = number_format(array_sum($values) / count($values), 2);
+                    } elseif ($selectedMethod === "odchylenie-std") {
+                        $result2 = number_format(sqrt(array_sum(array_map(function ($x) use ($values) {
+                            return pow($x - (array_sum($values) / count($values)), 2);
+                        }, $values)) / count($values)), 2);
+                    } elseif ($selectedMethod === "mediana") {
+                        sort($values);
+                        $count = count($values);
+                        $middle = floor($count / 2);
+                        if ($count % 2 == 0) {
+                            $result2 = number_format(($values[$middle - 1] + $values[$middle]) / 2, 2);
+                        } else {
+                            $result2 = number_format($values[$middle], 2);
+                        }
+                    } elseif ($selectedMethod === "moda") {
+                        $countValues = array_count_values($values);
+                        arsort($countValues);
+                        $modes = array_keys($countValues, max($countValues));
+                        $result2 = implode(", ", $modes);
+                    } elseif ($selectedMethod === "minimum") {
+                        $result2 = number_format(min($values), 2);
+                    } elseif ($selectedMethod === "maksimum") {
+                        $result2 = number_format(max($values), 2);
+                    } elseif ($selectedMethod === "kwartyl1") {
+                        sort($values);
+                        $result2 = number_format($values[floor(count($values) / 4)], 2);
+                    } elseif ($selectedMethod === "kwartyl3") {
+                        sort($values);
+                        $result2 = number_format($values[floor(3 * count($values) / 4)], 2);
+                    } elseif ($selectedMethod === "iqr") {
+                        sort($values);
+                        $count = count($values);
+                        $q1 = $values[floor($count / 4)];
+                        $q3 = $values[floor(3 * $count / 4)];
+                        $result2 = number_format($q3 - $q1, 2);
+                    }
+                } else {
+                    echo "Brak danych dla wybranej płci.";
+                }
+            } else {
+                echo "Błąd podczas otwierania pliku.";
+            }
+        }
+        ?>
+
+        <form method="post" action="" class="daneSzczegoloweContainer">
+            <input type="hidden" name="formType" value="sex">
+            <div class="slct-wrapper">
+                <p>Wybierz płci:</p>
+                <select name="selectedSex" class="slct-miara">
+                    <option value="Kobieta">Kobieta</option>
+                    <option value="Mezczyzna">Mężczyzna</option>
+                </select>
             </div>
-            <div class="wykresy">
-                <canvas id="myCharts"></canvas>
+
+            <div class="slct-wrapper">
+                <p>Wybierz wartość:</p>
+                <select name="selectedColumn" class="slct-miara">
+                    <?php
+                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                        $header = fgetcsv($handle, 1000, ",");
+                        fclose($handle);
+
+                        for ($i = 5; $i < 10 && $i < count($header); $i++) {
+                            $column = $header[$i];
+                            echo "<option value='$column'>$column</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="slct-wrapper">
+                <p>Wybierz miarę:</p>
+                <select name="selectedMethod" class="slct-miara">
+                    <option value="srednia">Średnia</option>
+                    <option value="mediana">Mediana</option>
+                    <option value="moda">Moda</option>
+                    <option value="minimum">Minimum</option>
+                    <option value="maksimum">Maksimum</option>
+                    <option value="kwartyl1">Kwartyl1</option>
+                    <option value="kwartyl3">Kwartyl3</option>
+                    <!-- zakres miedzykwartylowy -->
+                    <option value="iqr">IQR</option>
+                    <option value="odchylenie-std">Odchylenie sd</option>
+                </select>
+            </div>
+            <button type="submit" name="submit2" class="lekarz-btn">Oblicz</button>
+        </form>
+
+        <div class="wykresyContent">
+            <div class="wykresy-szczegolowe">
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result2)) {
+                    echo "Wynik: $result2";
+                }
+                ?>
+            </div>
+            <div class="wykresy-szczegolowe">
+            <?php
+                $values = [];
+
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit2"])) {
+                    $selectedSex = $_POST["selectedSex"];
+                    $selectedColumn = $_POST["selectedColumn"];
+                    $selectedMethod = $_POST["selectedMethod"];
+
+                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                        $data = [];
+                        while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                            $data[] = $row;
+                        }
+                        fclose($handle);
+
+                        $filteredData = [];
+                        $selectedColumnIndex2 = array_search($selectedColumn, $data[0]);
+
+                        foreach ($data as $row) {
+
+                            if (isset($row[2]) && trim($row[3]) == $selectedSex) {
+                                $filteredData[] = array_slice($row, 3);
+                            }
+                        }
+
+                        if (!empty($filteredData)) {
+                            $values = array_column($filteredData, $selectedColumnIndex2);
+                        } else {
+                            echo "Brak danych dla wybranego przedziału wiekowego.";
+                        }
+                    } else {
+                        echo "Błąd podczas otwierania pliku.";
+                    }
+                }
+                ?>
+
+                <?php
+                if (!empty($values)) {
+                    echo ' <table>';
+                    foreach ($filteredData as $row) {
+                        echo "<tr>";
+                        foreach ($row as $value) {
+                            echo "<td>$value</td>";
+                        }
+                        echo "</tr>";
+                    }
+                    echo '</table>';
+                }
+                ?>
             </div>
         </div>
 
@@ -311,28 +502,5 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="script1.js"></script>
-<script>
-    function toggleVisibility(selectId) {
-        var select = document.getElementById(selectId);
-        var isVisible = select.style.display === 'block';
-        select.style.display = isVisible ? 'none' : 'block';
-    }
-
-    document.getElementById('wiekBtn').addEventListener('click', function() {
-        toggleVisibility('wiekSelect');
-        // Dodaj dodatkową logikę lub opcje, jeśli to konieczne
-    });
-
-    document.getElementById('plecBtn').addEventListener('click', function() {
-        toggleVisibility('plecSelect');
-        // Dodaj dodatkową logikę lub opcje, jeśli to konieczne
-    });
-
-    document.getElementById('specjalistaBtn').addEventListener('click', function() {
-        toggleVisibility('specjalistaSelect');
-        // Dodaj dodatkową logikę lub opcje, jeśli to konieczne
-    });
-</script>
-
 
 </html>
