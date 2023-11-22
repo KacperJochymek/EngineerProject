@@ -18,7 +18,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 <html lang="en">
 
 <head>
-    <title>Dane Szczegółowe</title>
+    <title>Dane szczegółowe</title>
     <link rel="icon" href="/images/leaf.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -64,6 +64,11 @@ generateChartButton.addEventListener("click", () => {
                 type: selectedChartType,
                 data: chartData,
             });
+
+            if (selectedChartType === 'bar') {
+                ageChart.options.plugins.legend.display = false;
+                ageChart.update();
+            }
         });
 });
 

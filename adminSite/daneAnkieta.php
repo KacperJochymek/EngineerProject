@@ -18,7 +18,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 <html lang="en">
 
 <head>
-    <title>Admin Site</title>
+    <title>Analiza ankieta</title>
     <link rel="icon" href="/images/leaf.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -207,7 +207,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <p>Wybierz wykres:</p>
                     <select name="wybranyWykres" class="slct-miara" id="chartTypeSelect">
                         <option value="pie">Kołowy</option>
-                        <option value="line">Liniowy</option>
                         <option value="bar">Słupkowy</option>
                     </select>
                 </div>
