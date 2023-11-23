@@ -242,3 +242,46 @@ body {
 .lekarz-btn:hover {
     background: linear-gradient(to right, #BEC8E9, #265df2);
 }
+
+.succesfullContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.messageSuccess {
+    background-color: #fefefe;
+    color: green; 
+    border-radius: 10px; 
+    padding: 20px;
+    width: 400px; 
+    height: 400px;
+    text-align: center; 
+}
+  
+.succesThanks {
+    font-size: 30px; 
+    margin-bottom: 50px; 
+    margin-top: 30px;
+}
+  
+.messageSuccess .fa-regular{
+    font-size: 80px; 
+    margin-bottom: 50px; 
+}
+
+.messageCancel {
+    font-size: 22px; 
+}
+
+.prevPage2 i{
+    margin-right: 20px;
+    color: #999;
+    font-size: 20px;
+}
+
+.prevPage2 i:hover{
+    transform: scale(1.2);
+    color: #a380ee;
+}
