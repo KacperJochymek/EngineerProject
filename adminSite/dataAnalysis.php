@@ -127,7 +127,14 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <select class="slct-miara" id="selectMeasure">
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
-                        <option value="odchylenie-std">Odchylenie std</option>
+                        <option value="moda">Moda</option>
+                        <option value="minimum">Minimum</option>
+                        <option value="maksimum">Maksimum</option>
+                        <option value="kwartyl1">Kwartyl1</option>
+                        <option value="kwartyl3">Kwartyl3</option>
+                        <!-- zakres miedzykwartylowy -->
+                        <option value="iqr">IQR</option> 
+                        <option value="odchylenie-std">Odchylenie sd</option>
                     </select>
                 </div>
                 <button id="calculateButton" class="lekarz-btn">Oblicz</button>
@@ -212,7 +219,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <p>Wybierz wykres:</p>
                     <select class="slct-miara" id="selectChartType">
                         <option value="kolowy">Kołowy</option>
-                        <option value="liniowy">Liniowy</option>
                         <option value="slupkowy">Słupkowy</option>
                     </select>
                 </div>
@@ -321,9 +327,111 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 var stdDev = Math.sqrt(variance);
                 resultText += "Odchylenie standardowe wieku pacjentów: " + stdDev.toFixed(2) + " lat";
             }
+        } else if (selectedValue === "wiek" && selectedMeasure === "moda") {
+        var ages = <?php echo json_encode($ages); ?>;
+        ages = ages.map(Number);
+
+        if (ages.length === 0) {
+            resultText += "Brak dostępnych danych do obliczenia mody.";
         } else {
-            resultText += "Brak dostępnych danych lub błędne opcje.";
+            var modeMap = {};
+            var maxCount = 0;
+            var modes = [];
+
+            for (var i = 0; i < ages.length; i++) {
+                var age = ages[i];
+                modeMap[age] = (modeMap[age] || 0) + 1;
+
+                if (modeMap[age] > maxCount) {
+                    maxCount = modeMap[age];
+                    modes = [age];
+                } else if (modeMap[age] === maxCount) {
+                    modes.push(age);
+                }
+            }
+
+            if (modes.length === 1) {
+                resultText += "Moda wieku pacjentów: " + modes[0] + " lat";
+            } else {
+                resultText += "Wiele mod: " + modes.join(", ") + " lat";
+            }
         }
+    } else if (selectedValue === "wiek" && selectedMeasure === "minimum") {
+        var ages = <?php echo json_encode($ages); ?>;
+        ages = ages.map(Number);
+
+        if (ages.length === 0) {
+            resultText += "Brak dostępnych danych do obliczenia minimum.";
+        } else {
+            var minimumAge = Math.min(...ages);
+            resultText += "Minimum wieku pacjentów: " + minimumAge + " lat";
+        }
+    } else if (selectedValue === "wiek" && selectedMeasure === "maksimum") {
+        var ages = <?php echo json_encode($ages); ?>;
+        ages = ages.map(Number);
+
+        if (ages.length === 0) {
+            resultText += "Brak dostępnych danych do obliczenia maksimum.";
+        } else {
+            var maximumAge = Math.max(...ages);
+            resultText += "Maksimum wieku pacjentów: " + maximumAge + " lat";
+        }
+    }  else if (selectedValue === "wiek" && selectedMeasure === "kwartyl1") {
+        var ages = <?php echo json_encode($ages); ?>;
+        ages = ages.map(Number);
+
+        if (ages.length === 0) {
+            resultText += "Brak dostępnych danych do obliczenia kwartylu1.";
+        } else {
+            ages.sort(function(a, b) {
+                return a - b;
+            });
+
+            var indexQ1 = Math.floor(ages.length / 4);
+            var q1 = ages[indexQ1];
+
+            resultText += "Kwartyl 1 wieku pacjentów: " + q1.toFixed(2) + " lat";
+        }
+    } else if (selectedValue === "wiek" && selectedMeasure === "kwartyl3") {
+        var ages = <?php echo json_encode($ages); ?>;
+        ages = ages.map(Number);
+
+        if (ages.length === 0) {
+            resultText += "Brak dostępnych danych do obliczenia kwartylu3.";
+        } else {
+            ages.sort(function(a, b) {
+                return a - b;
+            });
+
+            var indexQ3 = Math.floor((3 * ages.length) / 4);
+            var q3 = ages[indexQ3];
+
+            resultText += "Kwartyl 3 wieku pacjentów: " + q3.toFixed(2) + " lat";
+        }
+    } else if (selectedValue === "wiek" && selectedMeasure === "iqr") {
+        var ages = <?php echo json_encode($ages); ?>;
+        ages = ages.map(Number);
+
+        if (ages.length === 0) {
+            resultText += "Brak dostępnych danych do obliczenia IQR.";
+        } else {
+            ages.sort(function(a, b) {
+                return a - b;
+            });
+
+            var indexQ1 = Math.floor(ages.length / 4);
+            var indexQ3 = Math.floor((3 * ages.length) / 4);
+
+            var q1 = ages[indexQ1];
+            var q3 = ages[indexQ3];
+
+            var iqr = q3 - q1;
+
+            resultText += "IQR wieku pacjentów: " + iqr.toFixed(2) + " lat";
+        }
+    } else {
+        resultText += "Brak dostępnych danych lub błędne opcje.";
+    }
 
         document.getElementById("result").textContent = resultText;
     });
@@ -358,6 +466,29 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             },
             options: {
                 responsive: true,
+            },
+        });
+    } else if (selectedChartType === "slupkowy") {
+        // Wygeneruj wykres słupkowy
+        window.locationChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Liczba pacjentów',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             },
         });
     }
