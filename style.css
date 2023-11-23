@@ -440,6 +440,12 @@ hr {
     margin-top: 10px;
 }
 
+.edit-text{
+    width: 100%;
+    height: 50px;
+    border: none;
+}
+
 .tekst-doctor3{
     font-size: 20px;
     text-align: left;
@@ -1274,6 +1280,7 @@ hr {
     justify-content: center;
     text-align: justify;
     margin-left: 50px;
+    flex-grow: 1;
 }
 
 .resztaMyAcc i{
@@ -1282,7 +1289,8 @@ hr {
 
 .myAccBtn{
     cursor: pointer;
-    margin-left: 100px;
+    margin-left: auto;
+    margin-right: 50px;
     font-size: 20px;
     width: 130px;
     padding: 5px;
@@ -1392,6 +1400,14 @@ hr {
     transition: background-color 0.3s;
 }
 
+.delete-btn:hover{
+    background: linear-gradient(to right, #BEC8E9, #a380ee);
+}
+
+.edit-btn:hover{
+    background: linear-gradient(to right, #BEC8E9, #a380ee);
+}
+
 .new-price-form{
     padding: 5px;
     height: 20px;
@@ -1413,7 +1429,16 @@ hr {
 .ukrytyDiv button{
     margin-top: 5px;
     margin-left: 10px;
-    padding: 5px;
+    background-color: #007BFF;
+    border-radius: 20px;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.ukrytyDiv button:hover{
+    background: linear-gradient(to right, #BEC8E9, #a380ee);
 }
 
 .settingi {
@@ -1447,15 +1472,25 @@ hr {
 
 .czy-napewno button{
     margin-top: 10px;
-    padding: 5px;
+    padding: 5px 15px;
     margin-left: 20px;
-    width: 50px;
+    background-color: #007BFF;
+    border-radius: 20px;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.czy-napewno button:hover{
+    background: linear-gradient(to right, #BEC8E9, #a380ee);
 }
 
 .czy-napewno p{
     margin-top: 10px;
 }
-
 
 @media only screen and (max-width: 710px) {
     .changePass{
