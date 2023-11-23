@@ -110,7 +110,7 @@ if (isset($_SESSION["user"])) {
                 Pacjenci mogą skonsultować się z lekarzem online, otrzymać recepty,a nawet poddać się prostym badaniom medycznym <br>
                 bez konieczności wizyty w gabinecie lekarskim. <br>
 
-                <a href="/userSite/blog.php"><button class="aktualizacje-btn" id="myLink">Czytaj dalej...</button></a>
+                <a><button class="aktualizacje-btn">Czytaj dalej...</button></a>
             </div>
 
         </div>
@@ -119,7 +119,7 @@ if (isset($_SESSION["user"])) {
     <div class="umow_sie">
         <p class="umow_sie_tekst"> Umów się na poradę już teraz! <br></p>
         <p class="umow_sie_tekst2">Rejestracja trwa tylko 5 minut. Zadbaj o swoje zdrowie. <br></p>
-        <a href="/userSite/lekarze.php"><button class="btn_znajdz" id="myLink">Znajdź lekarza</button></a>
+        <a><button class="btn_znajdz">Znajdź lekarza</button></a>
     </div>
 
     <div class="patroni">
@@ -157,8 +157,8 @@ if (isset($_SESSION["user"])) {
                 <h1>Przydatne linki</h1>
                 <ul>
                     <li><a href="index.php">Strona główna</a></li>
-                    <li><a href="#" id="myLink">Umów wizytę</a></li>
-                    <li><a href="#" id="myLink">Czytaj bloga</a></li>
+                    <li><a href="#">Umów wizytę</a></li>
+                    <li><a href="#">Czytaj bloga</a></li>
                 </ul>
             </div>
             <div class="col-1">

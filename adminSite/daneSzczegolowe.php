@@ -107,7 +107,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 }
 
                 if (!empty($filteredData)) {
-                    $values = array_column(array_slice($filteredData, 1), $selectedColumnIndex);
+                    $values = array_column($filteredData, $selectedColumnIndex);
 
 
                     $result = null;
@@ -256,7 +256,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     echo ' <table>';
                     foreach ($filteredData as $row) {
                         echo "<tr>";
-                        foreach ($row as $value) {
+                        $limitedValues = array_slice($row, 0, 8);
+                        foreach ($limitedValues as $value) {
                             echo "<td>$value</td>";
                         }
                         echo "</tr>";
@@ -295,7 +296,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 }
 
                 if (!empty($filteredData2)) {
-                    $values = array_column(array_slice($filteredData2, 1), $selectedColumnIndex2);
+                    $values = array_column($filteredData2, $selectedColumnIndex2);
 
                     $result2 = null;
 
@@ -398,7 +399,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 ?>
             </div>
             <div class="wykresy-szczegolowe">
-            <?php
+                <?php
                 $values = [];
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit2"])) {
@@ -419,7 +420,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         foreach ($data as $row) {
 
                             if (isset($row[2]) && trim($row[3]) == $selectedSex) {
-                                $filteredData[] = array_slice($row, 3);
+                                $filteredData[] = array_slice($row, 2);
                             }
                         }
 
@@ -439,7 +440,191 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     echo ' <table>';
                     foreach ($filteredData as $row) {
                         echo "<tr>";
-                        foreach ($row as $value) {
+                        $limitedValues = array_slice($row, 0, 8);
+                        foreach ($limitedValues as $value) {
+                            echo "<td>$value</td>";
+                        }
+                        echo "</tr>";
+                    }
+                    echo '</table>';
+                }
+                ?>
+            </div>
+        </div>
+
+        <!-- Obliczenia dla specjalisty -->
+
+        <?php
+        $result3 = null;
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["formType"]) && $_POST["formType"] === "specialist") {
+            $selectedSpecialist = $_POST["selectedSpecialist"];
+            $selectedColumn = $_POST["selectedColumn"];
+            $selectedMethod = $_POST["selectedMethod"];
+
+            if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                $data = [];
+                while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $data[] = $row;
+                }
+                fclose($handle);
+
+                $filteredData3 = [];
+                $selectedColumnIndex3 = array_search($selectedColumn, $data[0]);
+
+                foreach ($data as $row) {
+                    if (isset($row[4]) && trim($row[4]) == $selectedSpecialist) {
+                        $filteredData3[] = $row;
+                    }
+                }
+
+                if (!empty($filteredData3)) {
+                    $values = array_column($filteredData3, $selectedColumnIndex3);
+
+                    $result3 = null;
+
+                    if ($selectedMethod === "srednia") {
+                        $result3 = number_format(array_sum($values) / count($values), 2);
+                    } elseif ($selectedMethod === "odchylenie-std") {
+                        $result3 = number_format(sqrt(array_sum(array_map(function ($x) use ($values) {
+                            return pow($x - (array_sum($values) / count($values)), 2);
+                        }, $values)) / count($values)), 2);
+                    } elseif ($selectedMethod === "mediana") {
+                        sort($values);
+                        $count = count($values);
+                        $middle = floor($count / 2);
+                        if ($count % 2 == 0) {
+                            $result3 = number_format(($values[$middle - 1] + $values[$middle]) / 2, 2);
+                        } else {
+                            $result3 = number_format($values[$middle], 2);
+                        }
+                    } elseif ($selectedMethod === "moda") {
+                        $countValues = array_count_values($values);
+                        arsort($countValues);
+                        $modes = array_keys($countValues, max($countValues));
+                        $result3 = implode(", ", $modes);
+                    } elseif ($selectedMethod === "minimum") {
+                        $result3 = number_format(min($values), 2);
+                    } elseif ($selectedMethod === "maksimum") {
+                        $result3 = number_format(max($values), 2);
+                    } elseif ($selectedMethod === "kwartyl1") {
+                        sort($values);
+                        $result3 = number_format($values[floor(count($values) / 4)], 2);
+                    } elseif ($selectedMethod === "kwartyl3") {
+                        sort($values);
+                        $result3 = number_format($values[floor(3 * count($values) / 4)], 2);
+                    } elseif ($selectedMethod === "iqr") {
+                        sort($values);
+                        $count = count($values);
+                        $q1 = $values[floor($count / 4)];
+                        $q3 = $values[floor(3 * $count / 4)];
+                        $result3 = number_format($q3 - $q1, 2);
+                    }
+                } else {
+                    echo "Brak danych dla wybranego specjalisty.";
+                }
+            } else {
+                echo "Błąd podczas otwierania pliku.";
+            }
+        }
+        ?>
+
+        <form method="post" action="" class="daneSzczegoloweContainer">
+            <input type="hidden" name="formType" value="specialist">
+            <div class="slct-wrapper">
+                <p>Wybierz specjalistę:</p>
+                <select name="selectedSpecialist" class="slct-miara">
+                    <option value="Onkolog">Onkolog</option>
+                    <option value="Podolog">Podolog</option>
+                </select>
+            </div>
+
+            <div class="slct-wrapper">
+                <p>Wybierz wartość:</p>
+                <select name="selectedColumn" class="slct-miara">
+                    <?php
+                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                        $header = fgetcsv($handle, 1000, ",");
+                        fclose($handle);
+
+                        for ($i = 5; $i < 10 && $i < count($header); $i++) {
+                            $column = $header[$i];
+                            echo "<option value='$column'>$column</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="slct-wrapper">
+                <p>Wybierz miarę:</p>
+                <select name="selectedMethod" class="slct-miara">
+                    <option value="srednia">Średnia</option>
+                    <option value="mediana">Mediana</option>
+                    <option value="moda">Moda</option>
+                    <option value="minimum">Minimum</option>
+                    <option value="maksimum">Maksimum</option>
+                    <option value="kwartyl1">Kwartyl1</option>
+                    <option value="kwartyl3">Kwartyl3</option>
+                    <!-- zakres miedzykwartylowy -->
+                    <option value="iqr">IQR</option>
+                    <option value="odchylenie-std">Odchylenie sd</option>
+                </select>
+            </div>
+            <button type="submit" name="submit3" class="lekarz-btn">Oblicz</button>
+        </form>
+
+        <div class="wykresyContent">
+            <div class="wykresy-szczegolowe">
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result3)) {
+                    echo "Wynik: $result3";
+                }
+                ?>
+            </div>
+            <div class="wykresy-szczegolowe">
+                <?php
+                $values = [];
+
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit3"])) {
+                    $selectedSpecialist = $_POST["selectedSpecialist"];
+                    $selectedColumn = $_POST["selectedColumn"];
+                    $selectedMethod = $_POST["selectedMethod"];
+
+                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
+                        $data = [];
+                        while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                            $data[] = $row;
+                        }
+                        fclose($handle);
+
+                        $filteredData = [];
+                        $selectedColumnIndex3 = array_search($selectedColumn, $data[0]);
+
+                        foreach ($data as $row) {
+
+                            if (isset($row[4]) && trim($row[4]) == $selectedSpecialist) {
+                                $filteredData[] = array_slice($row, 2);
+                            }
+                        }
+
+                        if (!empty($filteredData)) {
+                            $values = array_column($filteredData, $selectedColumnIndex3);
+                        } else {
+                            echo "Brak danych dla wybranego specjalisty.";
+                        }
+                    } else {
+                        echo "Błąd podczas otwierania pliku.";
+                    }
+                }
+                ?>
+
+                <?php
+                if (!empty($values)) {
+                    echo ' <table>';
+                    foreach ($filteredData as $row) {
+                        echo "<tr>";
+                        $limitedValues = array_slice($row, 0, 8);
+                        foreach ($limitedValues as $value) {
                             echo "<td>$value</td>";
                         }
                         echo "</tr>";
