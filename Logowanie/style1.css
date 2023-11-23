@@ -188,3 +188,57 @@ body {
     transform: scale(1.2);
     color: #a380ee;
 }
+
+.contact-form{
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contact-form i{
+    font-size: 18px;
+}
+
+.contact-form p{
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.email-hldr{
+    padding: 10px; 
+    margin: 5px; 
+    margin-bottom: 20px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 18px; 
+}
+
+.message-inpt {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    height: 200px;
+    width: 400px;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+.lekarz-btn{
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    color: #fefefe;
+    font-size: 20px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to right, #BEC8E9, #a380ee);
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.lekarz-btn:hover {
+    background: linear-gradient(to right, #BEC8E9, #265df2);
+}

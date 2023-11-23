@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="checkbox-text">
-                        <a href="#" class="text">Zapomniałeś hasła?</a>
+                        <a href="/Logowanie/contact-logowanie.php" class="text">Zapomniałeś hasła?</a>
                     </div>
 
                     <div class="input-field button">
@@ -171,7 +171,7 @@
                     </div>
 
                     <div class="checkbox-text">
-                        <a href="#" class="text">Zapomniałeś hasła?</a>
+                        <a href="/Logowanie/contact-logowanie.php" class="text">Zapomniałeś hasła?</a>
                     </div>
 
                     <div class="input-field button">
