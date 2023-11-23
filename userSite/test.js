@@ -53,14 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Mapa największych miast i przypisanych do nich województw
 var miastaWojewodztwa = {
-    "Warszawa": "Mazowieckie",
-    "Kraków": "Małopolskie",
-    "Gdańsk": "Pomorskie",
-    "Rzeszów": "Podkarpackie",
-    "Lublin": "Lubelskie",
-    "Gdańsk": "Pomorskie",
-    "Poznań": "Wielkopolskie",
     "Katowice": "Śląskie",
+    "Kraków": "Małopolskie",
+    "Warszawa": "Mazowieckie",
+    "Rzeszów": "Podkarpackie",
+    "Gdańsk": "Pomorskie",
+    "Wrocław": "Dolnośląskie",
+    "Poznań": "Wielkopolskie",
 };
 
 
@@ -74,32 +73,37 @@ function validateForm() {
     var miasto = document.getElementById("miasto").value;
     var wojewodztwo = document.getElementById("wojewodztwo").value;
 
+    var alertDiv = document.querySelector(".alertDiv");
+
     if (imie === "" || nazwisko === "") {
-        alert("Imię i nazwisko są wymagane");
+        alertDiv.textContent = "Imię i nazwisko są wymagane.";
         return false;
     }
 
-    if (isNaN(wiek)) {
-        alert("Wiek musi być liczbą");
+    if (isNaN(parseInt(wiek, 10))) {
+        alertDiv.textContent = "Wiek musi być liczbą.";
         return false;
     }
 
     if (pesel.length !== 11 || isNaN(pesel)) {
-        alert("Pesel musi składać się z 11 cyfr");
+        alertDiv.textContent = "Pesel musi składać się z 11 cyfr.";
         return false;
     }
 
     if (miasto === "" || wojewodztwo === "") {
-        alert("Miasto i województwo są wymagane");
+        alertDiv.textContent = "Miasto i województwo są wymagane.";
         return false;
     }
 
     if (miastaWojewodztwa[miasto] !== wojewodztwo) {
-        alert("Podane miasto nie znajduje się w wybranym województwie.");
+        alertDiv.textContent = "Podane miasto nie znajduje się w wybranym województwie.";
         return false;
     }
 
-    return true; 
+    // Wyczyść alertDiv, jeśli nie ma problemów z walidacją
+    alertDiv.textContent = "";
+
+    return true;
 }
 
 // Skrypt do ukrywania i pokazywania diva w myAccount

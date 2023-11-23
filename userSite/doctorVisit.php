@@ -159,6 +159,7 @@ if (isset($_GET["doctor_id"])) {
 
                 ?>
 
+                <div class="alertDiv"></div>
                 <form method="POST" onsubmit="return validateForm()">
                     <div class="doctoruser-form">
                         <div class="teksikv">
