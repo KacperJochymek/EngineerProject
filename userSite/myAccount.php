@@ -82,10 +82,7 @@ if (isset($_POST['tak_oo'])) {
         $deleteDostepnoscQuery = "DELETE FROM dostepnosc WHERE id_wizyty = $wizytaId";
         $deleteDostepnoscResult = mysqli_query($conn, $deleteDostepnoscQuery);
 
-        $deletePacjentQuery = "DELETE FROM pacjenci WHERE id = $pacjentId";
-        $deletePacjentResult = mysqli_query($conn, $deletePacjentQuery);
-
-        if ($updateWizytaResult && $deleteDostepnoscResult && $deletePacjentResult) {
+        if ($updateWizytaResult && $deleteDostepnoscResult) {
             $message = "Anulowanie wizyty powiodło się.";
         } else {
             $message = "Błąd podczas anulowania: " . mysqli_error($conn) . "";

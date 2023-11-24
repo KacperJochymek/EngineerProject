@@ -127,9 +127,49 @@ if (isset($_GET["doctor_id"])) {
                         die("Błąd połączenia: " . $conn->connect_error);
                     }
 
-                    $sql = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo, adres_email) VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo', '$adres_email')";
+                    $sql_sprawdzenie_pacjenta = "SELECT * FROM pacjenci WHERE id_pacjenta = '$id_pacjenta'";
+                    $result_sprawdzenie_pacjenta = $conn->query($sql_sprawdzenie_pacjenta);
 
-                    if ($conn->query($sql) === TRUE) {
+                    if ($result_sprawdzenie_pacjenta->num_rows == 0) {
+                        // Pacjent nie istnieje, więc dodaj go do bazy danych
+                        $sql_dodaj_pacjenta = "INSERT INTO pacjenci (id_pacjenta, wiek, pesel, miasto, województwo, adres_email)
+                                              VALUES ('$id_pacjenta', '$wiek', '$pesel', '$miasto', '$wojewodztwo', '$adres_email')";
+
+                        if ($conn->query($sql_dodaj_pacjenta) === TRUE) {
+                            // Pobierz id nowo dodanego pacjenta
+                            $id_nowego_pacjenta = $conn->insert_id;
+
+                            $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status_wizyty = 'dostepna'";
+                            $result_wizyta = $conn->query($sql_wizyta);
+
+                            if ($result_wizyta->num_rows > 0) {
+                                $row_wizyta = $result_wizyta->fetch_assoc();
+                                $id_wizyty = $row_wizyta["id"];
+
+                                $sql_dostepnosc = "INSERT INTO dostepnosc (id_wizyty, id_pacjenta) VALUES ('$id_wizyty', (SELECT id FROM pacjenci WHERE id_pacjenta = '$id_pacjenta'))";
+
+                                if ($conn->query($sql_dostepnosc) === TRUE) {
+                                    $sql_update_status = "UPDATE wizyty SET status_wizyty = 'zarezerwowana' WHERE id = $id_wizyty";
+
+                                    if ($conn->query($sql_update_status) === TRUE) {
+                                        echo '<script>window.location.href = "/userSite/successfullVisit.php";</script>';
+                                        exit;
+                                    }
+                                } else {
+                                    echo '<div class="messageSent">Błąd: ' . $sql_update_status . '\\n' . $conn->error . '</div>';
+                                }
+                            } else {
+                                echo '<div class="messageSent">Błąd: ' . $sql_dostepnosc . '\\n' . $conn->error . '</div>';
+                            }
+                        } else {
+                            echo '<div class="messageSent">Brak dostępnych wizyt dla wybranego lekarza"</div>';
+                        }
+                    } else {
+                        // Pacjent już istnieje, pobierz jego id
+                        $row_pacjent = $result_sprawdzenie_pacjenta->fetch_assoc();
+                        $id_nowego_pacjenta = $row_pacjent['id'];
+
+                        // Kontynuacja dodawania nowej wizyty
                         $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status_wizyty = 'dostepna'";
                         $result_wizyta = $conn->query($sql_wizyta);
 
@@ -137,7 +177,8 @@ if (isset($_GET["doctor_id"])) {
                             $row_wizyta = $result_wizyta->fetch_assoc();
                             $id_wizyty = $row_wizyta["id"];
 
-                            $sql_dostepnosc = "INSERT INTO dostepnosc (id_wizyty, id_pacjenta) VALUES ('$id_wizyty', (SELECT id FROM pacjenci WHERE id_pacjenta = '$id_pacjenta'))";
+                            $sql_dostepnosc = "INSERT INTO dostepnosc (id_wizyty, id_pacjenta) 
+                              VALUES ('$id_wizyty', '$id_nowego_pacjenta')";
 
                             if ($conn->query($sql_dostepnosc) === TRUE) {
                                 $sql_update_status = "UPDATE wizyty SET status_wizyty = 'zarezerwowana' WHERE id = $id_wizyty";
@@ -147,13 +188,11 @@ if (isset($_GET["doctor_id"])) {
                                     exit;
                                 }
                             } else {
-                                echo '<div class="messageSent">Błąd: ' . $sql_update_status . '\\n' . $conn->error . '</div>';
+                                echo '<div class="messageSent">Błąd: ' . $sql_dostepnosc . '<br>' . $conn->error . '</div>';
                             }
                         } else {
-                            echo '<div class="messageSent">Błąd: ' . $sql_dostepnosc . '\\n' . $conn->error . '</div>';
+                            echo '<div class="messageSent">Błąd: ' . $sql_wizyta . '<br>' . $conn->error . '</div>';
                         }
-                    } else {
-                        echo '<div class="messageSent">Brak dostępnych wizyt dla wybranego lekarza"</div>';
                     }
                 }
 
@@ -176,7 +215,7 @@ if (isset($_GET["doctor_id"])) {
                         </div>
                         <div class="teksikv">
                             <p class="tekst-doctor3">Miasto:</p>
-                            <select name="miasto" id="miasto" >
+                            <select name="miasto" id="miasto">
                                 <option value="Katowice">Katowice</option>
                                 <option value="Kraków">Kraków</option>
                                 <option value="Warszawa">Warszawa</option>
