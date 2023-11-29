@@ -69,7 +69,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
     <div class="account">
 
-        <h1>Witamy w panelu lekarza!</h1>
+        <h1>Witamy w panelu obsługi lekarza!</h1>
 
         <div class="count">
             <p>Liczba wizyt dzisiaj: </br>

@@ -64,23 +64,28 @@ if (!empty($_SESSION["id"])) {
 
     <div class="priceSite">
         <?php
-
         $sql = "SELECT nazwa, cena FROM cennik";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             echo '<div class="pricing">';
             echo '<h2>Cennik naszych usług</h2>';
-            echo '<ul>';
+            echo '<table class="wyrownanie">';
+
             while ($row = $result->fetch_assoc()) {
-                echo '<li>' . htmlspecialchars($row["nazwa"]) . ': ' . number_format($row["cena"], 2) . ' zł</li>';
+                echo '<tr>';
+                echo '<td>' . htmlspecialchars($row["nazwa"]) . '</td>';
+                echo '<td>' . number_format($row["cena"], 2) . ' zł</td>';
+                echo '</tr>';
             }
-            echo '</ul>';
+
+            echo '</table>';
             echo '</div>';
         } else {
             echo "Brak danych w cenniku.";
         }
         ?>
+
 
         <div class="warningInfo">
             <i class="fa-solid fa-triangle-exclamation"></i>

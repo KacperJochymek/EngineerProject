@@ -1197,6 +1197,7 @@ hr {
     width: 500px; 
     border-radius: 10px;
     padding: 20px; 
+    font-size: 18px;
 }
   
 .pricing h2 {
@@ -1377,6 +1378,16 @@ hr {
     padding: 20px;
     text-align: center;
     border: none;
+}
+
+.wyrownanie table {
+    border-collapse: collapse;
+    border: 0;
+}
+
+.wyrownanie th,
+.wyrownanie td {
+    border: 0;
 }
 
 .tble-cennik{
