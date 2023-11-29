@@ -150,10 +150,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</thead>';
             echo '<tbody>';
 
+            $count = 1;
+
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
                 echo '<form method="post" action="">';
-                echo '<td>' . $row["id"] . '</td>';
+                echo '<td>' . $count . '</td>';
                 echo '<td><textarea name="tekst[]" class="edit-text" placeholder="Twój tekst">' . $row["tekst"] . '</textarea></td>';
                 echo '<td>' . $row["dat"] . '</td>';
                 echo '<td>';
@@ -163,6 +165,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
+                
+                $count++;
             }
             echo '</tbody>';
             echo '</table>';

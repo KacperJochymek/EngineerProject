@@ -109,9 +109,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</thead>';
             echo '<tbody>';
 
+            $count = 1;
+
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $row["id"] . '</td>';
+                echo '<td>' . $count . '</td>';
                 echo '<td>' . $row["nazwa"] . '</td>';
                 echo '<td>' . $row["cena"] . '</td>';
                 echo '<td>';
@@ -123,6 +125,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
+
+                $count++;
             }
             echo '</tbody>';
             echo '</table>';

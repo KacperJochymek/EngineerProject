@@ -121,7 +121,6 @@ $result = $conn->query($sql);
                     echo '<table>';
                     echo '<thead>';
                     echo '<tr>';
-                    echo '<th>Id</th>';
                     echo '<th>Data</th>';
                     echo '<th>Godzina</th>';
                     echo '<th>Lekarz</th>';
@@ -135,7 +134,6 @@ $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<form method="post" action="">';
-                        echo '<td>' . $row["id"] . '</td>';
                         echo '<td>' . $row["data_wizyty"] . '</td>';
                         echo '<td>' . $row["available_hour"] . '</td>';
                         echo '<td>' . $row["doctor_id"] . '</td>';

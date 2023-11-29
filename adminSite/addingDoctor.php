@@ -147,9 +147,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</thead>';
             echo '<tbody>';
 
+            $count = 1;
+
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $row["id"] . '</td>';
+                echo '<td>' . $count .  '</td>';
                 echo '<td>' . htmlspecialchars($row["tytul"]) . ' ' . htmlspecialchars($row["imienazwisko"]) . '</td>';
                 echo '<td>' . $row["profesja"] . '</td>';
                 echo '<td>';
@@ -161,6 +163,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
+
+                $count++;
             }
 
             echo '</tbody>';
