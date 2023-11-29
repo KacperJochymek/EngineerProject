@@ -67,9 +67,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Dodaj godziny pracy:</p>
-
-    <p class="zapytanie_admin">O "id lekarza" zapytaj administratora.</p>
+    <p class="lekarz-wybierz">Dodaj godziny pracy lekarza:</p>
 
     <div class="messageSent"></div>
 
@@ -122,13 +120,61 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
             <div class="add-inpt">
-                <input type="number" name="doctor_id" id="doctor_id" class="id_leka" placeholder="Podaj id lekarza"><br>
+
+                <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
+                    <?php
+
+                    $doctor_query = "SELECT id_lekarza FROM doctors";
+                    $doctor_result = $conn->query($doctor_query);
+
+                    if (!$doctor_result) {
+                        die("Błąd: " . $conn->error);
+                    }
+
+
+                    while ($row = $doctor_result->fetch_assoc()) {
+                        echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
+                    }
+                    ?>
+                </select>
                 <input type="date" name="data_wizyty" class="id_leka2" id="data_wizyty">
                 <input type="time" name="available_hour" id="available_hour" class="id_leka3" placeholder="Wybierz godzinę"><br>
                 <input type="submit" class="lekarz-btn" name="add_hour" value="Dodaj">
             </div>
         </form>
 
+
+        <div class="doctor-form">
+            <?php
+
+            $sql = "SELECT * FROM doctors";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                echo '<div class="tble-cennik">';
+                echo '<table>';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th>ID</th>';
+                echo '<th>Tytuł</th>';
+                echo '<th>Imię i nazwisko</th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
+
+                while ($row = $result->fetch_assoc()) {
+                echo '<tr>
+                <td>' . $row['id_lekarza'] . '</td>
+                <td>' . $row['tytul'] . '</td>
+                <td>' . $row['imienazwisko'] . '</td>
+                </tr>';
+                }
+                echo '</table>';
+            } else {
+                echo "Brak danych do wyświetlenia.";
+            }
+            ?>
+        </div>
     </div>
 
     <footer>
@@ -182,60 +228,60 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
 <script src="script1.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var form = document.querySelector('.doctor-form');
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.doctor-form');
 
-    form.addEventListener('submit', function (event) {
-        var doctorIdInput = document.getElementById('doctor_id');
-        if (!validateNumber(doctorIdInput.value)) {
-            displayErrorMessage('Pole "id lekarza" musi zawierać liczby całkowite dodatnie.');
-            event.preventDefault();
-            return false;
+        form.addEventListener('submit', function(event) {
+            var doctorIdInput = document.getElementById('doctor_id');
+            if (!validateNumber(doctorIdInput.value)) {
+                displayErrorMessage('Pole "id lekarza" musi zawierać liczby całkowite dodatnie.');
+                event.preventDefault();
+                return false;
+            }
+
+            var dataWizytyInput = document.getElementById('data_wizyty');
+            if (!validateDate(dataWizytyInput.value)) {
+                displayErrorMessage('Musisz wybrać datę.');
+                event.preventDefault();
+                return false;
+            }
+
+            var availableHourInput = document.getElementById('available_hour');
+            if (!validateTime(availableHourInput.value)) {
+                displayErrorMessage('Musisz wybrać godzinę.');
+                event.preventDefault();
+                return false;
+            }
+
+            clearErrorMessage();
+            return true;
+        });
+
+        function displayErrorMessage(message) {
+            var messageSent = document.querySelector('.messageSent');
+            messageSent.innerHTML = message;
         }
 
-        var dataWizytyInput = document.getElementById('data_wizyty');
-        if (!validateDate(dataWizytyInput.value)) {
-            displayErrorMessage('Musisz wybrać datę.');
-            event.preventDefault();
-            return false;
+        function clearErrorMessage() {
+            var messageSent = document.querySelector('.messageSent');
+            messageSent.innerHTML = '';
         }
 
-        var availableHourInput = document.getElementById('available_hour');
-        if (!validateTime(availableHourInput.value)) {
-            displayErrorMessage('Musisz wybrać godzinę.');
-            event.preventDefault();
-            return false;
+        function validateNumber(number) {
+            var regex = /^[0-9]+$/;
+            return regex.test(number);
         }
 
-        clearErrorMessage();
-        return true;
+        function validateDate(date) {
+            var regex = /^\d{4}-\d{2}-\d{2}$/;
+            return regex.test(date);
+        }
+
+        function validateTime(time) {
+            var regex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+            return regex.test(time);
+        }
     });
-
-    function displayErrorMessage(message) {
-        var messageSent = document.querySelector('.messageSent');
-        messageSent.innerHTML = message;
-    }
-
-    function clearErrorMessage() {
-        var messageSent = document.querySelector('.messageSent');
-        messageSent.innerHTML = '';
-    }
-
-    function validateNumber(number) {
-        var regex = /^[0-9]+$/;
-        return regex.test(number);
-    }
-
-    function validateDate(date) {
-        var regex = /^\d{4}-\d{2}-\d{2}$/;
-        return regex.test(date);
-    }
-
-    function validateTime(time) {
-        var regex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
-        return regex.test(time);
-    }
-});
 </script>
 
 

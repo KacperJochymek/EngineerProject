@@ -650,6 +650,15 @@ hr {
     text-align: center;
 }
 
+.wybor_lekarza{
+    text-align: center;
+    margin-bottom: 10px;
+    height: 52px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
 .id_leka{
     text-align: center;
     margin-bottom: 10px;
@@ -769,15 +778,6 @@ hr {
 
 .doc-chosen{
     height: 1000px;
-}
-
-.zapytanie_admin{
-    margin-top: 20px;
-    font-size: 20px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
 }
 
 .btn-chosen{

@@ -114,7 +114,22 @@ $result = $conn->query($sql);
         <div class="lookUsers">
             <form method="post" class="lookVis">
                 <p>Wybierz przedziały dat:</p>
-                <input type="number" name="doctor_id" id="doctor_id" class="id_leka" placeholder="Podaj id lekarza">
+                <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
+                    <?php
+
+                    $doctor_query = "SELECT id_lekarza FROM doctors";
+                    $doctor_result = $conn->query($doctor_query);
+
+                    if (!$doctor_result) {
+                        die("Błąd: " . $conn->error);
+                    }
+
+
+                    while ($row = $doctor_result->fetch_assoc()) {
+                        echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
+                    }
+                    ?>
+                </select>
                 <input type="date" name="start_date" placeholder="Data początkowa">
                 <input type="date" name="end_date" placeholder="Data końcowa">
                 <button type="submit" class="filtruj" name="filter-btn" >Filtruj</button>
