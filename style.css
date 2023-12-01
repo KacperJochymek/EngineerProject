@@ -534,8 +534,16 @@ hr {
     margin: 0 50px; 
 }
 
+.paczka{
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 500px;
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
 .daneSzczegolowe{
-    height: 2150px;
+    height: 2350px;
 }
 
 .wykresyContent{
@@ -726,6 +734,7 @@ hr {
 }
 
 .slct-wrapper p{
+    margin-top: 10px;
     font-size: 18px;
     margin-bottom: 8px;
 }
@@ -1559,7 +1568,8 @@ hr {
 
 .ankietaDaneWyniki iframe{
     width: 90%;
-    height: 200px;
+    height: 250px;
+    border-radius: 10px;
 }
 
 /* ================================ Responsywność ============================================= */

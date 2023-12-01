@@ -159,10 +159,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         ?>
 
+
+        <div class="paczka">
         <form method="post" action="" class="daneSzczegoloweContainer">
             <input type="hidden" name="formType" value="age">
             <div class="slct-wrapper">
-                <p>Wybierz przedział:</p>
+                <p>Wybierz wiek:</p>
                 <select name="selectedAgeGroup" class="slct-miara">
                     <option value="0-18">0-18</option>
                     <option value="19-35">19-35</option>
@@ -254,6 +256,20 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 if (!empty($values)) {
 
                     echo ' <table>';
+
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Przedział wieku</th>';
+                    echo '<th>Płeć</th>';
+                    echo '<th>Profesja</th>';
+                    echo '<th>Ocena</th>';
+                    echo '<th>Obsługa</th>';
+                    echo '<th>Satysfakcja</th>';
+                    echo '<th>Dostępność</th>';
+                    echo '<th>Polecenie</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+
                     foreach ($filteredData as $row) {
                         echo "<tr>";
                         $limitedValues = array_slice($row, 0, 8);
@@ -267,6 +283,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 ?>
             </div>
 
+        </div>
         </div>
 
         <!-- Obliczenia dla płci -->
@@ -346,10 +363,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         }
         ?>
 
+<div class="paczka">
         <form method="post" action="" class="daneSzczegoloweContainer">
             <input type="hidden" name="formType" value="sex">
             <div class="slct-wrapper">
-                <p>Wybierz płci:</p>
+                <p>Wybierz płeć:</p>
                 <select name="selectedSex" class="slct-miara">
                     <option value="Kobieta">Kobieta</option>
                     <option value="Mezczyzna">Mężczyzna</option>
@@ -438,6 +456,20 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <?php
                 if (!empty($values)) {
                     echo ' <table>';
+
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Przedział wieku</th>';
+                    echo '<th>Płeć</th>';
+                    echo '<th>Profesja</th>';
+                    echo '<th>Ocena</th>';
+                    echo '<th>Obsługa</th>';
+                    echo '<th>Satysfakcja</th>';
+                    echo '<th>Dostępność</th>';
+                    echo '<th>Polecenie</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+
                     foreach ($filteredData as $row) {
                         echo "<tr>";
                         $limitedValues = array_slice($row, 0, 8);
@@ -451,7 +483,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 ?>
             </div>
         </div>
-
+</div>
         <!-- Obliczenia dla specjalisty -->
 
         <?php
@@ -529,6 +561,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         }
         ?>
 
+<div class="paczka">
         <form method="post" action="" class="daneSzczegoloweContainer">
             <input type="hidden" name="formType" value="specialist">
             <div class="slct-wrapper">
@@ -621,6 +654,20 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <?php
                 if (!empty($values)) {
                     echo ' <table>';
+
+                    echo '<thead>';
+                    echo '<tr>';
+                    echo '<th>Przedział wieku</th>';
+                    echo '<th>Płeć</th>';
+                    echo '<th>Profesja</th>';
+                    echo '<th>Ocena</th>';
+                    echo '<th>Obsługa</th>';
+                    echo '<th>Satysfakcja</th>';
+                    echo '<th>Dostępność</th>';
+                    echo '<th>Polecenie</th>';
+                    echo '</tr>';
+                    echo '</thead>';
+
                     foreach ($filteredData as $row) {
                         echo "<tr>";
                         $limitedValues = array_slice($row, 0, 8);
@@ -634,6 +681,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 ?>
             </div>
         </div>
+</div>
 
     </div>
 

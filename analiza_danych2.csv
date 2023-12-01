@@ -1,11 +1,11 @@
-"Sygnatura czasowa","Nazwa użytkownika","Ile masz lat?","Jakiej jestes plci?","Podaj rodzaj lekarza","Ocena lekarza.","Obsluga pacjenta.","Satysfakcja leczenia.","Dostępnosc i terminy.","Czy polecilbys/as naszą aplikacje medyczną swoim znajomym lub rodzinie?","Czy korzystales/as z konsultacji telefonicznej?","Czy otrzymales/as wystarczająco informacji na temat swojej dolegliwosci?","Czy personel medyczny był uprzejmy i pomocny? "
-"2023/10/09 1:53:55 PM CET","k.joch19@wp.pl","0-18","Kobieta","Onkolog","5","5","4","3","5","Nie","Nie","Nie"
-"2023/11/08 12:41:02 AM CET","k.joch21@wp.pl","0-18","Mezczyzna","Onkolog","5","5","4","4","4","Nie","Tak","Tak"
-"2023/11/08 12:41:33 AM CET","kacper@wp.pl","19-35","Kobieta","Podolog","5","5","5","5","5","Tak","Tak","Tak"
-"2023/11/08 12:42:08 AM CET","kacper123@onet.pl","19-35","Kobieta","Onkolog","3","3","3","4","4","Tak","Nie","Nie"
-"2023/11/08 12:42:50 AM CET","bartek@wp.pl","36-55","Mezczyzna","Podolog","4","5","4","4","4","Nie","Nie","Tak"
-"2023/11/08 12:46:37 AM CET","bartek@wp.pl","55+","Mezczyzna","Onkolog","5","5","5","5","5","Nie","Tak","Tak"
-"2023/11/08 12:46:58 AM CET","jolanta@wp.pl","36-55","Kobieta","Psycholog","5","5","5","5","5","Tak","Tak","Tak"
-"2023/11/08 12:47:25 AM CET","jolajola@onet.pl","55+","Kobieta","Podolog","4","4","5","5","4","Nie","Nie","Tak"
-"2023/11/08 12:47:57 AM CET","daroLew@wp.pl","36-55","Mezczyzna","Psycholog","4","5","3","5","5","Nie","Tak","Nie"
-"2023/11/08 12:48:32 AM CET","sisisi@gmail.com","19-35","Kobieta","Psycholog","5","5","5","5","5","Nie","Tak","Tak"
+Sygnatura czasowa,Adres e-mail,Ile masz lat?,Jakiej jesteś płci?,Podaj rodzaj lekarza,Ocena lekarza,Obsługa pacjenta,Satysfakcja leczenia,Dostępność i terminy,Czy poleciłbyś/aś nasz serwis?,Czy korzystałeś/aś z konsultacji telefonicznej?,Czy otrzymałeś/aś wystarczająco informacji na temat swojej dolegliwosci?,Czy personel był uprzejmy i pomocny? 
+2023-10-09 14:53:56,k.joch19@wp.pl,0-18,Kobieta,Onkolog,5,5,4,3,5,Nie,Nie,Nie
+2023-11-08 00:41:03,k.joch21@wp.pl,0-18,Mezczyzna,Onkolog,5,5,4,4,4,Nie,Tak,Tak
+2023-11-08 00:41:34,kacper@wp.pl,19-35,Kobieta,Podolog,5,5,5,5,5,Tak,Tak,Tak
+2023-11-08 00:42:08,kacper123@onet.pl,19-35,Kobieta,Onkolog,3,3,3,4,4,Tak,Nie,Nie
+2023-11-08 00:42:51,bartek@wp.pl,36-55,Mezczyzna,Podolog,4,5,4,4,4,Nie,Nie,Tak
+2023-11-08 00:46:38,bartek@wp.pl,55+,Mezczyzna,Onkolog,5,5,5,5,5,Nie,Tak,Tak
+2023-11-08 00:46:59,jolanta@wp.pl,36-55,Kobieta,Psycholog,5,5,5,5,5,Tak,Tak,Tak
+2023-11-08 00:47:26,jolajola@onet.pl,55+,Kobieta,Podolog,4,4,5,5,4,Nie,Nie,Tak
+2023-11-08 00:47:58,daroLew@wp.pl,36-55,Mezczyzna,Psycholog,4,5,3,5,5,Nie,Tak,Nie
+2023-11-08 00:48:33,sisisi@gmail.com,19-35,Kobieta,Psycholog,5,5,5,5,5,Nie,Tak,Tak
