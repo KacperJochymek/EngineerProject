@@ -36,17 +36,23 @@ require '../Logowanie/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
     $id = $_POST['id'];
-    $cena = (float) str_replace(',', '.', $_POST['cena']);
+    $cena = $_POST['cena'];
 
-    $sql = "UPDATE cennik SET cena = $cena WHERE id = $id";
-    if ($conn->query($sql) === TRUE) {
-        echo '<div class="validationMessage">Dane zaktualizowane poprawnie</div>';
+    if (!preg_match('/^[0-9]+([,.][0-9]+)?$/', $cena)) {
+        echo '<div class="validationMessage">Błąd: Podana cena jest ujemna!</div>';
     } else {
-        echo '<div class="validationMessage">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
+        $cena = (float) str_replace(',', '.', $cena);
+        $sql = "UPDATE cennik SET cena = $cena WHERE id = $id";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo '<div class="validationMessage">Dane zaktualizowane poprawnie</div>';
+        } else {
+            echo '<div class="validationMessage">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
+        }
     }
 }
-
 ?>
+
 
 <?php
 require '../Logowanie/config.php';

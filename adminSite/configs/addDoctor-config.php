@@ -7,12 +7,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
     $id = $_POST['id'];
     $nowa_profesja = $_POST['nowa_profesja'];
 
-    $sql = "UPDATE doctors SET profesja = '$nowa_profesja' WHERE id = $id"; 
-    
-    if ($conn->query($sql) === TRUE) {
-        echo '<div class="messageSent">Profesja zaktualizowana pomyślnie!</div>';
+    if (!preg_match('/^[a-zA-Z]+$/', $nowa_profesja)) {
+        echo '<div class="messageSent">Błąd: Profesja powinna zawierać tylko litery!</div>';
     } else {
-        echo '<div class="messageSent">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
+        $sql = "UPDATE doctors SET profesja = '$nowa_profesja' WHERE id = $id"; 
+    
+        if ($conn->query($sql) === TRUE) {
+            echo '<div class="messageSent">Profesja zaktualizowana pomyślnie!</div>';
+        } else {
+            echo '<div class="messageSent">Błąd: ' . $sql . '<br>' . $conn->error . '</div>';
+        }
     }
 }
 ?>
