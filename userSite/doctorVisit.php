@@ -222,6 +222,16 @@ if (isset($_GET["doctor_id"])) {
                                 <option value="Rzeszów">Rzeszów</option>
                                 <option value="Wrocław">Wrocław</option>
                                 <option value="Poznań">Poznań</option>
+                                <option value="Lublin">Lublin</option>
+                                <option value="Zielona-Góra">Zielona-Góra</option>
+                                <option value="Gdańsk">Gdańsk</option>
+                                <option value="Szczecin">Szczecin</option>
+                                <option value="Olsztyn">Olsztyn</option>
+                                <option value="Toruń">Toruń</option>
+                                <option value="Kielce">Kielce</option>
+                                <option value="Łódź">Łódź</option>
+                                <option value="Opole">Opole</option>
+                                <option value="Białystok">Białystok</option>
                             </select>
                             <p class="tekst-doctor3">Województwo:</p>
                             <select name="wojewodztwo" id="wojewodztwo">
@@ -231,6 +241,16 @@ if (isset($_GET["doctor_id"])) {
                                 <option value="Podkarpackie">Podkarpackie</option>
                                 <option value="Dolnośląskie">Dolnośląskie</option>
                                 <option value="Wielkopolskie">Wielkopolskie</option>
+                                <option value="Lubelskie">Lubelskie</option>
+                                <option value="Lubuskie">Lubuskie</option>
+                                <option value="Pomorskie">Pomorskie</option>
+                                <option value="Zachodniopomorskie">Zachodniopomorskie</option>
+                                <option value="Warmińsko-mazurskie">Warmińsko-mazurskie</option>
+                                <option value="Kujawsko-pomorskie">Kujawsko-pomorskie</option>
+                                <option value="Świętokrzyskie">Świętokrzyskie</option>
+                                <option value="Łódzkie">Łódzkie</option>
+                                <option value="Opolskie">Opolskie</option>
+                                <option value="Podlaskie">Podlaskie</option>
                             </select>
                             <p class="tekst-doctor3">E-mail</p>
                             <input type="text" name="adres_email" id="adres_email" placeholder="Wpisz E-mail" value="<?php echo $email; ?>">

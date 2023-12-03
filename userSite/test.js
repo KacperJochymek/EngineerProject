@@ -57,9 +57,18 @@ var miastaWojewodztwa = {
     "Kraków": "Małopolskie",
     "Warszawa": "Mazowieckie",
     "Rzeszów": "Podkarpackie",
-    "Gdańsk": "Pomorskie",
     "Wrocław": "Dolnośląskie",
     "Poznań": "Wielkopolskie",
+    "Lublin": "Lubelskie", 
+    "Zielona-Góra": "Lubuskie",
+    "Gdańsk": "Pomorskie",
+    "Szczecin": "Zachodniopomorskie", 
+    "Olsztyn": "Warmińsko-mazurskie",
+    "Toruń": "Kujawsko-pomorskie", 
+    "Kielce": "Świętokrzyskie", 
+    "Łódź": "Łódzkie", 
+    "Opole": "Opolskie",
+    "Białystok": "Podlaskie", 
 };
 
 
