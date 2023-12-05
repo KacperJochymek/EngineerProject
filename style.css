@@ -770,6 +770,15 @@ hr {
     margin-bottom: 20px;
 }
 
+.messageSent3{
+    color: red;
+    margin-bottom: 20px;
+}
+
+.messageSent3 p{
+    margin-bottom: 10px;
+}
+
 .blog_brakdan{
     margin-top: 10px;
     font-size: 25px;

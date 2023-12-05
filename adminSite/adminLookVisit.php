@@ -113,6 +113,13 @@ $result = $conn->query($sql);
                 <input type="date" name="end_date" placeholder="Data końcowa">
                 <button type="submit" class="filtruj" name="filter-btn">Filtruj</button>
             </form>
+
+            <div class="messageSent3" id="confirmCancel" style="display:none;">
+                <p>Czy na pewno chcesz anulować wizytę?</p>
+                <button class="delete-btn" id="confirmYes">Tak</button>
+                <button class="delete-btn" id="confirmNo">Nie</button>
+            </div>
+
             <div class="vtableUsers">
                 <?php
 
@@ -133,20 +140,14 @@ $result = $conn->query($sql);
 
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
-                        echo '<form method="post" action="">';
                         echo '<td>' . $row["data_wizyty"] . '</td>';
                         echo '<td>' . $row["available_hour"] . '</td>';
                         echo '<td>' . $row["doctor_id"] . '</td>';
                         echo '<td>' . $row["id_pacjenta"] . '</td>';
-                        echo '<td>';
-                        echo '<select name="status_wizyty[]">';
-                        echo '<option value="dostępna" ' . ($row["status_wizyty"] == 'dostępna' ? 'selected' : '') . '>Dostępna</option>';
-                        echo '<option value="zarezerwowana" ' . ($row["status_wizyty"] == 'zarezerwowana' ? 'selected' : '') . '>Zarezerwowana</option>';
-                        echo '</select>';
+                        echo '<td>' . $row["status_wizyty"] . '</td>';
                         echo '</td>';
                         echo '<td>';
-                        echo '<button type="submit" class="edit-btn" name="save-btn[]">Zapisz</button>';
-                        echo '</form>';
+                        echo '<button type="submit" class="edit-btn" name="anuluj_wizyte">Anuluj</button>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -223,5 +224,18 @@ $result = $conn->query($sql);
 </body>
 
 <script src="script1.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('confirmNo').addEventListener('click', function () {
+            document.getElementById('confirmCancel').style.display = 'none';
+        });
+
+        document.getElementsByName('anuluj_wizyte').forEach(function (button) {
+            button.addEventListener('click', function () {
+                document.getElementById('confirmCancel').style.display = 'block';
+            });
+        });
+    });
+</script>
 
 </html>

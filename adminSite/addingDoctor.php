@@ -147,7 +147,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</thead>';
             echo '<tbody>';
 
-            $count = 1;
+            $count = $offset + 1;
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
