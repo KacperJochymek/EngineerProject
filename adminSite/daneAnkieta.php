@@ -69,7 +69,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Analiza danych ankietowanych</p>
+    <div class="ikona_powrot">
+        <a href="/adminSite/dataAnalysis.php">
+            <i class="fa-regular fa-circle-left"></i>
+        </a>
+    </div>
+    <p class="lekarz-wybierz2">Analiza danych ankietowanych</p>
 
     <div class="dataAnalize2">
 

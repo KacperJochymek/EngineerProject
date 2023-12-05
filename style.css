@@ -478,6 +478,13 @@ hr {
     color: #100F42;
 }
 
+.lekarz-wybierz2{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 40px;
+    font-weight: 600;
+    color: #100F42;
+}
 
 .lekarz-logo{
     margin: 50px 150px;
@@ -707,6 +714,23 @@ hr {
     display: flex;
     align-items: center;
     flex-direction: row;
+}
+
+.ikona_powrot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.ikona_powrot i{
+    font-size: 30px;
+    text-decoration: none;
+    color: #fefefe;
+}
+
+.ikona_powrot i:hover{
+    transform: scale(1.3);
 }
 
 .miaryStat {
