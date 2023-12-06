@@ -103,7 +103,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '<tr>';
             echo '<th>Id</th>';
             echo '<th>Nazwa zabiegu</th>';
-            echo '<th>Cena</th>';
+            echo '<th>Cena (zł)</th>';
             echo '<th>Akcje</th>';
             echo '</tr>';
             echo '</thead>';

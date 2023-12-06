@@ -553,11 +553,19 @@ hr {
 }
 
 .paczka{
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
     height: 500px;
     width: 75%;
     margin: 0 auto;
-    border-radius: 10px;
+    border-radius: 40px;
+}
+
+.paczka_blog{
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 450px;
+    width: 1000px;
+    margin: 0 auto;
+    border-radius: 40px;
 }
 
 .daneSzczegolowe{
@@ -869,9 +877,10 @@ hr {
 .message-inpt {
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-top: 20px;
     font-size: 20px;
     height: 250px;
-    width: 700px;
+    width: 800px;
     padding-left: 15px;
     padding-top: 15px;
 }
@@ -884,7 +893,7 @@ hr {
     }
 
 .blog_adding{
-    height: 1350px;
+    height: 1420px;
 }
 
 .blog-form{
@@ -1483,10 +1492,15 @@ hr {
 }
 
 .new-price-form{
-    padding: 5px;
-    height: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    height: 25px;
     width: 100px;
     text-align: center;
+}
+
+.new-price-form:focus{
+    outline: none;
 }
 
 

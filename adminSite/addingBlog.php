@@ -118,14 +118,16 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         ?>
 
         <form class="blog-form" method="POST" enctype="multipart/form-data">
-            <textarea name="tekst" class="message-inpt" placeholder="Treść wpisu bloga"></textarea>
-            <div class="file-container">
-                <i class="fa-solid fa-circle-arrow-down" id="fileIcon"></i>
-                <div class="file-name" id="fileName"></div>
+            <div class="paczka_blog">
+                <textarea name="tekst" class="message-inpt" placeholder="Treść wpisu bloga"></textarea>
+                <div class="file-container">
+                    <i class="fa-solid fa-circle-arrow-down" id="fileIcon"></i>
+                    <div class="file-name" id="fileName"></div>
+                </div>
+                <input type="file" name="obrazek" id="obrazek" class="file-input">
+                <input type="submit" name="signup_submit" class="lekarz-btn" value="Wyślij">
+                <div class="messageSent"></div>
             </div>
-            <input type="file" name="obrazek" id="obrazek" class="file-input">
-            <input type="submit" name="signup_submit" class="lekarz-btn" value="Wyślij">
-            <div class="messageSent"></div>
         </form>
 
         <p class="lekarz-wybierz2">Podgląd:</p>
