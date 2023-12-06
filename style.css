@@ -1419,6 +1419,32 @@ hr {
     font-size: 20px;
 }
 
+.wynik{
+    margin-left: 20px;
+    font-size: 40px;
+    color: red;
+    font-weight: 800;
+    width: 70px;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #fefefe;
+}
+
+@keyframes rotateNumber{
+    from{
+      transform: rotateY(0deg);
+    }
+    to{
+      transform: rotateY(360deg);
+    }
+}
+  
+.rotating-number{
+    display: inline-block;
+    animation: rotateNumber 2s linear infinite;
+    transform-origin: center; 
+}
+
 .accountAdminLook{
     display: flex;
     flex-direction: column;
