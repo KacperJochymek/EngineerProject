@@ -128,7 +128,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <div class="messageSent"></div>
         </form>
 
-        <p class="lekarz-wybierz">Podgląd:</p>
+        <p class="lekarz-wybierz2">Podgląd:</p>
 
         <?php
 
@@ -160,10 +160,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
                 echo '<form method="post" action="">';
-                echo '<td>' . $count . '</td>';
-                echo '<td><textarea name="tekst[]" class="edit-text" placeholder="Twój tekst">' . $row["tekst"] . '</textarea></td>';
-                echo '<td>' . $row["dat"] . '</td>';
-                echo '<td>';
+                echo '<td style="width: 50px;">' . $count . '</td>';
+                echo '<td><textarea name="tekst[]" class="edit-text" style="overflow: hidden;" placeholder="Twój tekst">' . $row["tekst"] . '</textarea></td>';
+                echo '<td style="width: 100px;">' . $row["dat"] . '</td>';
+                echo '<td style="width: 200px;">';
                 echo '<input type="hidden" name="id[]" value="' . $row["id"] . '">';
                 echo '<button type="submit" class="edit-btn" name="save-btn[]">Zapisz</button>';
                 echo '<button type="submit" class="delete-btn" name="delete-btn[]">Usuń</button>';
