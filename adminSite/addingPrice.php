@@ -69,7 +69,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
     <p class="lekarz-wybierz">Formularz dodawania/zmian cen w systemie</p>
 
-    <div class="lekarzeDatabase">
+    <div class="wysoko_price">
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
             <div class="add-inpt">
@@ -97,7 +97,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            echo '<div class="tble-cennik">';
+            echo '<div class="tble-hpracy">';
             echo '<table>';
             echo '<thead>';
             echo '<tr>';

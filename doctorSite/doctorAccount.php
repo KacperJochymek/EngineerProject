@@ -144,37 +144,60 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
         </form>
 
 
-        <div class="doctor-form">
-            <?php
+        <p class="lekarz-wybierz">Podgląd lekarzy:</p>
 
-            $sql = "SELECT * FROM doctors";
-            $result = $conn->query($sql);
+        <?php
 
-            if ($result->num_rows > 0) {
-                echo '<div class="tble-cennik">';
-                echo '<table>';
-                echo '<thead>';
+        $itemsPerPage = 3;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($page - 1) * $itemsPerPage;
+
+        $sql = "SELECT * FROM doctors LIMIT $itemsPerPage OFFSET $offset";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            echo '<div class="tble-hpracy">';
+            echo '<table>';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th>Id</th>';
+            echo '<th>Tytuł</th>';
+            echo '<th>Imię i nazwisko</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+            while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<th>ID</th>';
-                echo '<th>Tytuł</th>';
-                echo '<th>Imię i nazwisko</th>';
+                echo '<td>' . $row['id_lekarza'] . '</td>';
+                echo '<td>' . $row['tytul'] . '</td>';
+                echo ' <td>' . $row['imienazwisko'] . '</td>';
                 echo '</tr>';
-                echo '</thead>';
-                echo '<tbody>';
-
-                while ($row = $result->fetch_assoc()) {
-                echo '<tr>
-                <td>' . $row['id_lekarza'] . '</td>
-                <td>' . $row['tytul'] . '</td>
-                <td>' . $row['imienazwisko'] . '</td>
-                </tr>';
-                }
-                echo '</table>';
-            } else {
-                echo "Brak danych do wyświetlenia.";
             }
-            ?>
-        </div>
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+
+            $sqlCount = "SELECT COUNT(*) AS total FROM doctors";
+            $resultCount = $conn->query($sqlCount);
+            $rowCount = $resultCount->fetch_assoc()['total'];
+            $totalPages = ceil($rowCount / $itemsPerPage);
+
+            echo '<div class="pagination">';
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $active_class = ($i == $page) ? 'active' : '';
+                echo '<a class="' . $active_class . '" href="addingPrice.php?page=' . $i . '">' . $i . '</a>';
+            }
+            echo '</div>';
+        } else {
+            echo '<div class="blog_brakdan">';
+            echo "Brak danych do wyświetlenia.";
+            echo '<a href="addingPrice.php?page=1"><i class="fa-solid fa-circle-arrow-left"></i></a>';
+            echo '</div>';
+        }
+
+        $conn->close();
+        ?>
     </div>
 
     <footer>

@@ -590,7 +590,7 @@ hr {
 }
 
 .doctorAccDiv{
-    height: 900px;
+    height: 950px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -598,6 +598,20 @@ hr {
 
 .lekarzeDatabase{
     height: 1170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wysoko_addDoctor{
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wysoko_price{
+    height: 1050px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -702,17 +716,19 @@ hr {
 }
 
 .id_leka2{
+    margin-left: 10px;
+    height: 52px;
     padding: 10px;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .id_leka3{
+    margin-left: 10px;
+    height: 52px;
     padding: 10px;
     border-radius: 10px;
-    width: 100px;
-    font-size: 15px;
-    margin-left: 20px;
+    font-size: 20px;
 }
 
 .dataAnalize{
@@ -780,7 +796,7 @@ hr {
 }
 
 .select-prof{
-    width: 200px;
+    width: 220px;
     padding: 10px;
     text-align: center;
     border: 1px solid #ccc; 
@@ -908,6 +924,7 @@ hr {
 
 .message-inpt {
     border: 1px solid #ccc;
+    box-shadow: 2px 0 20px 0 rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     margin-top: 20px;
     font-size: 20px;
@@ -1451,7 +1468,16 @@ hr {
     align-items: center; 
     text-align: center;
     justify-content: flex-start; 
-    height: 1100px;
+    height: 1050px;
+}
+
+.wysoko_adminLook{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    justify-content: flex-start; 
+    height: 1050px;
 }
 
 .vtableUsers{
@@ -1493,6 +1519,7 @@ hr {
 
 .lookVis input{
     border-radius: 10px;
+    margin-left: 10px;
     font-size: 20px;
     height: 50px;
     width: 200px;
@@ -1509,6 +1536,36 @@ hr {
 .wyrownanie th,
 .wyrownanie td {
     border: 0;
+}
+
+.tble-hpracy{
+    background: #fefefe;
+    border-radius: 20px;
+    width: 700px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.tble-hpracy table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tble-hpracy table th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.tble-hpracy .edit-btn, .delete-btn {
+    background-color: #007BFF;
+    border-radius: 20px;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
 }
 
 .tble-cennik{
@@ -1560,7 +1617,6 @@ hr {
 .new-price-form:focus{
     outline: none;
 }
-
 
 #formContainer {
     display: none;

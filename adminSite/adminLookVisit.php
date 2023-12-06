@@ -106,7 +106,7 @@ $result = $conn->query($sql);
         </label>
     </header>
 
-    <div class="accountAdminLook">
+    <div class="wysoko_adminLook">
 
         <p class="lekarz-wybierz">Podgląd wizyt pacjentów</p>
 
