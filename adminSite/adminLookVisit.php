@@ -17,6 +17,7 @@ require '../Logowanie/config.php';
 if (isset($_POST['filter-btn'])) {
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $doctor_id = isset($_POST['doctor_id']) ? intval($_POST['doctor_id']) : null;
 
     $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, 
             pacjenci.id_pacjenta, wizyty.status_wizyty 
@@ -24,6 +25,10 @@ if (isset($_POST['filter-btn'])) {
             LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
             LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
             WHERE wizyty.data_wizyty BETWEEN '$start_date' AND '$end_date'";
+            
+    if (!is_null($doctor_id)) {
+        $sql .= " AND wizyty.doctor_id = $doctor_id";
+    }
 } else {
     $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, 
             pacjenci.id_pacjenta, wizyty.status_wizyty 
@@ -38,7 +43,6 @@ $countRow = $countResult->fetch_assoc();
 $totalRecords = $countRow['total'];
 
 $records_per_page = 4;
-
 
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($page - 1) * $records_per_page;
@@ -109,6 +113,22 @@ $result = $conn->query($sql);
         <div class="lookUsers">
             <form method="post" class="lookVis">
                 <p>Wybierz przedziały dat:</p>
+                <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
+                    <?php
+
+                    $doctor_query = "SELECT id_lekarza FROM doctors";
+                    $doctor_result = $conn->query($doctor_query);
+
+                    if (!$doctor_result) {
+                        die("Błąd: " . $conn->error);
+                    }
+
+
+                    while ($row = $doctor_result->fetch_assoc()) {
+                        echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
+                    }
+                    ?>
+                </select>
                 <input type="date" name="start_date" placeholder="Data początkowa">
                 <input type="date" name="end_date" placeholder="Data końcowa">
                 <button type="submit" class="filtruj" name="filter-btn">Filtruj</button>
