@@ -179,7 +179,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         <option value="kwartyl1">Kwartyl1</option>
                         <option value="kwartyl3">Kwartyl3</option>
                         <!-- zakres miedzykwartylowy -->
-                        <option value="iqr">IQR</option> 
+                        <option value="iqr">IQR</option>
                         <option value="odchylenie-std">Odchylenie sd</option>
                     </select>
                 </div>
@@ -189,7 +189,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <div class="wykresy">
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result)) {
-                    echo "Wynik obliczenia: $result";
+                    // Ograniczenie do dwóch miejsc po przecinku
+                    $resultFormatted = number_format($result, 2, '.', '');
+                    echo "Wynik obliczenia: $resultFormatted";
                 }
                 ?>
             </div>
@@ -223,7 +225,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </div>
 
         <div class="ankieta-cd">
-            
+
             <p class="linia"></p>
             <p>Dane szczegółowe <a href="/adminSite/daneSzczegolowe.php"><i class="fa-solid fa-circle-arrow-right"></i> </p></a>
         </div>

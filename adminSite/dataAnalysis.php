@@ -448,6 +448,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
     var labels = Object.keys(parsedLocationCounts);
     var data = Object.values(parsedLocationCounts);
 
+    var total = data.reduce((acc, value) => acc + value, 0);
+    var percentages = data.map(value => ((value / total) * 100).toFixed(2));
+    
     var ctx = document.getElementById('locationChart').getContext('2d');
 
     if (window.locationChart instanceof Chart) {
@@ -461,7 +464,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             data: {
                 labels: labels,
                 datasets: [{
-                    data: data,
+                    data: percentages,
                 }],
             },
             options: {
@@ -486,7 +489,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        stepSize: 1
                     }
                 }
             },
