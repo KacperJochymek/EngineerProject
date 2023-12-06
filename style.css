@@ -1210,6 +1210,13 @@ hr {
     color: #aaa;
 }
 
+
+.calendar .days li.active {
+    background: linear-gradient(to right, #BEC8E9, #265df2);
+    color: #fff; 
+    border-radius: 50%; 
+}
+
 .godzinaWizyty {
     margin-top: 30px;
     text-align: center;

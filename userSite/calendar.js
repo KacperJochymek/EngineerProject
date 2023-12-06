@@ -112,3 +112,30 @@ availableHours.addEventListener("click", (event) => {
         selectedHourElement.textContent = wybranaGodzina;
     }
 });
+
+//Przemieszczanie się aktywnego dnia w kalendarzu
+document.addEventListener("DOMContentLoaded", function () {
+    const daysTag = document.querySelector(".days");
+    let selectedDay = date.getDate(); 
+
+    daysTag.addEventListener("click", (event) => {
+        const target = event.target;
+        if (target.tagName === 'LI' && !target.classList.contains("inactive")) {
+            const day = parseInt(target.textContent, 10);
+            if (!isNaN(day) && isFinite(day)) {
+                
+                const currentActive = document.querySelector('.days li.active');
+                if (currentActive) {
+                    currentActive.classList.remove('active');
+                }
+
+                target.classList.add('active');
+
+                selectedDay = day;
+
+                const selectedDateElement = document.getElementById("selectedDate");
+                selectedDateElement.textContent = `${selectedDay} ${months[currMonth]} ${currYear}`;
+            }
+        }
+    });
+});
