@@ -75,39 +75,44 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         require '../Logowanie/config.php';
 
         if (isset($_POST["signup_submit"])) {
-            $tekst = $_POST["tekst"];
-            $data = date("Y-m-d");
+            $tekst = isset($_POST["tekst"]) ? trim($_POST["tekst"]) : '';
 
-            // Inicjalizuj zmienne obrazka na null, które zostaną wstawione do bazy danych
-            $obrazek_name = null;
-
-            if (!empty($_FILES["obrazek"]["name"])) {
-                $obrazek_name = $_FILES["obrazek"]["name"];
-                $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
-                $obrazek_type = $_FILES["obrazek"]["type"];
-
-                // Sprawdź, czy przesłany plik to obrazek
-                if (substr($obrazek_type, 0, 5) === "image") {
-                    move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
-                } else {
-                    echo '<div class="messageSent">Błąd: Plik nie jest obrazkiem.</div>';
-                }
-            }
-
-            $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES (?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-
-            if ($stmt) {
-                $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
-
-                if ($stmt->execute()) {
-                    echo '<div class="messageSent">Wpis dodany pomyślnie!</div>';
-                } else {
-                    echo '<div class="messageSent">Błąd: ' . $stmt->error . '</div>';
-                }
-                $stmt->close();
+            // Sprawdź, czy tekst nie jest pusty
+            if (empty($tekst)) {
+                echo '<div class="messageSent">Błąd: Treść wpisu bloga nie może być pusta.</div>';
             } else {
-                echo '<div class="messageSent">Błąd przy przygotowywaniu zapytania.<br></div>';
+                $data = date("Y-m-d");
+
+                $obrazek_name = null;
+
+                if (!empty($_FILES["obrazek"]["name"])) {
+                    $obrazek_name = $_FILES["obrazek"]["name"];
+                    $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
+                    $obrazek_type = $_FILES["obrazek"]["type"];
+
+                    // Sprawdź, czy przesłany plik to obrazek
+                    if (substr($obrazek_type, 0, 5) === "image") {
+                        move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
+                    } else {
+                        echo '<div class="messageSent">Błąd: Plik nie jest obrazkiem.</div>';
+                    }
+                }
+
+                $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES (?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+
+                if ($stmt) {
+                    $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
+
+                    if ($stmt->execute()) {
+                        echo '<div class="messageSent">Wpis dodany pomyślnie!</div>';
+                    } else {
+                        echo '<div class="messageSent">Błąd: ' . $stmt->error . '</div>';
+                    }
+                    $stmt->close();
+                } else {
+                    echo '<div class="messageSent">Błąd przy przygotowywaniu zapytania.<br></div>';
+                }
             }
         }
         ?>
@@ -150,7 +155,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '</thead>';
             echo '<tbody>';
 
-            $count = 1;
+            $count = $offset + 1;
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
@@ -165,7 +170,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
-                
+
                 $count++;
             }
             echo '</tbody>';
