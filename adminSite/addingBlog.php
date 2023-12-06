@@ -44,7 +44,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
                 </li>
                 <li>
-                    <a href="#">Zmień cene</a>
+                    <a href="/adminSite/addingPrice.php">Zmień cene</a>
                 </li>
 
                 <li>

@@ -73,8 +73,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
             <div class="add-inpt">
-                <input type="text" name="nazwa" id="nazwa" placeholder="Nazwa zabiegu">
-                <input type="text" name="cena" id="cena" placeholder="Cena"><br>
+                <input class="doctor-form-input" type="text" name="nazwa" id="nazwa" placeholder="Nazwa zabiegu">
+                <input class="doctor-form-input" type="text" name="cena" id="cena" placeholder="Cena"><br>
                 <input type="submit" class="lekarz-btn" name="add_submit" value="Dodaj">
                 <div class="validationMessage" style="display:none;">
                     <p class="nazwaError">Podana cena musi zawierać tylko litery.</p>

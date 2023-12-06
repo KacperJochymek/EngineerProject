@@ -597,7 +597,7 @@ hr {
 }
 
 .lekarzeDatabase{
-    height: 1100px;
+    height: 1170px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -612,7 +612,7 @@ hr {
     margin-top: 40px;
 }
 
-.doctor-form input[type="text"] {
+.doctor-form-input{
     padding: 10px; 
     margin: 5px; 
     border: 1px solid #ccc; 
@@ -767,6 +767,37 @@ hr {
     margin-right: 20px;
 }
 
+.laczenie{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.laczenie .new_lekz{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.select-prof{
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 19px;
+}
+
+.new_lekz{
+    width: 220px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 19px;
+    margin: 0 10px;
+}
+
 .miaryStat .lekarz-btn{
     margin-top: 30px;
     margin-left: 20px;
@@ -774,6 +805,7 @@ hr {
 
 .slct-wrapper {
     text-align: justify;
+    margin: 0 10px;
 }
 
 .slct-wrapper p{

@@ -76,8 +76,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         if (isset($_POST["signup_submit"])) {
             $tytul = $_POST["tytul"];
-            $imienazwisko = $_POST["imienazwisko"];
+            $imie = $_POST["imie"];
+            $nazwisko = $_POST["nazwisko"];
             $profesja = $_POST["profesja"];
+
+            $imienazwisko = $_POST["imie"] . ' ' . $_POST["nazwisko"];
 
             $obrazek_name = $_FILES["obrazek"]["name"];
             $obrazek_temp = $_FILES["obrazek"]["tmp_name"];
@@ -107,11 +110,37 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         <form method="POST" enctype="multipart/form-data" class="doctor-form">
             <div class="add-inpt">
-                <input type="text" name="tytul" id="tytul" placeholder="Tytuł naukowy">
-                <input type="text" name="imienazwisko" id="imienazwisko" placeholder="Imię i nazwisko"><br>
-                <input type="text" name="profesja" id="profesja" placeholder="Specjalizacja">
+                <div class="laczenie">
+                    <div class="slct-wrapper">
+                        <p>Wybierz tytuł:</p>
+                        <select class="select-prof" name="tytul" id="tytul">
+                            <option value="lek">lek.</option>
+                            <option value="mgr">mgr</option>
+                            <option value="dr">dr</option>
+                            <option value="drnmed">dr n. med.</option>
+                            <option value="drhabnmed">dr hab. n. med.</option>
+                            <option value="profhab">prof. dr hab. n. med.</option>
+                        </select>
+                    </div>
+                    <div class="slct-wrapper">
+                        <p>Wybierz profesję:</p>
+                        <select class="select-prof" name="profesja" id="profesja">
+                            <option value="Podolog">Podolog</option>
+                            <option value="Onkolog">Onkolog</option>
+                            <option value="Psycholog">Psycholog</option>
+                            <option value="Kardiolog">Kardiolog</option>
+                            <option value="Internista">Internista</option>
+                            <option value="Neurolog">Neurolog</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="laczenie">
+                    <input class="new_lekz" type="text" name="imie" id="imie" placeholder="Imię">
+                    <input class="new_lekz" type="text" name="nazwisko" id="nazwisko" placeholder="Nazwisko">
+                </div>
+
                 <div class="file-container">
-                <i class="fa-solid fa-circle-arrow-down" id="fileIcon"></i>
+                    <i class="fa-solid fa-circle-arrow-down" id="fileIcon"></i>
                     <div class="file-name" id="fileName"></div>
                 </div>
                 <input type="file" name="obrazek" id="obrazek" class="file-input">
@@ -127,7 +156,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         require '../Logowanie/config.php';
         require '../adminSite/configs/addDoctor-config.php';
 
-        $itemsPerPage = 4;
+        $itemsPerPage = 3;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
@@ -242,55 +271,35 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
 <script src="script1.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var form = document.querySelector('.doctor-form');
-    var messageSent = document.querySelector('.messageSent');
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('.doctor-form');
+        var messageSent = document.querySelector('.messageSent');
 
-    form.addEventListener('submit', function (event) {
-        var tytulInput = document.getElementById('tytul');
-        if (!validateTextWithDot(tytulInput.value)) {
-            displayErrorMessage('Pole "Tytuł naukowy" musi zawierać tylko litery i kropki.');
-            event.preventDefault();
-            return false;
+        form.addEventListener('submit', function(event) {
+            clearErrorMessage();
+
+            var imieInput = document.getElementById('imie');
+            var nazwiskoInput = document.getElementById('nazwisko');
+
+            var imieValid = validateText(imieInput.value);
+            var nazwiskoValid = validateText(nazwiskoInput.value);
+
+            if (!imieValid || !nazwiskoValid) {
+                event.preventDefault();
+                messageSent.innerHTML = 'Pola "Imię" i "Nazwisko" muszą zawierać tylko litery.';
+                messageSent.style.color = 'red';
+            }
+        });
+
+        function clearErrorMessage() {
+            messageSent.innerHTML = '';
         }
 
-        var imienazwiskoInput = document.getElementById('imienazwisko');
-        if (!validateText(imienazwiskoInput.value)) {
-            displayErrorMessage('Pole "Imię i nazwisko" musi zawierać tylko litery.');
-            event.preventDefault();
-            return false;
+        function validateText(text) {
+            var regex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s]+$/;
+            return regex.test(text);
         }
-
-        var profesjaInput = document.getElementById('profesja');
-        if (!validateText(profesjaInput.value)) {
-            displayErrorMessage('Pole "Specjalizacja" musi zawierać tylko litery.');
-            event.preventDefault();
-            return false;
-        }
-
-        clearErrorMessage();
-        return true;
     });
-
-    function displayErrorMessage(message) {
-        messageSent.innerHTML = message;
-        messageSent.style.color = 'red';
-    }
-
-    function clearErrorMessage() {
-        messageSent.innerHTML = '';
-    }
-
-    function validateTextWithDot(text) {
-        var regex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s.]+$/;
-        return regex.test(text);
-    }
-
-    function validateText(text) {
-        var regex = /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s]+$/;
-        return regex.test(text);
-    }
-});
 </script>
 <script>
     const fileIcon = document.getElementById('fileIcon');
