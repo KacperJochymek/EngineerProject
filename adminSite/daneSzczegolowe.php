@@ -161,9 +161,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo "Błąd podczas otwierania pliku.";
             }
         }
-
         ?>
-
 
         <div class="paczka">
             <form method="post" action="" class="daneSzczegoloweContainer">
@@ -213,7 +211,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </form>
 
             <div class="wykresyContent">
-                <div class="wykresy-szczegolowe">
+                <div class="wykresy-wynik">
                     <?php
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result)) {
                         echo "Wynik: $result";
@@ -259,9 +257,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
                     <?php
                     if (!empty($values)) {
-
+                        echo '<div class="tble-hpracy">';
                         echo ' <table>';
-
                         echo '<thead>';
                         echo '<tr>';
                         echo '<th>Przedział wieku</th>';
@@ -284,6 +281,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                             echo "</tr>";
                         }
                         echo '</table>';
+                        echo '</div>';
                     }
                     ?>
                 </div>
@@ -414,7 +412,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </form>
 
             <div class="wykresyContent">
-                <div class="wykresy-szczegolowe">
+                <div class="wykresy-wynik">
                     <?php
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result2)) {
                         echo "Wynik: $result2";
@@ -460,8 +458,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
                     <?php
                     if (!empty($values)) {
+                        echo '<div class="tble-hpracy">';
                         echo ' <table>';
-
                         echo '<thead>';
                         echo '<tr>';
                         echo '<th>Przedział wieku</th>';
@@ -484,6 +482,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                             echo "</tr>";
                         }
                         echo '</table>';
+                        echo '</div>';
                     }
                     ?>
                 </div>
@@ -612,7 +611,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </form>
 
             <div class="wykresyContent">
-                <div class="wykresy-szczegolowe">
+                <div class="wykresy-wynik">
                     <?php
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result3)) {
                         echo "Wynik: $result3";
@@ -658,8 +657,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
                     <?php
                     if (!empty($values)) {
+                        echo '<div class="tble-hpracy">';
                         echo ' <table>';
-
                         echo '<thead>';
                         echo '<tr>';
                         echo '<th>Przedział wieku</th>';
@@ -682,6 +681,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                             echo "</tr>";
                         }
                         echo '</table>';
+                        echo '</div>';
                     }
                     ?>
                 </div>
