@@ -456,7 +456,7 @@ hr {
 
 .edit-text{
     width: 100%;
-    height: 100px;
+    height: 99px;
     border: none;
 }
 
@@ -1677,6 +1677,7 @@ hr {
 }
 
 .new-price-form{
+    border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
     height: 25px;
