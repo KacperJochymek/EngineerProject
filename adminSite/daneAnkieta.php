@@ -186,7 +186,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <button class="lekarz-btn">Oblicz</button>
             </form>
 
-            <div class="wykresy">
+            <div class="wykresy-wynik">
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result)) {
                     // Ograniczenie do dwóch miejsc po przecinku
@@ -197,9 +197,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </div>
         </div>
 
-        <p class="tekst-dataWykresy">Wykresy dla całej przychodni:</p>
+        <p class="tekst-dataWykresy2">Wykresy dla całej przychodni:</p>
 
-        <div class="dataAnalizeSquare">
+        <div class="dataAnalizeSquare2">
             <img src="/images/wykresy.png" alt="">
             <!-- Wykresy -->
             <div class="miaryStat">
@@ -219,7 +219,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 </div>
                 <button class="lekarz-btn" id="generateChart">Generuj wykres</button>
             </div>
-            <div class="wykresy">
+            <div class="wykresy-wykr">
                 <canvas id="myCharts"></canvas>
             </div>
         </div>

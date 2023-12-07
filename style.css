@@ -408,6 +408,13 @@ hr {
     text-align: center;
 }
 
+.tekst-dataWykresy2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
 .ankieta-cd{
     flex-direction: column;
     align-items: center;
@@ -552,11 +559,37 @@ hr {
     margin: 0 50px; 
 }
 
+.wykresy-wykr{
+    background: #fefefe;
+    margin-top: 50px;
+    border-radius: 20px;
+    padding: 20px;
+    height: 400px;
+    width: 1000px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .wykresy-wynik{
     background: #fefefe;
     border-radius: 20px;
     height: 50px;
     width: 200px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.dataAnalizeSquare .wykresy-wynik{
+    margin-top: 50px;
+    background: #fefefe;
+    border-radius: 20px;
+    height: 100px;
+    width: 250px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -745,23 +778,40 @@ hr {
 }
 
 .dataAnalize{
-    height: 1400px;
+    height: 1900px;
 }
 
 .dataAnalize2{
-    height: 1600px;
+    height: 2220px;
 }
 
 .dataAnalize2 img{
-    width: 250px;
-    margin: 70px;
+    width: 200px;
+    margin-top: 50px;
 }
 
 .dataAnalizeSquare{
     text-align: center;
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 500px;
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 40px;
+}
+
+.dataAnalizeSquare2{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 800px;
+    width: 75%;
+    margin: 0 auto;
+    border-radius: 40px;
 }
 
 .ikona_powrot{
@@ -856,8 +906,8 @@ hr {
 }  
 
 .dataAnalize img{
-    width: 250px;
-    margin: 70px;
+    width: 200px;
+    margin-top: 50px;
 }
 
 .messageSent{

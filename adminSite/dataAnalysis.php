@@ -139,14 +139,14 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 </div>
                 <button id="calculateButton" class="lekarz-btn">Oblicz</button>
             </div>
-            <div class="wykresy">
+            <div class="wykresy-wynik">
                 <p id="result"> </p>
             </div>
         </div>
 
-        <p class="tekst-dataWykresy">Wykresy:</p>
+        <p class="tekst-dataWykresy2">Wykresy:</p>
 
-        <div class="dataAnalizeSquare">
+        <div class="dataAnalizeSquare2">
 
             <?php
 
@@ -224,7 +224,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 </div>
                 <button class="lekarz-btn" id="generateChart">Generuj wykres</button>
             </div>
-            <div class="wykresy">
+            <div class="wykresy-wykr">
                 <canvas id="locationChart"></canvas>
             </div>
         </div>
