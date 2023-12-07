@@ -243,6 +243,7 @@ if (isset($_POST['tak_oo'])) {
             </div>
 
             <div class="settings-inpt">
+                <p p class="tekst-wizytyMyAcc2">Zmień hasło lub usuń konto.</p>
                 <div class="changePass">
                     <form method="post">
                         <div class="input-cntiner">

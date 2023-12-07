@@ -83,7 +83,7 @@ if (isset($_GET["doctor_id"])) {
         </label>
     </header>
 
-    <p class="lekarz-wybierz" id="lekarz-wybierz-text">Wybierz date i godzine wizyty:</p>
+    <p class="lekarz-wybierz" id="lekarz-wybierz-text">Wybierz datę i godzinę wizyty:</p>
 
     <div class="messageSent"></div>
 
