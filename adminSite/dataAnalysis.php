@@ -212,7 +212,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <p>Wybierz wartość:</p>
                     <select class="slct-miara" id="selectLocation">
                         <option value="miasto">Miasto</option>
-                        <option value="wojewodztwo">Wojewodztwo</option>
+                        <option value="wojewodztwo">Województwo</option>
                     </select>
                 </div>
                 <div class="slct-wrapper">
@@ -464,6 +464,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             data: {
                 labels: labels,
                 datasets: [{
+                    label: '%',
                     data: percentages,
                 }],
             },

@@ -160,7 +160,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>Id</th>';
+            echo '<th>Lp.</th>';
             echo '<th>Tytuł</th>';
             echo '<th>Imię i nazwisko</th>';
             echo '</tr>';
