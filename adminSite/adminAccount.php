@@ -40,20 +40,20 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="/index.php">Strona Główna</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
+                    <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingPrice.php">Zmień cene</a>
+                    <a href="/adminSite/addingPrice.php">Zmień cenę</a>
                 </li>
 
                 <li>
-                    <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
+                    <a href="/adminSite/addingBlog.php">Wpisy blog</a>
                 </li>
                 <li>
-                    <a href="dataAnalysis.php">Analiza Danych</a>
+                    <a href="dataAnalysis.php">Analiza danych</a>
                 </li>
                 <li>
-                    <a href="/adminSite/adminAccount.php">Moje Konto</a>
+                    <a href="/adminSite/adminAccount.php">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -74,7 +74,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <div class="admin-panel">
             <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
             <a href="/adminSite/addingBlog.php">Dodaj wpis na bloga</a>
-            <a href="/adminSite/dataAnalysis.php">Analiza Danych</a>
+            <a href="/adminSite/dataAnalysis.php">Analiza danych</a>
             <a href="/adminSite/adminLookVisit.php">Wizyty</a>
             <a href="/adminSite/addingPrice.php">Edytuj cennik</a>
         </div>

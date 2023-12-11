@@ -32,7 +32,7 @@ if (!empty($_SESSION["id"])) {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="lekarze.php">Lekarze</a>
@@ -48,7 +48,7 @@ if (!empty($_SESSION["id"])) {
                 </li>
 
                 <li>
-                    <a href="myAccount.php">Moje Konto</a>
+                    <a href="myAccount.php">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>

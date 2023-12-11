@@ -37,23 +37,23 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
+                    <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingPrice.php">Zmień cene</a>
+                    <a href="/adminSite/addingPrice.php">Zmień cenę</a>
                 </li>
 
                 <li>
-                    <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
+                    <a href="/adminSite/addingBlog.php">Wpisy blog</a>
                 </li>
                 <li>
-                    <a href="dataAnalysis.php">Analiza Danych</a>
+                    <a href="dataAnalysis.php">Analiza danych</a>
                 </li>
                 <li>
-                    <a href="/adminSite/adminAccount.php">Moje Konto</a>
+                    <a href="/adminSite/adminAccount.php">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -101,7 +101,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>Id</th>';
+            echo '<th>Lp.</th>';
             echo '<th>Nazwa zabiegu</th>';
             echo '<th>Cena (zł)</th>';
             echo '<th>Akcje</th>';

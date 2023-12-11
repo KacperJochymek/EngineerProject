@@ -38,23 +38,23 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingDoctor.php">Dodaj Lekarza</a>
+                    <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
                 </li>
                 <li>
-                    <a href="/adminSite/addingPrice.php">Zmień cene</a>
+                    <a href="/adminSite/addingPrice.php">Zmień cenę</a>
                 </li>
 
                 <li>
-                    <a href="/adminSite/addingBlog.php">Wpisy Blog</a>
+                    <a href="/adminSite/addingBlog.php">Wpisy blog</a>
                 </li>
                 <li>
-                    <a href="dataAnalysis.php">Analiza Danych</a>
+                    <a href="dataAnalysis.php">Analiza danych</a>
                 </li>
                 <li>
-                    <a href="/adminSite/adminAccount.php">Moje Konto</a>
+                    <a href="/adminSite/adminAccount.php">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
@@ -68,7 +68,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Dodaj post na strone bloga</p>
+    <p class="lekarz-wybierz">Dodaj post na stronę bloga</p>
 
     <div class="blog_adding">
         <?php
@@ -121,7 +121,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <div class="paczka_blog">
                 <textarea name="tekst" class="message-inpt" placeholder="Treść wpisu bloga"></textarea>
                 <div class="file-container">
-                    <i class="fa-solid fa-circle-arrow-down" id="fileIcon"></i>
+                    <i class="fa-solid fa-circle-arrow-up" id="fileIcon"></i>
                     <div class="file-name" id="fileName"></div>
                 </div>
                 <input type="file" name="obrazek" id="obrazek" class="file-input">
@@ -149,8 +149,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>Id</th>';
-            echo '<th>Tekst</th>';
+            echo '<th>Lp.</th>';
+            echo '<th>Treść</th>';
             echo '<th>Data</th>';
             echo '<th>Akcje</th>';
             echo '</tr>';

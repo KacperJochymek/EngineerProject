@@ -118,7 +118,7 @@ if (isset($_POST['tak_oo'])) {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="lekarze.php">Lekarze</a>
@@ -134,7 +134,7 @@ if (isset($_POST['tak_oo'])) {
                 </li>
 
                 <li>
-                    <a href="myAccount.php">Moje Konto</a>
+                    <a href="myAccount.php">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>

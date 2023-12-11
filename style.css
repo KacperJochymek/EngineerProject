@@ -456,7 +456,7 @@ hr {
 
 .edit-text{
     width: 100%;
-    height: 99px;
+    height: 98px;
     border: none;
 }
 
@@ -658,7 +658,7 @@ hr {
 }
 
 .wysoko_addDoctor{
-    height: 1100px;
+    height: 1150px;
     display: flex;
     flex-direction: column;
     align-items: center;

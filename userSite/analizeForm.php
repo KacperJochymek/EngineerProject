@@ -25,16 +25,16 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/logo.png"></a>
+            <img src="/images/medease.png">
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
             <div class="logo">
-                <img src="./images/logo.png" width="100px" height="100px" />
+                <img src="/images/medease.png" width="100px" height="100px" />
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="lekarze.php">Lekarze</a>
@@ -50,7 +50,7 @@ if (!empty($_SESSION["id"])) {
                 </li>
 
                 <li>
-                    <a href="myAccount.php">Moje Konto</a>
+                    <a href="myAccount.php">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>

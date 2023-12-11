@@ -76,7 +76,7 @@ $result = $conn->query($sql);
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="/userSite/lekarze.php">Lekarze</a>
@@ -91,7 +91,7 @@ $result = $conn->query($sql);
                     <a href="/userSite/contact.php">Kontakt</a>
                 </li>
                 <li>
-                    <a href="/doctorSite/doctorFirstSite.php">Moje Konto</a>
+                    <a href="/doctorSite/doctorFirstSite.php">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
