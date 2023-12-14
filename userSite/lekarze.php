@@ -37,7 +37,7 @@ if (!empty($_SESSION["id"])) {
                     <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
-                    <a href="lekarze.php">Lekarze</a>
+                    <a href="lekarze.php" class="active2">Lekarze</a>
                 </li>
                 <li>
                     <a href="cennik.php">Cennik</a>

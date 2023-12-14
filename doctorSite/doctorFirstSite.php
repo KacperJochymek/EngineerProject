@@ -40,19 +40,16 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
                     <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
-                    <a href="/userSite/lekarze.php">Lekarze</a>
+                    <a href="/doctorSite/doctorAccount.php">Godziny pracy</a>
                 </li>
                 <li>
-                    <a href="/userSite/cennik.php">Cennik</a>
-                </li>
-                <li>
-                    <a href="/userSite/blog.php">Aktualności</a>
+                    <a href="/doctorSite/doctorVisitCount.php">Wizyty</a>
                 </li>
                 <li>
                     <a href="/userSite/contact.php">Kontakt</a>
                 </li>
                 <li>
-                    <a href="/doctorSite/doctorAccount.php">Moje konto</a>
+                    <a href="/doctorSite/doctorFirstSite.php" class="active2">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>

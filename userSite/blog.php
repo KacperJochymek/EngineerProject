@@ -40,7 +40,7 @@ if (!empty($_SESSION["id"])) {
                     <a href="cennik.php">Cennik</a>
                 </li>
                 <li>
-                    <a href="blog.php">Aktualności</a>
+                    <a href="blog.php" class="active2">Aktualności</a>
                 </li>
                 <li>
                     <a href="contact.php">Kontakt</a>

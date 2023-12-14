@@ -52,7 +52,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="/adminSite/addingBlog.php">Wpisy blog</a>
                 </li>
                 <li>
-                    <a href="dataAnalysis.php">Analiza danych</a>
+                    <a href="dataAnalysis.php" class="active2">Analiza danych</a>
                 </li>
                 <li>
                     <a href="/adminSite/adminAccount.php">Moje konto</a>

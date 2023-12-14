@@ -134,7 +134,7 @@ if (isset($_POST['tak_oo'])) {
                 </li>
 
                 <li>
-                    <a href="myAccount.php">Moje konto</a>
+                    <a href="myAccount.php" class="active2">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>

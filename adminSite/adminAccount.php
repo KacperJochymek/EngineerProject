@@ -53,7 +53,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <a href="dataAnalysis.php">Analiza danych</a>
                 </li>
                 <li>
-                    <a href="/adminSite/adminAccount.php">Moje konto</a>
+                    <a href="/adminSite/adminAccount.php" class="active2">Moje konto</a>
                 </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>

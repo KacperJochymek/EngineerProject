@@ -79,13 +79,10 @@ $result = $conn->query($sql);
                     <a href="/index.php">Strona główna</a>
                 </li>
                 <li>
-                    <a href="/userSite/lekarze.php">Lekarze</a>
+                    <a href="/doctorSite/doctorAccount.php">Godziny pracy</a>
                 </li>
                 <li>
-                    <a href="/userSite/cennik.php">Cennik</a>
-                </li>
-                <li>
-                    <a href="/userSite/blog.php">Aktualności</a>
+                    <a href="/doctorSite/doctorVisitCount.php" class="active2">Wizyty</a>
                 </li>
                 <li>
                     <a href="/userSite/contact.php">Kontakt</a>

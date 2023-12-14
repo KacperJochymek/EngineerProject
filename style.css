@@ -61,6 +61,11 @@ nav ul li a.active {
     color: white;
 }
 
+nav ul li a.active2 {
+    background: linear-gradient(to right, #BEC8E9, #265df2);
+    color: white;
+}
+
 .active:hover{
     background: linear-gradient(to right, #BEC8E9, #265df2);
     transform: scale(1.1);

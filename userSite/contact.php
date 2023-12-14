@@ -44,7 +44,7 @@ if (!empty($_SESSION["id"])) {
                     <a href="blog.php">Aktualności</a>
                 </li>
                 <li>
-                    <a href="contact.php">Kontakt</a>
+                    <a href="contact.php" class="active2">Kontakt</a>
                 </li>
 
                 <li>
