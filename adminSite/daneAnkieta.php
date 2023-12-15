@@ -91,70 +91,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         <div class="dataAnalizeSquare">
             <img src="/images/ankieta.jpg" alt="">
             <!-- Ankieta -->
-            <form method="post" action="" class="miaryStat">
-
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $selectedColumn = $_POST["selectedColumn"];
-                    $selectedMethod = $_POST["selectedMethod"];
-
-                    if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
-                        $data = [];
-                        while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                            $data[] = $row;
-                        }
-                        fclose($handle);
-
-                        // Przetwarzanie danych i obliczenia
-                        $selectedColumnIndex = array_search($selectedColumn, $data[0]);
-                        $values = array_column(array_slice($data, 1), $selectedColumnIndex);
-
-                        $result = null;
-
-                        if ($selectedMethod === "srednia") {
-                            $result = array_sum($values) / count($values);
-                        } elseif ($selectedMethod === "odchylenie-std") {
-                            $result = sqrt(array_sum(array_map(function ($x) use ($values) {
-                                return pow($x - (array_sum($values) / count($values)), 2);
-                            }, $values)) / count($values));
-                        } elseif ($selectedMethod === "mediana") {
-                            sort($values);
-                            $count = count($values);
-                            $middle = floor($count / 2);
-                            if ($count % 2 == 0) {
-                                $result = ($values[$middle - 1] + $values[$middle]) / 2;
-                            } else {
-                                $result = $values[$middle];
-                            }
-                        } elseif ($selectedMethod === "moda") {
-                            $countValues = array_count_values($values);
-                            arsort($countValues);
-                            $modes = array_keys($countValues, max($countValues));
-                            $result = implode(", ", $modes);
-                        } elseif ($selectedMethod === "minimum") {
-                            $result = min($values);
-                        } elseif ($selectedMethod === "maksimum") {
-                            $result = max($values);
-                        } elseif ($selectedMethod === "kwartyl1") {
-                            sort($values);
-                            $result = $values[floor(count($values) / 4)];
-                        } elseif ($selectedMethod === "kwartyl3") {
-                            sort($values);
-                            $result = $values[floor(3 * count($values) / 4)];
-                        } elseif ($selectedMethod === "iqr") {
-                            sort($values);
-                            $count = count($values);
-                            $q1 = $values[floor($count / 4)];
-                            $q3 = $values[floor(3 * $count / 4)];
-                            $result = $q3 - $q1;
-                        }
-                    }
-                }
-
-                ?>
+            <div class="miaryStat">
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
-                    <select name="selectedColumn" class="slct-miara">
+                    <select id="selectedColumn" class="slct-miara">
                         <?php
                         if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
                             $header = fgetcsv($handle, 1000, ",");
@@ -170,7 +110,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
-                    <select name="selectedMethod" class="slct-miara">
+                    <select id="selectedMethod" class="slct-miara">
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
                         <option value="moda">Moda</option>
@@ -183,17 +123,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         <option value="odchylenie-std">Odchylenie sd</option>
                     </select>
                 </div>
-                <button class="lekarz-btn">Oblicz</button>
-            </form>
+                <button class="lekarz-btn" id="calculateButton">Oblicz</button>
+            </div>
 
             <div class="wykresy-wynik">
-                <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($result)) {
-                    // Ograniczenie do dwóch miejsc po przecinku
-                    $resultFormatted = number_format($result, 2, '.', '');
-                    echo "Wynik obliczenia: $resultFormatted";
-                }
-                ?>
+                <p id="result"> </p>
             </div>
         </div>
 
@@ -203,7 +137,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             <img src="/images/wykresy.png" alt="">
             <!-- Wykresy -->
             <div class="miaryStat">
-
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select name="wybranaColumna" class="slct-miara" id="selectColumn">
@@ -225,7 +158,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </div>
 
         <div class="ankieta-cd">
-
             <p class="linia"></p>
             <p>Dane szczegółowe <a href="/adminSite/daneSzczegolowe.php"><i class="fa-solid fa-circle-arrow-right"></i> </p></a>
         </div>
@@ -282,6 +214,99 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
 <script src="script1.js"></script>
 <script src="/adminSite/daneAnaliza.js"></script>
+<script>
+    //Obliczanie miar na podstawie pliku CSV - czyli bazy danych z ankiety :)
+    document.getElementById("calculateButton").addEventListener("click", function() {
+        var selectedColumn = document.getElementById("selectedColumn").value;
+        var selectedMethod = document.getElementById("selectedMethod").value;
 
+        fetch('../analiza_danych2.csv')
+            .then(response => response.text())
+            .then(csvData => {
+                // Przetwarzanie danych i obliczenia
+                var rows = csvData.split('\n');
+                var header = rows[0].split(',');
+                var selectedColumnIndex = header.indexOf(selectedColumn);
+                var values = rows.slice(1).map(function(row) {
+                    var rowData = row.split(',');
+                    return parseFloat(rowData[selectedColumnIndex]);
+                });
+
+                var result = null;
+
+                if (selectedMethod === "srednia") {
+                    result = values.reduce(function(sum, value) {
+                        return sum + value;
+                    }, 0) / values.length;
+                } else if (selectedMethod === "odchylenie-std") {
+                    var mean = values.reduce(function(sum, value) {
+                        return sum + value;
+                    }, 0) / values.length;
+                    result = Math.sqrt(values.reduce(function(sum, value) {
+                        return sum + Math.pow(value - mean, 2);
+                    }, 0) / values.length);
+                } else if (selectedMethod === "mediana") {
+                    var sortedValues = values.slice().sort(function(a, b) {
+                        return a - b;
+                    });
+                    var middle = Math.floor(sortedValues.length / 2);
+                    result = sortedValues.length % 2 === 0 ?
+                        (sortedValues[middle - 1] + sortedValues[middle]) / 2 :
+                        sortedValues[middle];
+                } else if (selectedMethod === "moda") {
+                    var countValues = values.reduce(function(count, value) {
+                        count[value] = (count[value] || 0) + 1;
+                        return count;
+                    }, {});
+
+                    var maxCount = Math.max.apply(null, Object.values(countValues));
+
+                    var modes = Object.keys(countValues).filter(function(key) {
+                        return countValues[key] === maxCount;
+                    });
+
+                    // Sprawdzenie, czy jest więcej niż jedna moda
+                    if (modes.length > 1) {
+                        result = modes.map(function(mode) {
+                            return mode + ".00";
+                        }).join(", ");
+                    } else {
+                        result = modes[0] + ".00";
+                    }
+                } else if (selectedMethod === "minimum") {
+                    result = Math.min.apply(null, values);
+                } else if (selectedMethod === "maksimum") {
+                    result = Math.max.apply(null, values);
+                } else if (selectedMethod === "kwartyl1") {
+                    var sortedValues = values.slice().sort(function(a, b) {
+                        return a - b;
+                    });
+                    result = sortedValues[Math.floor(sortedValues.length / 4)];
+                } else if (selectedMethod === "kwartyl3") {
+                    var sortedValues = values.slice().sort(function(a, b) {
+                        return a - b;
+                    });
+                    result = sortedValues[Math.floor(3 * sortedValues.length / 4)];
+                } else if (selectedMethod === "iqr") {
+                    var sortedValues = values.slice().sort(function(a, b) {
+                        return a - b;
+                    });
+                    var q1 = sortedValues[Math.floor(sortedValues.length / 4)];
+                    var q3 = sortedValues[Math.floor(3 * sortedValues.length / 4)];
+                    result = q3 - q1;
+                }
+
+                var resultElement = document.getElementById("result");
+                if (typeof result === "number") {
+                    resultElement.textContent = "Wynik obliczenia: " + result.toFixed(2);
+                } else {
+                    resultElement.textContent = "Wynik obliczenia: " + result;
+                }
+            })
+            .catch(error => {
+                console.error('Wystąpił błąd podczas pobierania lub przetwarzania danych:', error);
+            });
+    });
+</script>
 
 </html>
