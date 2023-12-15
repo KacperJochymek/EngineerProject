@@ -99,6 +99,7 @@ if (!empty($_SESSION["id"])) {
         ?>
     </div>
 
+    <div class="dostosuj-wysokosc"></div>
     <footer>
         <div class="foo">
             <div class="col-1">
@@ -149,5 +150,17 @@ if (!empty($_SESSION["id"])) {
 </body>
 
 <script src="script1.js"></script>
+<script>
+    //Skrypt do powiększania wysokości strony
+    var dostosujWysokosc = document.querySelector('.dostosuj-wysokosc');
+    var lekarzeContainer = document.querySelector('.lekarze-wybor');
+    var lekarze = document.querySelectorAll('.lekarze-wybor .lekarz-logo');
+
+    var lekarzeNaRzad = 3;
+    var iloscRzedow = Math.ceil(lekarze.length / lekarzeNaRzad);
+    var lekarzeWyborHeight = iloscRzedow * (lekarze[0].offsetHeight + 10); 
+
+    dostosujWysokosc.style.height =  (lekarzeWyborHeight - 350) + 'px';
+</script>
 
 </html>
