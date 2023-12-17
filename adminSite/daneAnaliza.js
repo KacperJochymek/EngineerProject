@@ -23,54 +23,70 @@ fetch("../analiza_danych2.csv")
         }
     });
 
-generateChartButton.addEventListener("click", () => {
-    const selectedColumn = columnSelect.value;
-    const selectedChartType = chartTypeSelect.value;
-
-    if (ageChart) {
-        ageChart.destroy();
-    }
-
-    fetch("../analiza_danych2.csv")
-        .then(response => response.text())
-        .then(data => {
-            const lines = data.split("\n");
-            const header = lines[0].split(",");
-
-            const categories = [];
-            const dataValues = Array(header.length - 2).fill(0);
-
-            for (let i = 1; i < lines.length; i++) {
-                const row = lines[i].split(",");
-                const value = row[header.indexOf(selectedColumn)];
-                const index = header.indexOf(selectedColumn);
-
-                if (!categories.includes(value)) {
-                    categories.push(value);
+    generateChartButton.addEventListener("click", () => {
+        const selectedColumn = columnSelect.value;
+        const selectedChartType = chartTypeSelect.value;
+    
+        if (ageChart) {
+            ageChart.destroy();
+        }
+    
+        fetch("../analiza_danych2.csv")
+            .then(response => response.text())
+            .then(data => {
+                const lines = data.split("\n");
+                const header = lines[0].split(",");
+    
+                const categories = [];
+                const dataValues = Array(header.length - 2).fill(0);
+    
+                for (let i = 1; i < lines.length; i++) {
+                    const row = lines[i].split(",");
+                    const value = row[header.indexOf(selectedColumn)];
+                    const index = header.indexOf(selectedColumn);
+    
+                    if (!categories.includes(value)) {
+                        categories.push(value);
+                    }
+    
+                    dataValues[categories.indexOf(value)]++;
                 }
-
-                dataValues[categories.indexOf(value)]++;
-            }
-
-            const chartData = {
-                labels: categories,
-                datasets: [{
-                    data: dataValues,
-                    backgroundColor: getRandomColors(dataValues.length),
-                }],
-            };
-
-            ageChart = new Chart(ageChartCanvas, {
-                type: selectedChartType,
-                data: chartData,
+    
+                let chartData;
+                if (selectedChartType === 'bar') {
+                    chartData = {
+                        labels: categories,
+                        datasets: [{
+                            data: dataValues,
+                            label: "Liczba pacjentów",
+                            backgroundColor: getRandomColors(dataValues.length),
+                        }],
+                    };
+                } else if (selectedChartType === 'pie') {
+                    const totalPatients = dataValues.reduce((acc, val) => acc + val, 0);
+                    const percentages = dataValues.map(value => ((value / totalPatients) * 100).toFixed(2));
+    
+                    chartData = {
+                        labels: categories,
+                        datasets: [{
+                            data: percentages,
+                            label: "%",
+                            backgroundColor: getRandomColors(dataValues.length),
+                        }],
+                    };
+                }
+    
+                ageChart = new Chart(ageChartCanvas, {
+                    type: selectedChartType,
+                    data: chartData,
+                });
+    
+                if (selectedChartType === 'bar') {
+                    ageChart.options.plugins.legend.display = false;
+                }
             });
-
-            if (selectedChartType === 'bar') {
-                ageChart.options.plugins.legend.display = false;
-                ageChart.update();
-            }
-        });
-});
+    });
+    
 
 function getRandomColors(numColors) {
     const colors = [];
