@@ -71,6 +71,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
         <h1>Witamy w panelu administratora!</h1>
 
+        <button class="save_database" id="save_database"><i class="fa-solid fa-database"></i>Zapisz bazę danych</button>
+
         <div class="admin-panel">
             <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>
             <a href="/adminSite/addingBlog.php">Dodaj wpis na bloga</a>
@@ -130,5 +132,29 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 </body>
 
 <script src="script1.js"></script>
+<script>
+document.getElementById("save_database").addEventListener("click", function() {
+    backupDatabase();
+});
+
+function backupDatabase() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "/adminSite/backup_database.php", true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log("Kopia zapasowa bazy danych została utworzona pomyślnie.");
+            } else {
+                console.error("Błąd podczas tworzenia kopii zapasowej bazy danych.");
+            }
+        }
+    };
+
+    xhr.send();
+}
+</script>
+
 
 </html>

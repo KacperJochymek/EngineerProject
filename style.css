@@ -1136,7 +1136,7 @@ hr {
 }
 
 .admin-panel{
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 @media only screen and (max-width: 784px) {
@@ -1146,7 +1146,7 @@ hr {
 }
 
 .account h1{
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .account a {
@@ -1160,10 +1160,27 @@ hr {
     border-radius: 5px;
     transition: background-color 0.3s; 
 }
+
+.save_database{
+    border: none;
+    padding: 10px;
+    background: linear-gradient(to right, #100f4287, black);
+    color: #ffffff; 
+    font-size: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s; 
+}
   
-  
+.save_database:hover{
+    background: linear-gradient(to right, #100f4287, rgb(222, 57, 57)); 
+}
+
 .account a:hover {
     background: linear-gradient(to right, #100f4287, rgb(222, 57, 57)); 
+}
+
+.account i{
+    margin-right: 5px;
 }
 
 .doctorContent{
