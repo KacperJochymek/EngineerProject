@@ -95,6 +95,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select id="selectedColumn" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <?php
                         if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
                             $header = fgetcsv($handle, 1000, ",");
@@ -111,6 +112,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
                     <select id="selectedMethod" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
                         <option value="moda">Moda</option>
@@ -146,6 +148,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wykres:</p>
                     <select name="wybranyWykres" class="slct-miara" id="chartTypeSelect">
+                        <option value="brak">Brak</option>
                         <option value="pie">Kołowy</option>
                         <option value="bar">Słupkowy</option>
                     </select>

@@ -94,6 +94,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wiek:</p>
                     <select name="selectedAgeGroup" id="selectedAgeGroup" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <option value="0-18">0-18</option>
                         <option value="19-35">19-35</option>
                         <option value="36-55">36-55</option>
@@ -104,6 +105,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select name="selectedColumn" id="selectedColumn" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <?php
                         if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
                             $header = fgetcsv($handle, 1000, ",");
@@ -120,6 +122,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
                     <select name="selectedMethod" id="selectedMethod" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
                         <option value="moda">Moda</option>
@@ -155,6 +158,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz płeć:</p>
                     <select name="selectedSex" id="selectedSex" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <option value="Kobieta">Kobieta</option>
                         <option value="Mezczyzna">Mężczyzna</option>
                     </select>
@@ -163,6 +167,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select name="selectedColumn2" id="selectedColumn2" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <?php
                         if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
                             $header = fgetcsv($handle, 1000, ",");
@@ -179,6 +184,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
                     <select name="selectedMethod2" id="selectedMethod2" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
                         <option value="moda">Moda</option>
@@ -216,6 +222,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <p>Wybierz specjalistę:</p>
                     <select name="selectedSpecialist" id="selectedSpecialist" class="slct-miara">
                         <!-- Tutaj dodać wczytywanie z pliku, ustawić na konkretna kolumne -->
+                        <option value="brak">Brak</option>
                         <option value="Onkolog">Onkolog</option>
                         <option value="Podolog">Podolog</option>
                     </select>
@@ -224,6 +231,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select name="selectedColumn" id="selectedColumn3" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <?php
                         if (($handle = fopen("../analiza_danych2.csv", "r")) !== FALSE) {
                             $header = fgetcsv($handle, 1000, ",");
@@ -240,6 +248,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
                     <select name="selectedMethod" id="selectedMethod3" class="slct-miara">
+                        <option value="brak">Brak</option>
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
                         <option value="moda">Moda</option>
@@ -423,7 +432,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
                     // Wyświetlanie wyniku
                     var resultElement = document.getElementById("result");
-                    resultElement.textContent = "Wynik obliczenia: " + result;
+                    resultElement.textContent = "Uśredniony wynik: " + result;
                 } else {
                     console.error('Brak danych dla wybranego przedziału wiekowego.');
                 }
@@ -609,7 +618,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
                     // Wyświetlanie wyniku
                     var resultElement = document.getElementById("result2");
-                    resultElement.textContent = "Wynik obliczenia: " + result;
+                    resultElement.textContent = "Uśredniony wynik: " + result;
                 } else {
                     console.error('Brak danych dla wybranego przedziału wiekowego.');
                 }
@@ -795,7 +804,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
                     // Wyświetlanie wyniku
                     var resultElement = document.getElementById("result3");
-                    resultElement.textContent = "Wynik obliczenia: " + result;
+                    resultElement.textContent = "Uśredniony wynik: " + result;
                 } else {
                     console.error('Brak danych dla wybranego przedziału wiekowego.');
                 }

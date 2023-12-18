@@ -119,12 +119,14 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select class="slct-miara" id="selectValue">
+                        <option value="brak">Brak</option>
                         <option value="wiek">Wiek</option>
                     </select>
                 </div>
                 <div class="slct-wrapper">
                     <p>Wybierz miarę:</p>
                     <select class="slct-miara" id="selectMeasure">
+                        <option value="brak">Brak</option>
                         <option value="srednia">Średnia</option>
                         <option value="mediana">Mediana</option>
                         <option value="moda">Moda</option>
@@ -211,6 +213,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wartość:</p>
                     <select class="slct-miara" id="selectLocation">
+                        <option value="brak">Brak</option>
                         <option value="miasto">Miasto</option>
                         <option value="wojewodztwo">Województwo</option>
                     </select>
@@ -218,6 +221,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 <div class="slct-wrapper">
                     <p>Wybierz wykres:</p>
                     <select class="slct-miara" id="selectChartType">
+                        <option value="brak">Brak</option>
                         <option value="kolowy">Kołowy</option>
                         <option value="slupkowy">Słupkowy</option>
                     </select>
@@ -440,6 +444,11 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
   document.getElementById('generateChart').addEventListener('click', function() {
     var selectedValue = document.getElementById('selectLocation').value;
     var selectedChartType = document.getElementById('selectChartType').value;
+
+    if (selectedValue === 'brak' || selectedChartType === 'brak') {
+        console.log('Musisz wybrać coś innego przed generowaniem wykresu.');
+        return;
+    }
 
     var locationCountsMiasto = <?php echo json_encode($miastoCount); ?>;
     var locationCountsWojewodztwo = <?php echo json_encode($wojewodztwoCount); ?>;

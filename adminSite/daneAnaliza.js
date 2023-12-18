@@ -14,6 +14,11 @@ fetch("../analiza_danych2.csv")
 
         columnSelect.innerHTML = '';
 
+        const brakOption = document.createElement("option");
+        brakOption.value = "brak";
+        brakOption.text = "Brak";
+        columnSelect.appendChild(brakOption);
+
         for (let i = 2; i < header.length; i++) {
             const column = header[i];
             const option = document.createElement("option");
@@ -26,6 +31,11 @@ fetch("../analiza_danych2.csv")
     generateChartButton.addEventListener("click", () => {
         const selectedColumn = columnSelect.value;
         const selectedChartType = chartTypeSelect.value;
+
+        if (selectedColumn === "brak" || selectedChartType === "brak") {
+            console.log("Musisz coś wybrać przed generowaniem wykresu.");
+            return;
+        }
     
         if (ageChart) {
             ageChart.destroy();
