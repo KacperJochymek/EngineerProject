@@ -29,7 +29,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 <body>
     <header>
         <div class="logo">
-            <img src="/images/medease.png">
+            <img src="/images/medease_admin.png">
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>

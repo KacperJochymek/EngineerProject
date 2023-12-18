@@ -67,7 +67,7 @@ $result = $conn->query($sql);
 <body>
     <header>
         <div class="logo">
-            <img src="/images/medease.png">
+            <img src="/images/medease_doctor.png">
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
