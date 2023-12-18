@@ -1632,6 +1632,30 @@ hr {
     text-align: center;
 }
 
+#tableContainer,
+#tableContainer2,
+#tableContainer3 {
+    max-height: 265px;
+    overflow-y: auto;
+    overflow-x: hidden; 
+    scrollbar-width: thin; 
+    scrollbar-color: darkgray lightgray;
+}
+
+#tableContainer::-webkit-scrollbar,
+#tableContainer2::-webkit-scrollbar,
+#tableContainer3::-webkit-scrollbar {
+    width: 8px; 
+}
+
+#tableContainer::-webkit-scrollbar-thumb,
+#tableContainer2::-webkit-scrollbar-thumb,
+#tableContainer3::-webkit-scrollbar-thumb {
+    background-color: darkgray;
+    margin-left: 50px; 
+    height: calc(100% - 50px);
+}
+
 .lookVis p{
     font-size: 20px;
 }
@@ -1659,7 +1683,7 @@ hr {
 .tble-hpracy{
     background: #fefefe;
     border-radius: 20px;
-    width: 700px;
+    width: 800px;
     padding: 20px;
     margin-top: 20px;
 }
