@@ -25,7 +25,7 @@ if (isset($_POST['filter-btn'])) {
             LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
             LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
             WHERE wizyty.data_wizyty BETWEEN '$start_date' AND '$end_date'";
-            
+
     if (!is_null($doctor_id)) {
         $sql .= " AND wizyty.doctor_id = $doctor_id";
     }
@@ -108,29 +108,35 @@ $result = $conn->query($sql);
 
     <div class="wysoko_adminLook">
 
-        <p class="lekarz-wybierz">Podgląd wizyt pacjentów</p>
+        <p class="lekarz-wybierz">Podgląd wizyt pacjentów:</p>
 
         <div class="lookUsers">
             <form method="post" class="lookVis">
-                <p>Wybierz przedziały dat:</p>
-                <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
-                    <?php
+                <div class="slct-wrapper">
+                    <p>Id:</p>
+                    <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
+                        <?php
+                        $doctor_query = "SELECT id_lekarza FROM doctors";
+                        $doctor_result = $conn->query($doctor_query);
 
-                    $doctor_query = "SELECT id_lekarza FROM doctors";
-                    $doctor_result = $conn->query($doctor_query);
+                        if (!$doctor_result) {
+                            die("Błąd: " . $conn->error);
+                        }
 
-                    if (!$doctor_result) {
-                        die("Błąd: " . $conn->error);
-                    }
-
-
-                    while ($row = $doctor_result->fetch_assoc()) {
-                        echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
-                    }
-                    ?>
-                </select>
-                <input type="date" name="start_date" placeholder="Data początkowa">
-                <input type="date" name="end_date" placeholder="Data końcowa">
+                        while ($row = $doctor_result->fetch_assoc()) {
+                            echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="slct-wrapper">
+                    <p>Od:</p>
+                    <input type="date" name="start_date" placeholder="Data początkowa">
+                </div>
+                <div class="slct-wrapper">
+                    <p>Do:</p>
+                    <input type="date" name="end_date" placeholder="Data końcowa">
+                </div>
                 <button type="submit" class="filtruj" name="filter-btn">Filtruj</button>
             </form>
 
@@ -245,13 +251,13 @@ $result = $conn->query($sql);
 
 <script src="script1.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('confirmNo').addEventListener('click', function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('confirmNo').addEventListener('click', function() {
             document.getElementById('confirmCancel').style.display = 'none';
         });
 
-        document.getElementsByName('anuluj_wizyte').forEach(function (button) {
-            button.addEventListener('click', function () {
+        document.getElementsByName('anuluj_wizyte').forEach(function(button) {
+            button.addEventListener('click', function() {
                 document.getElementById('confirmCancel').style.display = 'block';
             });
         });

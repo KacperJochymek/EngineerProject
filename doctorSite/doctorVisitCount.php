@@ -25,7 +25,7 @@ if (isset($_POST['filter-btn'])) {
             LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
             LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
             WHERE wizyty.data_wizyty BETWEEN '$start_date' AND '$end_date'";
-            
+
     if (!is_null($doctor_id)) {
         $sql .= " AND wizyty.doctor_id = $doctor_id";
     }
@@ -109,26 +109,32 @@ $result = $conn->query($sql);
 
         <div class="lookUsers">
             <form method="post" class="lookVis">
-                <p>Wybierz przedziały dat:</p>
-                <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
-                    <?php
+                <div class="slct-wrapper">
+                    <p>Id:</p>
+                    <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
+                        <?php
+                        $doctor_query = "SELECT id_lekarza FROM doctors";
+                        $doctor_result = $conn->query($doctor_query);
 
-                    $doctor_query = "SELECT id_lekarza FROM doctors";
-                    $doctor_result = $conn->query($doctor_query);
+                        if (!$doctor_result) {
+                            die("Błąd: " . $conn->error);
+                        }
 
-                    if (!$doctor_result) {
-                        die("Błąd: " . $conn->error);
-                    }
-
-
-                    while ($row = $doctor_result->fetch_assoc()) {
-                        echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
-                    }
-                    ?>
-                </select>
-                <input type="date" name="start_date" placeholder="Data początkowa">
-                <input type="date" name="end_date" placeholder="Data końcowa">
-                <button type="submit" class="filtruj" name="filter-btn" >Filtruj</button>
+                        while ($row = $doctor_result->fetch_assoc()) {
+                            echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="slct-wrapper">
+                    <p>Od:</p>
+                    <input type="date" name="start_date" placeholder="Data początkowa">
+                </div>
+                <div class="slct-wrapper">
+                    <p>Do:</p>
+                    <input type="date" name="end_date" placeholder="Data końcowa">
+                </div>
+                <button type="submit" class="filtruj" name="filter-btn">Filtruj</button>
             </form>
 
             <div class="messageSent3" id="confirmCancel" style="display:none;">
@@ -191,64 +197,64 @@ $result = $conn->query($sql);
 
     </div>
 
-        <footer>
-            <div class="foo">
-                <div class="col-1">
-                    <h1>O nas</h1>
+    <footer>
+        <div class="foo">
+            <div class="col-1">
+                <h1>O nas</h1>
 
-                    <p class="footer-text">Witamy w Medease! Nasza firma zajmuje się tworzeniem oprogramowania dla przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
-                        swój stan zdrowia i wiele więcej. Ponadto może ocenić swoją wizytę, a to wszystko w jednym miejscu.</p>
-                </div>
+                <p class="footer-text">Witamy w Medease! Nasza firma zajmuje się tworzeniem oprogramowania dla przychodni. W naszej aplikacji pacjent może wybrać odpowiedniego dla siebie lekarza, umówić wizytę, skonsultować
+                    swój stan zdrowia i wiele więcej. Ponadto może ocenić swoją wizytę, a to wszystko w jednym miejscu.</p>
+            </div>
 
-                <div class="col-1">
-                    <h1>Biuro</h1>
-                    <p class="footer-text">ul. Sezamkowa 15</p>
-                    <p>43-600 XYZ, Polska</p>
-                    <p class="email-id"><b>E-mail:</b> <br> kontakt@medease.pl</p>
-                    <p><b>Numer telefonu: </b> <br> 123-456-789</p>
-                </div>
+            <div class="col-1">
+                <h1>Biuro</h1>
+                <p class="footer-text">ul. Sezamkowa 15</p>
+                <p>43-600 XYZ, Polska</p>
+                <p class="email-id"><b>E-mail:</b> <br> kontakt@medease.pl</p>
+                <p><b>Numer telefonu: </b> <br> 123-456-789</p>
+            </div>
 
-                <div class="col-1">
-                    <h1>Przydatne linki</h1>
-                    <ul>
-                        <li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>
-                        <li><a href="/userSite/analizeForm.php">Ankieta</a></li>
-                        <li><a href="/userSite/lekarze.php">Lekarze</a></li>
-                    </ul>
-                </div>
-                <div class="col-1">
-                    <h1>Skontaktuj się!</h1>
-                    <div class="sociale">
-                        <a href="https://www.facebook.com/">
-                            <div class="circle"><i class="fa-brands fa-facebook-f"></i></div>
-                        </a>
-                        <a href="https://twitter.com/">
-                            <div class="circle"><i class="fa-brands fa-x-twitter"></i></div>
-                        </a>
-                        <a href="https://instagram.com/">
-                            <div class="circle"><i class="fa-brands fa-instagram"></i></div>
-                        </a>
-                        <a href="https://tiktok.com/">
-                            <div class="circle"><i class="fa-brands fa-tiktok"></i></div>
-                        </a>
-                    </div>
+            <div class="col-1">
+                <h1>Przydatne linki</h1>
+                <ul>
+                    <li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>
+                    <li><a href="/userSite/analizeForm.php">Ankieta</a></li>
+                    <li><a href="/userSite/lekarze.php">Lekarze</a></li>
+                </ul>
+            </div>
+            <div class="col-1">
+                <h1>Skontaktuj się!</h1>
+                <div class="sociale">
+                    <a href="https://www.facebook.com/">
+                        <div class="circle"><i class="fa-brands fa-facebook-f"></i></div>
+                    </a>
+                    <a href="https://twitter.com/">
+                        <div class="circle"><i class="fa-brands fa-x-twitter"></i></div>
+                    </a>
+                    <a href="https://instagram.com/">
+                        <div class="circle"><i class="fa-brands fa-instagram"></i></div>
+                    </a>
+                    <a href="https://tiktok.com/">
+                        <div class="circle"><i class="fa-brands fa-tiktok"></i></div>
+                    </a>
                 </div>
             </div>
-            <hr>
-            <p class="copyright"> Wszelkie prawa zastrzeżone. Medease 2023 ©</p>
-        </footer>
+        </div>
+        <hr>
+        <p class="copyright"> Wszelkie prawa zastrzeżone. Medease 2023 ©</p>
+    </footer>
 
 </body>
 
 <script src="script1.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('confirmNo').addEventListener('click', function () {
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('confirmNo').addEventListener('click', function() {
             document.getElementById('confirmCancel').style.display = 'none';
         });
 
-        document.getElementsByName('anuluj_wizyte').forEach(function (button) {
-            button.addEventListener('click', function () {
+        document.getElementsByName('anuluj_wizyte').forEach(function(button) {
+            button.addEventListener('click', function() {
                 document.getElementById('confirmCancel').style.display = 'block';
             });
         });
