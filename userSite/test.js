@@ -17,6 +17,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // Dodaj obsługę zdarzenia kliknięcia przycisku "DALEJ"
     dalejButton.addEventListener("click", function (event) {
         event.preventDefault();
+
+        const selectedDate = document.getElementById("selectedDate").textContent;
+        const selectedHour = document.getElementById("selectedHour").textContent;
+    
+        // Sprawdź, czy tekst nie jest pusty
+        if (!selectedDate.trim()) {
+            document.querySelector('.messageSent').textContent = "Proszę wybrać datę wizyty.";
+            return;
+        }
+
+        if (selectedHour === "Godzina twojej wizyty") {
+            document.querySelector('.messageSent').textContent = "Proszę wybrać godzinę wizyty.";
+            return false;
+        }
         
         // Ukryj kalendarz
         calendarContainer.style.display = "none";
@@ -30,11 +44,16 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Zaktualizuj tekst na "Podaj dane osobowe:"
         lekarzWybierzText.textContent = "Podaj dane osobowe:";
+
+        document.querySelector('.messageSent').textContent = "";
     });
 
     // Dodaj obsługę zdarzenia kliknięcia przycisku "Powrót"
     powrotButton.addEventListener("click", function (event) {
         event.preventDefault();
+
+        document.getElementById("selectedDate").innerHTML = '<i class="fa-solid fa-calendar-days"></i>';
+        document.getElementById("selectedHour").textContent = "Godzina twojej wizyty";
         
         // Wyświetl kalendarz
         calendarContainer.style.display = "block";

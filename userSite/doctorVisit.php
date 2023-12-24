@@ -259,7 +259,7 @@ if (isset($_GET["doctor_id"])) {
                     <div class="btn-chosen">
 
                         <button type="submit" class="lekarz-btn" id="powrotButton" name="powrot_btn">Powrót</button>
-                        <button type="submit" class="lekarz-btn" name="umow_btn">Umów się!</button>
+                        <button type="submit" class="lekarz-btn" name="umow_btn" onclick="return validateForm()">Umów się!</button>
                     </div>
                 </form>
 
