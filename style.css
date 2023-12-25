@@ -1098,11 +1098,12 @@ hr {
 }
 
 .blog-strona{
-    height: 1650px;
+    height: auto;
     display: flex;
     flex-direction: column;
     text-align: center;
     margin-top: 50px;
+    padding-bottom: 370px;
 }
 
 .validationMessage{
