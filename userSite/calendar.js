@@ -23,8 +23,9 @@ const renderujKalendarz = (year, month) => {
 
     for (let i = 1; i <= lastDateOfMonth; i++) {
         let isToday = i === date.getDate() && month === date.getMonth() && year === date.getFullYear() ? "active" : "";
-        liTag.push(`<li class="${isToday}">${i}</li>`);
-    }
+        let isPastDate = new Date(year, month, i + 1) < date ? "inactive" : "";
+        liTag.push(`<li class="${isToday} ${isPastDate}">${i}</li>`);
+    }    
 
     for (let i = 1; i < 6 - lastDayOfMonth; i++) {
         liTag.push(`<li class="inactive">${i}</li>`);
@@ -65,10 +66,13 @@ daysTag.addEventListener("click", (event) => {
             const availableHours = document.getElementById("availableHours");
             availableHours.innerHTML = '';
 
-            const selectedDate = `${currYear}-${currMonth + 1}-${day}`; // Tworzenie daty w formacie "Y-m-d"
+            const selectedDate = `${currYear}-${currMonth + 1}-${day}`; 
+
+            const selectedHourElement = document.getElementById("selectedHour");
+            selectedHourElement.textContent = "Godzina twojej wizyty";
 
             const queryParams = new URLSearchParams(window.location.search);
-            const doctorId = queryParams.get('doctor_id'); // Pobieranie doctor_id z adresu URL
+            const doctorId = queryParams.get('doctor_id'); 
 
             fetch(`http://localhost:3000/userSite/calendarConnect.php?selectedDate=${selectedDate}&doctor_id=${doctorId}`, {
             method: 'GET',
