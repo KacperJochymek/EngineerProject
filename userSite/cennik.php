@@ -143,5 +143,24 @@ if (!empty($_SESSION["id"])) {
 </body>
 
 <script src="script1.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var dostosujWysokosc = document.querySelector('.priceSite');
+    var tabelaCennik = document.querySelector('.wyrownanie');
+    var wierszeCennik = document.querySelectorAll('.wyrownanie tr');
+
+    function dostosujWysokoscStrony() {
+        var iloscRekordow = wierszeCennik.length;
+
+        if (iloscRekordow > 4) {
+            var dodatkowaWysokosc = (iloscRekordow - 4) * 30;
+            dostosujWysokosc.style.height = (dostosujWysokosc.offsetHeight + dodatkowaWysokosc) + 'px';
+        }
+    }
+
+    dostosujWysokoscStrony();
+});
+</script>
+
 
 </html>
