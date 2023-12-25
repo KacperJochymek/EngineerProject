@@ -649,10 +649,11 @@ hr {
 }
 
 .doctorAccDiv{
-    height: 950px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 350px;
 }
 
 .lekarzeDatabase{
@@ -976,8 +977,9 @@ hr {
 .contact-site{
     font-size: 20px;
     text-align: center;
-    height: 900px;
+    height: auto;
     margin-top: 50px;
+    padding-bottom: 350px;
 }
 
 .contact-form{
@@ -1585,7 +1587,8 @@ hr {
     align-items: center; 
     text-align: center;
     justify-content: flex-start; 
-    height: 1050px;
+    height: auto;
+    padding-bottom: 350px;
 }
 
 .wysoko_adminLook{
@@ -1894,6 +1897,12 @@ hr {
 
 /* ================================ Responsywność ============================================= */
 
+@media only screen and (max-width: 800px) {
+    .tble-hpracy {
+        width: 100%; 
+    }
+}
+
 @media (max-width: 1500px) {
 
     .tekst{
@@ -1982,6 +1991,7 @@ hr {
 
     .blog-strona{
         height: auto;
+        padding-bottom: 30px;
     }
 
     .account{
@@ -2055,9 +2065,10 @@ hr {
 
     .contact-site{
         text-align: center;
-        height: 500px;
+        height: auto;
         margin-top: 50px;
         font-size: 17px;
+        padding-bottom: 20px;
     }
 }
 
