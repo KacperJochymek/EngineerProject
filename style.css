@@ -1093,7 +1093,7 @@ hr {
 
 .blog-tekst{
     text-align: justify;
-    max-width: 1400px; 
+    width: 90%;
     font-size: 20px;
     margin: 0 auto;
     margin-top: 20px;
@@ -1836,16 +1836,6 @@ hr {
     margin-top: 10px;
 }
 
-@media only screen and (max-width: 710px) {
-    .changePass{
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-        text-align: center;
-        width: 100%; 
-    }
-}
-
 .settings-inpt{
     display: flex;
     justify-content: center;
@@ -1943,8 +1933,9 @@ hr {
     }
 
     .analizeForm{
-        margin-top: 50px;
-        height: 780px;
+        margin-bottom: 50px;
+        height: auto;
+        width: auto;
     }
 
     .doctorContent2{
@@ -2130,6 +2121,14 @@ hr {
         height: 200px;
         width: 500px;
     }
+    
+    .paczka_blog{
+        background-color: rgba(255, 255, 255, 0.2);
+        height: 450px;
+        width: 90%;
+        margin: 0 auto;
+        border-radius: 40px;
+    }
 
     header {
         font-family: "Poppins";
@@ -2256,6 +2255,22 @@ hr {
         flex-direction: column;
         align-items: center;
     }
+
+    .analizeForm iframe{
+        margin-bottom: 50px;
+        height: 800px;
+        width: 600px;
+    }
+
+    .blog-tekst{
+        padding-bottom: 20px;
+    }
+
+    @media only screen and (max-width: 710px) {
+        .changePass{
+            width: 100%; 
+        }
+    }
 }
 
 @media (max-width: 600px) {
@@ -2272,4 +2287,47 @@ hr {
     .logo-aktualizacje{
         display: none;
     }
+
+    .analizeForm iframe{
+        margin-bottom: 50px;
+        height: 600px;
+        width: 370px;
+    }
+
+    .message-inpt {
+        height: 200px;
+        width: 370px;
+    }
+
+    .paczka_blog{
+        width: 100%;
+        height: auto;
+        padding-bottom: 20px;
+        margin-bottom: 50px;
+    }
+
+    .select-prof{
+        width: 130px;
+    }
+
+    .new_lekz{
+        width: 130px;
+    }
+
+    .tble-hpracy table th, td {
+        padding: 8px;
+    }
+
+    .slct-wrapper p{
+        font-size: 15px;
+    }
+
+    .lekarz-wybierz{
+        font-size: 25px;
+    }
+
+    .lekarz-wybierz2{
+        font-size: 25px;
+    }
+
 }
