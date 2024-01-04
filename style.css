@@ -776,6 +776,10 @@ hr {
     border-radius: 10px;
 }
 
+.add-inpt .wybor_lekarza{
+    border: 1px solid black;
+}
+
 .id_leka2{
     border: 1px solid black;
     margin-left: 10px;
@@ -1887,6 +1891,18 @@ hr {
     }
 }
 
+@media (max-width: 1800px){
+
+    .tekst{
+        text-align: justify;
+        font-size: 40px;
+        margin-left: -100px;
+        margin-top: 70px;
+        mix-blend-mode: difference;
+    }
+} 
+
+
 @media (max-width: 1500px) {
 
     .tekst{
@@ -2447,4 +2463,13 @@ hr {
         font-size: 25px;
     }
 
+}
+
+@media (max-width: 410px){
+    .doctorAccDiv .add-inpt{
+        flex-direction: column;
+    }
+    .id_leka2{
+        margin-bottom: 10px;
+    }
 }
