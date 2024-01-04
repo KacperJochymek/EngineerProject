@@ -1143,12 +1143,6 @@ hr {
     margin-top: 50px;
 }
 
-@media only screen and (max-width: 784px) {
-    .account{
-        height: 800px;
-    }
-}
-
 .account h1{
     margin-bottom: 30px;
 }
@@ -1998,6 +1992,56 @@ hr {
         height: 440px;
     }
 
+    @media only screen and (max-width: 783px) {
+        .account{
+            height: auto;
+            margin-bottom: 50px;
+        }
+    }
+
+    .wysoko_addDoctor{
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .blog_adding{
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .dataAnalize {
+        height: auto; 
+        margin-bottom: 50px;
+    }
+
+    .wykresy-wykr{
+        height: auto;
+        width: auto;
+    }
+
+    .wysoko_price{
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .dataAnalize2{
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .daneSzczegolowe{
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .accountAdminLook{
+        padding-bottom: 20px;
+    }
+
+    .doctorAccDiv{
+        padding-bottom: 20px;
+    }
+
     .badania {
         width: auto;
         height: auto;
@@ -2148,10 +2192,6 @@ hr {
     .wyswietlanieMyAcc img{
         width: 150px;
         height: 150px; 
-    }
-
-    .dataAnalize {
-        height: auto; 
     }
 
     .dataAnalizeSquare {
