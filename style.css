@@ -2131,6 +2131,20 @@ hr {
         width: 200px;
     }
 
+    #tableContainer,
+    #tableContainer2,
+    #tableContainer3 {
+        overflow-x: auto; 
+    }
+
+    #tableContainer::-webkit-scrollbar-track,
+    #tableContainer2::-webkit-scrollbar-track,
+    #tableContainer3::-webkit-scrollbar-track {
+        background-color: lightgray;
+        margin-left: 20px; 
+        height: calc(100% - 200px);
+    }
+
     .changePass{
         width: 700px;
     }
