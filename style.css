@@ -1900,6 +1900,20 @@ hr {
         margin-top: 20px;
     }
 
+    .daneSzczegoloweContainer{
+        flex-direction: column;
+    }
+
+    .wykresy-szczegolowe{
+        height: 300px;
+        width: 800px;
+    }
+
+    .paczka{
+        height: auto;
+        padding-bottom: 30px;
+    }
+
     .lekarze{
         width: 800px;
         height: 600px;
@@ -1908,6 +1922,11 @@ hr {
         position: fixed;
         top: 168px;
         right: auto;
+    }
+
+    .wykresy-wykr{
+        height: 400px;
+        width: 800px;
     }
 
     .wstep{
@@ -2003,11 +2022,6 @@ hr {
     .dataAnalize {
         height: auto; 
         margin-bottom: 50px;
-    }
-
-    .wykresy-wykr{
-        height: auto;
-        width: auto;
     }
 
     .wysoko_price{
@@ -2113,6 +2127,10 @@ hr {
         font-size: 10px;
     }
 
+    .daneSzczegoloweContainer .slct-wrapper{
+        width: 200px;
+    }
+
     .changePass{
         width: 700px;
     }
@@ -2120,6 +2138,24 @@ hr {
     .message-inpt {
         height: 200px;
         width: 500px;
+    }
+
+    .wykresy-szczegolowe{
+        width: 550px;
+    }
+
+    .dataAnalizeSquare .slct-wrapper .slct-miara{
+        width: 150px;
+    }
+
+    .dataAnalizeSquare2 .slct-wrapper .slct-miara{
+        width: 150px;
+    }
+
+    .wykresy-wykr{
+        height: 400px;
+        width: 580px;
+        margin-top: 30px;
     }
     
     .paczka_blog{
@@ -2194,7 +2230,21 @@ hr {
     }
 
     .dataAnalizeSquare {
-        flex-direction: column; 
+        flex-direction: column;
+        height: 650px; 
+    }
+
+    .dataAnalizeSquare .miaryStat button{
+        margin-top: 20px;
+    }
+
+    .dataAnalizeSquare2 {
+        flex-direction: column;
+        height: 950px; 
+    }
+
+    .dataAnalizeSquare2 .miaryStat button{
+        margin-top: 20px;
     }
 
     .miaryStat {
@@ -2231,6 +2281,14 @@ hr {
         left: auto;
         top: auto;
         margin-top: 60px;
+    }
+
+    .wykresy-szczegolowe{
+        width: 420px;
+    }
+
+    .wykresy-wykr{
+        width: 420px;
     }
 
     .lekarze{
@@ -2286,6 +2344,30 @@ hr {
 
     .logo-aktualizacje{
         display: none;
+    }
+
+    .dataAnalizeSquare{
+        width: 100%;
+    }
+
+    .paczka{
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .wykresy-szczegolowe{
+        width: 300px;
+    }
+
+    .dataAnalizeSquare2{
+        width: 100%;
+        height: 850px;
+        padding-bottom: 30px;
+    }
+
+    .wykresy-wykr{
+        width: auto;
+        height: 500px;
     }
 
     .analizeForm iframe{
