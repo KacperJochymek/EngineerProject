@@ -5,6 +5,8 @@ if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
+
+    $userType = $row["role"];
 }
 ?>
 
@@ -31,25 +33,24 @@ if (!empty($_SESSION["id"])) {
                 <img src="/images/medease.png" width="100px" height="100px" />
             </div>
             <ul>
-                <li>
-                    <a href="/index.php">Strona główna</a>
-                </li>
-                <li>
-                    <a href="lekarze.php">Lekarze</a>
-                </li>
-                <li>
-                    <a href="cennik.php">Cennik</a>
-                </li>
-                <li>
-                    <a href="blog.php">Aktualności</a>
-                </li>
-                <li>
-                    <a href="contact.php" class="active2">Kontakt</a>
-                </li>
-
-                <li>
-                    <a href="myAccount.php">Moje konto</a>
-                </li>
+                <?php
+                if ($userType === 'user') {
+                    // Nawigacja dla usera
+                    echo '<li><a href="/index.php">Strona główna</a></li>';
+                    echo '<li><a href="lekarze.php">Lekarze</a></li>';
+                    echo '<li><a href="cennik.php">Cennik</a></li>';
+                    echo '<li><a href="blog.php">Aktualności</a></li>';
+                    echo '<li><a href="contact.php" class="active2">Kontakt</a></li>';
+                    echo '<li><a href="myAccount.php">Moje konto</a></li>';
+                } elseif ($userType === 'doctor') {
+                    // Nawigacja dla lekarza
+                    echo '<li><a href="/index.php">Strona główna</a></li>';
+                    echo '<li><a href="/doctorSite/doctorAccount.php">Godziny pracy</a></li>';
+                    echo '<li><a href="/doctorSite/doctorVisitCount.php">Wizyty</a></li>';
+                    echo '<li><a href="contact.php" class="active2">Kontakt</a></li>';
+                    echo '<li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>';
+                }
+                ?>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
 
