@@ -186,8 +186,8 @@ if (!empty($_SESSION["id"])) {
                 <h1>Przydatne linki</h1>
                 <ul>
                     <li><a href="index.php">Strona główna</a></li>
-                    <li><a href="#">Umów wizytę</a></li>
-                    <li><a href="#">Czytaj bloga</a></li>
+                    <li><a href="/userSite/lekarze.php">Umów wizytę</a></li>
+                    <li><a href="/userSite/blog.php">Czytaj bloga</a></li>
                 </ul>
             </div>
             <div class="col-1">
