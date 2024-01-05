@@ -2,6 +2,11 @@
 require '../Logowanie/config.php';
 session_start();
 
+if (empty($_SESSION["id"])) {
+    header("Location: /index.php"); 
+    exit();
+}
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
@@ -61,7 +66,7 @@ if (isset($_SESSION["doctor_data"])) {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona główna</a>
+                    <a href="/indexLogged.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="lekarze.php">Lekarze</a>

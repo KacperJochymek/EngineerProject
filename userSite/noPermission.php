@@ -22,7 +22,7 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/logo.png"></a>
+            <a href=""> <img src="/images/medease.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -30,27 +30,9 @@ if (!empty($_SESSION["id"])) {
                 <img src="/images/logo.png" width="100px" height="100px" />
             </div>
             <ul>
+                
                 <li>
-                    <a href="/index.php">Strona główna</a>
-                </li>
-                <li>
-                    <a href="#">Lekarze</a>
-                </li>
-                <li>
-                    <a href="#">Cennik</a>
-                </li>
-                <li>
-                    <a href="#">Aktualności</a>
-                </li>
-                <li>
-                    <a href="#">Kontakt</a>
-                </li>
-
-                <li>
-                    <a href="#">Moje konto</a>
-                </li>
-                <li>
-                    <a href="/Logowanie/sign_in.php" class="active">Zaloguj się</a>
+                    <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
 
                 </li>
             </ul>

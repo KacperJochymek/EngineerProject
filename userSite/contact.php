@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (empty($_SESSION["id"])) {
+    header("Location: /index.php"); 
+    exit();
+}
+
 require '../Logowanie/config.php';
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
@@ -25,7 +31,15 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/medease.png"></a>
+            <?php
+            if ($userType === 'user') {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease.png"></a>';
+            } elseif ($userType === 'doctor') {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease_doctor.png"></a>';
+            } else {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease.png"></a>';
+            }
+            ?>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -34,9 +48,9 @@ if (!empty($_SESSION["id"])) {
             </div>
             <ul>
                 <?php
-                if ($userType === 'user') {
+                if ($userType === 'user' || $userType === 'admin') {
                     // Nawigacja dla usera
-                    echo '<li><a href="/index.php">Strona główna</a></li>';
+                    echo '<li><a href="/indexLogged.php">Strona główna</a></li>';
                     echo '<li><a href="lekarze.php">Lekarze</a></li>';
                     echo '<li><a href="cennik.php">Cennik</a></li>';
                     echo '<li><a href="blog.php">Aktualności</a></li>';
@@ -44,7 +58,7 @@ if (!empty($_SESSION["id"])) {
                     echo '<li><a href="myAccount.php">Moje konto</a></li>';
                 } elseif ($userType === 'doctor') {
                     // Nawigacja dla lekarza
-                    echo '<li><a href="/index.php">Strona główna</a></li>';
+                    echo '<li><a href="/indexLogged.php">Strona główna</a></li>';
                     echo '<li><a href="/doctorSite/doctorAccount.php">Godziny pracy</a></li>';
                     echo '<li><a href="/doctorSite/doctorVisitCount.php">Wizyty</a></li>';
                     echo '<li><a href="contact.php" class="active2">Kontakt</a></li>';

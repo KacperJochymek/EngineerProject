@@ -2,6 +2,11 @@
 require '../Logowanie/config.php';
 session_start();
 
+if (empty($_SESSION["id"])) {
+    header("Location: /index.php"); 
+    exit();
+}
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
@@ -25,7 +30,7 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <img src="/images/medease.png">
+            <a href="/indexLogged.php"> <img src="/images/medease.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -34,7 +39,7 @@ if (!empty($_SESSION["id"])) {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona główna</a>
+                    <a href="/indexLogged.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="lekarze.php">Lekarze</a>
@@ -49,9 +54,15 @@ if (!empty($_SESSION["id"])) {
                     <a href="contact.php">Kontakt</a>
                 </li>
 
-                <li>
-                    <a href="myAccount.php">Moje konto</a>
-                </li>
+                <?php
+                if ($userType === 'user') {
+                    echo '<li><a href="/userSite/myAccount.php">Moje konto</a></li>';
+                } elseif ($userType === 'doctor') {
+                    echo '<li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>';
+                } elseif ($userType === 'admin') {
+                    echo '<li><a href="/adminSite/adminAccount.php">Moje Konto</a></li>';
+                }
+                ?>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
 

@@ -1,9 +1,18 @@
 <?php
+session_start();
+
+if (empty($_SESSION["id"])) {
+    header("Location: /index.php"); 
+    exit();
+}
+
 require '../Logowanie/config.php';
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
+
+    $userType = $row["role"];
 }
 ?>
 
@@ -22,7 +31,17 @@ if (!empty($_SESSION["id"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/medease.png"></a>
+            <?php
+            if ($userType === 'user') {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease.png"></a>';
+            } elseif ($userType === 'doctor') {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease_doctor.png"></a>';
+            } elseif ($userType === 'admin') {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease_admin.png"></a>';
+            } else {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease.png"></a>';
+            }
+            ?>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -31,7 +50,7 @@ if (!empty($_SESSION["id"])) {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona główna</a>
+                    <a href="/indexLogged.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="lekarze.php">Lekarze</a>
@@ -46,9 +65,15 @@ if (!empty($_SESSION["id"])) {
                     <a href="contact.php">Kontakt</a>
                 </li>
 
-                <li>
-                    <a href="myAccount.php">Moje konto</a>
-                </li>
+                <?php
+                if ($userType === 'user') {
+                    echo '<li><a href="/userSite/myAccount.php">Moje konto</a></li>';
+                } elseif ($userType === 'doctor') {
+                    echo '<li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>';
+                } elseif ($userType === 'admin') {
+                    echo '<li><a href="/adminSite/adminAccount.php">Moje Konto</a></li>';
+                }
+                ?>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
 
@@ -144,22 +169,22 @@ if (!empty($_SESSION["id"])) {
 
 <script src="script1.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var dostosujWysokosc = document.querySelector('.priceSite');
-    var tabelaCennik = document.querySelector('.wyrownanie');
-    var wierszeCennik = document.querySelectorAll('.wyrownanie tr');
+    document.addEventListener("DOMContentLoaded", function() {
+        var dostosujWysokosc = document.querySelector('.priceSite');
+        var tabelaCennik = document.querySelector('.wyrownanie');
+        var wierszeCennik = document.querySelectorAll('.wyrownanie tr');
 
-    function dostosujWysokoscStrony() {
-        var iloscRekordow = wierszeCennik.length;
+        function dostosujWysokoscStrony() {
+            var iloscRekordow = wierszeCennik.length;
 
-        if (iloscRekordow > 4) {
-            var dodatkowaWysokosc = (iloscRekordow - 4) * 30;
-            dostosujWysokosc.style.height = (dostosujWysokosc.offsetHeight + dodatkowaWysokosc) + 'px';
+            if (iloscRekordow > 4) {
+                var dodatkowaWysokosc = (iloscRekordow - 4) * 30;
+                dostosujWysokosc.style.height = (dostosujWysokosc.offsetHeight + dodatkowaWysokosc) + 'px';
+            }
         }
-    }
 
-    dostosujWysokoscStrony();
-});
+        dostosujWysokoscStrony();
+    });
 </script>
 
 

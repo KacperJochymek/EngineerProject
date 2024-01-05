@@ -2,10 +2,17 @@
 require '../Logowanie/config.php';
 session_start();
 
+if (empty($_SESSION["id"])) {
+    header("Location: /index.php"); 
+    exit();
+}
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
     $row = mysqli_fetch_assoc($result);
+
+    $userType = $row["role"];
 }
 
 
@@ -52,7 +59,15 @@ if (isset($_SESSION["doctor_data"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/logo.png"></a>
+            <?php
+            if ($userType === 'user') {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease.png"></a>';
+            } elseif ($userType === 'doctor') {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease_doctor.png"></a>';
+            } else {
+                echo '<a href="/indexLogged.php"> <img src="/images/medease.png"></a>';
+            }
+            ?>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -60,27 +75,27 @@ if (isset($_SESSION["doctor_data"])) {
                 <img src="/images/medease.png" width="100px" height="100px" />
             </div>
             <ul>
-                <li>
-                    <a href="/index.php">Strona główna</a>
-                </li>
-                <li>
-                    <a href="lekarze.php">Lekarze</a>
-                </li>
-                <li>
-                    <a href="cennik.php">Cennik</a>
-                </li>
-                <li>
-                    <a href="blog.php">Aktualności</a>
-                </li>
-                <li>
-                    <a href="contact.php">Kontakt</a>
-                </li>
-
-                <li>
-                    <a href="myAccount.php">Moje konto</a>
-                </li>
+                <?php
+                if ($userType === 'user' || $userType === 'admin') {
+                    // Nawigacja dla usera
+                    echo '<li><a href="/indexLogged.php">Strona główna</a></li>';
+                    echo '<li><a href="lekarze.php">Lekarze</a></li>';
+                    echo '<li><a href="cennik.php">Cennik</a></li>';
+                    echo '<li><a href="blog.php">Aktualności</a></li>';
+                    echo '<li><a href="contact.php" class="active2">Kontakt</a></li>';
+                    echo '<li><a href="myAccount.php">Moje konto</a></li>';
+                } elseif ($userType === 'doctor') {
+                    // Nawigacja dla lekarza
+                    echo '<li><a href="/indexLogged.php">Strona główna</a></li>';
+                    echo '<li><a href="/doctorSite/doctorAccount.php">Godziny pracy</a></li>';
+                    echo '<li><a href="/doctorSite/doctorVisitCount.php">Wizyty</a></li>';
+                    echo '<li><a href="contact.php" class="active2">Kontakt</a></li>';
+                    echo '<li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>';
+                }
+                ?>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
+
                 </li>
             </ul>
         </nav>
@@ -96,7 +111,16 @@ if (isset($_SESSION["doctor_data"])) {
         <div class="messageSuccess">
             <p class="succesThanks">Dziękujemy za wiadomość!</p>
             <i class="fa-regular fa-circle-check"></i>
-            <p class="messageCancel">Odpowiemy na Twoje pytanie, tak szybko jak tylko będziemy mogli. Aby powrócić do strony głównej <a href="/userSite/myAccount.php">kliknij tutaj.</a> </p>
+            <p class="messageCancel">Odpowiemy na Twoje pytanie, tak szybko jak tylko będziemy mogli.
+                <?php
+                if ($userType === 'user' || $userType === 'admin') {
+                    echo 'Aby powrócić do strony głównej <a href="/userSite/myAccount.php">kliknij tutaj.</a>';
+                } elseif ($userType === 'doctor') {
+                    echo 'Aby powrócić do panelu lekarza <a href="/doctorSite/doctorFirstSite.php">kliknij tutaj.</a>';
+                } else {
+                    echo 'Aby powrócić do strony głównej <a href="/indexLogged.php">kliknij tutaj.</a>';
+                }
+                ?>
         </div>
     </div>
 

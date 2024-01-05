@@ -67,7 +67,7 @@ $result = $conn->query($sql);
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/medease_admin.png"></a>
+            <a href="/indexLogged.php"> <img src="/images/medease_admin.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -76,7 +76,7 @@ $result = $conn->query($sql);
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona Główna</a>
+                    <a href="/indexLogged.php">Strona Główna</a>
                 </li>
                 <li>
                     <a href="/adminSite/addingDoctor.php">Dodaj lekarza</a>

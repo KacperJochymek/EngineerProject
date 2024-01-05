@@ -2,6 +2,11 @@
 require '../Logowanie/config.php';
 session_start();
 
+if (empty($_SESSION["id"])) {
+    header("Location: /index.php"); 
+    exit();
+}
+
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id =$id");
@@ -44,7 +49,7 @@ if (isset($_GET["doctor_id"])) {
 <body>
     <header>
         <div class="logo">
-            <a href="/index.php"> <img src="/images/medease.png"></a>
+            <a href="/indexLogged.php"> <img src="/images/medease.png"></a>
         </div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
@@ -53,7 +58,7 @@ if (isset($_GET["doctor_id"])) {
             </div>
             <ul>
                 <li>
-                    <a href="/index.php">Strona główna</a>
+                    <a href="/indexLogged.php">Strona główna</a>
                 </li>
                 <li>
                     <a href="lekarze.php" class="active2">Lekarze</a>
