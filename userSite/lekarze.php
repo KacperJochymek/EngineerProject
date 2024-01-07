@@ -179,7 +179,7 @@ if (!empty($_SESSION["id"])) {
     var lekarzeContainer = document.querySelector('.lekarze-wybor');
     var lekarze = document.querySelectorAll('.lekarze-wybor .lekarz-logo');
 
-    var lekarzeNaRzad = 3;
+    var lekarzeNaRzad = 2;
     var iloscRzedow = Math.ceil(lekarze.length / lekarzeNaRzad);
     var lekarzeWyborHeight = iloscRzedow * (lekarze[0].offsetHeight + 10);
 
