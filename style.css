@@ -521,6 +521,19 @@ hr {
     border-radius: 10px;
 }
 
+.accountAdminLook .validationMessage{
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.accountAdminLook .ukrytyDiv{
+    margin-top: 5px;
+    color: red;
+    border: 1px solid #ccc; 
+    padding: 5px;
+    border-radius: 10px;
+}
+
 .lekarz-wybierz{
     text-align: center;
     margin-top: 50px;
