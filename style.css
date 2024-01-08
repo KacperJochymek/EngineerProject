@@ -498,6 +498,11 @@ hr {
     color: red;
 }
 
+.blog_adding .ukrytyDiv{
+    margin-top: 5px;
+    color: red;
+}
+
 .lekarz-wybierz{
     text-align: center;
     margin-top: 50px;
@@ -1036,7 +1041,7 @@ hr {
     }
 
 .blog_adding{
-    height: 1420px;
+    height: 1430px;
 }
 
 .blog-form{

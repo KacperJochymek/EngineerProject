@@ -158,6 +158,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '<tbody>';
 
             $count = $offset + 1;
+            $counter = 1;
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
@@ -170,10 +171,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 echo '<button type="submit" class="edit-btn" name="save-btn[]">Zapisz</button>';
                 echo '<button type="submit" class="delete-btn" name="delete-btn[]">Usuń</button>';
                 echo '</form>';
+                echo '<form method="post">';
+                echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
+                echo '<div class="ukrytyDiv" id="ukrytyDiv' . $counter . '" style="display:none;">';
+                echo '<p>Czy na pewno? </p>';
+                echo '<button name="tak_oo" id="tak_oo">Tak</button>';
+                echo '<button onclick="schowajDiv(' . $counter . ')">Nie</button>';
+                echo '</div>';
+                echo '</form>';
                 echo '</td>';
                 echo '</tr>';
 
                 $count++;
+                $counter++;
             }
             echo '</tbody>';
             echo '</table>';
@@ -262,6 +272,28 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
     fileInput.addEventListener('change', function() {
         fileNameDisplay.textContent = fileInput.files[0].name;
+    });
+</script>
+<script>
+    function pokazDiv(nr) {
+        var div = document.getElementById('ukrytyDiv' + nr);
+        div.style.display = 'block';
+    }
+
+    function schowajDiv(nr) {
+        var div = document.getElementById('ukrytyDiv' + nr);
+        div.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var deleteButtons = document.querySelectorAll('.delete-btn');
+
+        deleteButtons.forEach(function(button, index) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                pokazDiv(index + 1);
+            });
+        });
     });
 </script>
 

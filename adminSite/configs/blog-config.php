@@ -3,7 +3,7 @@
 require '../Logowanie/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST['delete-btn'])) {
+    if (isset($_POST['tak_oo'])) {
         $id = $_POST['id'];
 
         if (is_array($id)) {
