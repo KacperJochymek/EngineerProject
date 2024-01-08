@@ -765,9 +765,6 @@ hr {
             height: auto;
         }
 
-        .tble-cennik{
-            margin-bottom: 70px;
-        }
     }
 } 
 
@@ -2364,7 +2361,6 @@ hr {
 
     .wysoko_adminLook{
         height: 950px;
-        margin-bottom: 20px;
     }
 
     .vtableUsers{
@@ -2453,8 +2449,40 @@ hr {
         padding-bottom: 30px;
     }
 
-    .vtableUsers{
-        width: 100%;
+    .wysoko_adminLook{
+        height: 900px;
+    }
+
+    .tble-cennik{
+        width: 400px;
+        padding: 5px;
+        overflow: auto;
+        scrollbar-width: thin; 
+        scrollbar-color: darkgray lightgray;
+    }
+
+    @media (max-width: 450px){
+        .tble-cennik{
+            width: 300px;
+        }
+    }
+    
+    .tble-cennik table{
+        width: auto;
+    }
+    
+    .tble-cennik table th, td {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    .tble-cennik::-webkit-scrollbar{
+        margin-top: 2px;
+        width: 8px; 
+    }
+    
+    .tble-cennik::-webkit-scrollbar-thumb {
+        background-color: darkgray;
     }
 
     .wykresy-wykr{
