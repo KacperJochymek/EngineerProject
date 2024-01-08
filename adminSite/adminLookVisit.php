@@ -140,14 +140,16 @@ $result = $conn->query($sql);
                 <button type="submit" class="filtruj" name="filter-btn">Filtruj</button>
             </form>
 
-            <div class="messageSent3" id="confirmCancel" style="display:none;">
-                <p>Czy na pewno chcesz anulować wizytę?</p>
-                <button class="delete-btn" id="confirmYes">Tak</button>
-                <button class="delete-btn" id="confirmNo">Nie</button>
+            <div class="validationMessage">
+                <?php 
+                require '../adminSite/configs/wizyty-config.php';
+                echo $message; ?>
             </div>
 
             <div class="vtableUsers">
                 <?php
+
+                require '../adminSite/configs/wizyty-config.php';
 
                 if ($result->num_rows > 0) {
                     echo '<div class="tble-cennik">';
@@ -164,6 +166,8 @@ $result = $conn->query($sql);
                     echo '</thead>';
                     echo '<tbody>';
 
+                    $counter = 1;
+
                     while ($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<td>' . $row["data_wizyty"] . '</td>';
@@ -174,8 +178,18 @@ $result = $conn->query($sql);
                         echo '</td>';
                         echo '<td>';
                         echo '<button type="submit" class="edit-btn" name="anuluj_wizyte">Anuluj</button>';
+                        echo '<form method="post">';
+                        echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
+                        echo '<div class="ukrytyDiv" id="ukrytyDiv' . $counter . '" style="display:none;">';
+                        echo '<p>Czy na pewno? </p>';
+                        echo '<button name="tak_oo" id="tak_oo">Tak</button>';
+                        echo '<button onclick="schowajDiv(' . $counter . ')">Nie</button>';
+                        echo '</div>';
+                        echo '</form>';
                         echo '</td>';
                         echo '</tr>';
+
+                        $counter++;
                     }
                     echo '</tbody>';
                     echo '</table>';
@@ -200,6 +214,7 @@ $result = $conn->query($sql);
 
     </div>
 
+    <div class="dostosuj-wysokosc"></div>
     <footer>
         <div class="foo">
             <div class="col-1">
@@ -251,16 +266,45 @@ $result = $conn->query($sql);
 
 <script src="script1.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('confirmNo').addEventListener('click', function() {
-            document.getElementById('confirmCancel').style.display = 'none';
-        });
+    function pokazDiv(nr) {
+        var div = document.getElementById('ukrytyDiv' + nr);
+        div.style.display = 'block';
+    }
 
-        document.getElementsByName('anuluj_wizyte').forEach(function(button) {
-            button.addEventListener('click', function() {
-                document.getElementById('confirmCancel').style.display = 'block';
+    function schowajDiv(nr) {
+        var div = document.getElementById('ukrytyDiv' + nr);
+        div.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var deleteButtons = document.querySelectorAll('.edit-btn');
+
+        deleteButtons.forEach(function(button, index) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                pokazDiv(index + 1);
             });
         });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var deleteButtons = document.querySelectorAll('.edit-btn');
+        var dostosujWysokosc = document.querySelector('.dostosuj-wysokosc');
+
+        deleteButtons.forEach(function(button, index) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                pokazDiv(index + 1);
+                dostosujWysokoscStrony();
+            });
+        });
+
+        function dostosujWysokoscStrony() {
+            var aktualnaWysokosc = dostosujWysokosc.offsetHeight;
+            var nowaWysokosc = aktualnaWysokosc + 50;
+            dostosujWysokosc.style.height = nowaWysokosc + 'px';
+        }
     });
 </script>
 
