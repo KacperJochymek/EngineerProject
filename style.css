@@ -503,6 +503,11 @@ hr {
     color: red;
 }
 
+.wysoko_addDoctor .ukrytyDiv{
+    margin-top: 5px;
+    color: red;
+}
+
 .lekarz-wybierz{
     text-align: center;
     margin-top: 50px;
@@ -674,7 +679,7 @@ hr {
 }
 
 .wysoko_addDoctor{
-    height: 1150px;
+    height: 1170px;
     display: flex;
     flex-direction: column;
     align-items: center;
