@@ -285,3 +285,20 @@ body {
     transform: scale(1.2);
     color: #a380ee;
 }
+
+@media (max-width: 600px) {
+
+    .message-inpt{
+        width: 300px;
+        font-size: 15px;
+    }
+
+    .email-hldr{
+        width: 200px;
+        font-size: 15px;
+    }
+
+    .contact-form p{
+        font-size: 20px;
+    }
+}
