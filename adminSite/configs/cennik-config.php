@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
 <?php
 require '../Logowanie/config.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete-btn'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['tak_oo'])) {
     $id = $_POST['id'];
     $sql = "DELETE FROM cennik WHERE id = $id";
     if ($conn->query($sql) === TRUE) {

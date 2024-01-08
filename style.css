@@ -493,6 +493,11 @@ hr {
     align-items: flex-start;
 }
 
+.wysoko_price .ukrytyDiv{
+    margin-top: 5px;
+    color: red;
+}
+
 .lekarz-wybierz{
     text-align: center;
     margin-top: 50px;
