@@ -144,6 +144,7 @@ nav ul li a.active2 {
     float: left;
     width: 100px;
     text-align: center;
+    background-color: white;
 }
 
 footer {
@@ -290,6 +291,7 @@ hr {
         font-size: auto;
     }
     .badania {
+        font-size: 17px;
         width: auto;
         height: auto;
         font-size: auto;
@@ -1932,7 +1934,7 @@ hr {
 @media (max-width: 1800px){
 
     .tekst{
-        text-align: justify;
+        /* text-align: justify; */
         font-size: 40px;
         margin-left: -100px;
         margin-top: 70px;
@@ -1944,13 +1946,12 @@ hr {
 @media (max-width: 1500px) {
 
     .tekst{
-        position:fixed;
-        font-size: 40px;
-        line-height: 54px;
+        position:absolute;
+        font-size: 30px;
         width: auto;
         height: auto;
-        left: auto;
         top: auto;
+        margin-right: 100px;
         margin-top: 20px;
     }
 
@@ -2345,14 +2346,17 @@ hr {
 @media (max-width: 800px) {
 
     .tekst{
-        position:fixed;
-        font-size: 30px;
-        line-height: 44px;
+        position: absolute;
+        font-size: 25px;
         width: auto;
         height: auto;
-        left: auto;
         top: auto;
+        margin-right: 80px;
         margin-top: 60px;
+    }
+
+    .logo-aktualizacje {
+        width: 200px;
     }
 
     .wykresy-szczegolowe{
@@ -2434,6 +2438,23 @@ hr {
         width: 100%;
     }
 
+    .tekst-aktualizacje{
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .umow_sie_tekst{
+        font-size: 30px;
+    }
+
+    .umow_sie_tekst2{
+        font-size: 20px;
+    }
+
+    .obrazek_jeden{
+        width: 70px;
+    }
+
     .paczka{
         width: 100%;
         margin-bottom: 40px;
@@ -2453,7 +2474,8 @@ hr {
         height: 900px;
     }
 
-    .tble-cennik{
+    .wysoko_adminLook .tble-cennik,
+    .accountAdminLook .tble-cennik{
         width: 400px;
         padding: 5px;
         overflow: auto;
@@ -2462,26 +2484,35 @@ hr {
     }
 
     @media (max-width: 450px){
-        .tble-cennik{
+        .wysoko_adminLook .tble-cennik,
+        .accountAdminLook .tble-cennik{
             width: 300px;
+        }
+
+        .tekst{
+            font-size: 20px;
         }
     }
     
-    .tble-cennik table{
+    .wysoko_adminLook .tble-cennik table,
+    .accountAdminLook .tble-cennik table{
         width: auto;
     }
     
-    .tble-cennik table th, td {
+    .wysoko_adminLook .tble-cennik table th, td,
+    .accountAdminLook .tble-cennik table th, td {
         font-size: 12px;
         padding: 5px;
     }
 
-    .tble-cennik::-webkit-scrollbar{
+    .wysoko_adminLook .tble-cennik::-webkit-scrollbar,
+    .accountAdminLook .tble-cennik::-webkit-scrollbar{
         margin-top: 2px;
         width: 8px; 
     }
     
-    .tble-cennik::-webkit-scrollbar-thumb {
+    .wysoko_adminLook .tble-cennik::-webkit-scrollbar-thumb,
+    .accountAdminLook .tble-cennik::-webkit-scrollbar-thumb {
         background-color: darkgray;
     }
 
