@@ -121,7 +121,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
                 <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
                     <?php
 
-                    $doctor_query = "SELECT id FROM doctors";
+                    $doctor_query = "SELECT imienazwisko FROM doctors";
                     $doctor_result = $conn->query($doctor_query);
 
                     if (!$doctor_result) {
@@ -130,7 +130,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
 
                     while ($row = $doctor_result->fetch_assoc()) {
-                        echo "<option value='" . $row['id'] . "'>" . $row['id'] . "</option>";
+                        echo "<option value='" . $row['imienazwisko'] . "'>" . $row['imienazwisko'] . "</option>";
                     }
                     ?>
                 </select>
@@ -157,16 +157,18 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>ID</th>';
+            echo '<th>Lp.</th>';
             echo '<th>Tytuł</th>';
             echo '<th>Imię i nazwisko</th>';
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
 
+            $counter = 1;
+
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $row['id'] . '</td>';
+                echo '<td>' . $counter++ . '</td>';
                 echo '<td>' . $row['tytul'] . '</td>';
                 echo ' <td>' . $row['imienazwisko'] . '</td>';
                 echo '</tr>';
@@ -252,12 +254,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
         var form = document.querySelector('.doctor-form');
 
         form.addEventListener('submit', function(event) {
-            var doctorIdInput = document.getElementById('doctor_id');
-            if (!validateNumber(doctorIdInput.value)) {
-                displayErrorMessage('Pole "id lekarza" musi zawierać liczby całkowite dodatnie.');
-                event.preventDefault();
-                return false;
-            }
+            // var doctorIdInput = document.getElementById('doctor_id');
+            // if (!validateNumber(doctorIdInput.value)) {
+                // displayErrorMessage('Pole "id lekarza" musi zawierać liczby całkowite dodatnie.');
+                // event.preventDefault();
+                // return false;
+            // }
 
             var dataWizytyInput = document.getElementById('data_wizyty');
             if (!validateDate(dataWizytyInput.value)) {

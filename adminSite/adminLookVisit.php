@@ -17,7 +17,7 @@ require '../Logowanie/config.php';
 if (isset($_POST['filter-btn'])) {
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
-    $doctor_id = isset($_POST['doctor_id']) ? intval($_POST['doctor_id']) : null;
+    $doctor_id = isset($_POST['doctor_id']) ? $conn->real_escape_string($_POST['doctor_id']) : null;
 
     $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, 
             pacjenci.id_pacjenta, wizyty.status_wizyty 
@@ -27,7 +27,7 @@ if (isset($_POST['filter-btn'])) {
             WHERE wizyty.data_wizyty BETWEEN '$start_date' AND '$end_date'";
 
     if (!is_null($doctor_id)) {
-        $sql .= " AND wizyty.doctor_id = $doctor_id";
+        $sql .= " AND wizyty.doctor_id = '$doctor_id'";
     }
 } else {
     $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, 
@@ -113,10 +113,10 @@ $result = $conn->query($sql);
         <div class="lookUsers">
             <form method="post" class="lookVis">
                 <div class="slct-wrapper">
-                    <p>Id:</p>
+                    <p>Wybierz lekarza:</p>
                     <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
                         <?php
-                        $doctor_query = "SELECT id_lekarza FROM doctors";
+                        $doctor_query = "SELECT imienazwisko FROM doctors";
                         $doctor_result = $conn->query($doctor_query);
 
                         if (!$doctor_result) {
@@ -124,7 +124,7 @@ $result = $conn->query($sql);
                         }
 
                         while ($row = $doctor_result->fetch_assoc()) {
-                            echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
+                            echo "<option value='" . $row['imienazwisko'] . "'>" . $row['imienazwisko'] . "</option>";
                         }
                         ?>
                     </select>

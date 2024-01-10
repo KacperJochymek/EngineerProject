@@ -4,11 +4,11 @@
 require '../Logowanie/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
-    $id = $_POST['id'];
+    $imienazwisko = $_POST['id']; // Zmieniono z $id na $imienazwisko
     $nowa_profesja = $_POST['nowa_profesja'];
 
     $sqlCheckAppointments = "SELECT COUNT(*) as appointments_count FROM wizyty 
-    WHERE doctor_id = $id AND status_wizyty = 'zarezerwowana'";
+    WHERE doctor_id = '$imienazwisko' AND status_wizyty = 'zarezerwowana'";
     $resultCheckAppointments = $conn->query($sqlCheckAppointments);
 
     if ($resultCheckAppointments->num_rows > 0) {
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
             if (!preg_match('/^[a-zA-Z]+$/', $nowa_profesja)) {
                 echo '<div class="messageSent">Błąd: Profesja powinna zawierać tylko litery!</div>';
             } else {
-                $sqlUpdateProfession = "UPDATE doctors SET profesja = '$nowa_profesja' WHERE id = $id";
+                $sqlUpdateProfession = "UPDATE doctors SET profesja = '$nowa_profesja' WHERE imienazwisko = '$imienazwisko'"; // Zmieniono z id na imienazwisko
 
                 if ($conn->query($sqlUpdateProfession) === TRUE) {
                     echo '<div class="messageSent">Profesja zaktualizowana pomyślnie!</div>';
@@ -39,9 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
 require '../Logowanie/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['tak_oo'])) {
-    $id = $_POST['id'];
+    $imienazwisko = $_POST['id']; 
 
-    $sqlCheckAppointments = "SELECT COUNT(*) as appointments_count FROM wizyty WHERE doctor_id = $id 
+    $sqlCheckAppointments = "SELECT COUNT(*) as appointments_count FROM wizyty WHERE doctor_id = '$imienazwisko' 
     AND status_wizyty = 'zarezerwowana'";
     $resultCheckAppointments = $conn->query($sqlCheckAppointments);
 
@@ -53,14 +53,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['tak_oo'])) {
             echo '<div class="messageSent">Nie możesz usunąć lekarza, ponieważ ma on umówione wizyty.</div>';
         } else {
 
-            $sqlDeleteFreeAppointments = "DELETE FROM wizyty WHERE doctor_id = $id AND status_wizyty = 'dostepna'";
+            $sqlDeleteFreeAppointments = "DELETE FROM wizyty WHERE doctor_id = '$imienazwisko' AND status_wizyty = 'dostepna'";
             if ($conn->query($sqlDeleteFreeAppointments) === TRUE) {
                 echo '<div class="messageSent">Wolne terminy usunięte poprawnie.</div>';
             } else {
                 echo '<div class="messageSent">Błąd: ' . $sqlDeleteFreeAppointments . '<br>' . $conn->error . '</div>';
             }
 
-            $sql = "SELECT obrazek FROM doctors WHERE id = $id";
+            $sql = "SELECT obrazek FROM doctors WHERE imienazwisko = '$imienazwisko'"; // Zmieniono z id na imienazwisko
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['tak_oo'])) {
                     unlink($obrazekPath);
                 }
 
-                $sql = "DELETE FROM doctors WHERE id = $id";
+                $sql = "DELETE FROM doctors WHERE imienazwisko = '$imienazwisko'"; // Zmieniono z id na imienazwisko
                 if ($conn->query($sql) === TRUE) {
                     echo '<div class="messageSent">Dane usunięte poprawnie.</div>';
                 } else {
@@ -82,5 +82,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['tak_oo'])) {
         }
     }
 }
-
 ?>

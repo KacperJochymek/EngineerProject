@@ -110,7 +110,7 @@ if (!empty($_SESSION["id"])) {
                 echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i> ' . $row["tytul"] . ' ' . $row["imienazwisko"] . ' </p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $row["profesja"] . '</p>';
                 echo '<form method="GET" action="../userSite/doctorVisit.php">';
-                echo '<input type="hidden" name="doctor_id" value="' . $row["id"] . '">';
+                echo '<input type="hidden" name="doctor_id" value="' . $row["imienazwisko"] . '">';
                 echo '<button class="lekarz-btn" type="submit">Umów się</button>';
                 echo '</form>';
                 echo '</div>';

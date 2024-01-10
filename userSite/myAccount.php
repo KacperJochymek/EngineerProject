@@ -2,7 +2,7 @@
 session_start();
 
 if (empty($_SESSION["id"])) {
-    header("Location: /index.php"); 
+    header("Location: /index.php");
     exit();
 }
 
@@ -166,22 +166,19 @@ if (isset($_POST['tak_oo'])) {
             <div class="mojeWizyty">
                 <p class="tekst-wizytyMyAcc">Moje wizyty:</p>
 
-
                 <?php
-
                 $recordsPerPage = 2;
                 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
                 $offset = ($currentPage - 1) * $recordsPerPage;
 
-
                 $sql = "SELECT wizyty.id, wizyty.data_wizyty, wizyty.available_hour, wizyty.doctor_id, wizyty.status_wizyty,
-        doctors.imienazwisko, doctors.profesja, doctors.obrazek
-        FROM wizyty
-        LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
-        LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
-        LEFT JOIN doctors ON wizyty.doctor_id = doctors.id_lekarza
-        WHERE pacjenci.adres_email = '$email' AND wizyty.status_wizyty = 'zarezerwowana'
-        LIMIT $recordsPerPage OFFSET $offset";
+                doctors.obrazek, doctors.profesja
+                FROM wizyty
+                LEFT JOIN dostepnosc ON wizyty.id = dostepnosc.id_wizyty
+                LEFT JOIN pacjenci ON dostepnosc.id_pacjenta = pacjenci.id
+                LEFT JOIN doctors ON wizyty.doctor_id = doctors.imienazwisko
+                WHERE pacjenci.adres_email = '$email' AND wizyty.status_wizyty = 'zarezerwowana'
+                LIMIT $recordsPerPage OFFSET $offset";
 
                 $result = $conn->query($sql);
 
@@ -194,7 +191,7 @@ if (isset($_POST['tak_oo'])) {
                         echo '<div class="wyswietlanieMyAcc">';
                         echo '<img src="' . $obrazekPath . '" alt="">';
                         echo '<div class="resztaMyAcc">';
-                        echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $row['imienazwisko'] . '</p>';
+                        echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $row['doctor_id'] . '</p>';
                         echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $row['profesja'] . '</p>';
                         echo '<p id="selectedDate" class="selected-date">' . $row['data_wizyty'] . '</p>';
                         echo '<p id="selectedHour" class="selected-hour">' . $row['available_hour'] . '</p>';

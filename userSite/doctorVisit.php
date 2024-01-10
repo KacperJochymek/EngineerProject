@@ -21,7 +21,7 @@ $selectedDate = "";
 if (isset($_GET["doctor_id"])) {
     $doctor_id = $_GET["doctor_id"];
 
-    $sql = "SELECT * FROM doctors WHERE id = $doctor_id";
+    $sql = "SELECT * FROM doctors WHERE imienazwisko = '$doctor_id'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -150,7 +150,7 @@ if (isset($_GET["doctor_id"])) {
                             // Pobierz id nowo dodanego pacjenta
                             $id_nowego_pacjenta = $conn->insert_id;
 
-                            $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id
+                            $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = '$doctor_id'
                             AND available_hour = '$selectedHour' 
                             AND data_wizyty = '$selectedDate' 
                             AND status_wizyty = 'dostepna'";
@@ -184,7 +184,7 @@ if (isset($_GET["doctor_id"])) {
                         $row_pacjent = $result_sprawdzenie_pacjenta->fetch_assoc();
                         $id_nowego_pacjenta = $row_pacjent['id'];
 
-                        $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id
+                        $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = '$doctor_id'
                         AND available_hour = '$selectedHour' 
                         AND data_wizyty = '$selectedDate' 
                         AND status_wizyty = 'dostepna'";

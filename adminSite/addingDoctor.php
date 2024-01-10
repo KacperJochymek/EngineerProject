@@ -169,7 +169,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>ID</th>';
+            echo '<th>Lp.</th>';
             echo '<th>Imię i Nazwisko</th>';
             echo '<th>Specjalizacja</th>';
             echo '<th>Akcje</th>';
@@ -182,18 +182,18 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $row['id'] .  '</td>';
+                echo '<td>' . $counter .  '</td>';
                 echo '<td>' . htmlspecialchars($row["tytul"]) . ' ' . htmlspecialchars($row["imienazwisko"]) . '</td>';
                 echo '<td>' . $row["profesja"] . '</td>';
                 echo '<td>';
                 echo '<form method="post" action="">';
-                echo '<input type="hidden" name="id" value="' . $row["id"] . '">';
+                echo '<input type="hidden" name="id" value="' . $row["imienazwisko"] . '">';
                 echo '<input type="text" class="new-price-form" name="nowa_profesja" placeholder="Nowa profesja">';
                 echo '<button type="submit" class="edit-btn" name="edit-btn">Aktualizuj</button>';
                 echo '<button type="submit" class="delete-btn" name="delete-btn">Usuń</button>';
                 echo '</form>';
                 echo '<form method="post">';
-                echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
+                echo '<input type="hidden" name="id" value="' . $row['imienazwisko'] . '">';
                 echo '<div class="ukrytyDiv" id="ukrytyDiv' . $counter . '" style="display:none;">';
                 echo '<p>Czy na pewno? </p>';
                 echo '<button name="tak_oo" id="tak_oo">Tak</button>';
