@@ -169,7 +169,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>Lp.</th>';
+            echo '<th>ID</th>';
             echo '<th>Imię i Nazwisko</th>';
             echo '<th>Specjalizacja</th>';
             echo '<th>Akcje</th>';
@@ -182,7 +182,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $count .  '</td>';
+                echo '<td>' . $row['id'] .  '</td>';
                 echo '<td>' . htmlspecialchars($row["tytul"]) . ' ' . htmlspecialchars($row["imienazwisko"]) . '</td>';
                 echo '<td>' . $row["profesja"] . '</td>';
                 echo '<td>';

@@ -121,7 +121,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
                 <select name="doctor_id" id="doctor_id" class="wybor_lekarza">
                     <?php
 
-                    $doctor_query = "SELECT id_lekarza FROM doctors";
+                    $doctor_query = "SELECT id FROM doctors";
                     $doctor_result = $conn->query($doctor_query);
 
                     if (!$doctor_result) {
@@ -130,7 +130,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
 
                     while ($row = $doctor_result->fetch_assoc()) {
-                        echo "<option value='" . $row['id_lekarza'] . "'>" . $row['id_lekarza'] . "</option>";
+                        echo "<option value='" . $row['id'] . "'>" . $row['id'] . "</option>";
                     }
                     ?>
                 </select>
@@ -157,7 +157,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
             echo '<table>';
             echo '<thead>';
             echo '<tr>';
-            echo '<th>Lp.</th>';
+            echo '<th>ID</th>';
             echo '<th>Tytuł</th>';
             echo '<th>Imię i nazwisko</th>';
             echo '</tr>';
@@ -166,7 +166,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $row['id_lekarza'] . '</td>';
+                echo '<td>' . $row['id'] . '</td>';
                 echo '<td>' . $row['tytul'] . '</td>';
                 echo ' <td>' . $row['imienazwisko'] . '</td>';
                 echo '</tr>';
