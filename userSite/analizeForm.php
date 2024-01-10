@@ -54,15 +54,9 @@ if (!empty($_SESSION["id"])) {
                     <a href="contact.php">Kontakt</a>
                 </li>
 
-                <?php
-                if ($userType === 'user') {
-                    echo '<li><a href="/userSite/myAccount.php">Moje konto</a></li>';
-                } elseif ($userType === 'doctor') {
-                    echo '<li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>';
-                } elseif ($userType === 'admin') {
-                    echo '<li><a href="/adminSite/adminAccount.php">Moje Konto</a></li>';
-                }
-                ?>
+                <li>
+                    <a href="myAccount.php">Moje konto</a>
+                </li>
                 <li>
                     <a href="/Logowanie/logout.php" class="active">Wyloguj się</a>
 
