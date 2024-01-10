@@ -3,7 +3,7 @@ require '../Logowanie/config.php';
 session_start();
 
 if (empty($_SESSION["id"])) {
-    header("Location: /index.php"); 
+    header("Location: /index.php");
     exit();
 }
 
@@ -14,6 +14,9 @@ if (!empty($_SESSION["id"])) {
 
     $email = $row["email"];
 }
+
+$selectedHour = "";
+$selectedDate = "";
 
 if (isset($_GET["doctor_id"])) {
     $doctor_id = $_GET["doctor_id"];
@@ -27,6 +30,11 @@ if (isset($_GET["doctor_id"])) {
         $imienazwisko = $selected_doctor["imienazwisko"];
         $profesja = $selected_doctor["profesja"];
         $obrazek = $selected_doctor["obrazek"];
+
+        if (isset($_GET["selectedHour"]) && isset($_GET["selectedDate"])) {
+            $selectedHour = $_GET["selectedHour"];
+            $selectedDate = $_GET["selectedDate"];
+        }
     } else {
         echo "Brak danych do wyświetlenia.";
     }
@@ -102,10 +110,8 @@ if (isset($_GET["doctor_id"])) {
                 echo '<img src="../adminSite/uploads/' . $obrazek . '" alt="">';
                 echo '<p class="lekarz-med"> <i class="fa-solid fa-user-doctor"></i>' . $tytul . ' ' . $imienazwisko . '</p>';
                 echo '<p class="profesja"> <i class="fa-solid fa-stethoscope"></i>' . $profesja . '</p>';
-                echo '<form method="GET" action="../userSite/doctorChosen.php">';
                 echo '<p id="selectedDate" class="selected-date"><i class="fa-solid fa-calendar-days"></i></p>';
                 echo '<p id="selectedHour" class="selected-hour">Godzina twojej wizyty</p>';
-                echo '</form>';
             } else {
                 echo "Nie wybrano lekarza.";
             }
@@ -144,7 +150,11 @@ if (isset($_GET["doctor_id"])) {
                             // Pobierz id nowo dodanego pacjenta
                             $id_nowego_pacjenta = $conn->insert_id;
 
-                            $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status_wizyty = 'dostepna'";
+                            $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id
+                            AND available_hour = '$selectedHour' 
+                            AND data_wizyty = '$selectedDate' 
+                            AND status_wizyty = 'dostepna'";
+
                             $result_wizyta = $conn->query($sql_wizyta);
 
                             if ($result_wizyta->num_rows > 0) {
@@ -174,8 +184,11 @@ if (isset($_GET["doctor_id"])) {
                         $row_pacjent = $result_sprawdzenie_pacjenta->fetch_assoc();
                         $id_nowego_pacjenta = $row_pacjent['id'];
 
-                        // Kontynuacja dodawania nowej wizyty
-                        $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id AND status_wizyty = 'dostepna'";
+                        $sql_wizyta = "SELECT id FROM wizyty WHERE doctor_id = $doctor_id
+                        AND available_hour = '$selectedHour' 
+                        AND data_wizyty = '$selectedDate' 
+                        AND status_wizyty = 'dostepna'";
+
                         $result_wizyta = $conn->query($sql_wizyta);
 
                         if ($result_wizyta->num_rows > 0) {

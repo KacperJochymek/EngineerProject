@@ -61,12 +61,14 @@ daysTag.addEventListener("click", (event) => {
         const day = parseInt(target.textContent, 10);
         if (!isNaN(day) && isFinite(day)) {
             const selectedDateElement = document.getElementById("selectedDate");
-            selectedDateElement.textContent = `${day} ${months[currMonth]} ${currYear}`;
+            const formattedMonth = (currMonth + 1).toString().padStart(2, '0'); 
+            const formattedDay = day.toString().padStart(2, '0'); 
+            selectedDateElement.textContent = `${formattedDay} ${months[currMonth]} ${currYear}`;
 
             const availableHours = document.getElementById("availableHours");
             availableHours.innerHTML = '';
 
-            const selectedDate = `${currYear}-${currMonth + 1}-${day}`; 
+            const selectedDate = `${currYear}-${formattedMonth}-${formattedDay}`; 
 
             const selectedHourElement = document.getElementById("selectedHour");
             selectedHourElement.textContent = "Godzina twojej wizyty";
@@ -75,28 +77,33 @@ daysTag.addEventListener("click", (event) => {
             const doctorId = queryParams.get('doctor_id'); 
 
             fetch(`http://localhost:3000/userSite/calendarConnect.php?selectedDate=${selectedDate}&doctor_id=${doctorId}`, {
-            method: 'GET',
+                method: 'GET',
             })
             .then(response => response.json())
             .then(data => {
                 const dostepneGodziny = data;
                 const availableHours = document.getElementById("availableHours");
                 availableHours.innerHTML = '';
-            
+
                 dostepneGodziny.forEach(entry => {
                     const godzina = entry.hour;
                     const status = entry.status_wizyty; 
-            
+
                     if (status !== 'zarezerwowana') { 
                         const button = document.createElement("button");
                         button.classList.add("przykladowa");
                         button.textContent = godzina; 
-            
+
                         button.addEventListener("click", () => {
                             const wybranaGodzina = godzina;
+                            console.log("Wybrano datę:", selectedDate);
                             console.log("Wybrano godzinę:", wybranaGodzina);
+
+                            // Przekierowanie do doctorVisit.php
+                            const newUrl = `/userSite/doctorVisit.php?doctor_id=${doctorId}&selectedHour=${wybranaGodzina}&selectedDate=${selectedDate}`;
+                            history.pushState(null, '', newUrl);
                         });
-            
+
                         availableHours.appendChild(button);
                     }
                 });
