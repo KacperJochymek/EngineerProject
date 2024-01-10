@@ -2,7 +2,7 @@
 session_start();
 
 if (empty($_SESSION["id"])) {
-    header("Location: /index.php"); 
+    header("Location: /index.php");
     exit();
 }
 
@@ -82,6 +82,8 @@ if (!empty($_SESSION["id"])) {
 
         <h1>Hej <?php echo $row["username"]; ?>, jeśli masz jakieś pytania skontaktuj się z nami!</h1>
 
+        <div class="messageSent" id="messageSent"></div>
+
         <div class="paczka_blog">
             <form class="contact-form" action="https://formsubmit.co/karton2137j@gmail.com" method="POST">
                 <i class="fa-regular fa-envelope"><input type="email" name="email" class="email-hldr" placeholder="Wpisz swój e-mail" required></i>
@@ -140,6 +142,21 @@ if (!empty($_SESSION["id"])) {
     </footer>
 
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var contactForm = document.querySelector(".contact-form");
+        var messageSentDiv = document.getElementById("messageSent");
 
+        contactForm.addEventListener("submit", function(event) {
+            var messageTextarea = document.querySelector(".message-inpt");
+            var trimmedMessage = messageTextarea.value.trim();
+
+            if (trimmedMessage === "") {
+                event.preventDefault();
+                messageSentDiv.innerHTML = "Wiadomość nie może być pusta.";
+            }
+        });
+    });
+</script>
 
 </html>

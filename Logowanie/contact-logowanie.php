@@ -18,8 +18,9 @@
 
     <div class="container">
         <form class="contact-form" id="contactForm" action="https://formsubmit.co/karton2137j@gmail.com" method="POST">
-            <p>Napisz do nas, aby odzyskać hasło.</p>
+            <p>Masz pytanie? Napisz do nas!</p>
             <i class="fa-regular fa-envelope"><input type="email" name="email" class="email-hldr" placeholder="Wpisz swój e-mail" required></i>
+            <div class="messageSent" id="messageSent"></div>
             <textarea class="message-inpt" name="message" placeholder="Treść wiadomości" required></textarea>
             <input type="hidden" name="_next" value="http://localhost:3000/Logowanie/contact-success.php">
             <input type="submit" class="lekarz-btn" value="Wyślij">
@@ -30,5 +31,21 @@
 </body>
 
 <script src="/Logowanie/script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var contactForm = document.querySelector(".contact-form");
+        var messageSentDiv = document.getElementById("messageSent");
+
+        contactForm.addEventListener("submit", function(event) {
+            var messageTextarea = document.querySelector(".message-inpt");
+            var trimmedMessage = messageTextarea.value.trim();
+
+            if (trimmedMessage === "") {
+                event.preventDefault();
+                messageSentDiv.innerHTML = "Wiadomość nie może być pusta.";
+            }
+        });
+    });
+</script>
 
 </html>

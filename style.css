@@ -994,6 +994,11 @@ hr {
     margin-bottom: 10px;
 }
 
+.contact-site .messageSent{
+    margin-top: 20px;
+    margin-bottom: -20px;
+}
+
 .blog_brakdan{
     margin-top: 10px;
     font-size: 25px;

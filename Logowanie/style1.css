@@ -173,6 +173,14 @@ body {
     font-size: 14px;
 }
 
+.container .messageSent{
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
 .messageSent2{
     margin-top: 10px;
     color: red;
