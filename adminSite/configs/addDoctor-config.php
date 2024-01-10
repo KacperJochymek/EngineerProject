@@ -4,7 +4,7 @@
 require '../Logowanie/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
-    $imienazwisko = $_POST['id']; // Zmieniono z $id na $imienazwisko
+    $imienazwisko = $_POST['id']; 
     $nowa_profesja = $_POST['nowa_profesja'];
 
     $sqlCheckAppointments = "SELECT COUNT(*) as appointments_count FROM wizyty 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit-btn'])) {
             if (!preg_match('/^[a-zA-Z]+$/', $nowa_profesja)) {
                 echo '<div class="messageSent">Błąd: Profesja powinna zawierać tylko litery!</div>';
             } else {
-                $sqlUpdateProfession = "UPDATE doctors SET profesja = '$nowa_profesja' WHERE imienazwisko = '$imienazwisko'"; // Zmieniono z id na imienazwisko
+                $sqlUpdateProfession = "UPDATE doctors SET profesja = '$nowa_profesja' WHERE imienazwisko = '$imienazwisko'"; 
 
                 if ($conn->query($sqlUpdateProfession) === TRUE) {
                     echo '<div class="messageSent">Profesja zaktualizowana pomyślnie!</div>';
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['tak_oo'])) {
                 echo '<div class="messageSent">Błąd: ' . $sqlDeleteFreeAppointments . '<br>' . $conn->error . '</div>';
             }
 
-            $sql = "SELECT obrazek FROM doctors WHERE imienazwisko = '$imienazwisko'"; // Zmieniono z id na imienazwisko
+            $sql = "SELECT obrazek FROM doctors WHERE imienazwisko = '$imienazwisko'"; 
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['tak_oo'])) {
                     unlink($obrazekPath);
                 }
 
-                $sql = "DELETE FROM doctors WHERE imienazwisko = '$imienazwisko'"; // Zmieniono z id na imienazwisko
+                $sql = "DELETE FROM doctors WHERE imienazwisko = '$imienazwisko'"; 
                 if ($conn->query($sql) === TRUE) {
                     echo '<div class="messageSent">Dane usunięte poprawnie.</div>';
                 } else {
