@@ -393,7 +393,7 @@ hr {
     width: 200px;
     height: 50px;
     margin-top: 40px;
-    margin-left: 1000px;
+    margin-left: 900px;
     border-radius: 20px;
     cursor: pointer;
     border: none;
@@ -405,7 +405,7 @@ hr {
 }
 
 .aktualizacje-btn:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
     z-index: 2;
 }
 
