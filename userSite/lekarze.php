@@ -173,17 +173,5 @@ if (!empty($_SESSION["id"])) {
 </body>
 
 <script src="script1.js"></script>
-<script>
-    //Skrypt do powiększania wysokości strony
-    var dostosujWysokosc = document.querySelector('.dostosuj-wysokosc');
-    var lekarzeContainer = document.querySelector('.lekarze-wybor');
-    var lekarze = document.querySelectorAll('.lekarze-wybor .lekarz-logo');
-
-    var lekarzeNaRzad = 2;
-    var iloscRzedow = Math.ceil(lekarze.length / lekarzeNaRzad);
-    var lekarzeWyborHeight = iloscRzedow * (lekarze[0].offsetHeight + 10);
-
-    dostosujWysokosc.style.height = (lekarzeWyborHeight - 200) + 'px';
-</script>
 
 </html>

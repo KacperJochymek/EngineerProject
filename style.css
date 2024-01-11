@@ -488,7 +488,7 @@ hr {
 }
 
 .lekarze-wybor{
-    height: 900px;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -1937,6 +1937,13 @@ hr {
     }
 }
 
+@media (max-width: 2000px){
+    .lekarze-wybor{
+        height: auto;
+        padding-bottom: 300px;
+    }
+}
+
 @media (max-width: 1800px){
 
     .tekst{
@@ -1959,6 +1966,11 @@ hr {
         top: auto;
         margin-right: 100px;
         margin-top: 20px;
+    }
+
+    .lekarze-wybor{
+        height: auto;
+        padding-bottom: 0;
     }
 
     .daneSzczegoloweContainer{
@@ -2169,9 +2181,6 @@ hr {
         height: auto;
     }
 
-    .lekarze-wybor{
-        height: auto;
-    }
 
     .lekarzeDatabase{
         height: 700px;
