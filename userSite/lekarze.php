@@ -183,7 +183,7 @@ if (!empty($_SESSION["id"])) {
     var iloscRzedow = Math.ceil(lekarze.length / lekarzeNaRzad);
     var lekarzeWyborHeight = iloscRzedow * (lekarze[0].offsetHeight + 10);
 
-    dostosujWysokosc.style.height = (lekarzeWyborHeight - 350) + 'px';
+    dostosujWysokosc.style.height = (lekarzeWyborHeight - 200) + 'px';
 </script>
 
 </html>

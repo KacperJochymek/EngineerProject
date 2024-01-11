@@ -225,6 +225,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         <option value="brak">Brak</option>
                         <option value="Onkolog">Onkolog</option>
                         <option value="Podolog">Podolog</option>
+                        <option value="Psycholog">Psycholog</option>
+                        <option value="Kardiolog">Kardiolog</option>
+                        <option value="Internista">Internista</option>
+                        <option value="Neurolog">Neurolog</option>
                     </select>
                 </div>
 

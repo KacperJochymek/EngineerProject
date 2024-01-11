@@ -114,12 +114,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     <div class="slct-wrapper">
                         <p>Wybierz tytuł:</p>
                         <select class="select-prof" name="tytul" id="tytul">
-                            <option value="lek">lek.</option>
+                            <option value="lek.">lek.</option>
                             <option value="mgr">mgr</option>
                             <option value="dr">dr</option>
-                            <option value="drnmed">dr n. med.</option>
-                            <option value="drhabnmed">dr hab. n. med.</option>
-                            <option value="profhab">prof. dr hab. n. med.</option>
+                            <option value="dr n. med.">dr n. med.</option>
+                            <option value="dr hab. n. med.">dr hab. n. med.</option>
+                            <option value="prof. dr hab. n. med.">prof. dr hab. n. med.</option>
                         </select>
                     </div>
                     <div class="slct-wrapper">
