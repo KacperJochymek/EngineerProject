@@ -157,7 +157,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         require '../Logowanie/config.php';
         require '../adminSite/configs/addDoctor-config.php';
 
-        $itemsPerPage = 3;
+        $itemsPerPage = 5;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
@@ -182,7 +182,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
-                echo '<td>' . $counter .  '</td>';
+                echo '<td>' . $count .  '</td>';
                 echo '<td>' . htmlspecialchars($row["tytul"]) . ' ' . htmlspecialchars($row["imienazwisko"]) . '</td>';
                 echo '<td>' . $row["profesja"] . '</td>';
                 echo '<td>';
