@@ -2015,7 +2015,7 @@ hr {
 
     .myAccountSite{
         text-align: center;
-        height: 700px;
+        height: 800px;
     }
 
     .priceSite{
@@ -2311,6 +2311,10 @@ hr {
         width: auto;
         margin-bottom: 30px;
     }
+
+    .myAccountSite{
+        height: 670px;
+    }
     
     .wyswietlanieMyAcc img{
         width: 150px;
@@ -2431,6 +2435,25 @@ hr {
         .changePass{
             width: 100%; 
         }
+    }
+}
+
+@media (max-width: 700px) {
+    .myAccountSite{
+        height: 1100px;
+    }
+
+    .wyswietlanieMyAcc img{
+        margin: 0;
+    }
+
+    .wyswietlanieMyAcc .resztaMyAcc{
+        margin: 0;
+        padding: 20px;
+    }
+
+    .myAccountSite .myAccBtn{
+        margin: 0;
     }
 }
 
