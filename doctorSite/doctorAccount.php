@@ -220,8 +220,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
                 <h1>Przydatne linki</h1>
                 <ul>
                     <li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>
-                    <li><a href="/userSite/analizeForm.php">Ankieta</a></li>
-                    <li><a href="/userSite/lekarze.php">Lekarze</a></li>
+                    <li><a href="/doctorSite/doctorVisitCount.php">Wizyty</a></li>
+                    <li><a href="/userSite/contact.php">Kontakt</a></li>
                 </ul>
             </div>
             <div class="col-1">

@@ -68,7 +68,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Dodaj post na stronę bloga</p>
+    <p class="lekarz-wybierz">Dodaj wpis na stronę bloga</p>
 
     <div class="blog_adding">
         <?php

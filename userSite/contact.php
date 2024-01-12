@@ -115,7 +115,7 @@ if (!empty($_SESSION["id"])) {
                 <h1>Przydatne linki</h1>
                 <ul>
                     <li><a href="/userSite/myAccount.php">Moje konto</a></li>
-                    <li><a href="/userSite/analizeForm.php">Ankieta</a></li>
+                    <li><a href="/userSite/blog.php">Blog</a></li>
                     <li><a href="/userSite/lekarze.php">Lekarze</a></li>
                 </ul>
             </div>

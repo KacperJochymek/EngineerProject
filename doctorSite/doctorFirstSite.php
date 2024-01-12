@@ -126,9 +126,9 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
             <div class="col-1">
                 <h1>Przydatne linki</h1>
                 <ul>
-                    <li><a href="/doctorSite/doctorAccount.php">Wizyty</a></li>
+                    <li><a href="/doctorSite/doctorAccount.php">Godziny pracy</a></li>
                     <li><a href="/userSite/blog.php">Blog</a></li>
-                    <li><a href="/userSite/lekarze.php">Lekarze</a></li>
+                    <li><a href="/doctorSite/doctorVisitCount.php">Wizyty</a></li>
                 </ul>
             </div>
             <div class="col-1">

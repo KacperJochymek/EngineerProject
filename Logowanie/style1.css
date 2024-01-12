@@ -173,6 +173,10 @@ body {
     font-size: 14px;
 }
 
+.login-signup .messageSent{
+    padding-top: 15px;
+}
+
 .container .messageSent{
     margin-top: 10px;
     color: red;

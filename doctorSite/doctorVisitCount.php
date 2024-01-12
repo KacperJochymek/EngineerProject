@@ -233,7 +233,7 @@ $result = $conn->query($sql);
                 <h1>Przydatne linki</h1>
                 <ul>
                     <li><a href="/doctorSite/doctorFirstSite.php">Moje konto</a></li>
-                    <li><a href="/userSite/analizeForm.php">Ankieta</a></li>
+                    <li><a href="/doctorSite/doctorAccount.php">Godziny pracy</a></li>
                     <li><a href="/userSite/lekarze.php">Lekarze</a></li>
                 </ul>
             </div>

@@ -67,7 +67,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
         </label>
     </header>
 
-    <p class="lekarz-wybierz">Formularz dodawania/zmian cen w systemie</p>
+    <p class="lekarz-wybierz">Formularz dodawania cennika w systemie</p>
 
     <div class="wysoko_price">
 
