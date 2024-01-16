@@ -145,7 +145,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
 
         <?php
 
-        $itemsPerPage = 3;
+        $itemsPerPage = 5;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page - 1) * $itemsPerPage;
 
@@ -160,17 +160,19 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
             echo '<th>Lp.</th>';
             echo '<th>Tytuł</th>';
             echo '<th>Imię i nazwisko</th>';
+            echo '<th>Specjalizacja</th>';
             echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
 
-            $counter = 1;
+            $counter = $offset + 1;
 
             while ($row = $result->fetch_assoc()) {
                 echo '<tr>';
                 echo '<td>' . $counter++ . '</td>';
                 echo '<td>' . $row['tytul'] . '</td>';
                 echo ' <td>' . $row['imienazwisko'] . '</td>';
+                echo '<td>' . $row['profesja'] . '</td>';
                 echo '</tr>';
             }
             echo '</tbody>';
@@ -185,13 +187,13 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
             echo '<div class="pagination">';
             for ($i = 1; $i <= $totalPages; $i++) {
                 $active_class = ($i == $page) ? 'active' : '';
-                echo '<a class="' . $active_class . '" href="addingPrice.php?page=' . $i . '">' . $i . '</a>';
+                echo '<a class="' . $active_class . '" href="doctorAccount.php?page=' . $i . '">' . $i . '</a>';
             }
             echo '</div>';
         } else {
             echo '<div class="blog_brakdan">';
             echo "Brak danych do wyświetlenia.";
-            echo '<a href="addingPrice.php?page=1"><i class="fa-solid fa-circle-arrow-left"></i></a>';
+            echo '<a href="doctorAccount.php?page=1"><i class="fa-solid fa-circle-arrow-left"></i></a>';
             echo '</div>';
         }
 

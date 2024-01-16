@@ -93,25 +93,27 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                     // Sprawdź, czy przesłany plik to obrazek
                     if (substr($obrazek_type, 0, 5) === "image") {
                         move_uploaded_file($obrazek_temp, "uploads/" . $obrazek_name);
+
+                        $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES (?, ?, ?)";
+                        $stmt = $conn->prepare($sql);
+
+                        if ($stmt) {
+                            $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
+
+                            if ($stmt->execute()) {
+                                echo '<div class="messageSent">Wpis dodany pomyślnie!</div>';
+                            } else {
+                                echo '<div class="messageSent">Błąd: ' . $stmt->error . '</div>';
+                            }
+                            $stmt->close();
+                        } else {
+                            echo '<div class="messageSent">Błąd przy przygotowywaniu zapytania.<br></div>';
+                        }
                     } else {
                         echo '<div class="messageSent">Błąd: Plik nie jest obrazkiem.</div>';
                     }
-                }
-
-                $sql = "INSERT INTO blog (tekst, obrazek, dat) VALUES (?, ?, ?)";
-                $stmt = $conn->prepare($sql);
-
-                if ($stmt) {
-                    $stmt->bind_param("sss", $tekst, $obrazek_name, $data);
-
-                    if ($stmt->execute()) {
-                        echo '<div class="messageSent">Wpis dodany pomyślnie!</div>';
-                    } else {
-                        echo '<div class="messageSent">Błąd: ' . $stmt->error . '</div>';
-                    }
-                    $stmt->close();
                 } else {
-                    echo '<div class="messageSent">Błąd przy przygotowywaniu zapytania.<br></div>';
+                    echo '<div class="messageSent">Błąd: Proszę przesłać obrazek.</div>';
                 }
             }
         }
