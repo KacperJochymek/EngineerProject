@@ -12,8 +12,8 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
     exit();
 }
 
+//Kod odpowiedzialny za filtrowanie wyników 
 require '../Logowanie/config.php';
-
 if (isset($_POST['filter-btn'])) {
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];

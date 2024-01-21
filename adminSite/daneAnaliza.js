@@ -1,3 +1,4 @@
+//Funkcje do wykresów
 const columnSelect = document.getElementById("selectColumn");
 const chartTypeSelect = document.getElementById("chartTypeSelect");
 const generateChartButton = document.getElementById("generateChart");

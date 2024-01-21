@@ -98,12 +98,10 @@ if (!empty($_SESSION["id"])) {
             die("Błąd połączenia: " . $conn->connect_error);
         }
 
-        // Przygotuj zapytanie SQL do pobrania danych z tabeli 'doctors'
         $sql = "SELECT * FROM doctors";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            // Iteruj przez wyniki zapytania i generuj divy
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="lekarz-logo">';
                 echo '<img src="/adminSite/uploads/' . $row["obrazek"] . '" alt="">';

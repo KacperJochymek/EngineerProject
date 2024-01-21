@@ -96,7 +96,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
                 $totalAge += $age;
                 $totalPatients++;
-
             }
 
             $averageAge = $totalAge / $totalPatients;
@@ -135,7 +134,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                         <option value="kwartyl1">Kwartyl1</option>
                         <option value="kwartyl3">Kwartyl3</option>
                         <!-- zakres miedzykwartylowy -->
-                        <option value="iqr">IQR</option> 
+                        <option value="iqr">IQR</option>
                         <option value="odchylenie-std">Odchylenie sd</option>
                     </select>
                 </div>
@@ -332,182 +331,181 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
                 resultText += "Odchylenie standardowe wieku pacjentów: " + stdDev.toFixed(2) + " lat";
             }
         } else if (selectedValue === "wiek" && selectedMeasure === "moda") {
-        var ages = <?php echo json_encode($ages); ?>;
-        ages = ages.map(Number);
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number);
 
-        if (ages.length === 0) {
-            resultText += "Brak dostępnych danych do obliczenia mody.";
-        } else {
-            var modeMap = {};
-            var maxCount = 0;
-            var modes = [];
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia mody.";
+            } else {
+                var modeMap = {};
+                var maxCount = 0;
+                var modes = [];
 
-            for (var i = 0; i < ages.length; i++) {
-                var age = ages[i];
-                modeMap[age] = (modeMap[age] || 0) + 1;
+                for (var i = 0; i < ages.length; i++) {
+                    var age = ages[i];
+                    modeMap[age] = (modeMap[age] || 0) + 1;
 
-                if (modeMap[age] > maxCount) {
-                    maxCount = modeMap[age];
-                    modes = [age];
-                } else if (modeMap[age] === maxCount) {
-                    modes.push(age);
+                    if (modeMap[age] > maxCount) {
+                        maxCount = modeMap[age];
+                        modes = [age];
+                    } else if (modeMap[age] === maxCount) {
+                        modes.push(age);
+                    }
+                }
+
+                if (modes.length === 1) {
+                    resultText += "Moda wieku pacjentów: " + modes[0] + " lat";
+                } else {
+                    resultText += "Wiele mod: " + modes.join(", ") + " lat";
                 }
             }
+        } else if (selectedValue === "wiek" && selectedMeasure === "minimum") {
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number);
 
-            if (modes.length === 1) {
-                resultText += "Moda wieku pacjentów: " + modes[0] + " lat";
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia minimum.";
             } else {
-                resultText += "Wiele mod: " + modes.join(", ") + " lat";
+                var minimumAge = Math.min(...ages);
+                resultText += "Minimum wieku pacjentów: " + minimumAge + " lat";
             }
-        }
-    } else if (selectedValue === "wiek" && selectedMeasure === "minimum") {
-        var ages = <?php echo json_encode($ages); ?>;
-        ages = ages.map(Number);
+        } else if (selectedValue === "wiek" && selectedMeasure === "maksimum") {
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number);
 
-        if (ages.length === 0) {
-            resultText += "Brak dostępnych danych do obliczenia minimum.";
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia maksimum.";
+            } else {
+                var maximumAge = Math.max(...ages);
+                resultText += "Maksimum wieku pacjentów: " + maximumAge + " lat";
+            }
+        } else if (selectedValue === "wiek" && selectedMeasure === "kwartyl1") {
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number);
+
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia kwartylu1.";
+            } else {
+                ages.sort(function(a, b) {
+                    return a - b;
+                });
+
+                var indexQ1 = Math.floor(ages.length / 4);
+                var q1 = ages[indexQ1];
+
+                resultText += "Kwartyl 1 wieku pacjentów: " + q1.toFixed(2) + " lat";
+            }
+        } else if (selectedValue === "wiek" && selectedMeasure === "kwartyl3") {
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number);
+
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia kwartylu3.";
+            } else {
+                ages.sort(function(a, b) {
+                    return a - b;
+                });
+
+                var indexQ3 = Math.floor((3 * ages.length) / 4);
+                var q3 = ages[indexQ3];
+
+                resultText += "Kwartyl 3 wieku pacjentów: " + q3.toFixed(2) + " lat";
+            }
+        } else if (selectedValue === "wiek" && selectedMeasure === "iqr") {
+            var ages = <?php echo json_encode($ages); ?>;
+            ages = ages.map(Number);
+
+            if (ages.length === 0) {
+                resultText += "Brak dostępnych danych do obliczenia IQR.";
+            } else {
+                ages.sort(function(a, b) {
+                    return a - b;
+                });
+
+                var indexQ1 = Math.floor(ages.length / 4);
+                var indexQ3 = Math.floor((3 * ages.length) / 4);
+
+                var q1 = ages[indexQ1];
+                var q3 = ages[indexQ3];
+
+                var iqr = q3 - q1;
+
+                resultText += "IQR wieku pacjentów: " + iqr.toFixed(2) + " lat";
+            }
         } else {
-            var minimumAge = Math.min(...ages);
-            resultText += "Minimum wieku pacjentów: " + minimumAge + " lat";
+            resultText += "Brak dostępnych danych lub błędne opcje.";
         }
-    } else if (selectedValue === "wiek" && selectedMeasure === "maksimum") {
-        var ages = <?php echo json_encode($ages); ?>;
-        ages = ages.map(Number);
-
-        if (ages.length === 0) {
-            resultText += "Brak dostępnych danych do obliczenia maksimum.";
-        } else {
-            var maximumAge = Math.max(...ages);
-            resultText += "Maksimum wieku pacjentów: " + maximumAge + " lat";
-        }
-    }  else if (selectedValue === "wiek" && selectedMeasure === "kwartyl1") {
-        var ages = <?php echo json_encode($ages); ?>;
-        ages = ages.map(Number);
-
-        if (ages.length === 0) {
-            resultText += "Brak dostępnych danych do obliczenia kwartylu1.";
-        } else {
-            ages.sort(function(a, b) {
-                return a - b;
-            });
-
-            var indexQ1 = Math.floor(ages.length / 4);
-            var q1 = ages[indexQ1];
-
-            resultText += "Kwartyl 1 wieku pacjentów: " + q1.toFixed(2) + " lat";
-        }
-    } else if (selectedValue === "wiek" && selectedMeasure === "kwartyl3") {
-        var ages = <?php echo json_encode($ages); ?>;
-        ages = ages.map(Number);
-
-        if (ages.length === 0) {
-            resultText += "Brak dostępnych danych do obliczenia kwartylu3.";
-        } else {
-            ages.sort(function(a, b) {
-                return a - b;
-            });
-
-            var indexQ3 = Math.floor((3 * ages.length) / 4);
-            var q3 = ages[indexQ3];
-
-            resultText += "Kwartyl 3 wieku pacjentów: " + q3.toFixed(2) + " lat";
-        }
-    } else if (selectedValue === "wiek" && selectedMeasure === "iqr") {
-        var ages = <?php echo json_encode($ages); ?>;
-        ages = ages.map(Number);
-
-        if (ages.length === 0) {
-            resultText += "Brak dostępnych danych do obliczenia IQR.";
-        } else {
-            ages.sort(function(a, b) {
-                return a - b;
-            });
-
-            var indexQ1 = Math.floor(ages.length / 4);
-            var indexQ3 = Math.floor((3 * ages.length) / 4);
-
-            var q1 = ages[indexQ1];
-            var q3 = ages[indexQ3];
-
-            var iqr = q3 - q1;
-
-            resultText += "IQR wieku pacjentów: " + iqr.toFixed(2) + " lat";
-        }
-    } else {
-        resultText += "Brak dostępnych danych lub błędne opcje.";
-    }
 
         document.getElementById("result").textContent = resultText;
     });
 </script>
 <script>
-  document.getElementById('generateChart').addEventListener('click', function() {
-    var selectedValue = document.getElementById('selectLocation').value;
-    var selectedChartType = document.getElementById('selectChartType').value;
+    document.getElementById('generateChart').addEventListener('click', function() {
+        var selectedValue = document.getElementById('selectLocation').value;
+        var selectedChartType = document.getElementById('selectChartType').value;
 
-    if (selectedValue === 'brak' || selectedChartType === 'brak') {
-        console.log('Musisz wybrać coś innego przed generowaniem wykresu.');
-        return;
-    }
+        if (selectedValue === 'brak' || selectedChartType === 'brak') {
+            console.log('Musisz wybrać coś innego przed generowaniem wykresu.');
+            return;
+        }
 
-    var locationCountsMiasto = <?php echo json_encode($miastoCount); ?>;
-    var locationCountsWojewodztwo = <?php echo json_encode($wojewodztwoCount); ?>;
-    var parsedLocationCounts = selectedValue === 'miasto' ? locationCountsMiasto : locationCountsWojewodztwo;
+        var locationCountsMiasto = <?php echo json_encode($miastoCount); ?>;
+        var locationCountsWojewodztwo = <?php echo json_encode($wojewodztwoCount); ?>;
+        var parsedLocationCounts = selectedValue === 'miasto' ? locationCountsMiasto : locationCountsWojewodztwo;
 
-    var labels = Object.keys(parsedLocationCounts);
-    var data = Object.values(parsedLocationCounts);
+        var labels = Object.keys(parsedLocationCounts);
+        var data = Object.values(parsedLocationCounts);
 
-    var total = data.reduce((acc, value) => acc + value, 0);
-    var percentages = data.map(value => ((value / total) * 100).toFixed(2));
-    
-    var ctx = document.getElementById('locationChart').getContext('2d');
+        var total = data.reduce((acc, value) => acc + value, 0);
+        var percentages = data.map(value => ((value / total) * 100).toFixed(2));
 
-    if (window.locationChart instanceof Chart) {
-        window.locationChart.destroy();
-    }
+        var ctx = document.getElementById('locationChart').getContext('2d');
 
-    if (selectedChartType === "kolowy") {
-        // Wygeneruj wykres kołowy
-        window.locationChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: '%',
-                    data: percentages,
-                }],
-            },
-            options: {
-                responsive: true,
-            },
-        });
-    } else if (selectedChartType === "slupkowy") {
-        // Wygeneruj wykres słupkowy
-        window.locationChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Liczba pacjentów',
-                    data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }],
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        stepSize: 1
+        if (window.locationChart instanceof Chart) {
+            window.locationChart.destroy();
+        }
+
+        if (selectedChartType === "kolowy") {
+            // Wygeneruj wykres kołowy
+            window.locationChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '%',
+                        data: percentages,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                },
+            });
+        } else if (selectedChartType === "slupkowy") {
+            // Wygeneruj wykres słupkowy
+            window.locationChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Liczba pacjentów',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
                     }
-                }
-            },
-        });
-    }
-});
-
+                },
+            });
+        }
+    });
 </script>
 
 </html>

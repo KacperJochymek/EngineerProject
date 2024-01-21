@@ -1,27 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Pobierz przycisk "DALEJ"
     var dalejButton = document.querySelector(".lekarz-btn[name='submit']");
     
-    // Pobierz kontenery kalendarza, formularza, "guziczki" i "availableHours"
+    // Pobierz wartości kalendarza, formularza, "guziczki" i "availableHours"
     var calendarContainer = document.getElementById("calendarContainer");
     var formContainer = document.getElementById("formContainer");
     var guziczkiContainer = document.getElementById("guziczki");
     var availableHoursContainer = document.getElementById("availableHours");
     
-    // Pobierz przycisk "Powrót"
     var powrotButton = document.getElementById("powrotButton");
-    
-    // Pobierz element <p class="lekarz-wybierz">
     var lekarzWybierzText = document.getElementById("lekarz-wybierz-text");
     
-    // Dodaj obsługę zdarzenia kliknięcia przycisku "DALEJ"
+    //Obsługa zdarzenia po kliknięciu "Dalej"
     dalejButton.addEventListener("click", function (event) {
         event.preventDefault();
 
         const selectedDate = document.getElementById("selectedDate").textContent;
         const selectedHour = document.getElementById("selectedHour").textContent;
     
-        // Sprawdź, czy tekst nie jest pusty
+        // Czy tekst nie jest pusty - sprawdzenie
         if (!selectedDate.trim()) {
             document.querySelector('.messageSent').textContent = "Proszę wybrać datę wizyty.";
             return;
@@ -32,45 +28,36 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
         
-        // Ukryj kalendarz
         calendarContainer.style.display = "none";
         
-        // Ukryj "guziczki" i "availableHours"
         guziczkiContainer.style.display = "none";
         availableHoursContainer.style.display = "none";
         
-        // Wyświetl formularz
         formContainer.style.display = "block";
-        
-        // Zaktualizuj tekst na "Podaj dane osobowe:"
         lekarzWybierzText.textContent = "Podaj dane osobowe:";
 
         document.querySelector('.messageSent').textContent = "";
     });
 
-    // Dodaj obsługę zdarzenia kliknięcia przycisku "Powrót"
+    // Obsługa "Powrót"
     powrotButton.addEventListener("click", function (event) {
         event.preventDefault();
 
         document.getElementById("selectedDate").innerHTML = '<i class="fa-solid fa-calendar-days"></i>';
         document.getElementById("selectedHour").textContent = "Godzina twojej wizyty";
         
-        // Wyświetl kalendarz
         calendarContainer.style.display = "block";
         
-        // Wyświetl "guziczki" i "availableHours"
         guziczkiContainer.style.display = "block";
         availableHoursContainer.style.display = "block";
         
-        // Ukryj formularz
         formContainer.style.display = "none";
         
-        // Zaktualizuj tekst na "Wybierz date i godzine wizyty:"
         lekarzWybierzText.textContent = "Wybierz date i godzine wizyty:";
     });
 });
 
-//Mapa największych miast i przypisanych do nich województw
+//Największe miasta i przypisanie do nich województw
 var miastaWojewodztwa = {
     "Katowice": "Śląskie",
     "Kraków": "Małopolskie",
@@ -91,8 +78,7 @@ var miastaWojewodztwa = {
 };
 
 
-//Walidacja formularza po kalendarzu  
-
+//Walidacja formularza po kalendarzu
 function validateForm() {
     var imie = document.getElementById("imie").value;
     var nazwisko = document.getElementById("nazwisko").value;
@@ -128,7 +114,6 @@ function validateForm() {
         return false;
     }
 
-    // Wyczyść alertDiv, jeśli nie ma problemów z walidacją
     alertDiv.textContent = "";
 
     return true;
@@ -141,23 +126,17 @@ document.addEventListener("DOMContentLoaded", function () {
     var mojeWizyty = document.querySelector(".mojeWizyty");
     var settingsInpt = document.querySelector(".settings-inpt");
 
-    // Początkowo ukryj settings-inpt
     settingsInpt.style.display = "none";
-
-    // Utwórz zmienną do śledzenia widoczności mojeWizyty
     var mojeWizytyVisible = true;
 
     settingi.addEventListener("click", function (event) {
         event.preventDefault();
 
         if (mojeWizytyVisible) {
-            // Ukryj mojeWizyty
             mojeWizyty.style.display = "none";
-            // Wyświetl settings-inpt
             settingsInpt.style.display = "block";
             mojeWizytyVisible = false;
         } else {
-            // Jeśli mojeWizyty jest już ukryte, przywróć je
             mojeWizyty.style.display = "block";
             settingsInpt.style.display = "none";
             mojeWizytyVisible = true;
@@ -170,10 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
     zwrotButton.addEventListener("click", function (event) {
         event.preventDefault();
 
-        // Wyświetl mojeWizyty
         mojeWizyty.style.display = "block";
 
-        // Ukryj settings-inpt
         settingsInpt.style.display = "none";
         mojeWizytyVisible = true;
     });

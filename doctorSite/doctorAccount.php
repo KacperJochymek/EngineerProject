@@ -79,7 +79,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
             $available_hour = $_POST["available_hour"];
             $status_wizyty = 'dostepna';
 
-            // Czy wizyta już istnieje w bazie
+            // Sprawdź, czy wizyta istnieje w bazie
             $check_sql = "SELECT id FROM wizyty WHERE doctor_id = ? AND data_wizyty = ? AND available_hour = ?";
             $check_stmt = $conn->prepare($check_sql);
 
@@ -92,7 +92,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
                     echo '<div class="messageSent">Wizyta o tej godzinie już istnieje.</div>';
                 } else {
 
-                    // Dodawanie nowej wizyty do bazy
+                    // Dodanie nowej wizyty do bazy
                     $sql = "INSERT INTO wizyty (doctor_id, data_wizyty, available_hour, status_wizyty) VALUES (?, ?, ?, ?)";
                     $stmt = $conn->prepare($sql);
 
@@ -256,12 +256,6 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "doctor") {
         var form = document.querySelector('.doctor-form');
 
         form.addEventListener('submit', function(event) {
-            // var doctorIdInput = document.getElementById('doctor_id');
-            // if (!validateNumber(doctorIdInput.value)) {
-                // displayErrorMessage('Pole "id lekarza" musi zawierać liczby całkowite dodatnie.');
-                // event.preventDefault();
-                // return false;
-            // }
 
             var dataWizytyInput = document.getElementById('data_wizyty');
             if (!validateDate(dataWizytyInput.value)) {

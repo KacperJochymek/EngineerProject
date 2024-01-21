@@ -1,5 +1,4 @@
 //Funkcja, która generuje diva i sprawdza ilość znaków w napisanym tekście.
-
 document.addEventListener("DOMContentLoaded", function () {
     const textarea = document.querySelector("textarea[name='tekst']");
     const maxCharacters = 2000;

@@ -133,27 +133,28 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] !== "admin") {
 
 <script src="script1.js"></script>
 <script>
-document.getElementById("save_database").addEventListener("click", function() {
-    backupDatabase();
-});
+    //Skrypt odpowiedzialny za zapis bazy danych
+    document.getElementById("save_database").addEventListener("click", function() {
+        backupDatabase();
+    });
 
-function backupDatabase() {
-    var xhr = new XMLHttpRequest();
+    function backupDatabase() {
+        var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", "/adminSite/backup_database.php", true);
+        xhr.open("GET", "/adminSite/backup_database.php", true);
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                console.log("Kopia zapasowa bazy danych została utworzona pomyślnie.");
-            } else {
-                console.error("Błąd podczas tworzenia kopii zapasowej bazy danych.");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log("Kopia zapasowa bazy danych została utworzona pomyślnie.");
+                } else {
+                    console.error("Błąd podczas tworzenia kopii zapasowej bazy danych.");
+                }
             }
-        }
-    };
+        };
 
-    xhr.send();
-}
+        xhr.send();
+    }
 </script>
 
 

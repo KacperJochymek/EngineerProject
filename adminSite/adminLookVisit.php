@@ -141,7 +141,7 @@ $result = $conn->query($sql);
             </form>
 
             <div class="validationMessage">
-                <?php 
+                <?php
                 require '../adminSite/configs/wizyty-config.php';
                 echo $message; ?>
             </div>
@@ -288,6 +288,7 @@ $result = $conn->query($sql);
     });
 </script>
 <script>
+    //Skrypt odpowiadający powiększeniu strony
     document.addEventListener('DOMContentLoaded', function() {
         var deleteButtons = document.querySelectorAll('.edit-btn');
         var dostosujWysokosc = document.querySelector('.dostosuj-wysokosc');

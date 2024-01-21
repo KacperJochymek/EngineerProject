@@ -13,20 +13,19 @@ if ($mysqli->connect_error) {
 $backupFilePath = 'backups/backup_' . date('Y-m-d') . '.sql';
 $handle = fopen($backupFilePath, 'w');
 
-// Zapisz DROP TABLE i CREATE TABLE (bez tabeli dostepnosc)
+// Zapisz tabele (bez tabeli dostepnosc)
 $tablesOrder = ['users', 'doctors', 'pacjenci', 'wizyty', 'cennik', 'blog'];
 
 foreach ($tablesOrder as $table) {
     if ($table !== 'dostepnosc') {
-        // Zapisz DROP TABLE IF EXISTS
+        // Zapisz
         fwrite($handle, "DROP TABLE IF EXISTS `$table`;\n");
         
-        // Zapisz CREATE TABLE
         $createTable = $mysqli->query("SHOW CREATE TABLE `$table`");
         $createTableInfo = $createTable->fetch_row();
         fwrite($handle, $createTableInfo[1] . ";\n\n");
 
-        // Zapisz INSERT INTO
+        // Wstaw dane
         $resultTable = $mysqli->query("SELECT * FROM `$table`");
         while ($rowTable = $resultTable->fetch_assoc()) {
             $line = "INSERT INTO `$table` VALUES (";
@@ -40,7 +39,7 @@ foreach ($tablesOrder as $table) {
     }
 }
 
-// Zapisz DROP TABLE IF EXISTS, CREATE TABLE i INSERT INTO dla dostepnosc
+// Sprawdź dostepnosc, wczytaj dane
 fwrite($handle, "DROP TABLE IF EXISTS `dostepnosc`;\n");
 $createTable = $mysqli->query("SHOW CREATE TABLE dostepnosc");
 $createTableInfo = $createTable->fetch_row();

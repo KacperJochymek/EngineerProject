@@ -31,7 +31,6 @@ if (isset($_GET["selectedDate"]) && isset($_GET["doctor_id"])) {
 
     mysqli_close($conn);
 
-    // Zwróć dane jako JSON
     header('Content-Type: application/json');
     echo json_encode($godziny);
 } else {
