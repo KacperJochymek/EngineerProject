@@ -14,27 +14,30 @@ My motivation is fact that I want to connect reservation system with an analytic
 
 ## Roles
 
-Admin is the important role in hole system. He can:
+Admin is the most important role in whole system. 
 
-- You can save database with current date,
+- Save database with current date,
 - Add doctor to the system,
-- Change proffesion and delete doctor,
-- Add post on blog and modify,
-- Add new treatment and price and modify,
+- Change proffesion and delete doctors,
+- Add posts on blog and modify it,
+- Add new treatment and price and modify it,
 - View patient visit in system and modify,
-- Analitycal module:
-  - Calculating statistical measures,
-  - Generate Charts
+- Analytical module:
+  - Calculate statistical measures,
+  - Generate Charts.
+  - Generate Tables with filtered data.
     
-User of the service. He can:
-- Access to visits history,
-- Change password, delete account,
+User of the service. 
+
+- Access to history of the visits,
+- Change password and delete account,
 - Contact with admin using form,
 - View treatment price, read posts on blog,
 - Choose doctor and make appointment to select one,
 - Fill the questionnaire about quality.
 
 Receptionist:
+
 - Contact with admin using form,
 - Check visits and filtrate it,
 - Add doctor working hours,
@@ -46,7 +49,7 @@ Receptionist:
 
 Firstly you need to install:
 
-- XAMPP (mainly Apache Server)
+- XAMPP  (Apache Server)
 - Visual Studio Code
 
 Then copy the repo with git clone https://github.com/KacperJochymek/EngineerProject.
